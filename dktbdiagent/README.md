@@ -11,6 +11,7 @@ With knowledge, the agent chooses one of the 4 values at random as it's response
 
 
 ## Agent Service
+This is the main BDI application. It depends on the Belief Service, Desire Service and Knowledge Service to create and manage BDI agents. 
 
 ## Report Service
 This is the class for generating a transcript of the conversation with Lilobot together with the BDI updates as feedback. Currently, the configuration
@@ -25,4 +26,4 @@ is set to store the document on your local machine. If you want to store the tra
 ## Configuration
 application.properties contains the configuration for the postgres database and Azure storage account.
 - Postgres: localhost:5432/dktbase
-- 
+- Azure Storage account name and key
