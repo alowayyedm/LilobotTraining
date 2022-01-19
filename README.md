@@ -175,7 +175,7 @@ CREATE USER postgres WITH PASSWORD 'postgres';
 GRANT ALL PRIVILEGES ON DATABASE "dktbase" TO postgres;
  ```
 
-3. Include the credentials of your database in the BDI application (in application.propoerties). The BDI application requires this, otherwise the application will crash.
+3. Include the credentials of your database in the BDI application (in application.properties). The BDI application requires this, otherwise the application will crash.
 ```
 spring.datasource.url=jdbc:postgresql://localhost:5432/dktbase
 spring.datasource.username=postgres
@@ -218,10 +218,10 @@ You should be able to run your BDI application successfully now. A more secure o
 
 # Resources
 Links to data related to this thesis. 
-- Experiment data:
+- Experiment data (4TU.ResearchData): https://doi.org/10.4121/17371919
 - OSF form: Evaluation of a BDI-based virtual agent for training child helpline counsellors - https://osf.io/hkxzc
 - Project storage TU Delft: U:\MScProjectDKT (owned by Merijn Bruijnes)
-- Thesis report: https://repository.tudelft.nl/islandora/search/?collection=education
+- Thesis report: http://resolver.tudelft.nl/uuid:f04f8f0b-9ab9-4f1c-a19c-43b164d45cce
 
 
 
