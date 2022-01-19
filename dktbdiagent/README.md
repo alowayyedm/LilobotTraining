@@ -11,7 +11,7 @@ With knowledge, the agent chooses one of the 4 values at random as it's response
 
 
 ## Agent Service
-This is the main BDI application. It depends on the Belief Service, Desire Service and Knowledge Service to create and manage BDI agents. 
+This is the main BDI application. It depends on the Belief Service, Desire Service and Knowledge Service to create and manage BDI agents. I currently use a switch statement for the intent-belief mapping but I recommend you change this (in future work) if the number of beliefs and intents increase. 
 
 ## Report Service
 This is the class for generating a transcript of the conversation with Lilobot together with the BDI updates as feedback. Currently, the configuration
