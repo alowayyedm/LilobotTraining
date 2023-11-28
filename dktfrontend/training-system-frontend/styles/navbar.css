@@ -1,0 +1,140 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: transparent;
+  height: 10vh;
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
+}
+
+nav a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  color: var(--menu-tab-text);
+  text-decoration: none;
+}
+
+nav img {
+  margin-left: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  margin-left: 20px;
+}
+
+.tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab:hover .tab-title,
+.tab:focus .tab-title {
+  text-decoration: var(--menu-tab-hover-decoration);
+}
+
+.tab-circle {
+  margin-right: 10px;
+  min-width: 3rem;
+  min-height: 3rem;
+  border-radius: 50%;
+  background-color: var(--menu-tab-icon-background);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--menu-tab-icon);
+  font-size: 1.35rem;
+}
+
+.user-icon-circle {
+  background-color: var(--menu-tab-icon);
+  color: var(--menu-tab-icon-background);
+  min-width: 2.9rem;
+  min-height: 2.9rem;
+  width: 2.9rem;
+  height: 2.9rem;
+  font-size: 3rem;
+}
+
+.tab-title {
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  color: var(--menu-tab-text);
+  height: 10vh;
+  line-height: 1rem;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.submenu-title {
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  color: var(--submenu-text);
+}
+
+.navbar-title {
+  color: var(--main-header);
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  font-weight: normal;
+  font-family: 'Anton', sans-serif;
+  padding: 0 2rem;
+  height: 9vh;
+  text-align: center;
+}
+
+.profile {
+  margin-left: -0.5em;
+}
+
+.notifications {
+  margin-left: 2.5em;
+}
+
+.bell-icon-circle {
+  min-width: 2rem;
+  min-height: 2rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.notification-count {
+  position: absolute;
+  margin-left: 2vw;
+  margin-bottom: 3vh;
+  width: 1.5vw;
+  height: 2.5vh;
+  background-color: var(--new-notification-mark);
+  color: var(--new-notification-text);
+  text-align: center;
+  font-weight: bold;
+  font-size: smaller;
+}
+

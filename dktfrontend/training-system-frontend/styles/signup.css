@@ -1,0 +1,179 @@
+.sign-up-log-in-container {
+    display: flex;
+    flex-direction: column;
+    height: 90vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-info-small {
+    font-family: 'Anton', sans-serif;
+    font-size: 1.3rem;
+    text-align: center;
+    font-weight: normal;
+    color: var(--popup-header-text);
+}
+
+#sign-up-box {
+    width: 30rem;
+    box-sizing: border-box;
+    background-color: var(--popup-body);
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0.5, 0, 0.3), 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#log-in-box{
+    bottom: 30px;
+    width: 28rem;
+    height: 30rem;
+    box-sizing: border-box;
+    background-color: var(--popup-body);
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0.5, 0, 0.3), 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#profile {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    height: max(13vh, calc(max(3rem, 7.5vh) + 1.3rem + 1rem));
+    background-color: var(--basic-popup-header);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 1vh;
+    
+    /* border for accessibility */
+    border-bottom-style: solid;
+    border-bottom-width: var(--chat-widget-header-border-width);
+}
+
+.circle {
+    min-width: 3rem;
+    min-height: 3rem;
+    width: 7.3vh;
+    height: 7.3vh;
+    border-radius: 50%;
+    background-color: var(--popup-header-icon-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: max(3rem, 7.5vh);
+    color: var(--popup-header-icon-text);
+}
+
+.sign-up-form {
+    font-family: 'Anton', sans-serif;
+    font-size: x-large;
+}
+
+#log-in-box .sign-up-form {
+    font-family: 'Anton', sans-serif;
+    font-size: x-large;
+}
+
+fieldset {
+    display: flex;
+    padding-inline: initial;
+    flex-wrap: wrap;
+    border: none;
+    justify-content: right;
+    padding-right: 2.5rem;
+    margin-bottom: 2.5vh;
+}
+
+.form-item {
+    margin-top: 1rem;
+}
+
+.field {
+    position: relative;
+    margin-left: 1rem;
+    width: max(14rem, 12vw);
+    height: max(3rem, 3vh);
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: var(--field-bg-color);
+    text-align: left;
+    text-indent: 0.6rem;
+    padding-top: 1rem;
+    border-style: var(--field-border-style);
+    border-width: var(--field-border-width);
+    border-color: var(--field-border-color);
+    font-family: 'Inter', sans-serif;
+    font-size: small;
+}
+
+#aanmelden {
+    width: inherit;
+    height: max(12vh, 7rem);
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    background-color: var(--popup-footer);
+    font-family: 'Anton', sans-serif;
+    font-size: small;
+    text-align: center;
+    padding: 18px 10px 10px 10px;
+    color: var(--popup-footer-text);
+}
+
+#login {
+    border-radius: 15px;
+    height: 3rem;
+    width: max(20vw, 10rem);
+    background-color: var(--popup-button-green);
+    border: none;
+    color: var(--popup-button-text);
+    font-size: x-large;
+    font-family: 'Anton', sans-serif;
+    box-shadow: 0 4px 8px 0 rgba(0, 0.5, 0, 0.3), 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+
+    /* borders only used in accessibility mode */
+    border: solid;
+    border-width: var(--basic-border-width);
+    border-color: var(--basic-border-dark);
+}
+
+#login:focus,
+#login:hover {
+    background-color: var(--chat-widget-button-focus);
+    
+    /* outline only used in accessibility mode */
+    outline: var(--button-outline-width) solid var(--button-outline-dark);
+    outline-offset: 4px;
+}
+
+#login:active {
+    outline-offset: 3px;
+}
+
+.blue-link {
+    color: var(--popup-footer-link);
+}
+
+.error-list {
+    position: relative;
+    width: 28rem;
+    top: 6rem;
+    background-color: var(--error-div-color);
+    border-color: var(--error-msg-color);
+    border-radius: 1vh 1vh 1vh 1vh;
+    border-style: solid;
+    border-width: medium;
+    padding: 1vh 1vh 1vh 1vh;
+}
+
+.error-msg {
+    font-family: 'Inter', sans-serif;
+    font-size: small;
+    color: var(--error-msg-color);
+    text-align: center;
+}
+
