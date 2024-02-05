@@ -1340,6 +1340,7 @@ nlu:
     - I would bully you too
     - what a stupid idea
     - poor
+    - shut up
     - bad plan
     - how stupid of you
     - I'm going to tell your parents
@@ -1347,7 +1348,6 @@ nlu:
     - stupid
     - kk
     - where do you live?
-    - who are your parents?
     - what is your parents name?
     - which school do you go to?
     - this is a wrong sentence

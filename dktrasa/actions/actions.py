@@ -41,7 +41,7 @@ class ActionUseBdi(Action):
         if intent_name == 'nlu_fallback':
             return
 
-        headers = {'Content-Type': "application/json",}    
+        headers = {'Content-Type': "application/json",}
 
         payloadArray = intent_name.split("_")
         print(payloadArray)
@@ -55,7 +55,7 @@ class ActionUseBdi(Action):
             dispatcher.utter_message(text=response.text)
 
         return []
-        
+
 
 class ActionSetReminder(Action):
     """Schedules a reminder between 7 and 20 seconds to trigger the BDI agent to say something if user is inactive."""
@@ -81,8 +81,8 @@ class ActionSetReminder(Action):
         )
 
         return [reminder]
-  
-  
+
+
 class ActionReactToReminder(Action):
     """Triggers (remindst) the BDI agent to say something based on its intention."""
 
@@ -102,14 +102,14 @@ class ActionReactToReminder(Action):
 
         intent_name = tracker.latest_message["intent"].get("name")
 
-        headers = {'Content-Type': "application/json",}    
+        headers = {'Content-Type': "application/json",}
 
         payload = {"type": "trigger", "subject": "", "attribute" : ""}
 
         response = requests.post(url = BDIAGENT_ENDPOINT+conversation_id, data = json.dumps(payload), headers = headers)
 
         dispatcher.utter_message(text=response.text)
-        
+
         return []
 
 
@@ -124,7 +124,7 @@ class ForgetReminders(Action):
     ) -> List[Dict[Text, Any]]:
 
         print("cancelling reminders")
-        
+
         return [ReminderCancelled()]
 
 
@@ -133,7 +133,7 @@ class ActionPrintBdi(Action):
 
     def name(self) -> Text:
         return "action_get_bdi"
- 
+
     async def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         conversation_id = tracker.sender_id
@@ -142,10 +142,10 @@ class ActionPrintBdi(Action):
         print(doc_path)
 
         if LOCALMODE:
-            dispatcher.utter_message(text="Het gesprek is beëindigd. Hier vind je je transcriptie: " + doc_path)
+            dispatcher.utter_message(text="The chat has ended. You will find your transcript here: " + doc_path)
 
-        else:    
+        else:
             dispatcher.utter_message("[![download transcriptie](https://img.icons8.com/windows/452/download--v1.png)]("+doc_path+")")
-            dispatcher.utter_message(text="Het gesprek is beëindigd. Je kunt een transcriptie ervan downloaden door op de pijl hierboven te klikken.")
+            dispatcher.utter_message(text="The call has ended. You can download a transcript of it by clicking the arrow.")
 
-        return []          
+        return []

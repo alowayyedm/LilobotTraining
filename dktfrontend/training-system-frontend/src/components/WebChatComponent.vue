@@ -299,6 +299,30 @@ export default {
       // Delete the message
       this.chatRecord.splice(msgIndex, 1);
     },
+    deleteMessageUndo: function () {
+      // if the last msg is a user msg: delete them until you reach the first Lilo msg and delete it, with the previous user msg (if exists)
+      // if the last msg is Lilo: delete it only once and delete the user msg before it (if there is one)
+
+      if(this.chatRecord[this.chatRecord.length-1].fromUser){
+        while(this.chatRecord[this.chatRecord.length-1].fromUser && this.chatRecord.length > 0){
+          this.chatRecord.splice(this.chatRecord.length-1, 1); // delete delete user msg
+        }
+        if(this.chatRecord.length > 0)
+        this.chatRecord.splice(this.chatRecord.length-1, 1); //delete Lilo msg
+        if(this.chatRecord.length > 0)
+        this.chatRecord.splice(this.chatRecord.length-1, 1); //delete user msg before it msg
+      }
+      else {
+        this.chatRecord.splice(this.chatRecord.length-1, 1); // the last is lilo
+        if(this.chatRecord[this.chatRecord.length-1].fromUser && this.chatRecord.length > 0){
+          this.chatRecord.splice(this.chatRecord.length-1, 1); // delete the user input before lilo
+        }
+      }
+
+
+      //this.chatRecord.splice(msgIndex, 1);
+
+    },
     changeChatMode: function () {
       this.$emit('set-trainer-messaging', !this.autoSending);
       // Confirm and remove all unhandled messages when switching modes

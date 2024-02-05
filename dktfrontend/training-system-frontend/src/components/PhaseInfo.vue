@@ -95,6 +95,9 @@ export default {
     isActive (button) {
       return button.id === this.phase - 1;
     },
+    clickButtonN (num) {
+      this.$emit('switch-to-phase', `PHASE${num}`);
+    },
     clickButton (button) {
       this.$emit('switch-to-phase', `PHASE${button.phase}`);
     },

@@ -44,6 +44,7 @@
     <div class="belief-value-changing-box light-scrollbar">
       <div v-if="displayInfo" class="info-box">
         <p>
+
           Hier kun je de huidige overtuigingen van LiloBot zien. Je kunt de waarden aanpassen om te veranderen hoe LiloBot reageert.
         </p>
         <p>
@@ -53,17 +54,18 @@
           Gebruik de knoppen hierboven om LiloBot direct naar een van de fasen van het gespreksmodel te brengen.
         </p>
       </div>
-      <div v-else class="belief" v-for="belief in beliefs" :key="belief" title="belief input list">
-        <input 
+
+      <div v-else class="belief" v-for="(belief,index) in beliefs" :key="belief" title="belief input list">
+        <input
           type="number"
           class="belief-input"
           :disabled="!belief.isModifiable" 
-          v-model.number="belief.value" 
+          v-model.number="belief.value"
           :step="0.05"
           @blur="updateBelief(belief)"
           @keyup.enter="updateBelief(belief)"
           v-bind:title="belief.isModifiable ? (`input box for ` + belief.id) : `Can't modify ${belief.id}: ${belief.disableReason}`">
-            {{ belief.id }}: {{ belief.fullName }} 
+            {{ belief.id }}: {{ belief.fullName }} : {{addToList(index)}} {{this.AllBeliefList[this.AllBeliefList.length-2]}} {{this.AllBeliefList[this.AllBeliefList.length-1]}}
       </div>
     </div>
   </div>
@@ -73,6 +75,7 @@
 import ToastQueue from './ToastQueue.vue';
 import PhaseInfo from './PhaseInfo.vue';
 import DynamicText from "@/components/DynamicText.vue";
+
 
 export default {
   name: "BeliefInput",
@@ -88,10 +91,14 @@ export default {
     phase: Number,
     lastTransition: Object,
     privateSession: Boolean
+
   },
   data() {
     return {
-      displayInfo: false
+      displayInfo: false,
+      bell:0,
+      currBeliefs:[],
+      AllBeliefList: []
     }
   },
   methods: {
@@ -102,14 +109,38 @@ export default {
   
       if (oldValue !== newValue) {
         this.showToast(`Updated ${belief.id}`);
-        this.$emit('update-belief', belief.id, belief.value);      
+        this.$emit('update-belief', belief.id, belief.value);
       }
+
     },
     switchToPhase(phase) {
       this.$emit('switch-to-phase', phase);
     },
     showToast(message) {
       this.$refs.toastQueue.addToast(message, 'success');
+    },
+    addToList(num) {
+    this.bell=this.beliefs[num].value;
+      this.bell= Math.round(this.bell * 100) / 100;
+
+      this.currBeliefs[num]=this.bell;
+      if(this.AllBeliefList.length<17)
+        this.AllBeliefList.push(this.currBeliefs.slice(0,17));
+
+    },
+    updateBelList() {
+      setTimeout(() => {
+        if(JSON.stringify(this.currBeliefs.slice(0,17)) !== JSON.stringify(this.AllBeliefList[this.AllBeliefList.length-1])) {
+          this.AllBeliefList.push(this.currBeliefs.slice(0,17));
+        }
+
+      }, 1000);
+
+    },
+    popBelList() {
+      //if(this.AllBeliefList.length>16)
+      this.AllBeliefList.splice((this.AllBeliefList.length-1),1);
+      this.currBeliefs=this.AllBeliefList[this.AllBeliefList.length-1];
     },
     showInfo() {
       this.displayInfo = !this.displayInfo;

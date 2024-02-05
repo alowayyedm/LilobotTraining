@@ -6,10 +6,45 @@
 -->
 <template>
   <div class="wrapper">
-    <div class="first"><graph-component ref="graphComponent"></graph-component></div>
+
+    <div hidden name="col1" class="buttons">
+
+
+      <pre>            <button class="join-button" id="UndoStep" @click="UndoStep" >Go back 1 step</button> </pre> <br><br>
+      <pre>            <button class="join-button" id="advice" @click="GiveAdvice" >Give advice</button> </pre> <br> <br>
+      <pre>            <button class="join-button" id="ExplainSit" @click="ExplainSit" >Explain situation</button> </pre> <br> <br>
+      <pre>            <button class="join-button" id="5Phases" @click="FivePhasesButton" title="Show a summary of the 5-phase model" >5-phase model summary</button> </pre>
+
+
+    </div>
+
+    <div hidden name="col2" class="buttons">
+
+
+      <pre><button class="join-button" id="UndoPhase" @click="UndoPhase" >Go back 1 phase</button> </pre> <br><br>
+      <pre><button class="join-button" id="WhatNext" @click="WhenNext" >When is the next phase</button> </pre> <br> <br>
+      <pre><button class="join-button" id="IncUtterances"  @click="IncUtterances">Incorrect utterance</button> </pre>
+
+
+
+    </div>
+
+    <div class="first" > {{ this.test }}<graph-component ref="graphComponent"></graph-component></div>
+    <div hidden class="first">
+      <pre><button class="join-button" id="UndoStep" @click="UndoStep" >Go back 1 step</button> </pre> <br>
+      <pre><button class="join-button" id="advice" @click="GiveAdvice" >Give advice</button> </pre><br>
+      <pre><button class="join-button" id="ExplainSit" @click="ExplainSit" >Explain situation</button> </pre><br>
+      <pre><button class="join-button" id="UndoPhase" @click="UndoPhase" >Go back 1 phase</button> </pre><br>
+      <pre><button class="join-button" id="WhatNext" @click="WhenNext" >When is the next phase</button> </pre><br>
+      <pre><button class="join-button" id="IncUtterances"  @click="IncUtterances">Incorrect utterance</button> </pre> <br>
+
+      <pre><button class="join-button" id="5Phases" @click="FivePhasesButton" title="Show a summary of the 5-phase model" >5-phase model summary</button> </pre>
+
+
+    </div>
     <div class="second"><belief-input
       ref="beliefInput"
-      :beliefs="beliefs" 
+      :beliefs="beliefs"
       :previousValues="previousValues"
       :sessionActive="sessionActive"
       :phase="phase"
@@ -19,7 +54,7 @@
       @switch-to-phase="switchToPhase">
     </belief-input></div>
     <div class="third">
-      <belief-transitions-component 
+      <belief-transitions-component
         ref="beliefTransitions">
       </belief-transitions-component>
     </div>
@@ -33,11 +68,17 @@
       @start-private-session="startPrivateSession">
     </web-chat-component>
     </div>
+
   </div>
+
   <join-popup
       ref="joinPopup"
       @send-join-request="sendJoinRequest">
   </join-popup>
+  <join-popup2
+      ref="joinPopup2"
+      @send-join-request="sendJoinRequest">
+  </join-popup2>
   <generic-popup
       ref="genericPopup" accept-text="ACCEPT" decline-text="DECLINE">
   </generic-popup>
@@ -49,6 +90,7 @@
   import BeliefTransitionsComponent from "../components/BeliefTransitionsComponent";
   import WebChatComponent from "../components/WebChatComponent";
   import JoinPopup from "@/components/JoinPopup.vue";
+  import JoinPopup2 from "@/components/JoinPopup2.vue";
   import GenericPopup from "@/components/GenericPopup.vue";
   import axios from 'axios';
   import { phaseEnumToNumber } from "@/utils";
@@ -62,7 +104,8 @@
       GraphComponent,
       BeliefInput,
       WebChatComponent,
-      JoinPopup
+      JoinPopup,
+      JoinPopup2
     },
     mixins: [sessionMixin],
     data() {
@@ -74,7 +117,8 @@
         sessionActive: null,
         subscriptions: [],
         stompClient: null,
-        privateSession: false
+        privateSession: false,
+        test: null
       }
     },
     created() {
@@ -98,6 +142,8 @@
       this.clearNotifications();
     },
 
+
+
     methods: {
       setupPrivateSessionWebsocket() {
         // Sets up the websocket to send and receive messages to/from Spring server
@@ -107,15 +153,17 @@
           // This subscription is used for the message stream.
           this.stompClient.subscribe('/topic/session/' + this.getSessionID(), (message) => {
             const messageData = JSON.parse(message.body);
-
+            this.test=message.body; //remooveee thisssssssssssssssssssssss
             for (const i in messageData) {
               this.$refs.webChat.addMessage(messageData[i].message, messageData[i].fromUser, false);
+
             }
           });
 
           // This subscription is used to process live changes in agent beliefs
           this.stompClient.subscribe('/topic/beliefs/' + this.getSessionID(), (message) => {
             this.processReceivedUpdate(JSON.parse(message.body));
+             //////////// adddddddd heeeerreeee for updating the message. check!
           });
 
           // Subscribe to the phase updates topic
@@ -211,7 +259,7 @@
           .then((response) => {
             const pastBeliefUpdates = response.data;
             pastBeliefUpdates.forEach((beliefUpdate) => {
-              this.processReceivedUpdate(beliefUpdate)
+              this.processReceivedUpdate(beliefUpdate);
             });
           })
           .catch((error) => console.log(error));
@@ -312,7 +360,7 @@
         const causeType = (message.isManualUpdate) ? "MANUAL" : (msgText === null) ? "TRIGGER" : "MESSAGE";
 
         if (msgText === null) {
-          msgText = ">>> TRIGGER"
+          msgText = ">>> TRIGGER";
         }
       
         // Boolean representing whether the log entry received is not yet in the transition list
@@ -375,11 +423,29 @@
             }
           }
         }
+
+        if(causeType!=="MANUAL"){
+          this.$refs.beliefInput.updateBelList();
+        }
+
       },
       updateBelief(beliefId, newValue) { 
         //this.beliefs.find(item => item.id === belief.id).value = belief.value;
         this.sendMessage(beliefId, newValue);
+
       },
+      updateAllBeliefs() {
+        let i;
+        for (i=1;i<17;i++) {
+          if ((this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length-2][i-1] !== this.$refs.beliefInput.currBeliefs[i-1]) && i!==3)
+          {
+            //try to assign the value of i-2 and then delete i-1! so change the order from the above (other) function
+            this.updateBelief("B"+i, this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length-2][i-1]);
+            //this.updateBelief("B4", this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1][3]);
+          //this.updateBelief("B1", this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1][0]);
+          }
+        }
+        },
       sendMessage(beliefId, newValue) {
         const sessionID = sessionStorage.getItem('rasa_session_id');
         const message = { belief: beliefId, value: newValue };
@@ -465,6 +531,63 @@
         }
       },
 
+      testSession() {
+
+          this.$refs.joinPopup2.openPopup();
+
+      },
+
+      FivePhasesButton() {
+        this.$refs.joinPopup2.headerText= "5-phase model summary";
+        this.$refs.joinPopup2.phasesDiv();
+        this.$refs.joinPopup2.openPopup();
+      },
+      UndoStep() { // test it that everything works well!!
+        this.$refs.joinPopup2.headerText= "Go back one step in the conversation";
+        if(this.$refs.beliefInput.AllBeliefList.length<18){
+          this.$refs.joinPopup2.openPopupwMsg("You can't go back to the previous step.");}
+        else {
+          this.updateAllBeliefs();
+          this.$refs.beliefInput.popBelList();
+          //assign values
+          //this.updateBelief("B1",1);
+          this.$refs.joinPopup2.openPopupwMsg("You are back to the previous step.");
+          this.$refs.webChat.deleteMessageUndo();
+        }
+
+      },
+      GiveAdvice() {
+        this.$refs.joinPopup2.headerText= "Give advice";
+        this.$refs.joinPopup2.openPopupwMsg("advice");
+
+      },
+      ExplainSit() {
+        this.$refs.joinPopup2.headerText= "Explain Situation";
+        this.$refs.joinPopup2.openPopupwMsg("This is the current situation");
+      },
+      UndoPhase() {
+        this.$refs.joinPopup2.headerText= "Go back 1 phase";
+        if((this.$refs.beliefInput.phase) > 1){
+          this.$refs.beliefInput.switchToPhase(this.$refs.beliefInput.phase-2);
+          this.$refs.joinPopup2.undoPhaseDiv(this.$refs.beliefInput.phase-1);
+        }
+        else{
+          this.$refs.joinPopup2.undoIncorrectPhase();
+        }
+        this.$refs.joinPopup2.openPopup();
+
+      },
+      WhenNext() {
+        this.$refs.joinPopup2.headerText= "When is the next phase";
+
+        this.$refs.joinPopup2.openPopupwMsg("the next phase is");
+      },
+      IncUtterances() {
+        this.$refs.joinPopup2.headerText= "Incorrect Utterances";
+
+        this.$refs.joinPopup2.openPopupwMsg("These utterances are incorrect");
+      },
+
       checkAssignedTrainer(learner) {
         let url = this.$config.agentServer + '/user/join_request/' + learner;
         console.warn(learner)
@@ -509,6 +632,40 @@
   max-width: calc(100vw / 3);
 }
 
+.join-button{
+  border-radius: 16px;
+  background-color: var(--chat-widget-button);
+  border: none;
+  color: var(--chat-widget-button-text);
+  font-size: x-large;
+  padding: 0.8rem;
+  font-family: 'Anton', sans-serif;
+  width: 80%;
+  cursor: pointer;
+
+  /* borders only used in accessibility mode */
+  border: solid;
+  border-width: var(--basic-border-width);
+  border-color: var(--basic-border-dark);
+
+}
+
+.buttons {
+
+  width: 90%;
+  padding-top: 50px;
+}
+
+.join-button:hover {
+  background-color: var(--chat-widget-header-button-focus);
+  cursor: pointer;
+}
+
+#UndoStep:hover {
+
+}
+
+
 .second {
   grid-area: second;
   height: 50vh;
@@ -524,6 +681,7 @@
 .fourth {
   grid-area: fourth;
   max-width: calc(100vw / 3);
+  height: 100%;
 }
 
 </style>
