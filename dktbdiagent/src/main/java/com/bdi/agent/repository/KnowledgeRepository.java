@@ -13,6 +13,6 @@ public interface KnowledgeRepository extends JpaRepository<Knowledge, Long> {
 
     Knowledge findByKnowledgeAndSubjectAndAttribute(String knowledge, String subject, String attribute);
 
-    @Query("SELECT DISTINCT k.id FROM Knowledge k")
+    @Query("SELECT DISTINCT k.knowledge FROM Knowledge k")
     List<String> findAllUniqueKnowledgeFiles();
 }
