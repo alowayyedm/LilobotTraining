@@ -1,16 +1,30 @@
 package com.bdi.agent.model;
 
-import com.bdi.agent.model.enums.BeliefUpdateType;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
 import com.bdi.agent.model.enums.Phase;
 import com.bdi.agent.model.util.LogEntry;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
-import javax.persistence.*;
-import java.util.*;
 
 @Entity
 @Table
@@ -26,6 +40,8 @@ public class Agent {
 
     @Column(unique = true)
     private String userId;  //conversation id from Rasa tracker
+
+    private String knowledgeFile;
 
     @OneToMany(mappedBy="agent", cascade = CascadeType.ALL)
     private Set<Belief> beliefs;

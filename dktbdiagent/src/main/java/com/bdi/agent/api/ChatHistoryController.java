@@ -1,23 +1,11 @@
 package com.bdi.agent.api;
 
-import com.bdi.agent.authorization.JwtTokenUtils;
-import com.bdi.agent.model.Conversation;
-import com.bdi.agent.model.User;
-import com.bdi.agent.model.api.BeliefChangeClientModel;
-import com.bdi.agent.model.api.ChatMetaDataModel;
-import com.bdi.agent.model.api.MessageModel;
-import com.bdi.agent.service.AgentService;
-import com.bdi.agent.service.ConversationService;
-import com.bdi.agent.service.ReportService;
-import com.bdi.agent.service.UserService;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,6 +19,17 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.bdi.agent.authorization.JwtTokenUtils;
+import com.bdi.agent.model.Conversation;
+import com.bdi.agent.model.User;
+import com.bdi.agent.model.api.BeliefChangeClientModel;
+import com.bdi.agent.model.api.ChatMetaDataModel;
+import com.bdi.agent.model.api.MessageModel;
+import com.bdi.agent.service.AgentService;
+import com.bdi.agent.service.ConversationService;
+import com.bdi.agent.service.ReportService;
+import com.bdi.agent.service.UserService;
 
 @RestController
 @CrossOrigin(origins = "*")

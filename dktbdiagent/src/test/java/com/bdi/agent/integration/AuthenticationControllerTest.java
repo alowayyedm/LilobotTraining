@@ -1,12 +1,13 @@
 package com.bdi.agent.integration;
 
-import com.bdi.agent.authorization.JwtTokenUtils;
-import com.bdi.agent.model.AuthenticationRequest;
-import com.bdi.agent.model.RegisterRequest;
-import com.bdi.agent.model.Role;
-import com.bdi.agent.model.User;
-import com.bdi.agent.repository.UserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +26,14 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import java.util.Optional;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import com.bdi.agent.authorization.JwtTokenUtils;
+import com.bdi.agent.model.AuthenticationRequest;
+import com.bdi.agent.model.RegisterRequest;
+import com.bdi.agent.model.Role;
+import com.bdi.agent.model.User;
+import com.bdi.agent.repository.UserRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)

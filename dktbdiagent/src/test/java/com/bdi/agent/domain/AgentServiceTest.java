@@ -109,7 +109,7 @@ public class AgentServiceTest {
 
     @Test
     public void updateBeliefValid() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "testKnowledge", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
         when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
         agentService.updateBelief("testId", "B1", maxValue);
@@ -141,7 +141,7 @@ public class AgentServiceTest {
 
     @Test
     public void setManualValid() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "testKnowledge", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
         when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
         agentService.setTrainerResponding("testId", true);
@@ -152,7 +152,7 @@ public class AgentServiceTest {
 
     @Test
     public void setManualValidFalse() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, null, true, null);
+        Agent agent = new Agent(1L, "testId", "knowledge", null, null, null, 0L, "", true, 0L, 0.0f, null, true, null);
         when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
         when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
         agentService.setTrainerResponding("testId", false);
@@ -167,7 +167,7 @@ public class AgentServiceTest {
         // The next 2 tests only asserts that the correct methods are called, with the correct arguments. The tests
         // for saving the logs to the repository from the logEntryService can be found in LogEntryServiceTest
 
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), true, null);
+        Agent agent = new Agent(1L, "testId", "knowledge", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), true, null);
         when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
         when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
         agentService.addLog(new MessageLogEntry("testLog", false, agent));
@@ -179,7 +179,7 @@ public class AgentServiceTest {
 
     @Test
     public void addLogValidKt() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), true, null);
+        Agent agent = new Agent(1L, "testId", "knowledge", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), true, null);
         when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
         when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
         agentService.addLog(new MessageLogEntry("testLog", true, agent));
@@ -190,13 +190,13 @@ public class AgentServiceTest {
 
     @Test
     public void reasonTest() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), false, null);
+        Agent agent = new Agent(1L, "testId", "knowledge", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), false, null);
         Desire desire = new Desire(0L, agent, "", "", true, null);
         when(desireService.getById(0L)).thenReturn(desire);
         Action action = new Action(desire, "", "", "s", "a", false);
         when(actionService.getUncompletedAction(0L)).thenReturn(action);
-        Knowledge knowledge = new Knowledge("s", "a");
-        when(knowledgeService.getBySubjectAndAttribute("s", "a")).thenReturn(knowledge);
+        Knowledge knowledge = new Knowledge("test", "s", "a");
+        when(knowledgeService.getBySubjectAndAttribute("test", "s", "a")).thenReturn(knowledge);
         when(knowledgeService.getResponse(knowledge)).thenReturn("response");
 
         String response = agentService.reason(agent, new Perception("trigger", "s", "a", ""));
@@ -206,14 +206,14 @@ public class AgentServiceTest {
 
     @Test
     public void addDesireUpdateLogTest() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), false, null);
+        Agent agent = new Agent(1L, "testId", "testKnowledge", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), false, null);
         Desire desire = new Desire(0L, agent, "D1", "", true, null);
         when(desireService.getById(0L)).thenReturn(desire);
         when(desireService.getByAgent(1L)).thenReturn(List.of(desire));
         Action action = new Action(desire, "", "", "s", "a", false);
         when(actionService.getUncompletedAction(0L)).thenReturn(action);
-        Knowledge knowledge = new Knowledge("s", "a");
-        when(knowledgeService.getBySubjectAndAttribute("s", "a")).thenReturn(knowledge);
+        Knowledge knowledge = new Knowledge("test", "s", "a");
+        when(knowledgeService.getBySubjectAndAttribute("test", "s", "a")).thenReturn(knowledge);
         when(knowledgeService.getResponse(knowledge)).thenReturn("response");
         when(agentService.checkDesireConstraints(1L, DesireName.D1)).thenReturn(false);
 
@@ -234,7 +234,7 @@ public class AgentServiceTest {
                 new Belief("B3", "Test Belief 3", 0.3f)
         );
 
-        Agent agent = new Agent(1L, "testId", beliefs, null, Phase.PHASE1, 0L,
+        Agent agent = new Agent(1L, "testId", "test", beliefs, null, Phase.PHASE1, 0L,
                 "", false, 0L, 0.0f, null, false, null);
         when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
         when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
@@ -309,7 +309,7 @@ public class AgentServiceTest {
 
         Set<Belief> beliefs = Set.of(new Belief("B1", "Test Belief 1", 0.5f));
 
-        Agent agent = new Agent(1L, "testId", beliefs, null, null, 0L,
+        Agent agent = new Agent(1L, "testId", "test", beliefs, null, null, 0L,
                 "", true, 0L, 0.0f, null, false, null);
         when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
         when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
@@ -323,7 +323,7 @@ public class AgentServiceTest {
 
     @Test
     public void testUpdatePhaseOfAgentNonNull() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L,
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L,
                 "", true, 0L, 0.0f, null, false, null);
 
         when(mockConstraintService.checkDesireConstraints(any(), any())).thenReturn(true);
@@ -340,7 +340,7 @@ public class AgentServiceTest {
 
     @Test
     public void testUpdatePhaseOfAgentNull() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L,
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L,
                 "", true, 0L, 0.0f, null, false, null);
 
         when(mockConstraintService.checkDesireConstraints(any(), any())).thenReturn(true);
@@ -355,7 +355,7 @@ public class AgentServiceTest {
 
     @Test
     public void testUpdatePhaseOfAgentInvalid() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L,
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L,
                 "", true, 0L, 0.0f, null, false, null);
 
         when(mockConstraintService.checkDesireConstraints(any(), any())).thenReturn(true);
@@ -392,7 +392,7 @@ public class AgentServiceTest {
 
     @Test
     public void setAgentActiveValid() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L,
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L,
                 "", false, 0L, 0.0f, null, false, null);
         when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
         when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);

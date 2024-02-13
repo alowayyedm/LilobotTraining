@@ -1,5 +1,24 @@
 package com.bdi.agent.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.spy;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.TestPropertySource;
+
 import com.bdi.agent.TestConfig;
 import com.bdi.agent.TestUtils;
 import com.bdi.agent.model.enums.BoundaryCheck;
@@ -9,22 +28,6 @@ import com.bdi.agent.model.graph.GraphNode;
 import com.bdi.agent.model.util.BeliefConstraint;
 import com.bdi.agent.model.util.PhaseTransitionConstraints;
 import com.bdi.agent.service.graph.GraphUpdatingService;
-import com.bdi.agent.service.graph.GraphUtilsService;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.TestPropertySource;
-
-import java.util.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.spy;
 
 @SpringBootTest
 @Import(TestConfig.class)

@@ -41,67 +41,71 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource(locations="classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class LiveBeliefsTest {
 
-    @LocalServerPort
-    private Integer port;
+        @LocalServerPort
+        private Integer port;
 
-    @Autowired
-    private BeliefService beliefService;
+        @Autowired
+        private BeliefService beliefService;
 
-    @MockBean
-    private LogEntryService logEntryService;
+        @MockBean
+        private LogEntryService logEntryService;
 
-    @Test
-    void testLiveBeliefs() throws ExecutionException, InterruptedException, TimeoutException {
+        @Test
+        void testLiveBeliefs() throws ExecutionException, InterruptedException, TimeoutException {
 
-        // Setup
-        WebSocketStompClient webSocketStompClient = new WebSocketStompClient(new StandardWebSocketClient());
+                // Setup
+                WebSocketStompClient webSocketStompClient = new WebSocketStompClient(new StandardWebSocketClient());
 
-        BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(1);
+                BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(1);
 
-        webSocketStompClient.setMessageConverter(new StringMessageConverter());
+                webSocketStompClient.setMessageConverter(new StringMessageConverter());
 
-        StompSession session = webSocketStompClient.connect("ws://localhost:" + port + "/session",
-                new StompSessionHandlerAdapter() {
-                }).get(1, SECONDS);
+                StompSession session = webSocketStompClient.connect("ws://localhost:" + port + "/session",
+                                new StompSessionHandlerAdapter() {
+                                }).get(1, SECONDS);
 
-        session.subscribe("/topic/beliefs/testId", new StompFrameHandler() {
+                session.subscribe("/topic/beliefs/testId", new StompFrameHandler() {
 
-            @Override
-            public Type getPayloadType(StompHeaders headers) {
-                return String.class;
-            }
+                        @Override
+                        public Type getPayloadType(StompHeaders headers) {
+                                return String.class;
+                        }
 
-            @Override
-            public void handleFrame(StompHeaders headers, Object payload) {
-                blockingQueue.add((String) payload);
-            }
+                        @Override
+                        public void handleFrame(StompHeaders headers, Object payload) {
+                                blockingQueue.add((String) payload);
+                        }
 
-        });
+                });
 
-        Thread.sleep(1000);
+                Thread.sleep(1000);
 
-        Agent agent = new Agent();
-        agent = new Agent(1L, "testId", null, null, null, 0L, "",
-                true, 0L, 0.0f, List.of(new MessageLogEntry("test message",
-                true, agent)), false, null);
+                Agent agent = new Agent();
+                agent = new Agent(1L, "testId", "test", null, null, null, 0L, "",
+                                true, 0L, 0.0f, List.of(new MessageLogEntry("test message",
+                                                true, agent)),
+                                false, null);
 
-        when(logEntryService.getUserMessageLogsByAgentChronologicalUntilTimestamp(
-                eq(1L), any()))
-                .thenReturn(List.of(new MessageLogEntry("test message",
-                        true, agent)));
+                when(logEntryService.getUserMessageLogsByAgentChronologicalUntilTimestamp(
+                                eq(1L), any()))
+                                .thenReturn(List.of(new MessageLogEntry("test message",
+                                                true, agent)));
 
-        // Action
-        beliefService.sendBeliefsToClientAndLog(agent, List.of(new BeliefUpdateLogEntry(BeliefUpdateType.SET_TO, 0.3f,
-                BeliefName.B1, "test message", agent, false)));
+                // Action
+                beliefService.sendBeliefsToClientAndLog(agent,
+                                List.of(new BeliefUpdateLogEntry(BeliefUpdateType.SET_TO, 0.3f,
+                                                BeliefName.B1, "test message", agent, false)));
 
-        // Test
-        await()
-                .atMost(10, SECONDS)
-                .untilAsserted(() -> assertEquals(new BeliefChangeClientModel("B1", 0.3f, "test message",
-                                0, false, BeliefUpdateType.SET_TO),
-                        new ObjectMapper().readValue(blockingQueue.poll(1, SECONDS), BeliefChangeClientModel.class)));
-    }
+                // Test
+                await()
+                                .atMost(10, SECONDS)
+                                .untilAsserted(() -> assertEquals(
+                                                new BeliefChangeClientModel("B1", 0.3f, "test message",
+                                                                0, false, BeliefUpdateType.SET_TO),
+                                                new ObjectMapper().readValue(blockingQueue.poll(1, SECONDS),
+                                                                BeliefChangeClientModel.class)));
+        }
 }

@@ -79,7 +79,7 @@ public class OptimalPathServiceTest {
         findOverallOptimalPath and not being able to assert on the result of the method.
          */
 
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true,
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true,
                 0L, 0.0f, null, false, null);
         when(mockAgentService.containsUserId("testId")).thenReturn(true);
         when(mockAgentService.getByUserId("testId")).thenReturn(agent);
@@ -101,7 +101,7 @@ public class OptimalPathServiceTest {
         findOverallOptimalPath and not being able to assert on the result of the method.
          */
 
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true,
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true,
                 0L, 0.0f, null, false, null);
         when(mockAgentService.containsUserId("testId")).thenReturn(true);
         when(mockAgentService.getByUserId("testId")).thenReturn(agent);
@@ -260,7 +260,7 @@ public class OptimalPathServiceTest {
         beliefs.add(new Belief("B2", "full belief", 1f));
 
         Set<Desire> desires = new HashSet<>();
-        Agent agent = new Agent(1L, "testId", beliefs, desires, null, 0L, "subject", true,
+        Agent agent = new Agent(1L, "testId", "test", beliefs, desires, null, 0L, "subject", true,
                 0L, 0.0f, null, false, null);
 
         GraphUtilsService spyGraphUtils = spy(graphUtils);
