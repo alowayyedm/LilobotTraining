@@ -190,7 +190,7 @@ public class AgentServiceTest {
 
     @Test
     public void reasonTest() {
-        Agent agent = new Agent(1L, "testId", "knowledge", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), false, null);
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, new ArrayList<>(), false, null);
         Desire desire = new Desire(0L, agent, "", "", true, null);
         when(desireService.getById(0L)).thenReturn(desire);
         Action action = new Action(desire, "", "", "s", "a", false);

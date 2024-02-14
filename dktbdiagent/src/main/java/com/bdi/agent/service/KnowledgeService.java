@@ -38,19 +38,17 @@ public class KnowledgeService {
 
             File folder = new File(knowledgeFolder);
             File[] files = folder.listFiles();
-            if (files == null)
-                throw new IOException("No files found in the knowledge folder");
+            if (files == null) throw new IOException("No files found in the knowledge folder");
             for (File file : files) {
-                if (!file.isFile())
-                    continue;
+                if (!file.isFile()) continue;
                 readFromCsv(file.getName(), file.getAbsolutePath());
                 initialized.add(file.getName());
             }
-            
+
             System.out.println("Initialized " + initialized.size() + " knowledge from files: " + initialized);
 
         } catch (IOException | CsvException e) {
-            System.err.println("could not initialize knowledge");
+            e.printStackTrace();
         }
     }
 
@@ -71,7 +69,7 @@ public class KnowledgeService {
         return res.get(rand.nextInt(res.size()));
     }
 
-    private void readFromCsv(String id, String path) throws IOException, CsvException {
+    private void readFromCsv(String knowledge, String path) throws IOException, CsvException {
         // String knowledgeFile = getKnowledgeFromBlobStorage();
         CSVReader reader = new CSVReader(new FileReader(path));
         List<String[]> records = reader.readAll();
@@ -80,13 +78,9 @@ public class KnowledgeService {
             Knowledge k = new Knowledge();
             k.setSubject(record[0]);
             k.setAttribute(record[1]);
-            k.setId(id);
+            k.setKnowledge(knowledge);
 
-            List<String> values = new ArrayList<>();
-            values.add(record[2]);
-            values.add(record[3]);
-            values.add(record[4]);
-            values.add(record[5]);
+            List<String> values = new ArrayList<>(Arrays.asList(record).subList(2, record.length));
             k.setValues(values);
             knowledgeRepository.save(k);
         }

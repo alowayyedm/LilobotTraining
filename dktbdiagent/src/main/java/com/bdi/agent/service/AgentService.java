@@ -118,7 +118,11 @@ public class AgentService {
         this.constraintProvider = constraintProvider;
         this.messagingTemplate = messagingTemplate;
 
-        knowledgeService.initializeKnowledge();
+        try {
+            knowledgeService.initializeKnowledge();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
