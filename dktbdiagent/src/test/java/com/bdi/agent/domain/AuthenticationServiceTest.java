@@ -1,19 +1,14 @@
 package com.bdi.agent.domain;
 
-import com.bdi.agent.authorization.JwtTokenUtils;
-import com.bdi.agent.exceptions.EmailAlreadyExistsException;
-import com.bdi.agent.exceptions.InvalidCodeException;
-import com.bdi.agent.exceptions.UsernameAlreadyExistsException;
-import com.bdi.agent.model.AuthenticationRequest;
-import com.bdi.agent.model.AuthenticationResponse;
-import com.bdi.agent.model.RegisterRequest;
-import com.bdi.agent.model.Role;
-import com.bdi.agent.model.User;
-import com.bdi.agent.model.UserDataResponse;
-import com.bdi.agent.repository.UserRepository;
-import com.bdi.agent.service.AuthenticationService;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +24,18 @@ import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+
+import com.bdi.agent.authorization.JwtTokenUtils;
+import com.bdi.agent.exceptions.EmailAlreadyExistsException;
+import com.bdi.agent.exceptions.InvalidCodeException;
+import com.bdi.agent.exceptions.UsernameAlreadyExistsException;
+import com.bdi.agent.model.AuthenticationRequest;
+import com.bdi.agent.model.AuthenticationResponse;
+import com.bdi.agent.model.RegisterRequest;
+import com.bdi.agent.model.Role;
+import com.bdi.agent.model.User;
+import com.bdi.agent.repository.UserRepository;
+import com.bdi.agent.service.AuthenticationService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest

@@ -19,7 +19,7 @@ public interface LogEntryRepository extends JpaRepository<LogEntry, Long> {
 
     List<LogEntry> findByAgentIdAndLogEntryTypeOrderByTimestampAsc(Long agentId, LogEntryType logEntryType);
 
-    List<LogEntry> findByAgentIdAndLogEntryTypeAndTimestampLessThanEqualOrderByTimestampAsc(Long agent_id,
+    List<LogEntry> findByAgentIdAndLogEntryTypeAndTimestampLessThanEqualOrderByTimestampAsc(Long agentId,
                                                                                             LogEntryType logEntryType,
                                                                                             LocalDateTime timestamp);
 

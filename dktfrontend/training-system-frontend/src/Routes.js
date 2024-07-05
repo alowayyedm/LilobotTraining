@@ -8,10 +8,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import ChatWithLilobot from './pages/ChatWithLilobot';
 import TrainingPortal from './pages/TrainingPortal';
+import EditScenario from './pages/EditScenario.vue';
 import SignUp from './pages/SignUp';
 import LogIn from "./pages/LogInPage";
 import ChatHistory from "./pages/ChatHistory"
 import UserSettings  from "./pages/UserSettings";
+import EditIntents from "@/pages/EditIntents";
 
 /**             ------- ADDING NEW ROUTES ------- 
  *  To add a new route to the navbar, add the {path, name, component}
@@ -26,6 +28,14 @@ const routes = [
         component: ChatWithLilobot,
         meta: {
             title: "LILOBOT TRAINING PORTAL"
+        }
+    },
+    {
+        path: '/train/editScenario',
+        name: 'EditScenario',
+        component: EditScenario,
+        meta: {
+            title: "EDIT SCENARIO"
         }
     },
     {
@@ -66,6 +76,14 @@ const routes = [
         component: UserSettings,
         meta: {
             title: "Settings"
+        }
+    },
+    {
+        path: '/train/editIntents',
+        name: 'EditIntents',
+        component: EditIntents,
+        meta: {
+            title: 'Edit Intents'
         }
     }
 ];

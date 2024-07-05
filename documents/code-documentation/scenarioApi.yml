@@ -1,0 +1,763 @@
+openapi: 3.0.0
+info:
+  title: Intent API
+  description: API for managing intents in a chatbot scenario
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Beliefs
+    description: Belief related endpoints
+  - name: Desires
+    description: Desire related endpoints
+  - name: Scenarios
+    description: Scenario related endpoints
+  - name: Mapping
+    description: Intent mapping related endpoints
+  - name: Knowledge
+    description: Knowledge related endpoints
+paths:
+  /scenarios/{scenario}/knowledge:
+    put:
+      summary: Edit existing knowledge
+      tags:
+        - Knowledge
+      operationId: editIntents
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModifyIntent'
+      responses:
+        '200':
+          description: Modified knowledge successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyIntent'
+    get:
+      summary: Get all knowledge for a scenario
+      tags:
+        - Knowledge
+      operationId: getAllIntents
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModifyIntent'
+    post:
+      summary: Create new knowledge
+      tags:
+        - Knowledge
+      operationId: createIntent
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/Intent'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: #components/schemas/Intent
+  /scenarios/{scenario}/knowledge/{knowledge}:
+    delete:
+      summary: Delete knowledge
+      tags:
+        - Knowledge
+      operationId: deleteIntent
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: intentId
+          in: path
+          required: true
+          description: Name of the knowledge
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+  /scenarios:
+    get:
+      summary: Get all scenario names
+      tags:
+        - Scenarios
+      operationId: getAllScenarios
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Scenarios'
+  /scenarios/{scenario}/beliefs:
+    get:
+      summary: Get all beliefs for a scenario
+      tags:
+        - Beliefs
+      operationId: getAllBeliefs
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Belief'
+    put:
+      summary: Edit all beliefs
+      tags:
+        - Beliefs
+      operationId: editBeliefs
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Belief'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Belief'
+    post:
+      summary: Create a new belief
+      tags:
+        - Beliefs
+      operationId: createBelief
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Belief'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Belief'
+  /scenarios/{scenario}/beliefs/{belief}:
+    delete:
+      summary: Delete a belief
+      tags:
+        - Beliefs
+      operationId: deleteBelief
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: belief
+          in: path
+          required: true
+          description: Name of the belief
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+  /scenarios/{scenario}/desires:
+    get:
+      summary: Get all desires
+      tags:
+        - Desires
+      operationId: getDesires
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Desire'
+    post:
+      summary: Create a new desire
+      tags:
+        - Desires
+      operationId: createDesire
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Desire'
+      responses:
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Desire'
+    put:
+      summary: Update all desires
+      tags:
+        - Desires
+      operationId: editDesires
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Desire'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Desire'
+  /scenarios/{scenario}/desires/{desire}:
+    delete:
+      summary: Delete a desire
+      tags:
+        - Desires
+      operationId: deleteDesire
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: desire
+          in: path
+          required: true
+          description: Id of the desire
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+
+  /{scenario}/actions:
+    put:
+      summary: Modifies actions for the scenario
+      tags:
+        - Actions
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the scenario
+      requestBody:
+        description: List of actions to add
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/Action'
+      responses:
+        '200':
+          description: Actions modified successfully
+        '404':
+          description: Scenario not found
+        '500':
+          description: Internal server error
+    get:
+      summary: Gets actions for the scenario
+      tags:
+        - Actions
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the scenario
+      responses:
+        '200':
+          description: A list of actions
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Action'
+        '404':
+          description: Scenario not found
+        '500':
+          description: Internal server error
+
+  /scenarios/{scenario}/intents/{intent}/mapping/actions:
+    get:
+      summary: Get the action conditions for an intent
+      tags:
+        - Mapping
+      operationId: getActionConditions
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: intent
+          in: path
+          required: true
+          description: Name of the intent
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+    put:
+      summary: Set the action conditions for an intent
+      tags:
+        - Mapping
+      operationId: setActionConditions
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: intent
+          in: path
+          required: true
+          description: Name of the intent
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /scenarios/{scenario}/intents/{intent}/mapping/conditions:
+    get:
+      summary: Get the belief conditions for an intent mapping
+      tags:
+        - Mapping
+      operationId: getCondition
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: intent
+          in: path
+          required: true
+          description: Name of the intent
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BeliefNameCondition'
+    put:
+      summary: Set the belief conditions for an intent mapping
+      tags:
+        - Mapping
+      operationId: setCondition
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: intent
+          in: path
+          required: true
+          description: Name of the intent
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BeliefNameCondition'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BeliefNameCondition'
+  /scenarios/{scenario}/intents/{intent}/mapping:
+    get:
+      summary: Get the belief updates for an intent mapping
+      tags:
+        - Mapping
+      operationId: getMapping
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: intent
+          in: path
+          required: true
+          description: Name of the intent
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BeliefUpdate'
+    put:
+      summary: Set the belief updates for an intent mapping
+      tags:
+        - Mapping
+      operationId: setMapping
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: intent
+          in: path
+          required: true
+          description: Name of the intent
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/BeliefUpdate'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BeliefUpdate'
+    delete:
+      summary: Delete the intent mapping
+      tags:
+        - Mapping
+      operationId: deleteMapping
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+        - name: intent
+          in: path
+          required: true
+          description: Name of the intent
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content: {}
+  /scenarios/{scenario}:
+    post:
+      summary: Create a new scenario
+      tags:
+        - Scenarios
+      operationId: createScenario
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Succesfull operation
+    delete:
+      summary: Delete a scenario
+      tags:
+        - Scenarios
+      operationId: deleteScenario
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          description: Name of the scenario
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Succesfull operation
+  /{scenario}/commit:
+    post:
+      summary: Commit changes to the scenario
+      tags:
+        - Commit
+      parameters:
+        - name: scenario
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The name of the scenario
+      responses:
+        '200':
+          description: Scenario changes committed successfully
+        '404':
+          description: Scenario not found
+        '500':
+          description: Internal server error
+
+
+
+
+
+
+components:
+  schemas:
+    ModifyIntent:
+      type: object
+      properties:
+        intents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Intent'
+    IntentValues:
+      type: object
+      properties:
+        intentValues:
+          type: array
+          items:
+            type: string
+    IntentNames:
+      type: object
+      properties:
+        intentNames:
+          type: array
+          items:
+            type: string
+    Intent:
+      type: object
+      properties:
+        intent:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    Scenarios:
+      type: object
+      properties:
+        scenarioNames:
+          type: array
+          items:
+            type: string
+    Belief:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        value:
+          type: number
+          format: float
+
+    Desire:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        phase:
+          $ref: '#/components/schemas/Phase'
+        name:
+          type: string
+        constraints:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/Constraint'
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Action'
+    Constraint:
+      type: object
+      properties:
+        belief:
+          type: string
+        boundary:
+          $ref: '#/components/schemas/Boundary'
+        value:
+          type: number
+          format: float
+    Action:
+      type: object
+      properties:
+        name:
+          type: string
+    Boundary:
+      type: string
+      enum:
+        - LEQ
+        - GEQ
+        - GT
+        - LT
+        - EQ
+        - NEQ
+    Phase:
+      type: string
+      enum:
+        - PHASE1
+        - PHASE2
+        - PHASE3
+        - PHASE4
+        - PHASE5
+    BeliefNameCondition:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#components/schemas/Boundary'
+        value:
+          type: number
+          format: float
+    BeliefUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#components/schemas/BeliefUpdateType'
+        value:
+          type: number
+          format: float
+    BeliefUpdateType:
+      type: string
+      enum:
+        - INCREASE
+        - DECREASE
+        - SET_TO

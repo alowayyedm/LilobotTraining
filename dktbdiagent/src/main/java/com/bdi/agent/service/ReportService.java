@@ -13,16 +13,20 @@ import com.bdi.agent.model.util.BeliefUpdateLogEntry;
 import com.bdi.agent.model.util.DesireUpdateLogEntry;
 import com.bdi.agent.model.util.LogEntry;
 import com.bdi.agent.model.util.MessageLogEntry;
-import org.apache.poi.xwpf.usermodel.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ReportService {
@@ -61,11 +65,21 @@ public class ReportService {
     String intentionPrefix;
 
     // configuration for Azure Blob Storage
-    private final String connectionString = "DefaultEndpointsProtocol=https;AccountName=dktblobstorage;AccountKey=JRaAWGN9SbJ+gvn5ec0brrpuvOPT3HS+VSTyLfJoE4/EQKf9eEVIPGqCeniJCiHUKA4JNYymNDtsl1/TDIjEKA==;EndpointSuffix=core.windows.net";
-    BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(connectionString).buildClient();
+    private final String connectionString = "DefaultEndpointsProtocol=https;AccountName=dktblobstorage;"
+            + "AccountKey=JRaAWGN9SbJ+gvn5ec0brrpuvOPT3HS+VSTyLfJoE4/EQKf9eEVIPGqCeniJCiHUKA4JNYymNDtsl1/TDIjEKA==;"
+            + "EndpointSuffix=core.windows.net";
+    BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
+            .connectionString(connectionString).buildClient();
     String containerName = "reports";
     BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(containerName);
 
+    /**
+     * Construct the report service using autwiring.
+     *
+     * @param beliefService The belief service to use
+     * @param logEntryService The log entry service to use
+     * @param desireService The desire service to use
+     */
     @Autowired
     public ReportService(BeliefService beliefService, LogEntryService logEntryService, DesireService desireService) {
         this.beliefService = beliefService;
@@ -92,11 +106,11 @@ public class ReportService {
                                      Boolean showBeliefUpdateCause,
                                      Boolean showNewValue) {
         StringBuilder sb = new StringBuilder(
-        "Hier is een transcriptie van je gesprek met Lilobot met zijn gedachten tijdens het gesprek. Lilobot " +
-                "heeft een reeks overtuigingen en intenties die tijdens het gesprek constant worden bijgewerkt op " +
-                "basis van wat je tegen hem zegt. In de onderstaande tabel kun je zien wat Lilobot's overtuigingen " +
-                "waren aan het begin van het gesprek en aan het einde. Het transcript van het gesprek laat zien " +
-                "welke overtuigingen ");
+                "Hier is een transcriptie van je gesprek met Lilobot met zijn gedachten tijdens het gesprek. Lilobot "
+                        + "heeft een reeks overtuigingen en intenties die tijdens het gesprek constant worden "
+                        + "bijgewerkt op basis van wat je tegen hem zegt. In de onderstaande tabel kun je zien wat "
+                        + "Lilobot's overtuigingen waren aan het begin van het gesprek en aan het einde. Het "
+                        + "transcript van het gesprek laat zien welke overtuigingen ");
         if (showDesireUpdate) {
             sb.append("en verlangens ");
         }
@@ -109,8 +123,8 @@ public class ReportService {
             sb.append("worden links van de volledige namen weergeven. ");
         }
         if (showBeliefUpdateCause) {
-            sb.append("De reden voor iedere verandering in de overtuigingen wordt ook weergeven rechts naast de " +
-                    "volledige naam van de overtuiging. ");
+            sb.append("De reden voor iedere verandering in de overtuigingen wordt ook weergeven rechts naast de "
+                    + "volledige naam van de overtuiging. ");
         }
         sb.append("Het symbool ↑ betekent dat de overtuiging ");
 
@@ -125,20 +139,20 @@ public class ReportService {
         sb.append("afneemt. ");
 
         if (showBeliefSetTo) {
-            sb.append("Het symbool → betekent dat de overtuiging op dat moment naar een specifieke waarde is gezet, " +
-                    "vaak omdat de waarde afhankelijk was van andere overtuigingen, of omdat deze waarde handmatig " +
-                    "was gekozen door een trainer. ");
+            sb.append("Het symbool → betekent dat de overtuiging op dat moment naar een specifieke waarde is gezet, "
+                    + "vaak omdat de waarde afhankelijk was van andere overtuigingen, of omdat deze waarde handmatig "
+                    + "was gekozen door een trainer. ");
         }
         if (showNewValue) {
-            sb.append("Voor iedere verandering in overtuigingen kun je ook zien welke numerieke waarde deze " +
-                    "overtuiging hierdoor heeft gekregen. ");
+            sb.append("Voor iedere verandering in overtuigingen kun je ook zien welke numerieke waarde deze "
+                    + "overtuiging hierdoor heeft gekregen. ");
             if (showDesireUpdate) {
-                sb.append("Voor verlangens zijn er maar twee mogelijke waarden, dus ↓ betekent altijd dat de waarde " +
-                        "nu FALSE is, en ↑ dat het nu TRUE is. ");
+                sb.append("Voor verlangens zijn er maar twee mogelijke waarden, dus ↓ betekent altijd dat de waarde "
+                        + "nu FALSE is, en ↑ dat het nu TRUE is. ");
             }
         }
-        sb.append("Het transcript laat ook zien welke intenties Lilobot had op het moment in het gesprek. " +
-                "Al deze notaties zijn cursief weergegeven tussen jullie gesprek. \n");
+        sb.append("Het transcript laat ook zien welke intenties Lilobot had op het moment in het gesprek. "
+                + "Al deze notaties zijn cursief weergegeven tussen jullie gesprek. \n");
 
         sb.append("Je code voor deze sessie is ").append(agent.getUserId());
 
@@ -199,8 +213,6 @@ public class ReportService {
                 }
             }
 
-            FileOutputStream out = new FileOutputStream(file);
-
             XWPFDocument doc = new XWPFDocument();
             XWPFParagraph t1 = doc.createParagraph();
             t1.setAlignment(ParagraphAlignment.CENTER);
@@ -227,14 +239,14 @@ public class ReportService {
             headerRow.getCell(4).setText("Verschil");
 
             HashSet<Belief> initialBeliefs = beliefService.readBeliefsFromCsv();
-            Belief[] beliefArray = new Belief[agent.getBeliefs().size()];
-            beliefService.getByAgent(agent.getId()).toArray(beliefArray);
+            Belief[] beliefArray = new Belief[agent.getScenario().getBeliefs().size()];
+            agent.getScenario().getBeliefs().toArray(beliefArray);
 
             for (int i = 0; i < beliefArray.length; i++) {
                 Belief b = beliefArray[i];
                 float initialValue = beliefService.getBeliefValue(initialBeliefs, b.getName());
 
-                XWPFTableRow currentRow = beliefTable.getRow(i+1);
+                XWPFTableRow currentRow = beliefTable.getRow(i + 1);
                 if (showAbbreviations) {
                     currentRow.getCell(0).setText(String.format("%s", b.getName() + ": " + b.getFullName()));
                 } else {
@@ -259,6 +271,8 @@ public class ReportService {
                 formatLogEntryForReport(doc, logEntry, agent, showAbbreviations, showDesireUpdate, showBeliefSetTo,
                         showBeliefUpdateCause, showNewValue);
             }
+
+            FileOutputStream out = new FileOutputStream(file);
 
             doc.write(out);
             out.close();
@@ -315,7 +329,8 @@ public class ReportService {
                         intentionRun.setItalic(true);
 
                         String fullDesireName = desireService
-                                .getByAgentIdAndName(agent.getId(), msgLog.getIntention().toString()).getFullName();
+                                .getByDesiresAndName(agent.getScenario().getDesires(),
+                                        msgLog.getIntention().toString()).getFullName();
 
                         if (showAbbreviations) {
                             fullDesireName = msgLog.getIntention().toString() + ": " + fullDesireName;
@@ -354,16 +369,17 @@ public class ReportService {
                 break;
             case DESIRE_UPDATE:
                 if (showDesireUpdate) {
-                    DesireUpdateLogEntry desireLog = (DesireUpdateLogEntry) logEntry;
-
                     p = doc.createParagraph();
                     p.setSpacingBefore(200);
 
                     XWPFRun desireUpdateRun = p.createRun();
                     desireUpdateRun.setItalic(true);
 
+                    DesireUpdateLogEntry desireLog = (DesireUpdateLogEntry) logEntry;
+
                     String fullDesireName = desireService
-                            .getByAgentIdAndName(agent.getId(), desireLog.getDesireName().toString()).getFullName();
+                            .getByDesiresAndName(agent.getScenario().getDesires(),
+                                    desireLog.getDesireName().toString()).getFullName();
 
                     if (showAbbreviations) {
                         fullDesireName = desireLog.getDesireName().toString() + ": " + fullDesireName;
@@ -399,8 +415,8 @@ public class ReportService {
         XWPFRun beliefUpdateRun = p.createRun();
         beliefUpdateRun.setItalic(true);
 
-        String fullBeliefName = beliefService
-                .getByAgentIdAndName(agent.getId(), beliefLog.getBeliefName().toString()).getFullName();
+        String fullBeliefName = agent.getScenario().getBeliefs().stream()
+                .filter(b -> b.getName().equals(beliefLog.getBeliefName())).findFirst().get().getFullName();
 
         if (showAbbreviations) {
             fullBeliefName = beliefLog.getBeliefName().toString() + ": " + fullBeliefName;
@@ -452,7 +468,7 @@ public class ReportService {
      * @return the update prefix
      */
     private String getBeliefUpdatePrefix(BeliefUpdateType beliefUpdateType) {
-        return switch(beliefUpdateType) {
+        return switch (beliefUpdateType) {
             case INCREASE -> beliefIncrease;
             case DECREASE -> beliefDecrease;
             case SET_TO -> beliefSetTo;
@@ -503,7 +519,7 @@ public class ReportService {
     }
 
     private String calculateDifference(float begin, float end) {
-        int result = Math.round((end-begin) * percentage);
+        int result = Math.round((end - begin) * percentage);
         return Integer.toString(result).concat("%");
     }
 
@@ -512,7 +528,8 @@ public class ReportService {
 
         OffsetDateTime expiryTime = OffsetDateTime.now().plusDays(1);
         BlobSasPermission blobSasPermission =  new BlobSasPermission().setReadPermission(true);
-        BlobServiceSasSignatureValues serviceSasValues = new BlobServiceSasSignatureValues(expiryTime, blobSasPermission);
+        BlobServiceSasSignatureValues serviceSasValues = new BlobServiceSasSignatureValues(expiryTime,
+                blobSasPermission);
         String sasToken = blobClient.generateSas(serviceSasValues);
 
         String urlWithToken = blobClient.getBlobUrl() + "?" + sasToken;

@@ -1,5 +1,8 @@
 package com.bdi.agent.model.enums;
 
+import lombok.ToString;
+
+@ToString
 public enum DesireName {
     D1,
     D2,

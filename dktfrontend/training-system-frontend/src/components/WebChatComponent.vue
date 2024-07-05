@@ -14,35 +14,34 @@
 <template>
   <div class="chat-container">
     <div class="chat-header">
-      <dynamic-text
-        :header-text="`${headerText}`"
-        :target-font-size=24
-        :min-font-size=12
-        :unit="'px'"
-        :step-size=1
-        :overflow-wrap="'anywhere'"
-        style="padding: 0.5em 1em;"
-      >
+      <dynamic-text :header-text="`${headerText}`" :target-font-size=24 :min-font-size=12 :unit="'px'" :step-size=1
+        :overflow-wrap="'anywhere'" style="padding: 0.5em 1em;">
       </dynamic-text>
+      <select v-if="isConversationActive && isTrainingPortal" :value=scenario @change="updateScenario">
+        <option v-for="s in scenarios" :key=s :value=s>{{ s }}</option>
+      </select>
       <button id="exit-session" v-if="isConversationActive && !isPastConversation" @click="leaveSession()">
-        <i class="fas fa-arrow-right-from-bracket" title="Leave session" ></i>
+        <i class="fas fa-arrow-right-from-bracket" title="Leave session"></i>
       </button>
     </div>
     <template v-if="isConversationActive">
       <div class="chat light-scrollbar" ref="chat">
         <div v-for="(message, index) in chatRecord" :key="index"
-            :class="{'msg from': message.fromUser, 'msg to': !message.fromUser, 'editing':index===this.editingMessage}">
+          :class="{ 'msg from': message.fromUser, 'msg to': !message.fromUser, 'editing': index === this.editingMessage }">
 
-        <!-- Display text in input box inside the chat bubble if it is currently being edited -->
-        <span v-if="index === this.editingMessage">{{ this.inputText }}</span>
-        <!-- Otherwise, display message text -->
-        <span v-else class='message'>{{ message.text }}</span>
+          <!-- Display text in input box inside the chat bubble if it is currently being edited -->
+          <span v-if="index === this.editingMessage">{{ this.inputText }}</span>
+          <!-- Otherwise, display message text -->
+          <span v-else class='message'>{{ message.text }}</span>
 
           <!-- Display trainer option buttons if boolean is true -->
           <div class="option-buttons-container" v-if="message.displayOptionButtons">
-            <button type="button" class="option-button confirm" @click="this.confirmMessage(index)"><img src="../../images/checkmark-icon.svg" alt="Confirm" class="icon"></button>
-            <button type="button" class="option-button edit" @click="this.editMessage(index)"><img src="../../images/edit-icon.svg" alt="Edit" class="icon"></button>
-            <button type="button" class="option-button delete" @click="this.deleteMessage(index)"><img src="../../images/cross-icon.svg" alt="Delete" class="icon"></button>
+            <button type="button" class="option-button confirm" @click="this.confirmMessage(index)"><img
+                src="../../images/checkmark-icon.svg" alt="Confirm" class="icon"></button>
+            <button type="button" class="option-button edit" @click="this.editMessage(index)"><img
+                src="../../images/edit-icon.svg" alt="Edit" class="icon"></button>
+            <button type="button" class="option-button delete" @click="this.deleteMessage(index)"><img
+                src="../../images/cross-icon.svg" alt="Delete" class="icon"></button>
           </div>
         </div>
         <div class="msg to" ref="loading" :hidden="!showLoading">
@@ -53,32 +52,28 @@
           </div>
         </div>
       </div>
-      <div class="chat-mode" v-if="isTrainer" :class="{'rounded-bottom': autoSending}">
+      <div class="chat-mode" v-if="isTrainer" :class="{ 'rounded-bottom': autoSending }">
         <div>Automatisch verzenden</div>
 
-      <label class="switch">
-        <input id="change-chat-mode" type="checkbox" v-model="autoSending" @change="this.changeChatMode">
-        <span class="slider"></span>
-      </label>
+        <label class="switch">
+          <input id="change-chat-mode" type="checkbox" v-model="autoSending" @change="this.changeChatMode">
+          <span class="slider"></span>
+        </label>
 
         <div class="switch-label" v-if="autoSending">AAN</div>
         <div class="switch-label" v-else>UIT</div>
       </div>
-      <textarea class="input-box light-scrollbar rounded-bottom"
-                ref="inputBox"
-                title="Typ een bericht"
-                v-model="inputText"
-                @keydown.enter="handleInput($event)"
-                placeholder="Type a message..."
-                v-if="!autoSending || (!isTrainer && !isPastConversation)"
-                minlength="1"
-                id="text-box">
+      <textarea class="input-box light-scrollbar rounded-bottom" ref="inputBox" title="Typ een bericht"
+        v-model="inputText" @keydown.enter="handleInput($event)" placeholder="Type a message..."
+        v-if="!autoSending || (!isTrainer && !isPastConversation)" minlength="1" id="text-box">
       </textarea>
     </template>
     <div v-else class="join-session">
-      <button id="join-button" title="Join session as Trainer" @click="requestSession" name="request-session">Join</button>
+      <button id="join-button" title="Join session as Trainer" @click="requestSession"
+        name="request-session">Join</button>
       <div>or start your own chat</div>
-      <button id="join-button" title="Join session as Trainer" @click="startPrivateSession">Start private session</button>
+      <button id="join-button" title="Join session as Trainer" @click="startPrivateSession">Start private
+        session</button>
       <div style="text-align: center">Warning: you can not join the session of a trainer</div>
     </div>
   </div>
@@ -86,12 +81,15 @@
 
 <script>
 import DynamicText from "@/components/DynamicText.vue";
+import * as editorApi from '@/mixins/editorApi';
 
 export default {
   name: "WebChatComponent",
-  emits: ['handle-input', 'request-session', 'leave-session', 'set-trainer-messaging', 'start-private-session'],
+  emits: ['handle-input', 'request-session', 'leave-session', 'set-trainer-messaging', 'start-private-session', 'change-scenario', 'get-scenario'],
   props: {
-    headerText: String
+    headerText: String,
+    isTrainingPortal: Boolean,
+    scenario: String,
   },
   components: {
     DynamicText
@@ -107,8 +105,12 @@ export default {
       showLoading: false, // Whether the most recent message is still loading
       isConversationActive: true, // Whether the chat is active (true if (learner) or (trainer and is joined/in own session))
       isPastConversation: false,  // If true, don't allow chatting. Used for chat history
-      timeoutId: null // The id of the timeout for adding message with loading icons (needed to cancel when conversation is cleared)
+      timeoutId: null, // The id of the timeout for adding message with loading icons (needed to cancel when conversation is cleared)
+      scenarios: [],
     }
+  },
+  created() {
+    this.getScenarios();
   },
   methods: {
     /**
@@ -137,7 +139,7 @@ export default {
           if (this.editingMessage !== -1) {
             this.editingMessage++;
           }
-        }             
+        }
         else if (!fromUser) {
           this.showLoading = true;
           const delay = Math.max(Math.min(text.length * 50, 3000), 1000);
@@ -147,14 +149,14 @@ export default {
             // only for trainer
             if (this.isTrainer && this.autoSending && displayOptionButtons) {
               this.$emit('handle-input', [text]);
-            // if the message has options, push it to the end.
-            } else if (displayOptionButtons){
+              // if the message has options, push it to the end.
+            } else if (displayOptionButtons) {
               this.chatRecord.push({
                 text: text,
                 fromUser: fromUser,
                 displayOptionButtons: displayOptionButtons
               });
-            // if the message is from the server with no options, place before messages with options
+              // if the message is from the server with no options, place before messages with options
             } else {
               this.chatRecord.splice(this.getIndexToInsert(), 0, {
                 text: text,
@@ -209,6 +211,8 @@ export default {
     },
     setConversationActive() {
       this.isConversationActive = true;
+
+      this.$emit('get-scenario');
     },
     setConversationInactive() {
       this.isConversationActive = false;
@@ -216,7 +220,7 @@ export default {
     setAutoSendingTrue() {
       this.autoSending = true;
     },
-    clearConversation: function() {
+    clearConversation: function () {
       this.showLoading = false;
       clearTimeout(this.timeoutId)
       this.setConversation([]);
@@ -329,13 +333,22 @@ export default {
         }
       }
       return indexToInsert;
+    },
+
+    getScenarios: function () {
+      editorApi.getScenarios().then((scenarios) => {
+        this.scenarios = scenarios.scenarioNames;
+      });
+    }, 
+    updateScenario(event) {
+      let scenario = event.target.value;
+      this.$emit('change-scenario', scenario);
     }
   }
 }
 </script>
 
 <style scoped>
-
 .chat-container {
   border-radius: 1rem;
   background-color: var(--chat-widget-body);
@@ -485,19 +498,19 @@ export default {
   border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: var(--chat-widget-slider-active);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   background-color: var(--chat-widget-slider-circle-active);
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 0.063rem var(--chat-widget-slider-shadow);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   transform: translateX(1.625rem);
 }
 
@@ -526,9 +539,10 @@ input:checked + .slider:before {
   gap: 1rem;
   top: 40%;
   right: 0;
-  width: calc(100% / 3); 
+  width: calc(100% / 3);
   z-index: 9998;
 }
+
 .conversationId-input {
   text-align: center;
   width: 75%;
@@ -536,7 +550,7 @@ input:checked + .slider:before {
   font-size: 1rem;
 }
 
-#join-button{
+#join-button {
   border-radius: 16px;
   background-color: var(--chat-widget-button);
   border: none;
@@ -563,7 +577,7 @@ input:checked + .slider:before {
 
 #join-button:active {
   background-color: var(--chat-widget-button-active);
-  outline-offset: 3px;  
+  outline-offset: 3px;
 }
 
 .rounded-bottom {
@@ -595,7 +609,7 @@ input:checked + .slider:before {
 .option-button:focus {
   /* brightness only used in normal mode */
   filter: brightness(var(--user-settings-button-focus-brightness));
-    
+
   /* outline only used in accessibility mode */
   outline: var(--button-outline-width) solid var(--button-outline-dark);
   outline-offset: 3px;
@@ -624,7 +638,8 @@ input:checked + .slider:before {
 .delete {
   background-color: var(--chat-widget-message-delete-button);
 }
-  /* Wave animation from original Rasa webchat widget https://github.com/botfront/rasa-webchat */
+
+/* Wave animation from original Rasa webchat widget https://github.com/botfront/rasa-webchat */
 div#wave {
   position: relative;
   text-align: center;
@@ -654,7 +669,10 @@ div#wave .dot:nth-child(3) {
 }
 
 @keyframes wave {
-  0%,60%,to {
+
+  0%,
+  60%,
+  to {
     transform: none
   }
 

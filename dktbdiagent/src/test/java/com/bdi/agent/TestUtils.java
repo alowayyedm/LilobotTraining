@@ -1,5 +1,6 @@
 package com.bdi.agent;
 
+import com.bdi.agent.model.Belief;
 import com.bdi.agent.model.enums.BeliefName;
 import com.bdi.agent.model.enums.Phase;
 import com.bdi.agent.model.graph.GraphEdge;
@@ -21,7 +22,7 @@ public class TestUtils {
     private float maxValue;
     @Value("${relatednessBeliefs}")
     private BeliefName[] relatednessBeliefs;
-    private final List<BeliefName> beliefOrdering = Arrays.asList(BeliefName.values());
+    private final List<Belief> beliefOrdering = Arrays.stream(BeliefName.values()).map(x -> new Belief(x.name(), "", "", 0f)).toList();
 
     /**
      * Returns a float array of the size of the belief ordering filled with the given value.
@@ -31,10 +32,13 @@ public class TestUtils {
      * @param value The value to fill the array with.
      * @return A float array of the size of the belief ordering filled with the given value.
      */
-    public float[] getFilledBeliefArray(float value) {
-        float[] beliefs = new float[beliefOrdering.size()];
-        Arrays.fill(beliefs, value);
-        return beliefs;
+    public List<Belief> getFilledBeliefArray(float value) {
+        List<Belief> beliefs = new ArrayList<>();
+        beliefOrdering.forEach(x -> x.setValue(value));
+        return beliefOrdering;
+//        Float[] beliefs = new Float[beliefOrdering.size()];
+//        Arrays.fill(beliefs, value);
+//        return beliefs;
     }
 
     /**
@@ -67,7 +71,7 @@ public class TestUtils {
      *
      * @return the ordering of the belief names (enum values).
      */
-    public List<BeliefName> getBeliefOrdering() {
+    public List<Belief> getBeliefOrdering() {
         return beliefOrdering;
     }
 

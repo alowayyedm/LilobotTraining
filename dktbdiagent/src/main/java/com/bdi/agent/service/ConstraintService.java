@@ -1,5 +1,7 @@
 package com.bdi.agent.service;
 
+import com.bdi.agent.model.Belief;
+import com.bdi.agent.model.Scenario;
 import com.bdi.agent.model.enums.BeliefName;
 import com.bdi.agent.model.enums.DesireName;
 import com.bdi.agent.model.enums.Phase;
@@ -11,6 +13,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -45,8 +48,12 @@ public class ConstraintService {
      * @param beliefs   The belief values.
      * @return Whether the desire is active.
      */
-    public boolean checkDesireConstraints(DesireName desire, float[] beliefs) {
-        return areDnfConstraintsSatisfied(constraintProvider.getDesireConstraints(desire), beliefs);
+    public boolean checkDesireConstraints(Scenario scenario, String desire, List<Belief> beliefs) {
+        return areDnfConstraintsSatisfied(constraintProvider.getDesireConstraints(scenario, desire), beliefs);
+    }
+
+    public boolean checkDesireConstraints(DesireName desire, List<Belief> beliefs) {
+        return areDnfConstraintsSatisfied(constraintProvider.getDesireConstraints(null, desire.toString()), beliefs);
     }
 
     /**
@@ -110,7 +117,7 @@ public class ConstraintService {
      * @return  Whether the constraints in disjunctive normal form are satisfied, considering
      *          the belief values.
      */
-    public boolean areDnfConstraintsSatisfied(Set<Set<BeliefConstraint>> constraintSet, float[] beliefs) {
+    public boolean areDnfConstraintsSatisfied(Set<Set<BeliefConstraint>> constraintSet, List<Belief> beliefs) {
         // The constraintSet is in disjunctive normal form, so a disjunction of conjunctions
         if (constraintSet.isEmpty()) {
             return true;
@@ -153,10 +160,11 @@ public class ConstraintService {
             boolean isDisjunctionSatisfied = false;
 
             for (BeliefConstraint constraint : disjunction) {
-                if (isConstraintSatisfied(constraint, beliefs)) {
-                    isDisjunctionSatisfied = true;
-                    break;
-                }
+            //                if (isConstraintSatisfied(constraint, beliefs)) {
+            //                    isDisjunctionSatisfied = true;
+            //                    break;
+            //          }
+                //todo make it work again
             }
 
             // If one of the disjunctions evaluates to false, the conjunction is false
@@ -175,21 +183,26 @@ public class ConstraintService {
      * @param beliefs       The belief values.
      * @return Whether the constraint is satisfied.
      */
-    public boolean isConstraintSatisfied(BeliefConstraint constraint, float[] beliefs) {
+    public boolean isConstraintSatisfied(BeliefConstraint constraint, List<Belief> beliefs) {
         // If the belief name is not a valid one, returns false
-        int idx = beliefOrdering.indexOf(constraint.getBeliefName());
-        if (idx == -1 || idx >= beliefs.length) {
+
+        Optional<Belief> beliefSpecifiedByConstraint = beliefs.stream().filter(x -> x.getName()
+                .equals(constraint.getBelief().getName().toString())).findFirst();
+
+        if (beliefSpecifiedByConstraint.isEmpty()) {
             return false;
         }
 
+        float beliefValue = beliefSpecifiedByConstraint.get().getValue();
+
         // Check if the constraint is satisfied
         return switch (constraint.getBoundaryCheck()) {
-            case GEQ -> floatComparer.greaterOrEqual(beliefs[idx], constraint.getGoalValue());
-            case LEQ -> floatComparer.lessOrEqual(beliefs[idx], constraint.getGoalValue());
-            case EQ -> floatComparer.equalTo(beliefs[idx], constraint.getGoalValue());
-            case GT -> floatComparer.greaterThan(beliefs[idx], constraint.getGoalValue());
-            case LT -> floatComparer.lessThan(beliefs[idx], constraint.getGoalValue());
-            case NEQ -> !floatComparer.equalTo(beliefs[idx], constraint.getGoalValue());
+            case GEQ -> floatComparer.greaterOrEqual(beliefValue, constraint.getGoalValue());
+            case LEQ -> floatComparer.lessOrEqual(beliefValue, constraint.getGoalValue());
+            case EQ -> floatComparer.equalTo(beliefValue, constraint.getGoalValue());
+            case GT -> floatComparer.greaterThan(beliefValue, constraint.getGoalValue());
+            case LT -> floatComparer.lessThan(beliefValue, constraint.getGoalValue());
+            case NEQ -> !floatComparer.equalTo(beliefValue, constraint.getGoalValue());
         };
     }
 

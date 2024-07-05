@@ -1,7 +1,9 @@
 const config = {
-    agentServer: 'http://localhost:8080',
-    agentWsServer: 'ws://localhost:8080/session',
-    rasaServer: 'http://localhost:5005'
+    agentServer: 'http://'+process.env.VUE_APP_DKT_SERVER_BACKEND,
+    agentWsServer: 'ws://'+process.env.VUE_APP_DKT_SERVER_BACKEND+'/session',
+    rasaServer: 'http://'+ process.env.VUE_APP_DKT_SERVER_RASA,
 };
+
+console.log(process.env)
 
 export default config;

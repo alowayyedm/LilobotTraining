@@ -21,7 +21,7 @@ public class ExceptionalBelief extends Belief {
 
     public ExceptionalBelief(Agent agent, String name, String fullName, String phase, Float value,
                              String exceptionalReason) {
-        super(agent, name, fullName, phase, value);
+        super(name, fullName, phase, value);
         this.exceptionalReason = exceptionalReason;
     }
 

@@ -29,8 +29,7 @@ public class BeliefUpdateLogEntry extends LogEntry {
 
     @NotNull
     @Column(name = "name")
-    @Enumerated(EnumType.STRING)
-    private BeliefName beliefName;
+    private String beliefName;
 
     private String cause;
 
@@ -54,7 +53,7 @@ public class BeliefUpdateLogEntry extends LogEntry {
         super(LogEntryType.BELIEF_UPDATE, timestamp, agent);
         this.beliefUpdateType = beliefUpdateType;
         this.value = amount;
-        this.beliefName = beliefName;
+        this.beliefName = beliefName.toString();
         this.cause = cause;
         this.isManualUpdate = false;
     }
@@ -74,7 +73,7 @@ public class BeliefUpdateLogEntry extends LogEntry {
         super(LogEntryType.BELIEF_UPDATE, agent);
         this.beliefUpdateType = beliefUpdateType;
         this.value = amount;
-        this.beliefName = beliefName;
+        this.beliefName = beliefName.toString();
         this.cause = cause;
         this.isManualUpdate = false;
     }
@@ -94,7 +93,7 @@ public class BeliefUpdateLogEntry extends LogEntry {
         super(LogEntryType.BELIEF_UPDATE, agent);
         this.beliefUpdateType = beliefUpdateType;
         this.value = amount;
-        this.beliefName = beliefName;
+        this.beliefName = beliefName.toString();
         this.cause = cause;
         this.isManualUpdate = isManualUpdate;
     }

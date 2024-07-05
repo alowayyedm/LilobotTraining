@@ -1,15 +1,17 @@
 package com.bdi.agent.utils;
 
+import com.bdi.agent.model.Scenario;
 import com.bdi.agent.model.enums.BeliefName;
 import com.bdi.agent.model.enums.BoundaryCheck;
-import com.bdi.agent.model.enums.DesireName;
 import com.bdi.agent.model.enums.Phase;
 import com.bdi.agent.model.util.BeliefConstraint;
 import com.bdi.agent.model.util.PhaseTransitionConstraints;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -34,39 +36,12 @@ public class ConstraintProvider {
      * @param desire The desire.
      * @return The belief constraints/conditions to make the given desire active in disjunctive normal form.
      */
-    public Set<Set<BeliefConstraint>> getDesireConstraints(DesireName desire) {
-        // TODO this could be changed to either load from a file, or be loaded to a database
-
-        return switch (desire) {
-            case D1 -> Set.of(Set.of(
-                    new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, minValue),
-                    new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, minValue),
-                    new BeliefConstraint(BoundaryCheck.LT, BeliefName.B9, maxThreshold),
-                    new BeliefConstraint(BoundaryCheck.GT, BeliefName.B3, minThreshold)
-            ));
-            case D2 -> Set.of(
-                    Set.of(new BeliefConstraint(BoundaryCheck.LT, BeliefName.B1, minThreshold)),
-                    Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B17, maxValue)),
-                    Set.of(new BeliefConstraint(BoundaryCheck.LT, BeliefName.B3, midThreshold),
-                            new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, maxValue)),
-                    Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B2, maxValue))
-            );
-            case D3 -> Set.of(Set.of(
-                    new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue),
-                    new BeliefConstraint(BoundaryCheck.GT, BeliefName.B8, maxThreshold),
-                    new BeliefConstraint(BoundaryCheck.LT, BeliefName.B2, maxThreshold)
-            ));
-            case D4 -> Set.of(Set.of(
-                    new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, maxValue),
-                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B13, midThreshold),
-                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B3, midThreshold)
-            ));
-            case D5 -> Set.of(Set.of(
-                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B4, midThreshold),
-                    new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue),
-                    new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, minValue)
-            ));
-        };
+    public Set<Set<BeliefConstraint>> getDesireConstraints(Scenario scenario, String desire) {
+        Set<Set<BeliefConstraint>> conditions = scenario.getPhaseConditions(scenario.getDesire(desire))
+                .stream()
+                .map(x -> new HashSet<>(x.getConditions()))
+                .collect(Collectors.toSet());
+        return conditions;
     }
 
     /**
@@ -265,6 +240,6 @@ public class ConstraintProvider {
                 BoundaryCheck.GT, BoundaryCheck.LEQ);
 
         return new BeliefConstraint(reversedBoundary.get(constraint.getBoundaryCheck()),
-                constraint.getBeliefName(), constraint.getGoalValue());
+                constraint.getBelief(), constraint.getGoalValue());
     }
 }

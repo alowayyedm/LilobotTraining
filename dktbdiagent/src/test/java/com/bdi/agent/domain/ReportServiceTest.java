@@ -6,25 +6,31 @@ import static org.mockito.Mockito.when;
 import com.bdi.agent.model.Agent;
 import com.bdi.agent.model.Belief;
 import com.bdi.agent.model.Desire;
+import com.bdi.agent.model.Scenario;
 import com.bdi.agent.model.enums.BeliefName;
 import com.bdi.agent.model.enums.BeliefUpdateType;
-import com.bdi.agent.model.enums.DesireName;
+import com.bdi.agent.model.enums.Phase;
 import com.bdi.agent.model.util.BeliefUpdateLogEntry;
 import com.bdi.agent.model.util.DesireUpdateLogEntry;
 import com.bdi.agent.model.util.LogEntry;
 import com.bdi.agent.model.util.MessageLogEntry;
+import com.bdi.agent.service.AgentService;
 import com.bdi.agent.service.BeliefService;
 import com.bdi.agent.service.DesireService;
 import com.bdi.agent.service.ReportService;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
@@ -43,30 +49,60 @@ public class ReportServiceTest {
     @Autowired
     private transient BeliefService beliefService;
 
+    @MockBean
+    private AgentService agentService;
+
     @Autowired
     private transient DesireService desireService;
+
+    private Scenario testScenario;
+
+    @BeforeEach
+    public void setup() {
+        Scenario simpleTestScenario = new Scenario("test");
+        simpleTestScenario.setKnowledgeList(new ArrayList<>());
+        simpleTestScenario.setConditions(new ArrayList<>());
+        simpleTestScenario.setBeliefs(new ArrayList<>());
+        simpleTestScenario.setDesires(new ArrayList<>());
+        simpleTestScenario.setIntentionMapping(new HashMap<>());
+        simpleTestScenario.setActions(new ArrayList<>());
+
+        this.testScenario = simpleTestScenario;
+    }
 
     @Test
     public void testFormatLogEntryForBasicReport() throws IOException {
         // Create a sample XWPFDocument, Agent, Belief and Desire
         XWPFDocument doc = new XWPFDocument();
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
-        Belief belief = new Belief(0L, agent, "B1", "Belief number one", "", 0.3f);
-        Desire desire = new Desire(0L, agent, "D1", "Desire number one", false, null);
+        Agent agent = new Agent();
+        agent.setUserId("testId");
+        agent.setKnowledgeFile("test");
+        agent.setIntentionId(0L);
+        agent.setCurrentSubject("");
+        agent.isActive(true);
+        agent.setCurrentAction(0L);
+        agent.setScore(0.0f);
+        agent.isTrainerResponding(false);
 
-        when(beliefService.getByAgentIdAndName(1L, "B1")).thenReturn(belief);
-        when(desireService.getByAgentIdAndName(1L, "D1")).thenReturn(desire);
+        Belief belief = new Belief(0L, "B1", "Belief number one", "", 0.3f);
+        Desire desire = new Desire(0L, "D1", "Desire number one", false, Phase.PHASE1, null);
+
+        this.testScenario.setBeliefs(new ArrayList<>(List.of(belief)));
+        this.testScenario.setDesires(new ArrayList<>(List.of(desire)));
+        agent.setScenario(this.testScenario);
+
+        when(desireService.getByDesiresAndName(new ArrayList<>(List.of(desire)), "D1")).thenReturn(desire);
 
         // Create log entries that should be written to te doc
         LogEntry KtMessageLogEntry = new MessageLogEntry("test message from KT", true, agent);
-        LogEntry LiloMessageLogEntry = new MessageLogEntry("test reply", false, agent, DesireName.D1);
+        LogEntry LiloMessageLogEntry = new MessageLogEntry("test reply", false, agent, "D1");
         LogEntry increaseBeliefLogEntry = new BeliefUpdateLogEntry(BeliefUpdateType.INCREASE, 0.5F, BeliefName.B1,
                 "test message from KT", agent);
         LogEntry decreaseBeliefLogEntry = new BeliefUpdateLogEntry(BeliefUpdateType.DECREASE, 0.2F, BeliefName.B1,
                 "test message from KT", agent);
 
         // Create log entries that should not be written to the doc
-        LogEntry desireUpdateLogEntry = new DesireUpdateLogEntry(true, DesireName.D1, agent);
+        LogEntry desireUpdateLogEntry = new DesireUpdateLogEntry(true, "D1", agent);
         LogEntry setToValueBeliefLogEntry = new BeliefUpdateLogEntry(BeliefUpdateType.SET_TO, 0.2F, BeliefName.B1,
                 "test message from KT", agent);
 
@@ -97,7 +133,7 @@ public class ReportServiceTest {
         String expectedKtMessage = "KT: test message from KT\n";
         String expectedIntentionAndLiloReply = """
                 Intentie:	Desire number one
-                                
+
                 Lilo: test reply
                 """;
         String expectedIncreaseBelief = "Overtuiging: ↑\tBelief number one\n";
@@ -125,21 +161,33 @@ public class ReportServiceTest {
     public void testFormatLogEntryForAdvancedReport() throws IOException {
         // Create a sample XWPFDocument, Agent, Belief and Desire
         XWPFDocument doc = new XWPFDocument();
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
-        Belief belief = new Belief(0L, agent, "B1", "Belief number one", "", 0.3f);
-        Desire desire = new Desire(0L, agent, "D1", "Desire number one", false, null);
+        Agent agent = new Agent();
+        agent.setUserId("testId");
+        agent.setKnowledgeFile("test");
+        agent.setIntentionId(0L);
+        agent.setCurrentSubject("");
+        agent.isActive(true);
+        agent.setCurrentAction(0L);
+        agent.setScore(0.0f);
+        agent.isTrainerResponding(false);
 
-        when(beliefService.getByAgentIdAndName(1L, "B1")).thenReturn(belief);
-        when(desireService.getByAgentIdAndName(1L, "D1")).thenReturn(desire);
+        Belief belief = new Belief(0L, "B1", "Belief number one", "", 0.3f);
+        Desire desire = new Desire(0L, "D1", "Desire number one", false, Phase.PHASE1, null);
+
+        this.testScenario.setBeliefs(new ArrayList<>(List.of(belief)));
+        this.testScenario.setDesires(new ArrayList<>(List.of(desire)));
+
+        agent.setScenario(this.testScenario);
+        when(desireService.getByDesiresAndName(new ArrayList<>(List.of(desire)), "D1")).thenReturn(desire);
 
         // Create log entries that should be written to te doc
-        LogEntry LiloMessageLogEntry = new MessageLogEntry("test reply", false, agent, DesireName.D1);
+        LogEntry LiloMessageLogEntry = new MessageLogEntry("test reply", false, agent, "D1");
         LogEntry increaseBeliefLogEntry = new BeliefUpdateLogEntry(BeliefUpdateType.INCREASE, 0.5F, BeliefName.B1,
                 "test message from KT", agent);
         LogEntry decreaseBeliefLogEntry = new BeliefUpdateLogEntry(BeliefUpdateType.DECREASE, 0.2F, BeliefName.B1,
                 "test message from KT", agent);
-        LogEntry desireUpdateTrueLogEntry = new DesireUpdateLogEntry(true, DesireName.D1, agent);
-        LogEntry desireUpdateFalseLogEntry = new DesireUpdateLogEntry(false, DesireName.D1, agent);
+        LogEntry desireUpdateTrueLogEntry = new DesireUpdateLogEntry(true, "D1", agent);
+        LogEntry desireUpdateFalseLogEntry = new DesireUpdateLogEntry(false, "D1", agent);
         LogEntry setToValueBeliefLogEntry = new BeliefUpdateLogEntry(BeliefUpdateType.SET_TO, 0.2F, BeliefName.B1,
                 "test message from KT", agent);
 
@@ -180,7 +228,7 @@ public class ReportServiceTest {
         String expectedDesireFalseAbbreviation = "Verlangen: ↓\tD1: Desire number one\n";
         String expectedIntentionAbbreviation = """
                 Intentie:	D1: Desire number one
-                                
+
                 Lilo: test reply
                 """;
         String expectedBeliefAbbreviation = "Overtuiging: ↑\tB1: Belief number one\n";
@@ -217,10 +265,20 @@ public class ReportServiceTest {
     public void testNonMessageCausesForAdvancedReport() throws IOException {
         // Create a sample XWPFDocument, Agent, Belief and Desire
         XWPFDocument doc = new XWPFDocument();
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
-        Belief belief = new Belief(0L, agent, "B1", "Belief number one", "", 0.3f);
+        Agent agent = new Agent();
+        agent.setUserId("testId");
+        agent.setKnowledgeFile("test");
+        agent.setIntentionId(0L);
+        agent.setCurrentSubject("");
+        agent.isActive(true);
+        agent.setCurrentAction(0L);
+        agent.setScore(0.0f);
+        agent.isTrainerResponding(false);
 
-        when(beliefService.getByAgentIdAndName(1L, "B1")).thenReturn(belief);
+        Belief belief = new Belief(0L, "B1", "Belief number one", "", 0.3f);
+
+        this.testScenario.setBeliefs(new ArrayList<>(List.of(belief)));
+        agent.setScenario(this.testScenario);
 
         LogEntry triggerBeliefUpdateLog = new BeliefUpdateLogEntry(BeliefUpdateType.INCREASE, 0.5F, BeliefName.B1,
                 null, agent);

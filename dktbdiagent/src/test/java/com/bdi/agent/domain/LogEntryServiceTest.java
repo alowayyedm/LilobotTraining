@@ -12,6 +12,7 @@ import com.bdi.agent.model.util.BeliefUpdateLogEntry;
 import com.bdi.agent.model.util.LogEntry;
 import com.bdi.agent.model.util.MessageLogEntry;
 import com.bdi.agent.repository.LogEntryRepository;
+import com.bdi.agent.service.AgentService;
 import com.bdi.agent.service.LogEntryService;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,7 +20,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
@@ -27,20 +31,33 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-@ActiveProfiles({"mockLogEntryRepository"})
-@TestPropertySource(locations="classpath:application-test.properties")
+@ActiveProfiles({ "mockLogEntryRepository" })
+@TestPropertySource(locations = "classpath:application-test.properties")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
 public class LogEntryServiceTest {
 
     @Autowired
     private transient LogEntryRepository mockLogEntryRepository;
 
+    @MockBean
+    private AgentService agentService;
+
     @Autowired
     private transient LogEntryService logEntryService;
 
     @Test
     public void testAddMessageLog() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent();
+        agent.setUserId("testId");
+        agent.setKnowledgeFile("test");
+        agent.setIntentionId(0L);
+        agent.setCurrentSubject("");
+        agent.isActive(true);
+        agent.setCurrentAction(0L);
+        agent.setScore(0.0f);
+        agent.isTrainerResponding(false);
+
+//        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         MessageLogEntry log = new MessageLogEntry("testLog", true, agent);
         logEntryService.addMessageLogEntry("testLog", true, agent);
         ArgumentCaptor<MessageLogEntry> argumentCaptor = ArgumentCaptor.forClass(MessageLogEntry.class);
@@ -50,7 +67,17 @@ public class LogEntryServiceTest {
 
     @Test
     public void testGetMessageLogsByAgentChronological() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent();
+        agent.setUserId("testId");
+        agent.setKnowledgeFile("test");
+        agent.setIntentionId(0L);
+        agent.setCurrentSubject("");
+        agent.isActive(true);
+        agent.setCurrentAction(0L);
+        agent.setScore(0.0f);
+        agent.isTrainerResponding(false);
+
+//        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         MessageLogEntry log_1 = new MessageLogEntry("testLog", true, LocalDateTime.now().plusHours(1), agent);
         MessageLogEntry log_2 = new MessageLogEntry("testLog", true, agent);
         logEntryService.addLogEntry(log_1);
@@ -69,8 +96,19 @@ public class LogEntryServiceTest {
 
     @Test
     public void testGetBeliefUpdateLogsByAgent() {
-        Agent agent = new Agent(1L, "testId", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
-        BeliefUpdateLogEntry log_1 = new BeliefUpdateLogEntry(LocalDateTime.now().minusHours(1), BeliefUpdateType.INCREASE,
+        Agent agent = new Agent();
+        agent.setUserId("testId");
+        agent.setKnowledgeFile("test");
+        agent.setIntentionId(0L);
+        agent.setCurrentSubject("");
+        agent.isActive(true);
+        agent.setCurrentAction(0L);
+        agent.setScore(0.0f);
+        agent.isTrainerResponding(false);
+
+//        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        BeliefUpdateLogEntry log_1 = new BeliefUpdateLogEntry(LocalDateTime.now().minusHours(1),
+                BeliefUpdateType.INCREASE,
                 0.8F, BeliefName.B1, "", agent);
         logEntryService.addLogEntry(log_1);
 

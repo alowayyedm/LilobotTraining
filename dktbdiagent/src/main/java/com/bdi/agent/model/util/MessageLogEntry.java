@@ -25,8 +25,7 @@ public class MessageLogEntry extends LogEntry {
     private Boolean fromUser;
 
     @Nullable
-    @Enumerated(EnumType.STRING)
-    private DesireName intention; // intention is first active desire
+    private String intention; // intention is first active desire
 
     /**
      * Constructor for a MessageLogEntry that includes a timestamp and an intention. Use this when you want to log
@@ -39,7 +38,7 @@ public class MessageLogEntry extends LogEntry {
      * @param intention the intention that Lilobot had when sending the message
      */
     public MessageLogEntry(String message, Boolean fromUser, LocalDateTime timestamp,
-                           Agent agent, DesireName intention) {
+                           Agent agent, String intention) {
         super(LogEntryType.MESSAGE, timestamp, agent);
         this.message = message;
         this.fromUser = fromUser;
@@ -72,7 +71,7 @@ public class MessageLogEntry extends LogEntry {
      * @param agent the agent the log belongs to
      * @param intention the intention that Lilobot had when sending the message
      */
-    public MessageLogEntry(String message, Boolean fromUser, Agent agent, DesireName intention) {
+    public MessageLogEntry(String message, Boolean fromUser, Agent agent, String intention) {
         super(LogEntryType.MESSAGE, agent);
         this.message = message;
         this.fromUser = fromUser;

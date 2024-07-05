@@ -8,6 +8,8 @@ import com.bdi.agent.model.api.InitialBeliefModel;
 import com.bdi.agent.model.api.PhaseChangeRequest;
 import com.bdi.agent.service.AgentService;
 import com.bdi.agent.service.BeliefService;
+import com.bdi.agent.service.ScenarioService;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -28,6 +31,8 @@ public class BeliefController {
     private final AgentService agentService;
     private final BeliefService beliefService;
 
+    private final ScenarioService scenarioService;
+
     /**
      * Instantiates a new Belief Controller.
      *
@@ -35,9 +40,10 @@ public class BeliefController {
      * @param beliefService the beliefService for accessing beliefs.
      */
     @Autowired
-    public BeliefController(AgentService agentService, BeliefService beliefService) {
+    public BeliefController(AgentService agentService, BeliefService beliefService, ScenarioService scenarioService) {
         this.agentService = agentService;
         this.beliefService = beliefService;
+        this.scenarioService = scenarioService;
     }
 
     /**
@@ -64,12 +70,12 @@ public class BeliefController {
      * @param conversationId the conversation ID to be used to retrieve the agent.
      * @return 200 OK with the list of all beliefs as BeliefChangeModel objects if successful, Bad Request otherwise.
      */
-    @CrossOrigin("http://localhost:5601")
+    @CrossOrigin(origins = {"http://${server.web}"})
     @GetMapping("/all/{conversationId}")
     public ResponseEntity getAllBeliefs(@PathVariable("conversationId") String conversationId) {
         try {
             Agent agent = agentService.getByUserId(conversationId);
-            return new ResponseEntity<>(beliefService.getByAgent(agent.getId())
+            return new ResponseEntity<>(agent.getScenario().getBeliefs()
                     .stream()
                     .map(belief -> new BeliefChangeModel(belief.getName(), belief.getValue()))
                     .toArray(), HttpStatus.OK);
@@ -79,17 +85,22 @@ public class BeliefController {
     }
 
     /**
-     * Fetches all initial belief values. These are the beliefs as seen in the beliefs.csv file. This method is used
-     * to fetch all beliefs for the Training Portal, to ensure beliefs are shown even if the conversation didn't get
-     * initialized yet on the backend.
+     * Fetches all initial belief values. These are the beliefs as seen in the beliefs_default.csv file.
+     * This method is used to fetch all beliefs for the Training Portal, to ensure beliefs are shown even
+     * if the conversation didn't get initialized yet on the backend.
      *
      * @return 200 OK with the list of all beliefs as InitialBeliefModel objects if successful, Bad Request otherwise.
      */
-    @CrossOrigin("http://localhost:5601")
-    @GetMapping("/all")
-    public ResponseEntity getAllInitialBeliefsFromCsv() {
+    @CrossOrigin(origins = {"http://${server.web}"})
+    @GetMapping("/all/scenario/{scenarioName}")
+    public ResponseEntity getAllInitialBeliefsFromCsv(@PathVariable("scenarioName") String scenarioName) {
         try {
-            List<Belief> beliefs = beliefService.getAllInitialBeliefsSorted();
+            List<Belief> beliefs;
+            try {
+                beliefs = scenarioService.getScenarioByName(scenarioName).getBeliefs();
+            } catch (HttpClientErrorException e) {
+                return new ResponseEntity(new ArrayList<>(), HttpStatus.OK);
+            }
 
             return new ResponseEntity<>(beliefs
                     .stream()
@@ -116,7 +127,7 @@ public class BeliefController {
      * @param phaseChangeRequest A model specifying the agent, and the phase
      * @return 200 OK with the list of all belief change objects if successful, Bad Request otherwise.
      */
-    @CrossOrigin("http://localhost:5601")
+    @CrossOrigin(origins = {"http://${server.web}"})
     @PutMapping("/phase")
     public ResponseEntity changeAgentToPhase(@RequestBody PhaseChangeRequest phaseChangeRequest) {
         try {

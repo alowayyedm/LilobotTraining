@@ -24,14 +24,21 @@ services:
   dktrasa:
     user: root
     build:
-      context:  dktrasa
+      context: dktrasa
+      args:
+        DKT_RASA_AUTH: ${DKT_RASA_AUTH}
     ports:
       - "5005:5005"
+    environment:
+      - DKT_RASA_AUTH=${DKT_RASA_AUTH}
+      - DKT_SERVER_ACTIONS=${DKT_SERVER_ACTIONS}
   action-server:
     build:
       context: dktrasa/actions
     ports:
       - "5055:5055"
+    environment:
+      - DKT_SERVER_BACKEND=${DKT_SERVER_BACKEND}
   db:
     build:
       context: dktpostgres
@@ -45,13 +52,34 @@ services:
   dktfrontend:
     build:
       context: dktfrontend/training-system-frontend
+      args:
+        VUE_APP_DKT_SERVER_BACKEND: ${DKT_SERVER_BACKEND}
+        VUE_APP_DKT_SERVER_RASA: ${DKT_SERVER_RASA}
     ports:
       - '5601:5601'
+    environment:
+      - VUE_APP_DKT_SERVER_BACKEND=${DKT_SERVER_BACKEND}
+      - VUE_APP_DKT_SERVER_RASA=${DKT_SERVER_RASA}
   dktbdiagent:
     build:
-      context: dktbdiagent
+      context: .
+      dockerfile: dktbdiagent/Dockerfile
+      args:
+        DKT_SECRET: ${DKT_SECRET}
+        DKT_SERVER_WEB: ${DKT_SERVER_WEB}
+        DKT_RASA_AUTH: ${DKT_RASA_AUTH}
+        DKT_SERVER_DB: ${DKT_SERVER_DB}
+        DKT_DB_USER: ${DKT_DB_USER}
+        DKT_DB_PASSWORD: ${DKT_DB_PASSWORD}
     ports:
       - '8080:8080'
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      - DKT_SECRET=${DKT_SECRET}
+      - DKT_SERVER_WEB=${DKT_SERVER_WEB}
+      - DKT_RASA_AUTH=${DKT_RASA_AUTH}
+      - DKT_SERVER_DB=${DKT_SERVER_DB}
+      - DKT_DB_USER=${DKT_DB_USER}
+      - DKT_DB_PASSWORD=${DKT_DB_PASSWORD}

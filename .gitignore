@@ -3,7 +3,12 @@
 /dktbdiagent/target/
 /dktrasa/actions/__pycache__/
 /dktrasa/.idea/
+/dktrasa/.rasa/
+/dktbdiagent/files/scenarios/*.json
 
 *.iws
 *.iml
 *.ipr
+dktrasa/models/20240528-090422-odious-survey.tar.gz
+
+.env

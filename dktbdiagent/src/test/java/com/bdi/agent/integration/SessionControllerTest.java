@@ -29,9 +29,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-@ActiveProfiles({"mockAgentService", "mockAgentRepository"})
+@ActiveProfiles({ "mockAgentService", "mockAgentRepository" })
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@TestPropertySource(locations="classpath:application-test.properties")
+@TestPropertySource(locations = "classpath:application-test.properties")
 public class SessionControllerTest {
 
     @LocalServerPort
@@ -48,7 +48,19 @@ public class SessionControllerTest {
         WebSocketStompClient webSocketStompClient = new WebSocketStompClient(new StandardWebSocketClient());
         webSocketStompClient.setMessageConverter(new MappingJackson2MessageConverter());
 
-        Agent agent = new Agent(1L, "testId", null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(), false, null);
+        Agent agent = new Agent();
+        agent.setUserId("testId");
+        agent.setKnowledgeFile("test");
+        agent.setIntentionId(1L);
+        agent.setCurrentSubject("");
+        agent.isActive(true);
+        agent.setCurrentAction(1L);
+        agent.setScore(1.0f);
+        agent.setLogEntries(new ArrayList<>());
+        agent.isTrainerResponding(false);
+
+//        Agent agent = new Agent(1L, "testId", "test", null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(), false,
+//                null);
 
         when(mockAgentService.getByUserId("sessionId")).thenReturn(agent);
 

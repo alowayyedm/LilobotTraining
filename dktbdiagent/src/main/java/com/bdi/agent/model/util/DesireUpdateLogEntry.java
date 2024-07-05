@@ -1,7 +1,6 @@
 package com.bdi.agent.model.util;
 
 import com.bdi.agent.model.Agent;
-import com.bdi.agent.model.enums.DesireName;
 import com.bdi.agent.model.enums.LogEntryType;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -23,8 +22,7 @@ public class DesireUpdateLogEntry extends LogEntry {
 
     @NotNull
     @Column(name = "name")
-    @Enumerated(EnumType.STRING)
-    private DesireName desireName;
+    private String desireName;
 
     /**
      * Constructor for a DesireUpdateLogEntry that includes a timestamp. Use this when you want to log a desire update
@@ -35,7 +33,7 @@ public class DesireUpdateLogEntry extends LogEntry {
      * @param desireName the desire name, e.g. 'D1'
      * @param agent the agent the log belongs to
      */
-    public DesireUpdateLogEntry(LocalDateTime timestamp, Boolean newValue, DesireName desireName, Agent agent) {
+    public DesireUpdateLogEntry(LocalDateTime timestamp, Boolean newValue, String desireName, Agent agent) {
         super(LogEntryType.DESIRE_UPDATE, timestamp, agent);
         this.desireName = desireName;
         this.newValue = newValue;
@@ -49,7 +47,7 @@ public class DesireUpdateLogEntry extends LogEntry {
      * @param desireName the desire name, e.g. 'D1'
      * @param agent the agent the log belongs to
      */
-    public DesireUpdateLogEntry(Boolean newValue, DesireName desireName, Agent agent) {
+    public DesireUpdateLogEntry(Boolean newValue, String desireName, Agent agent) {
         super(LogEntryType.DESIRE_UPDATE, agent);
         this.desireName = desireName;
         this.newValue = newValue;

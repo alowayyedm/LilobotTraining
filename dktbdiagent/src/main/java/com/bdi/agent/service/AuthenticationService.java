@@ -49,6 +49,7 @@ public class AuthenticationService {
         this.passwordEncoder = passwordEncoder;
         this.jwtTokenUtils = jwtTokenUtils;
         this.authenticationProvider = authenticationProvider;
+        System.out.println(this.secretCode);
     }
 
     /**

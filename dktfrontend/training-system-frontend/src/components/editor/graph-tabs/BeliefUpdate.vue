@@ -1,0 +1,209 @@
+<template>
+  <div class="mappingDiv">
+    <h5 class="text">{{ updateName }}</h5>
+    <ul class="listContainer">
+      <li v-for="mapItem in currentMappings" :key="mapItem">
+        <div class="mapping">
+          <h5 class="nameOfEditedValue mapItemChild text">{{ mapItem.name }}</h5>
+          <select class="styled-select mapItemChild" v-model="mapItem.modifier" id="selectedOption">
+            <option v-for="option in options" :key="option" :value="option.type"> {{ option.title }}</option>
+          </select>
+          <input class="mapItemChild valueBox" min="0" max="1" step="0.05" type="number" v-model="mapItem.value">
+          <button @click="removeFromIntent(mapItem.name)" class="btn-close"></button>
+        </div>
+      </li>
+    </ul>
+    <button class="click-button" @click="openChooseMenu">{{ buttonValue }}</button>
+  </div>
+  <div v-if="showSelectionPopup">
+    <SelectionPopup
+    :showPopup="showSelectionPopup"
+    @update:showPopup="closeSelectionPopup"
+    v-model:selectedItem="newestItemToEdit"
+    @update:selectedItem="chooseIntentForMapping"
+    :selectionItems="localAllBeliefs"
+    @update:selectionItems="updateAllBeliefs"
+    :headerText="'Belief'"
+    :canAddToList="true">
+    </SelectionPopup>
+  </div>
+</template>
+
+<script>
+import SelectionPopup from "./SelectionPopup.vue";
+import {watch, ref} from 'vue';
+
+export default {
+  props: {
+    showPopup: {
+      type: Boolean,
+      default: false
+    },
+    options: {
+        type: Array,
+        default: () => []
+    },
+    updateName: {
+        type: String,
+        default: "belief mapping"
+    },
+    allBeliefs: {
+      type: Array,
+      default: () => ([])
+    },
+    mapItems: {
+        type: Array,
+        default: () => []
+    },
+    buttonValue: {
+      type: String,
+      default: "add belief"
+    }
+  },
+  name: "BeliefUpdate",
+  components: {
+    SelectionPopup
+  },
+  setup(props, { emit }) {
+    const currentMappings = ref(props.mapItems);
+
+    watch(currentMappings, (newValue) => {
+      emit('update:mapItems', newValue)
+    })
+
+    return {
+      currentMappings
+    }
+  },
+  data() {
+    return {
+      showSelectionPopup: false,
+      newestItemToEdit: "",
+      localAllBeliefs: [...this.allBeliefs],
+    }   
+  },
+  methods: {
+    updateShowPopup(newValue) {
+      this.$emit('update:showPopup', newValue);
+    },
+    removeFromIntent(item) {
+      this.currentMappings = this.currentMappings.filter(x => x.name != item);
+    },
+    openChooseMenu() {
+      this.showSelectionPopup = true;
+    },
+    closeSelectionPopup() {
+      this.showSelectionPopup = false;
+    },
+    chooseIntentForMapping() {
+      this.showSelectionPopup = false;
+      this.currentMappings.push({
+          name: this.newestItemToEdit,
+          modifier: "",
+          value: 0
+        })
+    },
+    updateAllBeliefs(newValue) {
+      this.localAllBeliefs = newValue;
+      this.$emit('update:allBeliefs', this.localAllBeliefs);
+    }
+  }
+}   
+</script>
+
+<style scoped>
+* {
+    box-sizing: border-box
+}
+
+.mappingDiv {
+    height: 90%;
+    background-color: var(--lightest-purple);
+    border-radius: 16px;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+}
+
+.listContainer {
+    padding: 0px;
+    list-style-type: none;
+}
+
+.btn-close {
+  width: 10%;
+}
+
+.mapping {
+  width: 100%;
+  display: flex;
+  justify-content: spce-beatween;
+  color: #888888;
+  list-style-type: none;
+  padding: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.mapItemChild {
+    border-radius: 16px;
+    border: 0px solid white;
+    margin-right: 2.5%;
+    margin-left: 2.5%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.valueBox {
+    width: 20%;
+}
+
+.nameOfEditedValue {
+    width: 50%;
+}
+
+.styled-select {
+    width: 20%;
+    font-size: 16px;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    cursor: pointer;
+}
+
+.click-button {
+  margin-top: 5px;
+  margin-left: 2px;
+  margin-right: 2px;
+  border-radius: 16px;
+  background-color: var(--chat-widget-button);
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  border: none;
+  color: var(--chat-widget-button-text);
+  font-size: small;
+  padding: 0.5rem;
+  font-family: 'Anton', sans-serif;
+  width: max-content;
+  cursor: pointer;
+  /* borders only used in accessibility mode */
+  border: solid;
+  border-width: var(--basic-border-width);
+  border-color: var(--basic-border-dark);
+}
+
+.click-button:hover,
+.click-button:focus {
+  background-color: var(--chat-widget-button-focus);
+  outline: var(--button-outline-width) solid var(--button-outline-dark);
+  outline-offset: 4px;
+}
+
+.text{
+  border: none;
+  color: var(--chat-widget-button-text);
+  font-size: large;
+  font-family: 'Anton', sans-serif;
+}
+
+</style>

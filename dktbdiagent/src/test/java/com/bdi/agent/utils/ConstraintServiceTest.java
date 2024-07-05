@@ -2,12 +2,15 @@ package com.bdi.agent.utils;
 
 import com.bdi.agent.TestConfig;
 import com.bdi.agent.TestUtils;
+import com.bdi.agent.model.Belief;
 import com.bdi.agent.model.enums.BoundaryCheck;
 import com.bdi.agent.model.enums.DesireName;
 import com.bdi.agent.model.enums.Phase;
 import com.bdi.agent.model.util.BeliefConstraint;
 import com.bdi.agent.model.util.PhaseTransitionConstraints;
 import com.bdi.agent.service.ConstraintService;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -47,7 +50,7 @@ public class ConstraintServiceTest {
         // Test idx >= beliefs.length
         BeliefConstraint beliefConstraint = new BeliefConstraint(BoundaryCheck.EQ,
                 utils.getBeliefOrdering().get(0), 0);
-        assertThat(constraintService.isConstraintSatisfied(beliefConstraint, new float[]{})).isFalse();
+        assertThat(constraintService.isConstraintSatisfied(beliefConstraint, new ArrayList<>())).isFalse();
     }
 
     @ParameterizedTest
@@ -55,7 +58,7 @@ public class ConstraintServiceTest {
             "LEQ, 0, 0.1, 0", "EQ, 0, 0, 0", "NEQ, 0, 0.1, 0", "NEQ, 0, 0, 0.1"})
     public void testIsConstraintSatisfiedSatisfied(BoundaryCheck boundaryCheck, int beliefIdx, float goalValue,
                                                    float fillValue) {
-        float[] beliefs = utils.getFilledBeliefArray(fillValue);
+        List<Belief> beliefs = utils.getFilledBeliefArray(fillValue);
 
         BeliefConstraint beliefConstraint = new BeliefConstraint(boundaryCheck,
                 utils.getBeliefOrdering().get(beliefIdx), goalValue);
@@ -68,7 +71,7 @@ public class ConstraintServiceTest {
             "LT, 0, 0, 0.1", "EQ, 0, 0.1, 0", "EQ, 0, 0, 0.1", "NEQ, 0, 0, 0"})
     public void testIsConstraintSatisfiedNotSatisfied(BoundaryCheck boundaryCheck, int beliefIdx, float goalValue,
                                                       float fillValue) {
-        float[] beliefs = utils.getFilledBeliefArray(fillValue);
+        List<Belief> beliefs = utils.getFilledBeliefArray(fillValue);
 
         BeliefConstraint beliefConstraint = new BeliefConstraint(boundaryCheck,
                 utils.getBeliefOrdering().get(beliefIdx), goalValue);
@@ -80,7 +83,7 @@ public class ConstraintServiceTest {
     public void testDnfConstraintsSatisfied_OnlyDisjunction() {
         // Tests DNF of the form: x1 || x2 || x3
 
-        float[] beliefs = utils.getFilledBeliefArray(0);
+        List<Belief> beliefs = utils.getFilledBeliefArray(0);
 
         // All true
         Set<Set<BeliefConstraint>> constraintSet = Set.of(
@@ -111,7 +114,7 @@ public class ConstraintServiceTest {
     public void testDnfConstraintsSatisfied_OnlyConjunction() {
         // Tests DNF of the form: (x1 && x2 && x3)
 
-        float[] beliefs = utils.getFilledBeliefArray(0);
+        List<Belief> beliefs = utils.getFilledBeliefArray(0);
 
         // All true
         Set<Set<BeliefConstraint>> constraintSet = Set.of(Set.of(
@@ -142,7 +145,7 @@ public class ConstraintServiceTest {
     public void testDnfConstraintsSatisfied_SingleAtom() {
         // Tests DNF of the form: x1
 
-        float[] beliefs = utils.getFilledBeliefArray(0);
+        List<Belief> beliefs = utils.getFilledBeliefArray(0);
 
         // True
         Set<Set<BeliefConstraint>> constraintSet = Set.of(Set.of(
@@ -161,7 +164,7 @@ public class ConstraintServiceTest {
     public void testDnfConstraintsSatisfied_DisjunctionOfConjunctions() {
         // Tests DNF of the form: (x1 && x2) || (x3 && x4)
 
-        float[] beliefs = utils.getFilledBeliefArray(0);
+        List<Belief> beliefs = utils.getFilledBeliefArray(0);
 
         // Both conjunctions true
         Set<Set<BeliefConstraint>> constraintSet = Set.of(
@@ -233,7 +236,7 @@ public class ConstraintServiceTest {
     public void testDnfConstraintsSatisfied_DisjunctionMixed() {
         // Tests DNF of the form: (x1 && x2) || x3
 
-        float[] beliefs = utils.getFilledBeliefArray(0);
+        List<Belief> beliefs = utils.getFilledBeliefArray(0);
 
         // Conjunction true
         Set<Set<BeliefConstraint>> constraintSet = Set.of(
@@ -285,216 +288,6 @@ public class ConstraintServiceTest {
     }
 
     @Test
-    public void testCnfConstraintsSatisfied_OnlyConjunction() {
-        // Tests CNF of the form: (x1) && (x2) && (x3)
-
-        float[] beliefs = utils.getFilledBeliefArray(0);
-
-        // All true
-        Set<Set<BeliefConstraint>> constraintSet = Set.of(
-                Set.of(new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0)),
-                Set.of(new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 0)),
-                Set.of(new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(2), 0))
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet, beliefs)).isTrue();
-
-        // One true
-        Set<Set<BeliefConstraint>> constraintSet2 = Set.of(
-                Set.of(new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0)),
-                Set.of(new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 1)),
-                Set.of(new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(2), 1))
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet2, beliefs)).isFalse();
-
-        // None true
-        Set<Set<BeliefConstraint>> constraintSet3 = Set.of(
-                Set.of(new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1)),
-                Set.of(new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 1)),
-                Set.of(new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(2), 1))
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet3, beliefs)).isFalse();
-    }
-
-    @Test
-    public void testCnfConstraintsSatisfied_OnlyDisjunction() {
-        // Tests CNF of the form: (x1 || x2 || x3)
-
-        float[] beliefs = utils.getFilledBeliefArray(0);
-
-        // All true
-        Set<Set<BeliefConstraint>> constraintSet = Set.of(Set.of(
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0),
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 0),
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(2), 0)
-        ));
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet, beliefs)).isTrue();
-
-        // One true
-        Set<Set<BeliefConstraint>> constraintSet2 = Set.of(Set.of(
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1),
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 0),
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(2), 0)
-        ));
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet2, beliefs)).isTrue();
-
-        // None true
-        Set<Set<BeliefConstraint>> constraintSet3 = Set.of(Set.of(
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1),
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 1),
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(2), 1)
-        ));
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet3, beliefs)).isFalse();
-    }
-
-    @Test
-    public void testCnfConstraintsSatisfied_SingleAtom() {
-        // Tests CNF of the form: x1
-
-        float[] beliefs = utils.getFilledBeliefArray(0);
-
-        // True
-        Set<Set<BeliefConstraint>> constraintSet = Set.of(Set.of(
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0)
-        ));
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet, beliefs)).isTrue();
-
-        // False
-        Set<Set<BeliefConstraint>> constraintSet2 = Set.of(Set.of(
-                new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1)
-        ));
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet2, beliefs)).isFalse();
-    }
-
-    @Test
-    public void testCnfConstraintsSatisfied_ConjunctionOfDisjunctions() {
-        // Tests CNF of the form: (x1 || x2) && (x3 || x4)
-
-        float[] beliefs = utils.getFilledBeliefArray(0);
-
-        // Both disjunctions true
-        Set<Set<BeliefConstraint>> constraintSet = Set.of(
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 0)
-                ),
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(2), 0),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(3), 0)
-                )
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet, beliefs)).isTrue();
-
-        // One disjunction true, other partially true
-        Set<Set<BeliefConstraint>> constraintSet2 = Set.of(
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 0)
-                ),
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 0)
-                )
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet2, beliefs)).isTrue();
-
-        // One disjunction true, other fully false
-        Set<Set<BeliefConstraint>> constraintSet3 = Set.of(
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 0)
-                ),
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 1)
-                )
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet3, beliefs)).isFalse();
-
-        // Both disjunctions fully false
-        Set<Set<BeliefConstraint>> constraintSet4 = Set.of(
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 1)
-                ),
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 1),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(2), 1)
-                )
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet4, beliefs)).isFalse();
-    }
-
-    @Test
-    public void testCnfConstraintsSatisfied_ConjunctionMixed() {
-        // Tests CNF of the form: (x1 || x2) && x3
-
-        float[] beliefs = utils.getFilledBeliefArray(0);
-
-        // Disjunction true, atom false
-        Set<Set<BeliefConstraint>> constraintSet = Set.of(
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 0)
-                ),
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1)
-                )
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet, beliefs)).isFalse();
-
-        // Atom true, disjunction false
-        Set<Set<BeliefConstraint>> constraintSet1 = Set.of(
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 1)
-                ),
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0)
-                )
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet1, beliefs)).isFalse();
-
-
-        // Atom true, disjunction partially true
-        Set<Set<BeliefConstraint>> constraintSet2 = Set.of(
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 1)
-                ),
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0)
-                )
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet2, beliefs)).isTrue();
-
-        // Both true
-        Set<Set<BeliefConstraint>> constraintSet3 = Set.of(
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 0)
-                ),
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 0)
-                )
-
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet3, beliefs)).isTrue();
-
-        // Both false
-        Set<Set<BeliefConstraint>> constraintSet4 = Set.of(
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1),
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(1), 1)
-                ),
-                Set.of(
-                        new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(0), 1)
-                )
-
-        );
-        assertThat(constraintService.areCnfConstraintsSatisfied(constraintSet4, beliefs)).isFalse();
-    }
-
-    @Test
     public void testCheckDesireConstraintsCheckCalls() {
         /*
         This only tests that the correct methods are called. It is closely bound to the code since these are the
@@ -502,20 +295,20 @@ public class ConstraintServiceTest {
          */
 
         Mockito.reset(mockConstraintProvider);
-        when(mockConstraintProvider.getDesireConstraints(DesireName.D1)).thenReturn(new HashSet<>());
+        when(mockConstraintProvider.getDesireConstraints(null, "D1")).thenReturn(new HashSet<>());
 
         ConstraintService spyConstraintService = Mockito.spy(constraintService);
 
-        when(spyConstraintService.areDnfConstraintsSatisfied(new HashSet<>(), new float[]{}))
+        when(spyConstraintService.areDnfConstraintsSatisfied(new HashSet<>(), new ArrayList<>()))
                 .thenReturn(true);
-        assertThat(spyConstraintService.checkDesireConstraints(DesireName.D1, new float[]{})).isTrue();
+        assertThat(spyConstraintService.checkDesireConstraints(null, "D1", new ArrayList<>())).isTrue();
 
-        when(spyConstraintService.areDnfConstraintsSatisfied(new HashSet<>(), new float[]{}))
+        when(spyConstraintService.areDnfConstraintsSatisfied(new HashSet<>(), new ArrayList<>()))
                 .thenReturn(false);
-        assertThat(spyConstraintService.checkDesireConstraints(DesireName.D1, new float[]{})).isFalse();
+        assertThat(spyConstraintService.checkDesireConstraints(null, "D1", new ArrayList<>())).isFalse();
 
-        verify(spyConstraintService, times(2)).areDnfConstraintsSatisfied(new HashSet<>(), new float[]{});
-        verify(mockConstraintProvider, times(2)).getDesireConstraints(DesireName.D1);
+        verify(spyConstraintService, times(2)).areDnfConstraintsSatisfied(new HashSet<>(), new ArrayList<>());
+        verify(mockConstraintProvider, times(2)).getDesireConstraints(null, "D1");
     }
 
     @Test
@@ -529,22 +322,22 @@ public class ConstraintServiceTest {
                 new BeliefConstraint(BoundaryCheck.EQ, utils.getBeliefOrdering().get(2), 0)
         ));
 
-        when(mockConstraintProvider.getDesireConstraints(DesireName.D1)).thenReturn(constraintSet);
+        when(mockConstraintProvider.getDesireConstraints(null, "D1")).thenReturn(constraintSet);
 
-        assertThat(constraintService.checkDesireConstraints(DesireName.D1, new float[]{})).isFalse();
-        verify(mockConstraintProvider).getDesireConstraints(DesireName.D1);
+        assertThat(constraintService.checkDesireConstraints(null, "D1", new ArrayList<>())).isFalse();
+        verify(mockConstraintProvider).getDesireConstraints(null, "D1");
     }
 
-    @Test
-    public void testEmptyCnfIsTrue() {
-        assertThat(constraintService.areCnfConstraintsSatisfied(Set.of(), new float[]{})).isTrue();
-        assertThat(constraintService.areCnfConstraintsSatisfied(Set.of(Set.of()), new float[]{})).isTrue();
-    }
+//    @Test
+//    public void testEmptyCnfIsTrue() {
+//        assertThat(constraintService.areCnfConstraintsSatisfied(Set.of(), new float[]{})).isTrue();
+//        assertThat(constraintService.areCnfConstraintsSatisfied(Set.of(Set.of()), new float[]{})).isTrue();
+//    }
 
     @Test
     public void testEmptyDnfIsTrue() {
-        assertThat(constraintService.areDnfConstraintsSatisfied(Set.of(), new float[]{})).isTrue();
-        assertThat(constraintService.areDnfConstraintsSatisfied(Set.of(Set.of()), new float[]{})).isTrue();
+        assertThat(constraintService.areDnfConstraintsSatisfied(Set.of(), new ArrayList<>())).isTrue();
+        assertThat(constraintService.areDnfConstraintsSatisfied(Set.of(Set.of()), new ArrayList<>())).isTrue();
     }
 
     @Test

@@ -31,13 +31,13 @@
     </div>
 
     <div class="right">
-      <web-chat-component
-          class="webchat-learner"
-        header-text="Chat met Lilobot"
-        ref="webChat"
-        @handle-input="sendUserMessage"
-        @leave-session="restartSession">
-      </web-chat-component>
+<!--      <web-chat-component -->
+<!--          class="webchat-learner"-->
+<!--        header-text="Chat met Lilobot"-->
+<!--        ref="webChat"-->
+<!--        @handle-input="sendUserMessage"-->
+<!--        @leave-session="restartSession">-->
+<!--      </web-chat-component>-->
     </div>
   </div>
   <generic-popup
@@ -48,7 +48,6 @@
 </template>
 
 <script>
-  import WebChatComponent from "@/components/WebChatComponent";
   import sessionMixin from "@/mixins/sessionMixin";
   import {Stomp} from "@stomp/stompjs";
   import axios from "axios";
@@ -58,7 +57,6 @@
     name: 'ChatWithLilobot',
     components: {
       GenericPopup,
-      WebChatComponent,
     },
     mixins: [sessionMixin],
     created() {

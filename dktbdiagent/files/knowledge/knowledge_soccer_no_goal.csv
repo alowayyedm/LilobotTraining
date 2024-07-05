@@ -1,0 +1,48 @@
+chitchat,init,"Hey, I'm Jim.",Hiiii I am Jim,"Hello, I'm Jim!",Hi! I'm Jim
+chitchat,greeting,"Hey, I'm Jim.",Hiiii I am Jim,"Hello, I'm Jim!",Hi! I'm Jim
+chitchat,faring,Well it's not going well,I'm feeling a little sad,I'm feeling sad,It's not going well :((
+chitchat,end,Okaaaay that's good!,Okaaaay great!,"Yeah, okeeey :)))",Okeeey :))
+chitchat,goodbye,Bye bye!,Bye!,Goodbye.,Have a nice day!
+bullying,what,I am being bullied at football practice.,Someone is making fun of me at football practice.,I'm being bullied at football.,They are making fun of me at football :(
+bullying,who,A group of kids at football practice!,I am being bullied by a group of kids at football practice,A group of kids,I am being bullied by a group of kids
+bullying,count,Almost everybody on my team,Almost everyone on my team,Most kids on my team,Most of my teammates
+bullying,details,"I constantly get told I look ugly, that my nose is too big and eyes are too small ):",I get shouted at and always am the last one to get picked for a team.,"Everyone laughs at me that I suck at the game, but I am not that bad!",They are making fun of me for being ugly and bad ):
+bullying,location,In the locker rooms,"On the field, when practicing.",At the club ):,When playing football
+bullying,frequency,Every time I go to practice!,Every day at practice!,Often... Every time we play...,Almost every day
+bullying,duration,"It all started with Alex, after I scored a goal. He started saying that ugly people are lucky.","It all started with Alex, after I scored a goal.  Everyone started making fun of me afterwards.",Since I scored against Alex he told everyone I am lucky and ugly!,Ever since I won against Alex he started making fun of me for being ugly. Everyone continued!
+bullying,when,"Yesterday, at practice.",Yesterday I was told I look like a frog and that made me very sad ):,Yesterday,Yesterday they made fun of me again.
+bullying,why,"I'm not sure, I think Alex got mad at me.","I'm not sure, I think Alex didn't like that I scored against him.",They say I hit the ball like a girl ):,I don't know
+bullying,response,I don't know what to do ):,There is nothing I can do...,,
+bullying,feeling,I sometimes feel like no one likes me.,When I come home I'm always very sad about it.,"I often come home and cry really hard because I'm being yelled at all day long. I feel powerless, I just feel like I can't do anything.","It makes me sad. I often cry...I really don't know what to do anymore,I often feel left out."
+bullying,confidant,Nobody. I'm afraid the bullying will get worse,I haven't told anyone about it.,I haven't talked to anyone about it yet. Otherwise the bullying will get worse. :(,I didn't tell anyone.
+bullying,teacher,No. I don't want to talk about it with Fred.,No I don't want to talk about it with my trainer.,No!,No.
+bullying,attempt,"I don't know what to do, I am scared.",I'm scared to do anything,Nothing at all.,I can't do anything
+goal,what,That they don't hit me anymore,That they stop,I want the bullying to stop,I don't want to be bullied anymore
+goal,dream,That we play football together and no one makes fun of me!,I would like to play football without anyone making fun of me!,I would like to just play football with my friends!,I want to play with my friends!
+goal,feeling,I would feel like I am part of the team.,I would feel like everyone wants to play with me!,I wouldn't feel left out anymore...,I would feel happy
+goal,effect,I would be happy,Then I would feel safe and part of the group,Others would notice that I am happy,I will feel happy
+goal,how,I don't know...,I have no idea...,,
+goal,howkt,I don't know what to do...,I am very sad and I don't know what to do., I am lost, I don't know what to do.
+goal,howchild,I don't know what to do.,Nothing I think..,,
+confidant,who,"Our trainer, Fred. He is nice.","Our trainer, Fred. He is always supportive.",I do have Fred. He is super nice :))),"I think Fred, our trainer, but I am scared to tell him."
+confidant,why,Maybe the situation will get worse. I will look like a crybaby.,I don't want the bullying to get worse. I will look like a crybaby.,Otherwise it will only get worse. I will look like a crybaby.,It might get worse I think. I will look like a crybaby.
+confidant,how,Maybe I can do it after practice.,I can ask him after practice. Then there is no one around,Maybe after practice or something.,Maybe after practice... then there is no one around
+confidant,feeling,Better I think,I'm not sure but I'll try. I just want to feel safe,Hopefully better :),I'm not sure but I think it would be fine
+confidant,say,That I am being bullied and I want it to stop,I am going to tell him about the bullying and that I want it to stop,That I am being bullied and stuff,That I don't want to be bullied
+confidant,when,Maybe I can talk to him tomorrow.,I'll talk to him tomorrow,Tomorrow I think...,I'll try tomorrow
+confidant,teacher,Won't the situation get worse?,Won't the situation get worse if I tell him?,Won't the bullying get worse?,Won't it get worse?
+help,how,What could Fred do about it?,How can my trainer help me?,What could my trainer do about it?,What could Fred do?
+help,severity,Won't the situation get worse?,Won't the situation get worse if I tell him?,Won't the bullying get worse?,Won't it get worse?
+help,say,What should I tell him?,What should I say?,What do I say?,What should I say to him?
+ack,positive,:),yeah,yesss,:))))
+ack,neutral,:),okay,:),:))))
+ack,negative,:(,:(((((,no,nooooo
+ack,empathize,:(,:(((((,,
+ack,compliment,:))),thank yooou,:),thank yooou
+ack,uninterested,I don't want to talk about that,I don't want to talk about it,I don't want to talk about this,I don't want to talk about that
+ack,helpful,Yes I will try. thanks,Yes I will talk to Fred tomorrow. Thank you!,Yes thank you,Yessss
+ack,unhelpful,.....,Shame,:(,:(((
+ack,cannot,No. I don't dare,"No, I don't dare","No, I just don't dare","No, I don't dare."
+ack,unknown,I'm not sure,I don't know.,No idea,I have no idea
+ack,notfound,I don't understand what you mean,,,
+meta,active,Yesssss,Yes I'm still here,Yeah,Yeeesss

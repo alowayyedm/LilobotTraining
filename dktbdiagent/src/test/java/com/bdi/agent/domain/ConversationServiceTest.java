@@ -9,6 +9,7 @@ import com.bdi.agent.model.Conversation;
 import com.bdi.agent.model.Role;
 import com.bdi.agent.model.User;
 import com.bdi.agent.repository.ConversationRepository;
+import com.bdi.agent.service.AgentService;
 import com.bdi.agent.service.ConversationService;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
@@ -31,14 +33,27 @@ public class ConversationServiceTest {
     @Autowired
     private transient ConversationRepository mockConversationRepository;
 
+    @MockBean
+    private AgentService agentService;
+
     @Autowired
     private transient ConversationService conversationService;
 
     @Test
     public void renameConversationTest() {
-        Agent agent = new Agent(1L, "testId", null, null,
-                null, 0L, "", true,
-                0L, 0.0f, null, false, null);
+        Agent agent = new Agent();
+        agent.setUserId("testId");
+        agent.setKnowledgeFile("test");
+        agent.setIntentionId(0L);
+        agent.setCurrentSubject("");
+        agent.isActive(true);
+        agent.setCurrentAction(0L);
+        agent.setScore(0.0f);
+        agent.isTrainerResponding(false);
+
+//        Agent agent = new Agent(1L, "testId", "test", null, null,
+//                null, 0L, "", true,
+//                0L, 0.0f, null, false, null);
         User user = new User("j_doe", "1VeryUnsafePassword!", "j.doe@mail.com", Role.LEARNER);
         Conversation conversation = new Conversation("Old", LocalDateTime.now(), agent, user);
         when(mockConversationRepository.findById(1L)).thenReturn(Optional.of(conversation));
@@ -49,9 +64,19 @@ public class ConversationServiceTest {
 
     @Test
     public void deleteConversationTest() {
-        Agent agent = new Agent(1L, "testId", null,
-                null, null, 0L, "",
-                true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent();
+        agent.setUserId("testId");
+        agent.setKnowledgeFile("test");
+        agent.setIntentionId(0L);
+        agent.setCurrentSubject("");
+        agent.isActive(true);
+        agent.setCurrentAction(0L);
+        agent.setScore(0.0f);
+        agent.isTrainerResponding(false);
+
+//        Agent agent = new Agent(1L, "testId", "test", null,
+//                null, null, 0L, "",
+//                true, 0L, 0.0f, null, false, null);
         User user = new User("j_doe", "1VeryUnsafePassword!", "j.doe@mail.com", Role.LEARNER);
         Conversation conversation = new Conversation("Name", LocalDateTime.now(), agent, user);
         when(mockConversationRepository.findById(1L)).thenReturn(Optional.of(conversation));

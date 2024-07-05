@@ -1,16 +1,16 @@
 package com.bdi.agent.utils;
 
-import com.bdi.agent.TestConfig;
-import com.bdi.agent.utils.FloatComparer;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.TestPropertySource;
 
-import java.math.BigDecimal;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import com.bdi.agent.TestConfig;
 
 @SpringBootTest
 @Import(TestConfig.class)

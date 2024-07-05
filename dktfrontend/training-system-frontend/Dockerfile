@@ -4,6 +4,10 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+ARG VUE_APP_DKT_SERVER_BACKEND
+ARG VUE_APP_DKT_SERVER_RASA
+RUN VUE_APP_DKT_SERVER_BACKEND=$VUE_APP_DKT_SERVER_BACKEND \
+    VUE_APP_DKT_SERVER_RASA=$VUE_APP_DKT_SERVER_RASA \
+    npm run build
 EXPOSE 5601
 CMD ["http-server", "dist", "-p", "5601"]

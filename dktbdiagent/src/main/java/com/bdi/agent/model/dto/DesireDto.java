@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class DesireDto {
-    private DesireName name;
+    private String name;
 
     @NotBlank
     private String fullName;

@@ -1,5 +1,6 @@
 package com.bdi.agent.model.dto;
 
+import java.util.List;
 import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,5 +12,5 @@ public class IntentDto {
     private String intentionName;
 
     @NotBlank
-    private String exampleMsg;
+    private List<String> examples;
 }

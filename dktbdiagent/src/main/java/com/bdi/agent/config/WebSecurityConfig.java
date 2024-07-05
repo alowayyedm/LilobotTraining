@@ -14,12 +14,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
@@ -41,8 +39,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * Web security configuration.
      *
      * @param jwtAuthorizationFilter filter that checks whether the user is authorized
-     * @param jwtAuthEndpoint entry point for authentication errors
-     * @param jwtUserDetailsService service for retrieving users
+     * @param jwtAuthEndpoint        entry point for authentication errors
+     * @param jwtUserDetailsService  service for retrieving users
      */
     @Autowired
     public WebSecurityConfig(JwtAuthorizationFilter jwtAuthorizationFilter,
@@ -99,14 +97,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
-                //.antMatchers("**").permitAll()
+                //              .antMatchers("**").permitAll()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/scenarios/**").permitAll()
                 .antMatchers("/session/**").permitAll()
                 .antMatchers("/beliefs/**").permitAll()
                 .antMatchers("/topic/**").permitAll()
                 .antMatchers("/app/**").permitAll()
                 .antMatchers("/agent/**").permitAll()
                 .antMatchers("/create/**").permitAll()
+                .antMatchers("/scenarios/**").permitAll()
+                .antMatchers("/nlu/**").permitAll()
                 .antMatchers("/trainer/**").hasAnyAuthority("TRAINER", "ADMIN")
                 .antMatchers("/user/**").hasAnyAuthority("LEARNER", "TRAINER", "ADMIN")
 

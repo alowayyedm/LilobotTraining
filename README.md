@@ -18,6 +18,39 @@ Alternatively, you can use personal access tokens to clone the repo.
 1. First, create a personal access token at: `https://<your-gitlab-domain>/-/profile/personal_access_tokens`
 2. Clone the git repo with `git clone https://<username>:<access-token>@<your-gitlab-domain>/<project-name>.git`
 
+# Running on server with docker
+
+## Setup the environment
+First, create the environment variables for the application to run in with a simple .env file
+```
+DKT_RASA_AUTH=test
+DKT_DB_USER=postgres
+DKT_DB_PASSWORD=password
+DKT_SERVER_WEB=localhost:5601
+DKT_SERVER_DB=localhost:5432
+DKT_SERVER_RASA=localhost:5005
+DKT_SERVER_ACTIONS=localhost:5055
+DKT_SERVER_BACKEND=localhost:8080
+DKT_SECRET=test
+```
+Specify the Rasa auth token and secret token the way you like.
+
+## Build and run
+Now you can build the image by running
+```
+docker-compose --env-file .env build
+```
+You can run the full application as a daemon in the backgrond
+```
+docker-compose --env-file .env up -d
+```
+To stop the application from running, run
+```
+docker-compose kill
+```
+
+# Running local or standalone on server
+
 ## Setting up Postgres database
 ### on local machine
 1. Install a postgres server on your local machine. You can find instructions for this through a Google search.

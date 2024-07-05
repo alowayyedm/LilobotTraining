@@ -12,7 +12,6 @@
 <template>
 	<div>
 		<nav>
-      <img alt="Kindertelefoon logo" src="../images/kt_logo.png" width="70" height="60">
       <div class="navbar-title">
         <dynamic-text
             :header-text="`${$route.meta.title}`"
@@ -110,7 +109,11 @@
         ref="notification">
     </notification-component>
 
-	<router-view/>
+	<router-view v-slot="{ Component }">
+    <keep-alive :include="EditScenario">
+      <component :is="Component"/>
+    </keep-alive>
+  </router-view>
 	</div>
 </template>
 
@@ -138,6 +141,9 @@ export default {
           *	right side of the navbar with a black circle left to it. The title +
           *	circle together work like a button.
           */
+          { name: 'EditScenario', title: 'Edit Scenario', iconClass: 'fa-solid fa-edit edit-icon', 
+            circleClass: 'edit-icon-circle', route: '/train/editScenario'
+          },
           { name: 'ChatWithLilobot', title: 'Chat with Lilobot', iconClass: 'fa-solid fa-message',
             circleClass: '', route: '/' },
           { name: 'TrainingPortal', title: 'Training Portal', iconClass: 'fa-solid fa-chalkboard-user',
@@ -179,6 +185,9 @@ export default {
         }
         else if (name === 'TrainingPortal') {
           // Hide TrainingPortal from learners
+          return (this.$store.state.auth.role !== "LEARNER") && sessionStorage.getItem('vuex');
+        }
+        else if (name == 'EditScenario') {
           return (this.$store.state.auth.role !== "LEARNER") && sessionStorage.getItem('vuex');
         }
 
@@ -276,6 +285,15 @@ export default {
 </script>
 
 <style scoped>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--main-background);
+}
+* {
+  box-sizing: border-box;
+}
+
 .tab {
   position: relative;
 }
@@ -348,6 +366,6 @@ nav .submenu a {
 </style>
 
 <style scoped src="../styles/navbar.css"/>
-<style src="../styles/main.css"/>
-<style src="../styles/signup.css"/>
-<style src="../node_modules/@fortawesome/fontawesome-free/css/all.css"/>
+<style scoped src="../styles/main.css"/>
+<style scoped src="../styles/signup.css"/>
+<style scoped src="../node_modules/@fortawesome/fontawesome-free/css/all.css"/>

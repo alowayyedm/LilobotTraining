@@ -3,9 +3,10 @@
 #
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
+import os
 
-BDIAGENT_ENDPOINT = "http://localhost:8080/agent/"
-REPORT_ENDPOINT = "http://localhost:8080/report/"
+BDIAGENT_ENDPOINT = "http://" + os.environ.get('DKT_SERVER_BACKEND') + "/agent/"
+REPORT_ENDPOINT = "http://" + os.environ.get('DKT_SERVER_BACKEND') + "/report/"
 LOCALMODE = True   # change to false if using Azure Blob Storage
 
 # Azure configuration
