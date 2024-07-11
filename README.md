@@ -236,35 +236,28 @@ to:\
 2. Open command prompt and navigate to the project repo top directory. 
 3. Run the command `docker-compose up`. This may take 5-30 minutes to build.
 
+#Publications
 
-# Resources (From original Master's thesis project)
-Links to data related to this thesis. 
-- Experiment data (4TU.ResearchData): https://doi.org/10.4121/17371919
-- OSF form: Evaluation of a BDI-based virtual agent for training child helpline counsellors - https://osf.io/hkxzc
-- Project storage TU Delft: U:\MScProjectDKT (owned by Merijn Bruijnes)
+Al Owayyed, M., Grundmann, S., Bruijnes, M., & Brinkman, W. P. (2023). Training child helpline counsellors with a BDI-based conversational agent. In BNAIC/BeNeLearn 2023: Joint International Scientific Conferences on AI and Machine Learning.
+
+Grundmann, S. (2022). A BDI-based virtual agent for training child helpline counsellors.
+
+
+# Resources
+The first version of Lilobot was developed as part of a master thesis by Sharon Grundman
 - Thesis report: http://resolver.tudelft.nl/uuid:f04f8f0b-9ab9-4f1c-a19c-43b164d45cce
 
+- Experiment data (4TU.ResearchData): https://doi.org/10.4121/17371919
+- OSF form: Evaluation of a BDI-based virtual agent for training child helpline counsellors - https://osf.io/hkxzc
+
+Lilobot was updated and extended by Mohammed Al Owayyed, Willem-Paul Brinkman, Fanni Fiedrich, Sten van Wolfswinkel, Francisco Ruas Vaz, Irene Aldabaldetrecu Alberdi, Kayleigh Jones, Alex Despan, Fedde de Haas,
+Veena Madhu, and Tristan Schmidt.
 
 
-Here are some handy links I used throughout the thesis. 
-- Data analysis markdown file (Willem-Paul):  https://data.4tu.nl/repository/uuid:0cf03876-0f94-4225-b211-c5971d250002
-- Data management plan: https://dmponline.tudelft.nl
-- Data science research lectures (Willem-Paul): http://yukon.twi.tudelft.nl/weblectures/cs4125.html 
-- De Kindertelefoon e-learning: https://www.linkidstudy.nl
-- Human research ethics committee (HREC): https://www.tudelft.nl/over-tu-delft/strategie/integriteitsbeleid/human-research-ethics
-  - HREC application: https://labservant.tudelft.nl/
-  - Template Informed Consent Form: https://www.tudelft.nl/over-tu-delft/strategie/integriteitsbeleid/human-research-ethics/template-informed-consent-form
-- Qualtrics TU Delft: https://tudelft.eu.qualtrics.com/
-- OSF form: https://osf.io
-  - Computer-based intervention for supporting individuals in changing negative thinking patterns: https://osf.io/v6tkq
-  - A support system for people with social diabetes distress: https://osf.io/yb6vg
-  - Study on effects of a virtual reality exposure with eye-gaze adaptive virtual cognitions: https://osf.io/q58v4
+
+Other resources. 
 - Rasa: https://rasa.com
-- Remote desktop (weblogin) TU Delft: https://weblogin.tudelft.nl/
-- Self service portal TU Delft: https://tudelft.topdesk.net
-- Transtheoretical model: https://en.wikipedia.org/wiki/Transtheoretical_model
 - Virtual human toolkit: https://vhtoolkit.ict.usc.edu
 - System Usability Scale: https://www.usability.gov/how-to-and-tools/methods/system-usability-scale.html
-  - SUS in Dutch: https://www.usersense.nl/usability-testing/system-usability-scale-sus
 
   
