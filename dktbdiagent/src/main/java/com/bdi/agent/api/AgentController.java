@@ -1,17 +1,6 @@
 package com.bdi.agent.api;
 
 import com.bdi.agent.model.Agent;
-<<<<<<< HEAD
-import com.bdi.agent.model.Perception;
-import com.bdi.agent.service.AgentService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-=======
 import com.bdi.agent.model.Conversation;
 import com.bdi.agent.model.Desire;
 import com.bdi.agent.model.Perception;
@@ -38,30 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "*")
->>>>>>> origin/updatedLilo
 @RestController
 public class AgentController {
 
     private final AgentService agentService;
-<<<<<<< HEAD
-
-    @Autowired
-    public AgentController(AgentService agentService) {
-        this.agentService = agentService;
-
-    }
-
-    @RequestMapping(path ="/agents", method = RequestMethod.GET)
-    public ResponseEntity<List<Agent>> get() {
-        List<Agent> agents = agentService.getAll();
-
-        return new ResponseEntity<List<Agent>>(agents, HttpStatus.OK);
-    }
-
-    @RequestMapping(path ="/agent/{userId}", method = RequestMethod.POST)
-    public ResponseEntity<String> addPerception(@PathVariable("userId") String userId, @RequestBody Perception perception) {
-
-=======
     private final LogEntryService logEntryService;
     private final UserService userService;
 
@@ -94,7 +63,6 @@ public class AgentController {
     @PostMapping(path = "/agent/{userId}")
     public ResponseEntity<String> addPerception(@PathVariable("userId") String userId,
                                                 @RequestBody Perception perception) {
->>>>>>> origin/updatedLilo
         if (!agentService.containsUserId(userId)) {
             agentService.createAgent(userId);
         }
@@ -111,12 +79,6 @@ public class AgentController {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
-<<<<<<< HEAD
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @RequestMapping(path = "/report/{userId}", method = RequestMethod.GET)
-=======
         if (!agent.isTrainerResponding()) {
             Desire intention = agentService.getIntention(agent.getId());
             DesireName intentionName = (intention == null) ? null : DesireName.valueOf(intention.getName());
@@ -143,7 +105,6 @@ public class AgentController {
      * @return the transcript of the conversation
      */
     @GetMapping(path = "/report/{userId}")
->>>>>>> origin/updatedLilo
     public ResponseEntity<String> getReport(@PathVariable("userId") String userId) {
         System.out.println("get BDI report for user :" + userId);
         String response;
@@ -158,8 +119,6 @@ public class AgentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Gets the conversation between the user and the agent as a list of MessageModel objects.
      * Can be used at any point in the conversation to retrieve the conversation when the trainer joins the session.
@@ -245,5 +204,4 @@ public class AgentController {
         return new ResponseEntity<>("Agent trainer mode changed to " + isTrainerResponding, HttpStatus.OK);
     }
 
->>>>>>> origin/updatedLilo
 }

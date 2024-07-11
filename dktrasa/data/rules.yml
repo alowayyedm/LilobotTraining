@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-version: "2.0"
-=======
 version: "3.1"
->>>>>>> origin/updatedLilo
 
 rules:
 
@@ -16,8 +12,4 @@ rules:
   - intent: request_chitchat_goodbye
   - action: action_use_bdi
   - action: action_get_bdi
-<<<<<<< HEAD
   - action: action_forget_reminders
-=======
-  - action: action_forget_reminders
->>>>>>> origin/updatedLilo

@@ -33,11 +33,7 @@ public class ActionService {
     public Action getUncompletedAction(Long desireId) {
         List<Action> actions = getActionsByDesireId(desireId);
         for (Action action : actions) {
-<<<<<<< HEAD
-            if (!action.getIsCompleted()) {
-=======
             if (!action.getCompleted()) {
->>>>>>> origin/updatedLilo
                 return action;
             }
         }
@@ -45,8 +41,6 @@ public class ActionService {
     }
 
     /**
-<<<<<<< HEAD
-=======
      * Sets all actions of the given desires to be uncompleted.
      *
      * @param desires The desires for which to set the activity of the actions.
@@ -63,7 +57,6 @@ public class ActionService {
     }
 
     /**
->>>>>>> origin/updatedLilo
     * Each desire has an associated set of actions. This method creates actions for each desire.
     *
     * */

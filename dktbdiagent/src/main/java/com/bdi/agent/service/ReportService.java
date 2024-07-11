@@ -8,10 +8,6 @@ import com.azure.storage.blob.sas.BlobSasPermission;
 import com.azure.storage.blob.sas.BlobServiceSasSignatureValues;
 import com.bdi.agent.model.Agent;
 import com.bdi.agent.model.Belief;
-<<<<<<< HEAD
-import org.apache.poi.xwpf.usermodel.*;
-import org.springframework.beans.factory.annotation.Autowired;
-=======
 import com.bdi.agent.model.enums.BeliefUpdateType;
 import com.bdi.agent.model.util.BeliefUpdateLogEntry;
 import com.bdi.agent.model.util.DesireUpdateLogEntry;
@@ -20,7 +16,6 @@ import com.bdi.agent.model.util.MessageLogEntry;
 import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
->>>>>>> origin/updatedLilo
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -32,14 +27,6 @@ import java.util.HashSet;
 @Service
 public class ReportService {
 
-<<<<<<< HEAD
-    private final boolean localMode = true;     //TODO: change to false if using Azure Blob Storage
-
-    private final BeliefService beliefService;
-    int percentage = 100;
-    String fontStyle = "Lato";
-    String localPath = "./reports/";
-=======
     @Value("${localMode}")
     private boolean localMode;
 
@@ -72,7 +59,6 @@ public class ReportService {
 
     @Value("${intentionPrefix}")
     String intentionPrefix;
->>>>>>> origin/updatedLilo
 
     // configuration for Azure Blob Storage
     private final String connectionString = "DefaultEndpointsProtocol=https;AccountName=dktblobstorage;AccountKey=JRaAWGN9SbJ+gvn5ec0brrpuvOPT3HS+VSTyLfJoE4/EQKf9eEVIPGqCeniJCiHUKA4JNYymNDtsl1/TDIjEKA==;EndpointSuffix=core.windows.net";
@@ -81,14 +67,6 @@ public class ReportService {
     BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(containerName);
 
     @Autowired
-<<<<<<< HEAD
-    public ReportService(BeliefService beliefService) {
-
-        this.beliefService = beliefService;
-    }
-
-    public String createReport(Agent agent) {
-=======
     public ReportService(BeliefService beliefService, LogEntryService logEntryService, DesireService desireService) {
         this.beliefService = beliefService;
         this.logEntryService = logEntryService;
@@ -192,14 +170,10 @@ public class ReportService {
      */
     public String createReport(Agent agent, Boolean showAbbreviations, Boolean showDesireUpdate,
                                Boolean showBeliefSetTo, Boolean showBeliefUpdateCause, Boolean showNewValue) {
->>>>>>> origin/updatedLilo
         try {
 
             String fileName = agent.getUserId().concat(".docx");
 
-<<<<<<< HEAD
-            File file = new File(localPath + fileName);
-=======
             String rootPath = System.getProperty("user.dir");
             File rootDir = new File(rootPath);
 
@@ -225,7 +199,6 @@ public class ReportService {
                 }
             }
 
->>>>>>> origin/updatedLilo
             FileOutputStream out = new FileOutputStream(file);
 
             XWPFDocument doc = new XWPFDocument();
@@ -241,16 +214,8 @@ public class ReportService {
             p1.setSpacingAfter(300);
             XWPFRun r1 = p1.createRun();
             r1.setFontFamily("Lato");
-<<<<<<< HEAD
-            r1.setText(String.format("Hier is een transcriptie van je gesprek met Lilobot met zijn gedachten tijdens het gesprek. Lilobot heeft een reeks overtuigingen en intenties die tijdens het gesprek constant worden bijgewerkt op basis van wat je tegen hem zegt. " +
-                    "In de onderstaande tabel kun je zien wat Lilobot's overtuigingen waren aan het begin van het gesprek en aan het einde. " +
-                    "Het transcript van het gesprek laat zien welke overtuigingen veranderen op basis van jouw berichten. Het symbool ↑ betekent dat de overtuiging toeneemt, terwijl ↓ betekent dat de overtuiging afneemt. " +
-                    "Het transcript laat ook zien welke intenties Lilobot had op het moment in het gesprek. Al deze notaties zijn cursief weergegeven tussen jullie gesprek. \n" +
-                    "Je code voor deze sessie is %s.", agent.getUserId()));
-=======
             r1.setText(getReportInfoText(agent, showAbbreviations, showDesireUpdate, showBeliefSetTo,
                     showBeliefUpdateCause, showNewValue));
->>>>>>> origin/updatedLilo
 
             XWPFTable beliefTable = doc.createTable(18, 5);
             beliefTable.setWidth("100%");
@@ -270,15 +235,11 @@ public class ReportService {
                 float initialValue = beliefService.getBeliefValue(initialBeliefs, b.getName());
 
                 XWPFTableRow currentRow = beliefTable.getRow(i+1);
-<<<<<<< HEAD
-                currentRow.getCell(0).setText(String.format("%s", b.getFullName()));
-=======
                 if (showAbbreviations) {
                     currentRow.getCell(0).setText(String.format("%s", b.getName() + ": " + b.getFullName()));
                 } else {
                     currentRow.getCell(0).setText(String.format("%s", b.getFullName()));
                 }
->>>>>>> origin/updatedLilo
                 currentRow.getCell(1).setText(String.format("%s", b.getPhase()));
                 currentRow.getCell(2).setText(String.format("%s", floatToPercentage(initialValue)));
                 currentRow.getCell(3).setText(String.format("%s", floatToPercentage(b.getValue())));
@@ -294,19 +255,9 @@ public class ReportService {
             t2run.setBold(true);
             t2run.setText("TRANSCRIPT");
 
-<<<<<<< HEAD
-
-            for (String log : agent.getLog()) {
-                System.out.println(String.format("%s%n", log));
-                XWPFParagraph p = doc.createParagraph();
-                XWPFRun r = p.createRun();
-                p.setSpacingBefore(200);
-                r.setText(String.format("%s%n", log));
-=======
             for (LogEntry logEntry : logEntryService.getChronologicalLogsByAgent(agent.getId())) {
                 formatLogEntryForReport(doc, logEntry, agent, showAbbreviations, showDesireUpdate, showBeliefSetTo,
                         showBeliefUpdateCause, showNewValue);
->>>>>>> origin/updatedLilo
             }
 
             doc.write(out);
@@ -325,10 +276,7 @@ public class ReportService {
             return file.getAbsolutePath();
 
         } catch (IOException e) {
-<<<<<<< HEAD
-=======
             System.err.println(e.getMessage());
->>>>>>> origin/updatedLilo
             System.err.println("createReport: could not create report");
         }
 
@@ -336,8 +284,6 @@ public class ReportService {
 
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Formats and sets a log entry in a document. All logs except the messages are added in cursive.
      *
@@ -550,7 +496,6 @@ public class ReportService {
         }
         return true;
     }
->>>>>>> origin/updatedLilo
 
     private String floatToPercentage(float value) {
         int result = Math.round(value * percentage);

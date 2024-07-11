@@ -1,22 +1,5 @@
 package com.bdi.agent.service;
 
-<<<<<<< HEAD
-import com.bdi.agent.model.*;
-import com.bdi.agent.repository.AgentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.*;
-
-/**
- * author:  Sharon Afua Grundmann
- * as part of MSc Thesis "A BDI-based virtual agent for training child helpline counsellors"
- *
- * This is the main class of the BDI application. Core functionalities are implemented here with the other services handling the BDI data structures and database querying.
- */
-
-@Service
-=======
 import com.bdi.agent.exceptions.SizeMismatchException;
 import com.bdi.agent.model.Action;
 import com.bdi.agent.model.Agent;
@@ -62,7 +45,6 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @PropertySource("classpath:config.properties")
->>>>>>> origin/updatedLilo
 public class AgentService {
 
     private final AgentRepository agentRepository;
@@ -71,26 +53,6 @@ public class AgentService {
     private final DesireService desireService;
     private final ActionService actionService;
     private final ReportService reportService;
-<<<<<<< HEAD
-    private final KnowledgeService knowledgeService;
-
-    float oneStep = (float) 0.1;
-    float twoSteps = (float) 0.2;
-    float minThreshold = (float) 0.3;
-    float midThreshold = (float) 0.5;
-    float maxThreshold = (float) 0.7;
-    float minValue = (float) 0;
-    float maxValue = (float) 1;
-
-    String[] relatednessBeliefs = {"B4", "B5", "B6", "B7"};     //for estimating value of B3
-
-    String ktPrefix = "KT: ";   //  for printing transcript
-    String liloPrefix = "Lilo: ";
-
-    
-    @Autowired
-    public AgentService(AgentRepository agentRepository, BeliefService beliefService, DesireService desireService, ActionService actionService, ReportService reportService, KnowledgeService knowledgeService) {
-=======
     private final LogEntryService logEntryService;
     private final KnowledgeService knowledgeService;
     private final FloatComparer floatComparer;
@@ -144,28 +106,21 @@ public class AgentService {
                         KnowledgeService knowledgeService, FloatComparer floatComparer,
                         ConstraintService constraintService, ConstraintProvider constraintProvider,
                         SimpMessagingTemplate messagingTemplate) {
->>>>>>> origin/updatedLilo
         this.agentRepository = agentRepository;
         this.beliefService = beliefService;
         this.desireService = desireService;
         this.actionService = actionService;
         this.reportService = reportService;
-<<<<<<< HEAD
-        this.knowledgeService = knowledgeService;
-=======
         this.logEntryService = logEntryService;
         this.knowledgeService = knowledgeService;
         this.constraintService = constraintService;
         this.floatComparer = floatComparer;
         this.constraintProvider = constraintProvider;
         this.messagingTemplate = messagingTemplate;
->>>>>>> origin/updatedLilo
 
         knowledgeService.initializeKnowledge();
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Sets the beliefs of an agent to be of a specified phase, if possible.
      *
@@ -243,7 +198,6 @@ public class AgentService {
         return setTo;
     }
 
->>>>>>> origin/updatedLilo
     public boolean containsUserId(String userId) {
         return agentRepository.existsByUserId(userId);
     }
@@ -252,23 +206,10 @@ public class AgentService {
         return agentRepository.getByUserId(userId);
     }
 
-<<<<<<< HEAD
-    public List<Agent> getAll() {
-        return agentRepository.findAll();
-    }
-
-=======
->>>>>>> origin/updatedLilo
     private String resolvePerceptionSubject(Agent agent) throws NullPointerException {
         return agent.getCurrentSubject();
     }
 
-<<<<<<< HEAD
-
-    private void parsePerception(Agent agent, Perception perception) {
-        try {
-             perception.setSubject(resolvePerceptionSubject(agent));
-=======
     /**
      * Sets the subject of the perception to the current subject of the agent.
      *
@@ -278,22 +219,18 @@ public class AgentService {
     private void parsePerception(Agent agent, Perception perception) {
         try {
             perception.setSubject(resolvePerceptionSubject(agent));
->>>>>>> origin/updatedLilo
         } catch (NullPointerException e) {
             System.err.println("parsePerception: cannot resolve perception subject");
             perception.setSubject("");
         }
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Gets a response from the database for an acknowledgement with attribute of the perception.
      *
      * @param perception the perception of the agent
      * @return the response from the knowledge base
      */
->>>>>>> origin/updatedLilo
     private String respondToAck(Perception perception) {
         String type = "ack";
         String attribute = perception.getAttribute();
@@ -301,8 +238,6 @@ public class AgentService {
         return getResponseFromKnowledge(type, attribute);
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Gets a response from the database with certain subject and attribute.
      *
@@ -310,7 +245,6 @@ public class AgentService {
      * @param attribute attribute of the perception
      * @return the response from the knowledge base
      */
->>>>>>> origin/updatedLilo
     private String getResponseFromKnowledge(String subject, String attribute) {
         String err = "Ik begrijp niet wat je bedoelt";
 
@@ -325,8 +259,6 @@ public class AgentService {
     }
 
 
-<<<<<<< HEAD
-=======
     /**
      * Gets a response from the database corresponding to an uncompleted action related to a desire.
      *
@@ -334,7 +266,6 @@ public class AgentService {
      * @param desire the desire of the agent
      * @return the response from the knowledge base
      */
->>>>>>> origin/updatedLilo
     private String saySomething(Agent agent, Desire desire) {
 
         try {
@@ -342,33 +273,20 @@ public class AgentService {
             agent.setCurrentAction(action.getId());
 
             if (action.getType().equals("inform")) {
-<<<<<<< HEAD
-                action.setIsCompleted(true);
-=======
                 action.setCompleted(true);
->>>>>>> origin/updatedLilo
             }
             actionService.addAction(action);
 
             return getResponseFromKnowledge(action.getSubject(), action.getAttribute());
 
         } catch (NullPointerException e) {
-<<<<<<< HEAD
-=======
             e.printStackTrace();
->>>>>>> origin/updatedLilo
             System.err.println("saySomething: could not get action");
         }
 
         return null;
     }
 
-<<<<<<< HEAD
-    private void parseConfirmToAck(Perception perception, float currentValue, float threshold) {
-        perception.setType("ack");
-
-        if (currentValue > threshold) {
-=======
     /**
      * Sets the perception type to "ack" and the attribute to "positive" or "negative" if the current value is above
      * or below the threshold.
@@ -381,16 +299,12 @@ public class AgentService {
         perception.setType("ack");
 
         if (floatComparer.greaterThan(currentValue, threshold)) {
->>>>>>> origin/updatedLilo
             perception.setAttribute("positive");
         } else {
             perception.setAttribute("negative");
         }
     }
 
-<<<<<<< HEAD
-    private void updateBeliefs(Agent agent, Perception perception) {
-=======
     /**
      * Updates the beliefs of the agent based on the perception.
      *
@@ -401,40 +315,24 @@ public class AgentService {
 
         List<BeliefUpdateLogEntry> beliefUpdateLogs = new ArrayList<>();
 
->>>>>>> origin/updatedLilo
         Long agentId = agent.getId();
         String perceptionName = perception.getType() + "_" + perception.getSubject() + "_" + perception.getAttribute();
 
         if (perception.getSubject().equals("goal")) {
-<<<<<<< HEAD
-            beliefService.setBeliefValue(agent, "B10", maxValue);
-        }
-
-        if (perception.getSubject().equals("bullying")) {
-            beliefService.setBeliefValue(agent, "B10", minValue);
-=======
             addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B10", maxValue));
         }
 
         if (perception.getSubject().equals("bullying")) {
             addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B10", minValue));
->>>>>>> origin/updatedLilo
         }
 
         switch (perceptionName) {
             case "request_chitchat_greeting":
             case "request_chitchat_faring":
-<<<<<<< HEAD
-                beliefService.increaseBeliefValue(agent, "B4", oneStep);
-                break;
-            case "request_chitchat_goodbye":
-                beliefService.setBeliefValue(agent, "B15", maxValue);
-=======
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B4", oneStep));
                 break;
             case "request_chitchat_goodbye":
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B15", maxValue));
->>>>>>> origin/updatedLilo
                 break;
             case "confirm_bullying_summary":
                 float hasTalkedAboutBullying = beliefService.getByAgentIdAndName(agent.getId(), "B9").getValue();
@@ -443,20 +341,6 @@ public class AgentService {
                 break;
             case "ack_contactingkt_compliment":
             case "inform_goal_help":
-<<<<<<< HEAD
-                beliefService.increaseBeliefValue(agent, "B7", oneStep);
-                break;
-            case "ack_bullying_empathize":
-            case "ack_goal_empathize":
-                beliefService.increaseBeliefValue(agent, "B5", oneStep);
-                break;
-            case "ack_goal_compliment":
-            case "ack_confidant_compliment":
-                beliefService.increaseBeliefValue(agent, "B2", oneStep);
-                break;
-            case "request_goal_dream":
-                beliefService.setBeliefValue(agent, "B11", maxValue);
-=======
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B7", oneStep));
                 break;
             case "ack_bullying_empathize":
@@ -479,18 +363,12 @@ public class AgentService {
                 break;
             case "request_goal_dream":
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B11", maxValue));
->>>>>>> origin/updatedLilo
                 break;
             case "request_goal_effect":
             case "request_goal_feeling":
             case "request_goal_howchild":
-<<<<<<< HEAD
-                beliefService.increaseBeliefValue(agent, "B1", oneStep);
-                beliefService.increaseBeliefValue(agent, "B11", oneStep);
-=======
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B1", oneStep));
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B11", oneStep));
->>>>>>> origin/updatedLilo
                 break;
             case "confirm_goal_summary":
                 float hasTalkedAboutGoal = beliefService.getByAgentIdAndName(agent.getId(), "B10").getValue();
@@ -498,46 +376,16 @@ public class AgentService {
                 break;
             case "confirm_goal_collaborate":
                 float hasGoodRelationWithKt = beliefService.getByAgentIdAndName(agent.getId(), "B4").getValue();
-<<<<<<< HEAD
-                if (hasGoodRelationWithKt> midThreshold) {
-                    beliefService.increaseBeliefValue(agent, "B7", oneStep);
-                    beliefService.decreaseBeliefValue(agent, "B8", twoSteps);
-                    beliefService.setBeliefValue(agent, "B16", maxValue);
-=======
                 if (floatComparer.greaterThan(hasGoodRelationWithKt, midThreshold)) {
                     addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B7", oneStep));
                     addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B8", twoSteps));
                     addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B16", maxValue));
->>>>>>> origin/updatedLilo
                 }
                 parseConfirmToAck(perception, hasGoodRelationWithKt, midThreshold);
 
                 break;
             case "inform_goal_negative":
                 float isCurrentlyTalkingAboutGoal = beliefService.getByAgentIdAndName(agentId, "B10").getValue();
-<<<<<<< HEAD
-                if (isCurrentlyTalkingAboutGoal == maxValue) {
-                    beliefService.decreaseBeliefValue(agent, "B8", twoSteps);
-                    beliefService.decreaseBeliefValue(agent, "B7", oneStep);
-                    beliefService.setBeliefValue(agent, "B8", minValue);
-                }
-                break;
-            case "inform_goal_positive":
-                if (beliefService.getByAgentIdAndName(agentId, "B10").getValue() == maxValue) {
-                    beliefService.setBeliefValue(agent, "B17", maxValue);
-                    actionService.getActionById(agent.getCurrentAction()).setIsCompleted(true);
-                }
-                break;
-            case "request_confidant_who":
-                beliefService.setBeliefValue(agent, "B12", maxValue);
-                break;
-            case "inform_confidant_help":
-            case "inform_confidant_say":
-                beliefService.setBeliefValue(agent, "B13", maxValue);
-                Action currentAction = actionService.getActionById(agent.getCurrentAction());
-                if (currentAction.getName().equals("A6") || currentAction.getName().equals("A7")) {
-                    actionService.getActionById(agent.getCurrentAction()).setIsCompleted(true);
-=======
                 if (floatComparer.equalTo(isCurrentlyTalkingAboutGoal, maxValue)) {
                     // This is reset by the setting below:
                     // - beliefService.decreaseBeliefValue(agent, "B8", twoSteps);
@@ -561,20 +409,13 @@ public class AgentService {
                 Action currentAction = actionService.getActionById(agent.getCurrentAction());
                 if (currentAction.getName().equals("A6") || currentAction.getName().equals("A7")) {
                     actionService.getActionById(agent.getCurrentAction()).setCompleted(true);
->>>>>>> origin/updatedLilo
                 }
                 break;
             case "confirm_confidant_teacher":
                 float confidantCanHelp = beliefService.getByAgentIdAndName(agentId, "B13").getValue();
-<<<<<<< HEAD
-                if (confidantCanHelp > midThreshold) {
-                    beliefService.setBeliefValue(agent, "B8", minValue);
-                    beliefService.setBeliefValue(agent, "B16", maxValue);
-=======
                 if (floatComparer.greaterThan(confidantCanHelp, midThreshold)) {
                     addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B8", minValue));
                     addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B16", maxValue));
->>>>>>> origin/updatedLilo
                 }
                 parseConfirmToAck(perception, confidantCanHelp, midThreshold);
                 break;
@@ -586,42 +427,17 @@ public class AgentService {
             case "confirm_chitchat_satisfaction":
                 perception.setType("ack");
                 Desire currentDesire = desireService.getActiveGoal(agentId);
-<<<<<<< HEAD
-                System.out.println(currentDesire.getName());
-                if (currentDesire.getName().equals("D4")) {
-=======
 
                 if (currentDesire != null) {
                     System.out.println(currentDesire.getName());
                 }
 
                 if (currentDesire != null && currentDesire.getName().equals("D4")) {
->>>>>>> origin/updatedLilo
                     perception.setAttribute("helpful");
                 } else {
                     perception.setAttribute("negative");
                 }
                 break;
-<<<<<<< HEAD
-
-        }
-
-        if (perception.getType().equals("request") && perception.getSubject().equals("bullying")) {
-            beliefService.increaseBeliefValue(agent, "B6", oneStep);
-        }
-
-        if (perception.getType().equals("ack") && perception.getAttribute().equals("neutral")) {
-            beliefService.increaseBeliefValue(agent, "B5", (float) 0.05);
-
-        }
-
-        float relatedness= beliefService.averageBeliefValue(agentId, relatednessBeliefs);
-        beliefService.setBeliefValue(agent, "B3", relatedness);
-
-    }
-
-
-=======
             default:
                 break;
         }
@@ -674,40 +490,30 @@ public class AgentService {
      *
      * @param agent the agent
      */
->>>>>>> origin/updatedLilo
     private void updateDesires(Agent agent) {
 
         List<Desire> desires = desireService.getByAgent(agent.getId());
 
         for (Desire desire : desires) {
             boolean currentActiveValue = updateActiveValue(agent.getId(), desire.getName());
-<<<<<<< HEAD
-=======
             if (desire.isActive() != currentActiveValue) {
                 logEntryService.addLogEntry(
                         new DesireUpdateLogEntry(currentActiveValue, DesireName.valueOf(desire.getName()), agent));
             }
->>>>>>> origin/updatedLilo
             desire.setActiveValue(currentActiveValue);
             desireService.addDesire(desire);
         }
 
         Desire intention = desireService.getActiveGoal(agent.getId());
-<<<<<<< HEAD
-        agent.setIntention(intention.getId());
-=======
 
         if (intention != null) {
             agent.setIntentionId(intention.getId());
         }
 
->>>>>>> origin/updatedLilo
         agentRepository.save(agent);
     }
 
 
-<<<<<<< HEAD
-=======
     /**
      * Gets the response of the agent based on the agent's desires. If the agent's desire is to end the conversation,
      * the function will return goodbye and the agent will be set to inactive.
@@ -716,39 +522,21 @@ public class AgentService {
      * @param perception the perception of the agent
      * @return the response of the agent
      */
->>>>>>> origin/updatedLilo
     private String updateIntentions(Agent agent, Perception perception) {
         agent.setCurrentSubject(perception.getSubject());
         agentRepository.save(agent);
 
-<<<<<<< HEAD
-        Desire intention = desireService.getById(agent.getIntention());
-
-        agent.addLog(String.format("%-20s %s", "Intentie:", intention.getFullName()));
-        System.out.printf("%-20s %s%n", "Intentie:", intention.getFullName());
-
-        if (intention.getName().equals("D2")) { //if the agent's desire to end the conversation, just return goodbye
-            agent.setActive(false);
-=======
         Desire intention = desireService.getById(agent.getIntentionId());
 
         System.out.printf("%-20s %s%n", "Intentie:", intention.getFullName());
 
         if (intention.getName().equals("D2")) { //if the agent's desire to end the conversation, just return goodbye
             agent.isActive(false);
->>>>>>> origin/updatedLilo
             agentRepository.save(agent);
             return getResponseFromKnowledge("chitchat", "goodbye");
         }
 
         switch (perception.getType()) {
-<<<<<<< HEAD
-            case "request":
-                return getResponseFromKnowledge(perception.getSubject(), perception.getAttribute());
-            case "ack":
-                return respondToAck(perception);
-            case "inform":
-=======
             case "request" -> {
                 return getResponseFromKnowledge(perception.getSubject(), perception.getAttribute());
             }
@@ -756,22 +544,15 @@ public class AgentService {
                 return respondToAck(perception);
             }
             case "inform" -> {
->>>>>>> origin/updatedLilo
                 if (perception.getAttribute().equals("negative")) {
                     return getResponseFromKnowledge("ack", "unhelpful");
                 }
                 return getResponseFromKnowledge("ack", "neutral");
-<<<<<<< HEAD
-        }
-
-        return null;
-=======
             }
             default -> {
                 return null;
             }
         }
->>>>>>> origin/updatedLilo
     }
 
     /**
@@ -779,20 +560,6 @@ public class AgentService {
      * Then, it checks the type of perception. If it's a trigger, the beliefs and desires are not updated.
      * The agent just returns an action associated with the current intention.
      * Otherwise, it updates the agent's beliefs and desires and returns a response based on these.
-<<<<<<< HEAD
-     * @return response
-     */
-    public String reason(Agent agent, Perception perception) {
-        String response;
-
-
-        if (perception.getType().equals("trigger")) {
-            Desire intention = desireService.getById(agent.getIntention());
-
-            if (intention.getName().equals("D1")) {
-                agent.setCurrentSubject("bullying");
-                beliefService.increaseBeliefValue(agent, "B9", oneStep);
-=======
      *
      * @param agent the agent
      * @param perception the perception of the agent
@@ -809,46 +576,19 @@ public class AgentService {
             if (intention.getName().equals("D1")) {
                 agent.setCurrentSubject("bullying");
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B9", oneStep));
->>>>>>> origin/updatedLilo
             }
 
             response = saySomething(agent, intention);
 
-<<<<<<< HEAD
-            if (response != null) {
-                agent.addLog(liloPrefix.concat(response));
-                agentRepository.save(agent);
-            }
-=======
             setLogCauses(beliefUpdateLogs, perception.getText());
 
             addLogs(beliefUpdateLogs, agent);
 
             beliefService.sendBeliefsToClientAndLog(agent, beliefUpdateLogs);
->>>>>>> origin/updatedLilo
 
             return response;
         }
 
-<<<<<<< HEAD
-        System.out.println("received perception: " + perception.getType() + " " + perception.getSubject() + " " + perception.getAttribute());
-        if (perception.getSubject().equals("unknown")) {
-            parsePerception(agent, perception);
-        }
-        System.out.println("parsed into perception: " + perception.getType() + " " + perception.getSubject() + " " + perception.getAttribute());
-
-        agent.addLog(ktPrefix.concat(perception.getText()));
-
-        updateBeliefs(agent, perception);
-        updateDesires(agent);
-
-        response = updateIntentions(agent,perception);
-
-        if (response != null) {
-            agent.addLog(liloPrefix.concat(response));
-            agentRepository.save(agent);
-        }
-=======
         System.out.println("received perception: " + perception.getType() + " " + perception.getSubject() + " "
                 + perception.getAttribute());
         if (perception.getSubject().equals("unknown")) {
@@ -869,23 +609,11 @@ public class AgentService {
         sendPhaseOfAgent(agent.getPhase(), updatePhaseOfAgent(agent), true, agent.getUserId());
 
         beliefService.sendBeliefsToClientAndLog(agent, beliefUpdateLogs);
->>>>>>> origin/updatedLilo
 
         return response;
     }
 
     /**
-<<<<<<< HEAD
-     * This function creates a new agent using the user or session id provided by Rasa.
-     * It populates the beliefs and desires of the agent with the initial values found in the .csv files provided.
-     *
-     */
-    public void createAgent(String userId) {
-
-        Agent agent = new Agent();
-        agent.setUser(userId);
-        agent.setActive(true);
-=======
      * Sends the phase of the agent as well as the previous phase, to the websocket subscription.
      *
      * @param phaseFrom The phase before.
@@ -919,7 +647,6 @@ public class AgentService {
         Agent agent = new Agent();
         agent.setUserId(userId);
         agent.isActive(true);
->>>>>>> origin/updatedLilo
 
         Set<Belief> initialBeliefs = beliefService.readBeliefsFromCsv(agent);
         beliefService.addBeliefs(initialBeliefs);
@@ -927,80 +654,6 @@ public class AgentService {
 
         Set<Desire> initialDesires = desireService.readDesiresFromCsv(agent);
         desireService.addDesires(initialDesires);
-<<<<<<< HEAD
-        agent.setDesires(initialDesires);
-
-        agentRepository.save(agent);
-        updateDesires(agent);
-
-    }
-
-
-    /**
-    * This method retrieves a report containing a transcript of the conversation and BDI status of the agent.
-    *
-    * */
-    public String getReport(Agent agent) {
-        agent.setActive(false);
-        agentRepository.save(agent);
-        return reportService.createReport(agent);
-
-    }
-
-    private Boolean updateActiveValue(Long agentId, String desireName) {
-        switch (desireName) {
-            case "D1":
-                return d1Context(agentId);
-            case "D2":
-                return d2Context(agentId);
-            case "D3":
-                return d3Context(agentId);
-            case "D4":
-                return d4Context(agentId);
-            case "D5":
-                return d5Context(agentId);
-        }
-
-        return false;
-    }
-
-    private Boolean d1Context(Long agentId) {    //wil over zijn probleem hebben
-        return beliefService.getByAgentIdAndName(agentId, "B10").getValue() == minValue &
-                beliefService.getByAgentIdAndName(agentId, "B12").getValue() == minValue &&
-                beliefService.getByAgentIdAndName(agentId, "B9").getValue() < maxValue &&
-                beliefService.getByAgentIdAndName(agentId, "B3").getValue() > minThreshold;
-    }
-
-    private Boolean d2Context(Long agentId) {   //wil het gesprek beëindigen
-        return beliefService.getByAgentIdAndName(agentId, "B1").getValue() < minThreshold ||
-                beliefService.getByAgentIdAndName(agentId, "B17").getValue() == maxValue ||
-                (beliefService.getByAgentIdAndName(agentId, "B3").getValue() < midThreshold &&
-                        beliefService.getByAgentIdAndName(agentId, "B12").getValue() == maxValue);
-    }
-
-
-    private Boolean d3Context(Long agentId) {    //wil dat KT de pestkoppen van school haalt
-        return beliefService.getByAgentIdAndName(agentId, "B10").getValue() == maxValue &&
-                beliefService.getByAgentIdAndName(agentId, "B8").getValue() > maxThreshold &&
-                beliefService.getByAgentIdAndName(agentId, "B2").getValue() < maxThreshold;
-    }
-
-
-    private Boolean d4Context(Long agentId) {    //wil met leraar praten over situatie
-        return beliefService.getByAgentIdAndName(agentId, "B12").getValue() == maxValue &&
-                beliefService.getByAgentIdAndName(agentId, "B13").getValue() >= midThreshold &&
-                beliefService.getByAgentIdAndName(agentId, "B3").getValue() >= midThreshold;     //only activated if phase 2 is executed
-    }
-
-    private Boolean d5Context(Long agentId) {    //wil samen met KT een oplossing zoeken
-        return beliefService.getByAgentIdAndName(agentId, "B4").getValue() >= midThreshold &&
-                beliefService.getByAgentIdAndName(agentId, "B10").getValue() == maxValue &&
-                beliefService.getByAgentIdAndName(agentId, "B12").getValue() == minValue;
-    }
-
-
-
-=======
         agent.getDesires().addAll(initialDesires);
 
         updateDesires(agent);
@@ -1243,5 +896,4 @@ public class AgentService {
         }
         agentRepository.save(agent);
     }
->>>>>>> origin/updatedLilo
 }

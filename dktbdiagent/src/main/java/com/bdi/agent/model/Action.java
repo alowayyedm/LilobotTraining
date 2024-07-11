@@ -1,11 +1,5 @@
 package com.bdi.agent.model;
 
-<<<<<<< HEAD
-import javax.persistence.*;
-
-@Entity
-@Table
-=======
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +17,6 @@ import lombok.Setter;
 @Table
 @Getter
 @Setter
->>>>>>> origin/updatedLilo
 public class Action {
 
     @Id
@@ -52,39 +45,4 @@ public class Action {
         this.attribute = attribute;
         this.completed = isCompleted;
     }
-<<<<<<< HEAD
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public String getAttribute() {
-        return attribute;
-    }
-
-    public Boolean getIsCompleted() {
-        return completed;
-    }
-
-    public void setIsCompleted(Boolean isCompleted) {
-        this.completed = isCompleted;
-    }
-=======
->>>>>>> origin/updatedLilo
 }

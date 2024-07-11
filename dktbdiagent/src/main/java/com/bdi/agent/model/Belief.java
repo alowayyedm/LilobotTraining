@@ -1,11 +1,5 @@
 package com.bdi.agent.model;
 
-<<<<<<< HEAD
-import javax.persistence.*;
-
-@Entity
-@Table
-=======
 import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
@@ -15,7 +9,6 @@ import lombok.EqualsAndHashCode;
 @Table
 @AllArgsConstructor
 @EqualsAndHashCode
->>>>>>> origin/updatedLilo
 public class Belief {
 
     @Id

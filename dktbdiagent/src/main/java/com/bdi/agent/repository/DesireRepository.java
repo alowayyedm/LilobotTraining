@@ -11,10 +11,6 @@ public interface DesireRepository extends JpaRepository<Desire, Long> {
 
     Desire findByAgentIdAndName(Long agentId, String name);
 
-<<<<<<< HEAD
-    List<Desire> findByAgentId(Long agentId);
-=======
     List<Desire> findByAgentIdOrderByName(Long agentId);
->>>>>>> origin/updatedLilo
 
 }

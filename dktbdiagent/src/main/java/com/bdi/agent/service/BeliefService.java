@@ -6,40 +6,6 @@ import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.bdi.agent.model.Agent;
 import com.bdi.agent.model.Belief;
-<<<<<<< HEAD
-import com.bdi.agent.repository.BeliefRepository;
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.*;
-
-@Service
-public class BeliefService {
-
-    private final boolean localMode = true;     //TODO: change to false when using Azure
-
-    float minValue = (float) 0;
-    float maxValue = (float) 1;
-    private final BeliefRepository beliefRepository;
-    String beliefIncrease = "Overtuiging: ↑";
-    String beliefDecrease = "Overtuiging: ↓";
-
-    String beliefsFile = "files/beliefs.csv";
-
-    // configuration for Azure Blob Storage
-    String connectionString = "DefaultEndpointsProtocol=https;AccountName=dktblobstorage;AccountKey=JRaAWGN9SbJ+gvn5ec0brrpuvOPT3HS+VSTyLfJoE4/EQKf9eEVIPGqCeniJCiHUKA4JNYymNDtsl1/TDIjEKA==;EndpointSuffix=core.windows.net";
-
-    @Autowired
-    public BeliefService(BeliefRepository beliefRepository) {
-        this.beliefRepository = beliefRepository;
-    }
-
-=======
 import com.bdi.agent.model.ExceptionalBelief;
 import com.bdi.agent.model.api.BeliefChangeClientModel;
 import com.bdi.agent.model.enums.BeliefName;
@@ -151,13 +117,10 @@ public class BeliefService {
      * @param agentId The id of the agent.
      * @return The beliefs of the agent associated with the agent id.
      */
->>>>>>> origin/updatedLilo
     public Set<Belief> getByAgent(Long agentId) {
         return beliefRepository.findByAgentIdOrderByPhaseAsc(agentId);
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Gets a belief by the agent id and the name of the belief.
      *
@@ -165,65 +128,21 @@ public class BeliefService {
      * @param name      The name of the belief.
      * @return the belief by the agent id and the name of the belief.
      */
->>>>>>> origin/updatedLilo
     public Belief getByAgentIdAndName(Long agentId, String name) {
         return beliefRepository.findByAgentIdAndName(agentId, name);
     }
 
-<<<<<<< HEAD
-    public void addBelief(Belief belief) {
-        beliefRepository.save(belief);
-    }
-
-=======
     /**
      * Saves a set of beliefs.
      *
      * @param beliefs the set of beliefs to save
      */
->>>>>>> origin/updatedLilo
     public void addBeliefs(Set<Belief> beliefs) {
         for (Belief belief : beliefs) {
             beliefRepository.save(belief);
         }
     }
 
-<<<<<<< HEAD
-    public void increaseBeliefValue(Agent agent, String name, Float value) {
-        Belief belief = beliefRepository.findByAgentIdAndName(agent.getId(), name);
-
-        if (belief.getValue() >= maxValue) {
-            return;
-        }
-
-        belief.setValue(belief.getValue() + value);
-        beliefRepository.save(belief);
-        agent.addLog(String.format("%-20s %s",beliefIncrease, belief.getFullName()));
-        System.out.printf("%-20s %s%n",beliefIncrease, belief.getFullName());
-
-    }
-
-    public void decreaseBeliefValue(Agent agent, String name, Float value) {
-        Belief belief = beliefRepository.findByAgentIdAndName(agent.getId(), name);
-
-        if (belief.getValue() <= minValue) {
-            return;
-        }
-
-        belief.setValue(belief.getValue() - value);
-        beliefRepository.save(belief);
-        agent.addLog(String.format("%-20s %s",beliefDecrease, belief.getFullName()));
-        System.out.printf("%-20s %s%n",beliefDecrease, belief.getFullName());
-
-    }
-
-    public void setBeliefValue(Agent agent, String name, Float value) {
-        Belief belief = beliefRepository.findByAgentIdAndName(agent.getId(), name);
-        belief.setValue(value);
-        beliefRepository.save(belief);
-    }
-
-=======
     /**
      * Increases the value of the given belief for the given agent.
      * Also sends the new belief to the client.
@@ -304,7 +223,6 @@ public class BeliefService {
      * @param beliefNames the names of the beliefs
      * @return the average value of the provided beliefs for the agent
      */
->>>>>>> origin/updatedLilo
     public float averageBeliefValue(Long agentId, String[] beliefNames) {
         float sum = 0;
         for (String beliefName : beliefNames) {
@@ -314,8 +232,6 @@ public class BeliefService {
         return sum / beliefNames.length;
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Reads the initial beliefs from a csv file or blob storage and returns them as a HashSet.
      * Also sets the agent for each belief.
@@ -323,7 +239,6 @@ public class BeliefService {
      * @param agent the agent for which the beliefs are read
      * @return HashSet of Beliefs
      */
->>>>>>> origin/updatedLilo
     public HashSet<Belief> readBeliefsFromCsv(Agent agent) {
 
         HashSet<Belief> result = new HashSet<>();
@@ -356,14 +271,11 @@ public class BeliefService {
         return result;
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Reads the initial beliefs from a csv file or blob storage and returns them as a HashSet.
      *
      * @return HashSet of Beliefs
      */
->>>>>>> origin/updatedLilo
     public HashSet<Belief> readBeliefsFromCsv() {
         HashSet<Belief> result = new HashSet<>();
 
@@ -382,15 +294,12 @@ public class BeliefService {
                 b.setFullName(record[1]);
                 b.setPhase(record[2]);
                 b.setValue(Float.valueOf(record[3]));
-<<<<<<< HEAD
-=======
                 if (record.length > 4 && record[4].matches("^(?i)(f|false)$")) {
                     String reason = (record.length > 5) ? record[5] : "reason unknown";
                     b = new ExceptionalBelief(
                             b.getAgent(), b.getName(), b.getFullName(), b.getPhase(), b.getValue(), reason
                     );
                 }
->>>>>>> origin/updatedLilo
                 result.add(b);
             }
 
@@ -403,8 +312,6 @@ public class BeliefService {
         return result;
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Gets the value of a certain belief from a set of beliefs.
      *
@@ -412,7 +319,6 @@ public class BeliefService {
      * @param name the name of the belief
      * @return the value of the belief
      */
->>>>>>> origin/updatedLilo
     public float getBeliefValue(Set<Belief> beliefs, String name) {
         for (Belief b : beliefs) {
             if (b.getName().equals(name)) {
@@ -423,11 +329,6 @@ public class BeliefService {
         return 0;
     }
 
-<<<<<<< HEAD
-    private String getBeliefsFromBlobStorage() {
-
-        BlobServiceClient blobServiceClient = new BlobServiceClientBuilder().connectionString(connectionString).buildClient();
-=======
     /**
      * Downloads the initial set of beliefs from the Azure Blob Storage.
      *
@@ -437,7 +338,6 @@ public class BeliefService {
 
         BlobServiceClient blobServiceClient = new BlobServiceClientBuilder()
                 .connectionString(connectionString).buildClient();
->>>>>>> origin/updatedLilo
         String containerName = "bdi";
         BlobContainerClient containerClient = blobServiceClient.getBlobContainerClient(containerName);
 
@@ -454,18 +354,12 @@ public class BeliefService {
         return downloadedFile.getAbsolutePath();
     }
 
-<<<<<<< HEAD
-/**
- * This method computes the BDI outcome of the agent. Used as part of the experiment of the thesis.
- * **/
-=======
     /**
      * This method computes the BDI outcome of the agent. Used as part of the experiment of the thesis.
      *
      * @param agent the agent
      * @return the BDI outcome
      */
->>>>>>> origin/updatedLilo
     public float calculateScore(Agent agent) {
         String[] beliefNames = {"B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8", "B14", "B17"};
 
@@ -484,9 +378,6 @@ public class BeliefService {
         return result;
     }
 
-<<<<<<< HEAD
-
-=======
     /**
      * This method sends the belief updates in json format to the client via websockets, and saves the log entries.
      * Client is subscribed to /topic/beliefs/{sessionId}
@@ -578,5 +469,4 @@ public class BeliefService {
             );
         }
     }
->>>>>>> origin/updatedLilo
 }

@@ -9,11 +9,8 @@ import com.bdi.agent.model.Desire;
 import com.bdi.agent.repository.DesireRepository;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
-<<<<<<< HEAD
-=======
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
->>>>>>> origin/updatedLilo
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -24,27 +21,17 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-<<<<<<< HEAD
-public class DesireService {
-
-    private final boolean localMode = true;     //TODO: change to false when using Azure
-=======
 @PropertySource("classpath:config.properties")
 public class DesireService {
 
     @Value("${localMode}")
     private boolean localMode;
->>>>>>> origin/updatedLilo
 
     private DesireRepository desireRepository;
     private final ActionService actionService;
 
-<<<<<<< HEAD
-    String desiresFile = "files/desires.csv";
-=======
     @Value("${desires.file}")
     private String desiresFile;
->>>>>>> origin/updatedLilo
 
     // configuration for Azure Blob Storage
     String connectionString = "DefaultEndpointsProtocol=https;AccountName=dktblobstorage;AccountKey=JRaAWGN9SbJ+gvn5ec0brrpuvOPT3HS+VSTyLfJoE4/EQKf9eEVIPGqCeniJCiHUKA4JNYymNDtsl1/TDIjEKA==;EndpointSuffix=core.windows.net";
@@ -68,11 +55,7 @@ public class DesireService {
     }
 
     public List<Desire> getByAgent(Long agentId) {
-<<<<<<< HEAD
-        return desireRepository.findByAgentId(agentId);
-=======
         return desireRepository.findByAgentIdOrderByName(agentId);
->>>>>>> origin/updatedLilo
     }
 
 
