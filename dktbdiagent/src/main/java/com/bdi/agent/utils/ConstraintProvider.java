@@ -42,29 +42,42 @@ public class ConstraintProvider {
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, minValue),
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, minValue),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B9, maxThreshold),
-                    new BeliefConstraint(BoundaryCheck.GT, BeliefName.B3, minThreshold)
+                    new BeliefConstraint(BoundaryCheck.GT, BeliefName.B3, minThreshold),
+                    new BeliefConstraint(BoundaryCheck.LT, BeliefName.B15, maxValue) // if they say bye they leave the conversation
             ));
             case D2 -> Set.of(
-                    Set.of(new BeliefConstraint(BoundaryCheck.LT, BeliefName.B1, minThreshold)),
+                    Set.of(new BeliefConstraint(BoundaryCheck.LT, BeliefName.B1, minThreshold)), // add this as a single constraint to another desire. now if activated there will be two true desires
                     Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B17, maxValue)),
                     Set.of(new BeliefConstraint(BoundaryCheck.LT, BeliefName.B3, midThreshold),
-                            new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, maxValue)),
-                    Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B2, maxValue))
+                            new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, maxValue)), // asking about confidant without showing enough empathy
+                    Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B2, maxValue)), //or delete this?
+                    Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B15, maxValue)) // add this alone? if they say goodbye.
+                             //or midthreeshhold? check!
+            // make something for B7 and B8, if they say (no we can't do that when asked if they can call school)
             );
             case D3 -> Set.of(Set.of(
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue),
-                    new BeliefConstraint(BoundaryCheck.GT, BeliefName.B8, maxThreshold),
+                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B8, maxValue),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B2, maxThreshold)
             ));
             case D4 -> Set.of(Set.of(
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, maxValue),
                     new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B13, midThreshold),
-                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B3, midThreshold)
+                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B3, midThreshold),
+                    new BeliefConstraint(BoundaryCheck.LT, BeliefName.B2, maxThreshold)
             ));
             case D5 -> Set.of(Set.of(
                     new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B4, midThreshold),
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue),
-                    new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, minValue)
+                    new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, minValue),
+                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B16, maxThreshold)
+            ));
+            case D6 -> Set.of(Set.of(
+                    new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, maxValue),
+                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B13, midThreshold),
+                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B3, midThreshold),
+                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B2, maxThreshold),
+                    new BeliefConstraint(BoundaryCheck.LT, BeliefName.B15, maxValue)
             ));
         };
     }
@@ -123,7 +136,9 @@ public class ConstraintProvider {
             case PHASE2 -> {
                 // GOAL to reach phase 3: Activate D3 OR D5
                 //  - D3   => B2 < 0.7 && B08 > 0.7 && B10 = 1
-                //  - D5   => B04 >= 0.5 && B10 = 1 && B12 = 0
+                //  - D5   => B04 >= 0.5 && B10 = 1 && B12 = 0 && B16 >= 0.7
+
+
 
                 BeliefConstraint constraintB2 = new BeliefConstraint(BoundaryCheck.LT, BeliefName.B2, maxThreshold);
                 BeliefConstraint constraintB8 = new BeliefConstraint(BoundaryCheck.GT, BeliefName.B8, maxThreshold);
@@ -195,7 +210,7 @@ public class ConstraintProvider {
                 float b3Value = (minThreshold * 2 + maxThreshold + (maxValue - oneStep)) / 4;
                 float[] exampleBeliefValues = new float[]{
                         midThreshold, minThreshold, b3Value, maxThreshold, minThreshold,
-                        minThreshold, (maxValue - oneStep), minValue, minValue, maxValue,
+                        minThreshold, (maxValue - oneStep), maxValue, minValue, maxValue,
                         minValue, minValue, midThreshold, maxValue, minValue,
                         minValue, minValue};
 

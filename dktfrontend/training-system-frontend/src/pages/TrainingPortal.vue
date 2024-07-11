@@ -6,43 +6,81 @@
 -->
 <template>
   <div class="wrapper">
+<!--    <div class="wrapper2">-->
 
-    <div hidden name="col1" class="buttons">
+    <div  v-if="visibleDiv === 1 && this.phase !== 5"  name="col11" class="buttons1" >
 
-
-      <pre>            <button class="join-button" id="UndoStep" @click="UndoStep" >Go back 1 step</button> </pre> <br><br>
-      <pre>            <button class="join-button" id="advice" @click="GiveAdvice" >Give advice</button> </pre> <br> <br>
-      <pre>            <button class="join-button" id="ExplainSit" @click="ExplainSit" >Explain situation</button> </pre> <br> <br>
-      <pre>            <button class="join-button" id="5Phases" @click="FivePhasesButton" title="Show a summary of the 5-phase model" >5-phase model summary</button> </pre>
+      <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
+      <pre>            <button class="join-button3" id="UndoStep" @click="UndoStep" >Undo My Last Message</button>      <button class="join-button3" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button> </pre> <br>
 
 
-    </div>
-
-    <div hidden name="col2" class="buttons">
-
-
-      <pre><button class="join-button" id="UndoPhase" @click="UndoPhase" >Go back 1 phase</button> </pre> <br><br>
-      <pre><button class="join-button" id="WhatNext" @click="WhenNext" >When is the next phase</button> </pre> <br> <br>
-      <pre><button class="join-button" id="IncUtterances"  @click="IncUtterances">Incorrect utterance</button> </pre>
-
-
+                 <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
+      <pre>            <button class="join-button2" id="WhatNext" @click="WhenNext" >Current Phase Progress</button>      <button class="join-button2" id="advice" @click="GiveAdvice" >Advice on Next Message</button></pre> <br> <br>
+      <pre>            <button class="join-button2" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button>      <button class="join-button2" id="ChildGoals"  @click="childGoal">Current Child's Goal</button></pre> <br> <br>
+      <pre>            <button class="join-button2" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button>      <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Show an overview of the 5-phase model" >5-Phase Model Summary</button></pre>
+      <br><pre><p class="section-title"></p></pre>
 
     </div>
 
-    <div class="first" > {{ this.test }}<graph-component ref="graphComponent"></graph-component></div>
-    <div hidden class="first">
-      <pre><button class="join-button" id="UndoStep" @click="UndoStep" >Go back 1 step</button> </pre> <br>
-      <pre><button class="join-button" id="advice" @click="GiveAdvice" >Give advice</button> </pre><br>
-      <pre><button class="join-button" id="ExplainSit" @click="ExplainSit" >Explain situation</button> </pre><br>
-      <pre><button class="join-button" id="UndoPhase" @click="UndoPhase" >Go back 1 phase</button> </pre><br>
-      <pre><button class="join-button" id="WhatNext" @click="WhenNext" >When is the next phase</button> </pre><br>
-      <pre><button class="join-button" id="IncUtterances"  @click="IncUtterances">Incorrect utterance</button> </pre> <br>
 
-      <pre><button class="join-button" id="5Phases" @click="FivePhasesButton" title="Show a summary of the 5-phase model" >5-phase model summary</button> </pre>
+  <div v-if="visibleDiv === 1 && this.phase !== 5"  name="col12" class="buttons1">
 
+    <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
+    <pre>            <button class="join-button2" id="ChildGoals"  @click="childGoal">Current Child's Goal</button>      <button class="join-button2" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button></pre> <br> <br>
+    <pre>            <button class="join-button2" id="advice" @click="GiveAdvice" >Advice on Next Message</button>      <button class="join-button2" id="WhatNext" @click="WhenNext" >Current Phase Progress</button></pre> <br> <br>
+    <pre>            <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Show an overview of the 5-phase model" >5-Phase Model Summary</button>      <button class="join-button2" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button></pre> <br>
+    <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
+    <pre>            <button class="join-button3" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button>      <button class="join-button3" id="UndoStep" @click="UndoStep" >Undo My Last Message</button> </pre>
+    <br>
+  </div>
+
+
+  <div  v-if="visibleDiv === 2 && this.phase !== 5"  name="col13" class="buttons1">
+    <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
+    <pre>            <button class="join-button2" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button>      <button class="join-button2" id="UndoStep" @click="UndoStep" >Undo My Last Message</button></pre> <br>
+    <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
+    <pre>            <button class="join-button3" id="5Phases" @click="FivePhasesButton" title="Show an overview of the 5-phase model" >5-Phase Model Summary</button>      <button class="join-button3" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button></pre> <br> <br>
+    <pre>            <button class="join-button3" id="ChildGoals"  @click="childGoal">Current Child's Goal</button>      <button class="join-button3" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button></pre> <br> <br>
+    <pre>            <button class="join-button3" id="advice" @click="GiveAdvice" >Advice on Next Message</button>      <button class="join-button3" id="WhatNext" @click="WhenNext" >Current Phase Progress</button></pre>
+
+  </div>
+
+  <div  v-if="visibleDiv === 3 && this.phase !== 5"  name="col13" class="buttons1">
+    <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
+    <pre>            <button class="join-button3" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button>      <button class="join-button3" id="ChildGoals"  @click="childGoal">Current Child's Goal</button></pre> <br> <br>
+    <pre>            <button class="join-button3" id="WhatNext" @click="WhenNext" >Current Phase Progress</button>      <button class="join-button3" id="advice" @click="GiveAdvice" >Advice on Next Message</button></pre> <br> <br>
+    <pre>            <button class="join-button3" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button>      <button class="join-button3" id="5Phases" @click="FivePhasesButton" title="Show an overview of the 5-phase model" >5-Phase Model Summary</button></pre><br>
+    <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
+    <pre>            <button class="join-button2" id="UndoStep" @click="UndoStep" >Undo My Last Message</button>      <button class="join-button2" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button>      </pre>
+    <br>
+  </div>
+
+
+
+
+
+    <div hidden class="first" >
+       <graph-component ref="graphComponent"></graph-component></div>
+    <div   class="first">
+
+<!--{{this.userIntents}}-->
+<!--      {{this.wrongUtterances}}-->
+      <pre><button @mouseover="showInfo" @mouseleave="hideInfo" class="join-button" id="UndoStep" @click="UndoStep" >Undo Last Message</button> </pre> <br>
+      <pre><button class="join-button" id="advice" @click="GiveAdvice" >Advice on Next Message</button> </pre><br>
+      <pre><button class="join-button" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button> </pre><br>
+      <pre><button class="join-button" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button> </pre><br>
+      <pre><button class="join-button" id="WhatNext" @click="WhenNext" >Current Phase Progress</button> </pre><br>
+      <pre><button class="join-button" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button> </pre> <br>
+      <pre><button class="join-button" id="ChildGoals"  @click="childGoal">Current Child's Goal</button> </pre> <br>
+
+      <pre><button class="join-button" id="5Phases" @click="FivePhasesButton" title="Show a summary of the 5-phase model" >5-Phase Model Summary</button> </pre>
+
+<!--      <div v-if="isHovered" class="info-box">-->
+<!--        More Information-->
+<!--      </div>-->
 
     </div>
-    <div class="second"><belief-input
+    <div   class="second"><belief-input
       ref="beliefInput"
       :beliefs="beliefs"
       :previousValues="previousValues"
@@ -53,14 +91,14 @@
       :privateSession="privateSession"
       @switch-to-phase="switchToPhase">
     </belief-input></div>
-    <div class="third">
+    <div     class="third">
       <belief-transitions-component
         ref="beliefTransitions">
       </belief-transitions-component>
     </div>
     <div class="fourth"><web-chat-component
       ref="webChat"
-      :header-text="`${sessionActive ? `${ sessionActive }'s Chat` : 'You are not watching anyone'}`"
+      :header-text="`${sessionActive ? `${ sessionActive }'s Chat` : 'Chat with a virtual child'}`"
       @handle-input="handleInput"
       @set-trainer-messaging="setTrainerMessaging"
       @request-session="requestSession"
@@ -95,9 +133,15 @@
   import axios from 'axios';
   import { phaseEnumToNumber } from "@/utils";
   import sessionMixin from "@/mixins/sessionMixin";
+  import webChatComponent from "../components/WebChatComponent.vue";
 
   export default {
     name: 'TrainingPortal',
+    computed: {
+      webChatComponent() {
+        return webChatComponent
+      }
+    },
     components: {
       GenericPopup,
       BeliefTransitionsComponent,
@@ -118,11 +162,71 @@
         subscriptions: [],
         stompClient: null,
         privateSession: false,
-        test: null
+        test: null,
+        intentMessage: null,
+        userIntents: [],
+        isHovered: false,
+        adviceMsg: null,
+        progressMsg: null,
+        childGoalMsg: null,
+        phase2Intents: [
+          "request_chitchat_greeting",
+          "request_chitchat_faring",
+          "trigger_unknown_what",
+          "request_bullying_who",
+          "request_unknown_who",
+          "request_bullying_details",
+          "request_unknown_details",
+          "request_bullying_count",
+          "request_bullying_location",
+          "request_unknown_location",
+          "request_bullying_duration",
+          "request_unknown_duration",
+          "request_bullying_frequency",
+          "request_unknown_frequency",
+          "request_unknown_when",
+          "request_bullying_why",
+          "request_unknown_why",
+          "request_bullying_response",
+          "request_unknown_response",
+          "request_unknown_feeling",
+          "request_bullying_confidant",
+          "request_unknown_confidant",
+          "request_bullying_parent",
+          "confirm_bullying_summary"
+        ],
+        phase3Intents: [
+          "request_goal_what",
+          "request_goal_dream",
+          "request_goal_feeling",
+          "confirm_goal_summary",
+          "confirm_goal_collaborate",
+          "request_goal_howchild",
+          "request_unknown_how",
+          "request_confidant_who"
+        ],
+        phase4Intents: [
+          "confirm_confidant_teacher",
+          "confirm_confidant_parent",
+          "request_confidant_when",
+          "request_confidant_feeling",
+          "request_confidant_why",
+          "request_confidant_how",
+          "inform_confidant_help",
+          "inform_confidant_say",
+          "request_confidant_say",
+          "confirm_confidant_summary",
+          "request_chitchat_end",
+          "confirm_chitchat_satisfaction",
+          "request_chitchat_goodbye"
+        ],
+        wrongUtterances: [],
+        visibleDiv: 0
       }
     },
     created() {
       window.addEventListener("beforeunload", this.unsubscribeFromTopics);
+      this.visibleDiv = this.calculateVisibleDiv();
     }, 
     beforeMount() {
       this.fetchInitBeliefs();
@@ -142,6 +246,13 @@
       this.clearNotifications();
     },
 
+    watch: {
+      phase(newPhase) {
+        if (newPhase === 5) {
+          this.handlePhase5();
+        }
+      }
+    },
 
 
     methods: {
@@ -171,6 +282,8 @@
             const messageData = JSON.parse(message.body);
             if (messageData.phaseFrom !== null) {
               if (messageData.phaseFrom !== messageData.phaseTo) {
+                if(messageData.phaseTo > messageData.phaseFrom) // so that it doesnt add phase 2 again if I did undo from phase 3 fist msg to phase 2
+                this.$refs.beliefInput.addPhaseToList();
                 this.lastTransition = {
                   from: phaseEnumToNumber(messageData.phaseFrom),
                   to: phaseEnumToNumber(messageData.phaseTo)
@@ -181,6 +294,36 @@
             }
             this.phase = phaseEnumToNumber(JSON.parse(message.body).phaseTo);
           });
+
+
+          this.stompClient.subscribe('/topic/intent/' + this.getSessionID(), (message) => {
+            this.intentMessage = message.body;
+            let parts = this.intentMessage.split(';').map(part => part.trim());
+
+// Assign the split parts to two variables
+            let useIntent = parts[0];
+            let usePhase = parts[1];
+            //this adds it with trigger! don't add if trigger????? don't delete this with the chat messages list! as it adds one extract if the nlp doesn't recognise
+            if (useIntent=== "trigger__") {
+              // this.userIntents.push({
+              //   UserIntent: useIntent,
+              //   inPhase: usePhase,
+              //   UserText: "trigger"
+              // });
+            }
+            else {
+              this.userIntents.push({
+                UserIntent: useIntent,
+                inPhase: usePhase,
+                UserText: this.$refs.webChat.GetlastUsermsg()
+              });
+            }
+            this.$refs.beliefInput.addToList();
+          });
+
+
+          // Subscribe to the advice topic
+
 
           axios.post(this.$config.agentServer + '/create/' + this.getSessionID(), null, {
             params: { username: this.$store.state.auth.username }
@@ -434,7 +577,81 @@
         this.sendMessage(beliefId, newValue);
 
       },
-      updateAllBeliefs() {
+
+      handlePhase5(){
+        this.$refs.webChat.disableTextarea();
+        setTimeout(() => {
+          this.$refs.webChat.reachedPhase5 = true;
+        }, 2000);
+        //   change the popup information to the feedback information.
+        //     so, the logic for the feedback should be here in this function
+        // let the popup close. it only opens when they click the button with the information
+        // also, check if this ths first time or the second time.
+        //maybe use this counter also to show it's the first or the second time?
+        // if the first time, open the popup that has the reset button, if second time, open the popup that goes to the reflection page
+        // Also, send the information of the chat to the backend to save it in the database
+      },
+
+
+      calculateVisibleDiv() {
+        // Consider only the last 3 characters of the username
+
+        const lastThreeChars = this.$store.state.auth.username.slice(-3);
+        // Simple hash function to determine the div
+        let hash = 0;
+        for (let i = 0; i < lastThreeChars.length; i++) {
+          const char = lastThreeChars.charCodeAt(i);
+          hash = (hash << 5) - hash + char;
+          hash |= 0; // Convert to 32bit integer
+        }
+        return Math.abs(hash) % 4; // Ensure the hash is a positive number and within 0-3 range
+
+    },
+
+  checkIfPhaseIsInList(){
+        const lastElement = this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1];
+        // const BeforelastElement = this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 2];
+
+        // const ThirdlastElement = this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 3];
+        if (lastElement === "phase2" || lastElement === "phase3" || lastElement === "phase4" || lastElement === "phase5") {
+          this.$refs.beliefInput.AllBeliefList.splice(this.$refs.beliefInput.AllBeliefList.length-1, 1);
+          //this.$refs.beliefInput.AllBeliefList.splice(this.$refs.beliefInput.AllBeliefList.length-1, 1);
+          // if (BeforelastElement === "phase2" || BeforelastElement === "phase3" || BeforelastElement === "phase4") {
+          //   const secondToLastIndex = this.$refs.beliefInput.AllBeliefList.length - 2;
+          //   this.$refs.beliefInput.AllBeliefList.splice(secondToLastIndex, 1);
+          // }
+          // if (ThirdlastElement === "phase2" || ThirdlastElement === "phase3" || ThirdlastElement === "phase4") {
+          //   const ThirdToLastIndex = this.$refs.beliefInput.AllBeliefList.length - 2;
+          //   this.$refs.beliefInput.AllBeliefList.splice(ThirdToLastIndex, 1);
+          // }
+          // if (BeforelastElement === "phase2" || BeforelastElement === "phase3" || BeforelastElement === "phase4") {
+          //   const secondToLastIndex = this.$refs.beliefInput.AllBeliefList.length - 1;
+          //   this.$refs.beliefInput.AllBeliefList.splice(secondToLastIndex, 1);
+          // }
+        }
+        // else if (BeforelastElement === "phase2" || BeforelastElement === "phase3" || BeforelastElement === "phase4") {
+        //   const secondToLastIndex = this.$refs.beliefInput.AllBeliefList.length - 2;
+        //   this.$refs.beliefInput.AllBeliefList.splice(secondToLastIndex, 1);
+        // }
+
+
+      },
+      updateAllBeliefs() { // update the values of the beliefs to the one before
+        this.checkIfPhaseIsInList(); // if the last element is phase2,3,4 then remove it and go to the one before it
+        const BeforelastElement = this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 2]; // check of (..., number, phase 2, numbers) then take the numbers before phase 2
+        if (BeforelastElement === "phase2" || BeforelastElement === "phase3" || BeforelastElement === "phase4" || BeforelastElement === "phase5") {
+          let i;
+          for (i=1;i<17;i++) {
+            if ((this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length-3][i-1] !== this.$refs.beliefInput.currBeliefs[i-1]) && i!==3)
+            {
+              //try to assign the value of i-2 and then delete i-1! so change the order from the above (other) function
+              this.updateBelief("B"+i, this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length-3][i-1]);
+              //this.updateBelief("B4", this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1][3]);
+              //this.updateBelief("B1", this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1][0]);
+            }
+          }
+        }
+        else{
         let i;
         for (i=1;i<17;i++) {
           if ((this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length-2][i-1] !== this.$refs.beliefInput.currBeliefs[i-1]) && i!==3)
@@ -445,7 +662,37 @@
           //this.updateBelief("B1", this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1][0]);
           }
         }
+        }
         },
+      updateAllBeliefsBforPhase() { // update the values of the beliefs to the one before
+
+        // const BeforelastElement = this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 2]; // check of (..., number, phase 2, numbers) then take the numbers before phase 2
+        // if (BeforelastElement === "phase2" || BeforelastElement === "phase3" || BeforelastElement === "phase4" || BeforelastElement === "phase5") {
+        //   let i;
+        //   for (i=1;i<17;i++) {
+        //     if ((this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length-3][i-1] !== this.$refs.beliefInput.currBeliefs[i-1]) && i!==3)
+        //     {
+        //       //try to assign the value of i-2 and then delete i-1! so change the order from the above (other) function
+        //       this.updateBelief("B"+i, this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length-3][i-1]);
+        //       //this.updateBelief("B4", this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1][3]);
+        //       //this.updateBelief("B1", this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1][0]);
+        //     }
+        //   }
+        // }
+        // else{
+          let i;
+          for (i=1;i<17;i++) {
+            if ((this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length-2][i-1] !== this.$refs.beliefInput.currBeliefs[i-1]) && i!==3)
+            {
+              //try to assign the value of i-2 and then delete i-1! so change the order from the above (other) function
+              this.updateBelief("B"+i, this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length-2][i-1]);
+              //this.updateBelief("B4", this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1][3]);
+              //this.updateBelief("B1", this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1][0]);
+            }
+          }
+        // }
+
+      },
       sendMessage(beliefId, newValue) {
         const sessionID = sessionStorage.getItem('rasa_session_id');
         const message = { belief: beliefId, value: newValue };
@@ -538,13 +785,13 @@
       },
 
       FivePhasesButton() {
-        this.$refs.joinPopup2.headerText= "5-phase model summary";
+        this.$refs.joinPopup2.headerText= "5-Phase Model Summary";
         this.$refs.joinPopup2.phasesDiv();
         this.$refs.joinPopup2.openPopup();
       },
       UndoStep() { // test it that everything works well!!
-        this.$refs.joinPopup2.headerText= "Go back one step in the conversation";
-        if(this.$refs.beliefInput.AllBeliefList.length<18){
+        this.$refs.joinPopup2.headerText= "Undo Last Message";
+        if(this.$refs.beliefInput.AllBeliefList.length<2){
           this.$refs.joinPopup2.openPopupwMsg("You can't go back to the previous step.");}
         else {
           this.updateAllBeliefs();
@@ -552,40 +799,396 @@
           //assign values
           //this.updateBelief("B1",1);
           this.$refs.joinPopup2.openPopupwMsg("You are back to the previous step.");
-          this.$refs.webChat.deleteMessageUndo();
+
+          //let deletedMSGs=this.$refs.webChat.deleteMessageUndo(); // returns list of deleted msgs
+          // this.userIntents=this.$refs.webChat.deleteMessageUndo(); // returns list of deleted msgs
+          this.removeDeletedMessages();
         }
 
       },
+      removeDeletedMessages() {
+
+        let deletedMSGs=this.$refs.webChat.deleteMessageUndo(this.$refs.beliefInput.phase); // returns list of deleted msgs
+
+        deletedMSGs.forEach(deletedMsg => {
+          // Check if the last element's UserText matches the deletedMsg
+          let lastIndex = this.userIntents.length - 1;
+          if (this.userIntents[lastIndex] && this.userIntents[lastIndex].UserText === deletedMsg) {
+            // Remove from userIntents and deletedMSGs
+            this.userIntents.splice(lastIndex, 1);
+          } else {
+            // Check the last three elements
+            let found = false;
+            for (let i = lastIndex; i >= Math.max(0, lastIndex - 2); i--) {
+              if (this.userIntents[i] && this.userIntents[i].UserText === deletedMsg) {
+                this.userIntents.splice(i, 1);
+                found = true;
+                break;
+              }
+            }
+            if (found) {
+              deletedMSGs = deletedMSGs.filter(msg => msg !== deletedMsg);
+            }
+          }
+        });
+        // Clean up deletedMSGs to remove processed messages
+        deletedMSGs = deletedMSGs.filter(deletedMsg => {
+          return this.userIntents.some(intent => intent.UserText === deletedMsg);
+        });
+      },
+
       GiveAdvice() {
-        this.$refs.joinPopup2.headerText= "Give advice";
-        this.$refs.joinPopup2.openPopupwMsg("advice");
+        this.$refs.joinPopup2.headerText = "Advice on Next Message";
+
+        this.traverseAdvSitu();
+
+        this.$refs.joinPopup2.openPopupwMsg(this.adviceMsg);
+        //this.$refs.joinPopup2.openPopupwMsg(this.intentMessage);
+        // const sessionId = this.getSessionID(); // Assuming this method gets the current session ID
+        // // Make an HTTP request to the backend to send advice
+        // axios.get(this.$config.agentServer + '/topic/sendAdvice/'  + sessionId)
+        //     .then(response => {
+        //       console.log('Advice message received:', response.data);
+        //       this.$refs.joinPopup2.openPopupwMsg(response.data);
+        //     })
+        //     .catch(error => {
+        //       console.error('Error receiving hello world message:', error);
+        //     });
 
       },
       ExplainSit() {
-        this.$refs.joinPopup2.headerText= "Explain Situation";
-        this.$refs.joinPopup2.openPopupwMsg("This is the current situation");
+        this.$refs.joinPopup2.headerText= "Current Child's Situation";
+        this.traverseAdvSitu();
+        //do the if statement for D2 to see id they are close to hang up
+        if(this.$refs.beliefInput.beliefs[0].value === 0.3){
+          this.childGoalMsg= this.childGoalMsg + " Also, the child is starting to feel that they are not under control of the conversation.";
+        }
+        // already in the child goals
+        // else if(this.$refs.beliefInput.beliefs[2].value < 0.6 && this.$refs.beliefInput.beliefs[11].value < 0.6){
+        //   this.childGoalMsg= this.childGoalMsg + " On the other hand, the child is starting to feel that they are not under control of the conversation. They are also starting to feel that they are not under control of the conversation.";
+        // }
+
+        this.$refs.joinPopup2.openPopupwMsg(this.childGoalMsg);
       },
-      UndoPhase() {
-        this.$refs.joinPopup2.headerText= "Go back 1 phase";
-        if((this.$refs.beliefInput.phase) > 1){
-          this.$refs.beliefInput.switchToPhase(this.$refs.beliefInput.phase-2);
-          this.$refs.joinPopup2.undoPhaseDiv(this.$refs.beliefInput.phase-1);
+
+      traverseAdvSitu(){
+        //check phase first
+        if (this.$refs.beliefInput.phase ===2){
+          if (this.$refs.beliefInput.beliefs[3].value < 0.8){
+            this.adviceMsg = "Greet and welcome the child to create a warm atmosphere and build a connection.";
+            this.childGoalMsg="The child does not trust you yet and does not know if you are interested in their problem.";
+            this.progressMsg="You completed 0% of phase 2 (clarifying the child’s story). \n" +
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+          }
+          else if (this.$refs.beliefInput.beliefs[5].value < 0.3 && this.$refs.beliefInput.beliefs[4].value < 0.2){
+            if (Math.random() < 0.5) {
+              this.adviceMsg = "Ask questions to clarify details of the child's story. This can show your interest and willingness to help.";
+            } else {
+              this.adviceMsg = "Show empathy towards the child. This can build trust and acknowledge their concerns.";
+            }
+            this.childGoalMsg="The child has started to trust you more. However, they are still not sure if you are interested in and understand their problem.";
+            this.progressMsg="You completed 20% of phase 2 (clarifying the child’s story). \n" +
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+          }
+          else if (this.$refs.beliefInput.beliefs[5].value < 0.3){
+            this.adviceMsg = "Ask questions to clarify details of the child's story. This can show your interest and willingness to help.";
+            this.childGoalMsg="The child trusts you now. However, they are still not sure if you are interested in their problem.";
+            this.progressMsg="You completed 40% of phase 2 (clarifying the child’s story). \n" +
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+          }
+          else if(this.$refs.beliefInput.beliefs[4].value < 0.2){
+            this.adviceMsg = "Show empathy towards the child. This can build trust and acknowledge their concerns.";
+            this.childGoalMsg="The child trusts you now. However, they are still not sure if you understand their problem.";
+            this.progressMsg="You completed 60% of phase 2 (clarifying the child’s story). \n" +
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+
+          }
+          else if(this.$refs.beliefInput.beliefs[9].value < 1){
+            this.adviceMsg = "Ask the child about their goals and what they wish to achieve in this conversation to show your interest in their goal.";
+            this.childGoalMsg="The child trusts you now and thinks that you understand them. But they don't know what to do next.";
+            this.progressMsg="You completed 80% of phase 2 (clarifying the child’s story). \n" +
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+          }
+          else{ // add random to give a random msg? or nothing delete?
+            this.adviceMsg = "Try to clarify the child's story and ask about their desires!";
+          }
         }
+
+        else if (this.$refs.beliefInput.phase ===3){
+          if (this.$refs.beliefInput.beliefs[3].value < 0.8 || this.$refs.beliefInput.beliefs[4].value < 0.2){
+            this.adviceMsg = "Don’t forget to show empathy and warmth to help the child feel more comfortable and open up.";
+            this.childGoalMsg="The child has started to trust you more. However, they are still not sure if you are interested in and understand their problem.";
+            this.progressMsg="You completed 0% of phase 3 (Setting the session’s goal). \n " +
+                "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
+          }
+          else if (!this.userIntents.some(item => item.UserIntent === "confirm_goal_summary")) {
+            this.adviceMsg = "Summarize the child's goal and confirm it, to show you understand and are interested in their goals.";
+            this.childGoalMsg = "The child trusts you now and thinks that you understand them. But they don't know what to do next.";
+            this.progressMsg="You completed 25% of phase 3 (Setting the session’s goal). \n " +
+                "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
+          }
+
+        else if(this.$refs.beliefInput.beliefs[15].value < 1){
+            this.adviceMsg = "Suggest working together with the child to find a goal for the conversation. This can strengthen your connection and show how you can help.";
+            this.childGoalMsg = "The child has a misconception about how to solve their problem and wants you to solve it."; // change this with the hit back scenarios
+            this.progressMsg="You completed 50% of phase 3 (Setting the session’s goal). \n " +
+                "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
+        }
+          else if(this.$refs.beliefInput.beliefs[11].value < 1){
+            this.adviceMsg = "Ask the child to share their problem with someone they trust. This can stimulate their problem-solving skills";
+            this.childGoalMsg = "The child now understands that you can find a solution together. However, they cannot think of any solutions.";
+            this.progressMsg="You completed 75% of phase 3 (Setting the session’s goal). \n " +
+                "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
+          }
+          else{ // add random to give a random msg? or nothing delete?
+            this.adviceMsg = "Try to clarify the child's wishes and goals for the conversation.";
+          }
+        }
+
+
+        else if (this.$refs.beliefInput.phase ===4){
+
+          if (this.$refs.beliefInput.beliefs[1].value < 0.7){ ////// add another one for answering their concerns?
+            if (Math.random() < 0.44) {
+              this.adviceMsg = "Compliment the child's ideas to boost their autonomy and competence.";
+            } else {
+              this.adviceMsg = "Ask the child for details about how they plan to achieve their goal of telling someone. This can increase their confidence in taking action.";
+            }
+            this.childGoalMsg = "The child has low confidence in their ability to talk to someone about their problem; they don't know how to do it.";
+
+            if (this.$refs.beliefInput.beliefs[1].value < 0.3)
+            this.progressMsg="You completed 0% of phase 4 (Working towards the session goal). \n "+
+            "This phase requires ensuring the child has the next steps to apply the agreed goal of talking to someone. If the child is confident enough and willing to apply this goal, then you can wrap up the conversation in phase 5";
+            else if (this.$refs.beliefInput.beliefs[1].value < 0.5)
+              this.progressMsg="You completed 40% of phase 4 (Working towards the session goal). \n "+
+                  "This phase requires ensuring the child has the next steps to apply the agreed goal of talking to someone. If the child is confident enough and willing to apply this goal, then you can wrap up the conversation in phase 5";
+            else{
+              this.progressMsg="You completed 80% of phase 4 (Working towards the session goal). \n "+
+                  "This phase requires ensuring the child has the next steps to apply the agreed goal of talking to someone. If the child is confident enough and willing to apply this goal, then you can wrap up the conversation in phase 5";
+            }
+          }
+
+          else if (this.$refs.beliefInput.beliefs[1].value < 0.8){
+            this.adviceMsg = "Wrap up the conversation and ask if it was helpful for them. This would show your continued interest in helping and understanding them, and to increase the child's commitment to the goal.";
+            this.childGoalMsg = "The child is now confident they can talk to someone. They are ready to wrap up the conversation.";
+            this.progressMsg="You completed 100% of phase 4 (Working towards the session goal). \n "+
+                "This phase requires ensuring the child has the next steps to apply the agreed goal of talking to someone. If the child is confident enough and willing to apply this goal, then you can wrap up the conversation in phase 5";
+
+          }
+          else if (this.$refs.beliefInput.beliefs[14].value < 1 && this.$refs.beliefInput.beliefs[1].value > 0.7){
+            this.adviceMsg = "Remember to say goodbye before ending the conversation.";
+            this.childGoalMsg = "The child is happy about the conversation's outcome and is ready to talk to someone.";
+            this.progressMsg="You completed 100% of phase 4 (Working towards the session goal). \n "+
+                "This phase requires ensuring the child has the next steps to apply the agreed goal of talking to someone. If the child is confident enough and willing to apply this goal, then you can wrap up the conversation in phase 5";
+
+          }
+          else{ // add random to give a random msg? or nothing delete?
+            this.adviceMsg = "Try to stimulate the child's problem-solving skills.";
+          }
+
+
+        }
+
         else{
-          this.$refs.joinPopup2.undoIncorrectPhase();
+          this.adviceMsg = "No available advice for this phase.";
         }
+      },
+
+      showInfo() {
+        this.isHovered = true;
+      },
+      hideInfo() {
+        this.isHovered = false;
+      },
+
+
+      UndoPhase() { ///////////////////////////update the issue with switching to phase 3!!
+        this.$refs.joinPopup2.headerText= "Restart the Phase";
+        // if((this.$refs.beliefInput.phase) > 1){
+        //   this.$refs.beliefInput.switchToPhase(this.$refs.beliefInput.phase-2);
+        //   this.$refs.joinPopup2.undoPhaseDiv(this.$refs.beliefInput.phase-1);
+        // }
+        // else{
+        //   this.$refs.joinPopup2.undoIncorrectPhase();
+        // }
+
+        if (this.$refs.beliefInput.phase ===2){
+          this.restartPhaseTwo();
+          this.$refs.joinPopup2.openPopupwMsg("You are back to the start of phases 1 and 2: Building rapport and clarifying the child's story.")
+        }
+
+        else if (this.$refs.beliefInput.phase ===3) {
+          this.restartPhaseThree();
+
+        }
+
+
+        else if (this.$refs.beliefInput.phase ===4){
+          this.restartPhaseFour();
+        }
+
+        else{
+          this.$refs.joinPopup2.openPopupwMsg("You can't restart the phase.")
+        }
+        //if the element before the end of the user intent has phase 3
+        //undo 1 step
+        //then do the phase 3 function
+        // otherwise
+        // delete from user intent from the end, until you reach the element that has phase 3, but the one before it is phase 2
+        // delete from the chat list until you reach the element in the chat list that has the same text as the last element in the user intent
+        // delete from the belief list until you reached element of the phase name, and assign the values of the one after it
+        //////////////// first know how to add the phase name to the beliefs list
+        // }
+
         this.$refs.joinPopup2.openPopup();
 
       },
-      WhenNext() {
-        this.$refs.joinPopup2.headerText= "When is the next phase";
+      restartPhaseTwo(){
+        this.$refs.webChat.clearConversation();
+        this.userIntents = [];
+        this.$refs.beliefInput.AllBeliefList=  [[0.5,0.3,0.4,0.6,0,0,0.7,1,0,0,0,0,0.5,1,0,0,0],[0.5,0.3,0.4,0.6,0,0,0.7,1,0,0,0,0,0.5,1,0,0,0]];
+        this.updateAllBeliefs();
+        this.$refs.beliefInput.popBelList();
+      },
+      restartPhaseThree(){
 
-        this.$refs.joinPopup2.openPopupwMsg("the next phase is");
+        // first clean the beliefs list
+        if (typeof this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1] !== "string"){
+        while (typeof this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1] !== "string") {
+          this.$refs.beliefInput.AllBeliefList.pop();
+        }
+
+        }
+
+        // Clean userIntents
+
+          while (this.userIntents.length > 0) {
+            const lastIntent = this.userIntents[this.userIntents.length - 1];
+            if (lastIntent.inPhase === "PHASE3") {
+              this.userIntents.pop();
+            } else {
+              break;
+            }
+          }
+
+        // Get the text in the last element of userIntents
+        const lastUserText = this.userIntents[this.userIntents.length - 1].UserText;
+
+        // Clean chatRecord
+
+        this.$refs.webChat.CleanRecordPhase(lastUserText);
+
+        this.updateAllBeliefsBforPhase();
+        this.$refs.joinPopup2.openPopupwMsg("You are back to the start of the third phase: Setting a goal for the session.")
+
+      },
+      restartPhaseFour(){
+        // first clean the beliefs list
+        if (typeof this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1] !== "string"){
+          while (typeof this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 1] !== "string") {
+            this.$refs.beliefInput.AllBeliefList.pop();
+          }
+
+        }
+
+        // Clean userIntents
+
+        while (this.userIntents.length > 0) {
+          const lastIntent = this.userIntents[this.userIntents.length - 1];
+          if (lastIntent.inPhase === "PHASE4") {
+            this.userIntents.pop();
+          } else {
+            break;
+          }
+        }
+
+        // Get the text in the last element of userIntents
+        const lastUserText = this.userIntents[this.userIntents.length - 1].UserText;
+
+        // Clean chatRecord
+
+        this.$refs.webChat.CleanRecordPhase(lastUserText);
+
+        this.updateAllBeliefsBforPhase();
+        this.$refs.joinPopup2.openPopupwMsg("You are back to the start of the fourth phase: Working towards the session goal.")
+
+      },
+
+      WhenNext() {
+        this.$refs.joinPopup2.headerText= "Current Phase Progress";
+        this.traverseAdvSitu();
+
+        this.$refs.joinPopup2.openPopupwMsg(this.progressMsg);
       },
       IncUtterances() {
-        this.$refs.joinPopup2.headerText= "Incorrect Utterances";
+        this.$refs.joinPopup2.headerText= "View Messages Evaluation";
+        this.wrongUtterances = [];
+        this.userIntents.forEach(intentObj => {
+          let flag = false;
+          const { UserIntent, inPhase, UserText } = intentObj;
 
-        this.$refs.joinPopup2.openPopupwMsg("These utterances are incorrect");
+          if (inPhase !== "PHASE2") { // add a new list for phase1 here, then check below whether this includes in phase 1 list or phase 2
+            if (this.phase2Intents.includes(UserIntent)) {
+              this.wrongUtterances.push({
+                usertext: UserText,
+                usedInPhase: inPhase,
+                correctPhase: "PHASE2"
+              });
+              flag = true;
+            }
+          }
+
+          if (inPhase !== "PHASE3" && !flag) {
+            if (this.phase3Intents.includes(UserIntent)) {
+              this.wrongUtterances.push({
+                usertext: UserText,
+                usedInPhase: inPhase,
+                correctPhase: "PHASE3"
+              });
+              flag = true;
+            }
+          }
+
+          if (inPhase !== "PHASE4" && !flag) {// add a new list for phase5 here, then check below whether this includes in phase 4 list or phase 5
+            if (this.phase4Intents.includes(UserIntent)) {
+              this.wrongUtterances.push({
+                usertext: UserText,
+                usedInPhase: inPhase,
+                correctPhase: "PHASE4"
+              });
+              flag = true;
+            }
+          }
+        });
+
+
+
+        this.$refs.joinPopup2.IncMSG(this.wrongUtterances);
+      },
+
+      childGoal() {
+        this.$refs.joinPopup2.headerText= "Current Child's Goal";
+
+        if (this.$refs.beliefInput.phase ===2){
+          this.childGoalMsg = "The child wants to tell their story and get help with their problem.";
+        }
+        else if(this.$refs.beliefInput.phase ===3){
+          if(this.$refs.beliefInput.beliefs[15].value < 0.75){
+            this.childGoalMsg = "The child wants you to call someone and inform them about the problem.";
+          }
+          else
+            this.childGoalMsg = "The child is willing to come up with a solution together with you.";
+        }
+        else if(this.$refs.beliefInput.phase ===4){
+          this.childGoalMsg = "The child is willing to talk to someone about the problem.";
+        }
+        else if(this.$refs.beliefInput.phase ===5){
+          this.childGoalMsg = "The child wants to end the conversation.";
+        }
+
+
+
+        this.$refs.joinPopup2.openPopupwMsg(this.childGoalMsg);
       },
 
       checkAssignedTrainer(learner) {
@@ -627,6 +1230,28 @@
     "first third fourth";
 }
 
+.wrapper2 {
+  display: grid;
+  position: relative;
+  max-height: 90vh;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas:
+    "first  fourth"
+    "first  fourth";
+}
+
+.wrapper3 {
+  display: grid;
+  position: relative;
+  max-height: 90vh;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-template-areas:
+    "first second fourth"
+    "first third fourth";
+}
+
 .first {
   grid-area: first;
   max-width: calc(100vw / 3);
@@ -650,8 +1275,57 @@
 
 }
 
-.buttons {
+.join-button2{
+  border-radius: 16px;
+  //background-color: var(--chat-widget-button);
+  background-color: #08d047;
+  border: none;
+  color: var(--chat-widget-button-text);
+  font-size: x-large;
+  padding: 0.8rem;
+  font-family: 'Anton', sans-serif;
+  width: 40%;
+  cursor: pointer;
 
+  /* borders only used in accessibility mode */
+  border: solid;
+  border-width: var(--basic-border-width);
+  border-color: var(--basic-border-dark);
+
+}
+
+.join-button3{
+  border-radius: 16px;
+  background-color: #08cad0;
+  border: none;
+  color: var(--chat-widget-button-text);
+  font-size: x-large;
+  padding: 0.8rem;
+  font-family: 'Anton', sans-serif;
+  width: 40%;
+  cursor: pointer;
+
+  /* borders only used in accessibility mode */
+  border: solid;
+  border-width: var(--basic-border-width);
+  border-color: var(--basic-border-dark);
+
+}
+
+.hello-message {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 50px;
+}
+
+.buttons1 {
+  width: 90%;
+  padding-top: 50px;
+}
+.buttons2 {
+  grid-area: second;
   width: 90%;
   padding-top: 50px;
 }
@@ -661,9 +1335,19 @@
   cursor: pointer;
 }
 
+.section-title {
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding-left: 50px;
+  font-size: xx-large;
+  color: floralwhite;
+  text-align: center;
+}
+
 #UndoStep:hover {
 
 }
+
 
 
 .second {

@@ -97,6 +97,19 @@ public class AgentController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+//    /**
+//     * Endpoint to send an advice message to the Vue interface via WebSocket.
+//     *
+//     * @param userId the user id connected to the agent
+//     * @return a response indicating the message was sent
+//     */
+//    @GetMapping("/topic/sendAdvice/{userId}") //or should it be sessionId
+//    public ResponseEntity<String> sendAdvice(@PathVariable("userId") String userId) {
+//        System.out.println("send advice activated");
+//        String msg = agentService.sendAdvice(userId);
+//        //String msg = "This is an advice";
+//        return new ResponseEntity<>(msg, HttpStatus.OK);
+//    }
 
     /**
      * Gets the transcript of the conversation between the user and the agent.

@@ -18,9 +18,12 @@
         <div><belief-input></belief-input></div> 
 -->
 <template>
+
   <div class="belief-changes-component">
     <div class="container">
+
       <div class="dynamic-h2" title="Phase info">
+
         <dynamic-text
             :header-text="'CHANGE BELIEFS'"
             :target-font-size=1.3
@@ -55,7 +58,7 @@
         </p>
       </div>
 
-      <div v-else class="belief" v-for="(belief,index) in beliefs" :key="belief" title="belief input list">
+      <div v-else class="belief" v-for="(belief) in beliefs" :key="belief" title="belief input list">
         <input
           type="number"
           class="belief-input"
@@ -65,9 +68,13 @@
           @blur="updateBelief(belief)"
           @keyup.enter="updateBelief(belief)"
           v-bind:title="belief.isModifiable ? (`input box for ` + belief.id) : `Can't modify ${belief.id}: ${belief.disableReason}`">
-            {{ belief.id }}: {{ belief.fullName }} : {{addToList(index)}} {{this.AllBeliefList[this.AllBeliefList.length-2]}} {{this.AllBeliefList[this.AllBeliefList.length-1]}}
+            {{ belief.id }}: {{ belief.fullName }}
       </div>
     </div>
+<!--    {{this.currBeliefs}}-->
+    {{this.AllBeliefList}}
+
+<!--    {{this.currBeliefs}}-->
   </div>
 </template>
   
@@ -98,7 +105,7 @@ export default {
       displayInfo: false,
       bell:0,
       currBeliefs:[],
-      AllBeliefList: []
+      AllBeliefList: [[0.5,0.3,0.4,0.6,0,0,0.7,1,0,0,0,0,0.5,1,0,0,0]]
     }
   },
   methods: {
@@ -113,28 +120,43 @@ export default {
       }
 
     },
+    getCurrentBeliefsValues(){
+      this.currBeliefs=this.beliefs.map(belief => {
+        return Math.floor(belief.value* 100) / 100;
+      });
+    },
     switchToPhase(phase) {
       this.$emit('switch-to-phase', phase);
     },
     showToast(message) {
       this.$refs.toastQueue.addToast(message, 'success');
     },
-    addToList(num) {
-    this.bell=this.beliefs[num].value;
-      this.bell= Math.round(this.bell * 100) / 100;
+    addToList() {
+      setTimeout(() => {
+      this.getCurrentBeliefsValues();
+      }, 500);
+      //this.currBeliefs= Math.round(this.currBeliefs * 100) / 100;
 
-      this.currBeliefs[num]=this.bell;
-      if(this.AllBeliefList.length<17)
-        this.AllBeliefList.push(this.currBeliefs.slice(0,17));
+      if(this.AllBeliefList.length<1)
+        this.AllBeliefList.push(this.currBeliefs);
 
+    },
+    addPhaseToList() { // add phase number to the list
+      const lastElement = this.AllBeliefList[this.AllBeliefList.length - 1];
+      //const BeforelastElement = this.$refs.beliefInput.AllBeliefList[this.$refs.beliefInput.AllBeliefList.length - 2];
+      if (lastElement !== "phase2" || lastElement !== "phase3" || lastElement !== "phase4") {
+        setTimeout(() => {
+          this.AllBeliefList.push("phase" + this.phase);
+        }, 1000);
+      }
     },
     updateBelList() {
       setTimeout(() => {
-        if(JSON.stringify(this.currBeliefs.slice(0,17)) !== JSON.stringify(this.AllBeliefList[this.AllBeliefList.length-1])) {
-          this.AllBeliefList.push(this.currBeliefs.slice(0,17));
+        if(JSON.stringify(this.currBeliefs) !== JSON.stringify(this.AllBeliefList[this.AllBeliefList.length-1])) {
+          this.AllBeliefList.push(this.currBeliefs);
         }
 
-      }, 1000);
+      }, 500);
 
     },
     popBelList() {

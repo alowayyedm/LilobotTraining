@@ -5,5 +5,6 @@ public enum DesireName {
     D2,
     D3,
     D4,
-    D5
+    D5,
+    D6
 }

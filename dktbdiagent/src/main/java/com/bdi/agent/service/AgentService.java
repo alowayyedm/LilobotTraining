@@ -187,7 +187,7 @@ public class AgentService {
                 case "D1" -> Phase.PHASE2;
                 case "D2" -> Phase.PHASE5;
                 case "D5", "D3" -> Phase.PHASE3;
-                case "D4" -> Phase.PHASE4;
+                case "D4", "D6" -> Phase.PHASE4;
                 default -> throw new IllegalStateException("Unexpected desire name " + activeDesire.getName());
             };
         }
@@ -246,7 +246,7 @@ public class AgentService {
      * @return the response from the knowledge base
      */
     private String getResponseFromKnowledge(String subject, String attribute) {
-        String err = "Ik begrijp niet wat je bedoelt";
+        String err = "I do not understand what you mean";
 
         try {
             Knowledge knowledge = knowledgeService.getBySubjectAndAttribute(subject, attribute);
@@ -305,6 +305,27 @@ public class AgentService {
         }
     }
 
+
+
+
+    /**
+     * everytime the user sends a message, this method is called
+     *
+     * @param sessionId The session id of the agent to which the message should be sent.
+     */
+    public void sendIntent(String sessionId, Agent agent, String PerceptionName) {
+        String message = PerceptionName + " ; " + agent.getPhase().name();
+        messagingTemplate.convertAndSend("/topic/intent/" + sessionId, message);
+
+    }
+//
+//    public String sendAdvice(String sessionId) {
+//        return "This is an advice" + sessionId + " " + counter++;
+//
+//    }
+
+
+
     /**
      * Updates the beliefs of the agent based on the perception.
      *
@@ -312,7 +333,6 @@ public class AgentService {
      * @param perception the perception of the agent
      */
     private List<BeliefUpdateLogEntry> updateBeliefs(Agent agent, Perception perception) {
-
         List<BeliefUpdateLogEntry> beliefUpdateLogs = new ArrayList<>();
 
         Long agentId = agent.getId();
@@ -334,12 +354,12 @@ public class AgentService {
             case "request_chitchat_goodbye":
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B15", maxValue));
                 break;
-            case "confirm_bullying_summary":
+            case "confirm_bullying_summary": //change??
                 float hasTalkedAboutBullying = beliefService.getByAgentIdAndName(agent.getId(), "B9").getValue();
                 System.out.println("summary belief: " + hasTalkedAboutBullying);
                 parseConfirmToAck(perception, hasTalkedAboutBullying, minValue);
                 break;
-            case "ack_contactingkt_compliment":
+            case "ack_contactingkt_compliment": //add b2?
             case "inform_goal_help":
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B7", oneStep));
                 break;
@@ -359,6 +379,7 @@ public class AgentService {
             case "request_confidant_feeling": //added new
             case "request_confidant_how": //added new
             case "request_confidant_say": //added new
+            case "request_chitchat_end": //added new
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
                 break;
             case "request_goal_dream":
@@ -432,7 +453,7 @@ public class AgentService {
                     System.out.println(currentDesire.getName());
                 }
 
-                if (currentDesire != null && currentDesire.getName().equals("D4")) {
+                if (currentDesire != null && currentDesire.getName().equals("D6")) { // changed this to D6
                     perception.setAttribute("helpful");
                 } else {
                     perception.setAttribute("negative");
@@ -568,6 +589,11 @@ public class AgentService {
     public String reason(Agent agent, Perception perception) {
         String response;
         List<BeliefUpdateLogEntry> beliefUpdateLogs = new ArrayList<>();
+
+        //Send advice and perception to give advice.
+        String perceptionName = perception.getType() + "_" + perception.getSubject() + "_" + perception.getAttribute();
+        sendIntent(agent.getUserId(), agent, perceptionName);
+
 
 
         if (perception.getType().equals("trigger")) {
@@ -718,6 +744,7 @@ public class AgentService {
             case "D3" -> checkDesireConstraints(agentId, DesireName.D3);
             case "D4" -> checkDesireConstraints(agentId, DesireName.D4);
             case "D5" -> checkDesireConstraints(agentId, DesireName.D5);
+            case "D6" -> checkDesireConstraints(agentId, DesireName.D6);
             default -> false;
         };
     }

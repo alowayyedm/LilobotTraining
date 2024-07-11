@@ -12,7 +12,12 @@
 -->
 
 <template>
+
   <div class="chat-container">
+<!--    {{this.inputText}}-->
+<!--    {{this.GetlastUsermsg()}}-->
+<!--    {{this.deletedList}}-->
+<!--    {{this.chatRecord}}-->
     <div class="chat-header">
       <dynamic-text
         :header-text="`${headerText}`"
@@ -24,12 +29,13 @@
         style="padding: 0.5em 1em;"
       >
       </dynamic-text>
-      <button id="exit-session" v-if="isConversationActive && !isPastConversation" @click="leaveSession()">
+      <button hidden id="exit-session" v-if="isConversationActive && !isPastConversation" @click="leaveSession()">
         <i class="fas fa-arrow-right-from-bracket" title="Leave session" ></i>
       </button>
     </div>
     <template v-if="isConversationActive">
       <div class="chat light-scrollbar" ref="chat">
+
         <div v-for="(message, index) in chatRecord" :key="index"
             :class="{'msg from': message.fromUser, 'msg to': !message.fromUser, 'editing':index===this.editingMessage}">
 
@@ -44,6 +50,7 @@
             <button type="button" class="option-button edit" @click="this.editMessage(index)"><img src="../../images/edit-icon.svg" alt="Edit" class="icon"></button>
             <button type="button" class="option-button delete" @click="this.deleteMessage(index)"><img src="../../images/cross-icon.svg" alt="Delete" class="icon"></button>
           </div>
+
         </div>
         <div class="msg to" ref="loading" :hidden="!showLoading">
           <div id="wave">
@@ -64,9 +71,19 @@
         <div class="switch-label" v-if="autoSending">AAN</div>
         <div class="switch-label" v-else>UIT</div>
       </div>
-      <textarea class="input-box light-scrollbar rounded-bottom"
+
+<!--to show feedback after the child leaves the conversation. The feedback is hidden by default and is shown when the child leaves the conversation. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. -->
+      <div v-if="reachedPhase5">
+        The child left the conversation. Please click here to view the feedback.<br>
+        <button  id="join-button" title="Join session as Trainer" @click="enableTextarea" name="request-session">Join</button>
+
+      </div>
+
+
+      <textarea :disabled="isTextareaDisabled"
+                :class="computedTextareaClass"
                 ref="inputBox"
-                title="Typ een bericht"
+                title="Type a message"
                 v-model="inputText"
                 @keydown.enter="handleInput($event)"
                 placeholder="Type a message..."
@@ -74,12 +91,14 @@
                 minlength="1"
                 id="text-box">
       </textarea>
+
     </template>
     <div v-else class="join-session">
-      <button id="join-button" title="Join session as Trainer" @click="requestSession" name="request-session">Join</button>
-      <div>or start your own chat</div>
-      <button id="join-button" title="Join session as Trainer" @click="startPrivateSession">Start private session</button>
-      <div style="text-align: center">Warning: you can not join the session of a trainer</div>
+      <button hidden id="join-button" title="Join session as Trainer" @click="requestSession" name="request-session">Join</button>
+<br><br>
+      <div>Click to start the conversation</div>
+      <button id="join-button" title="Start chatting with a virtual child" @click="startPrivateSession">Start conversation</button>
+      <div hidden style="text-align: center">Warning: you can not join the session of a trainer</div>
     </div>
   </div>
 </template>
@@ -107,7 +126,21 @@ export default {
       showLoading: false, // Whether the most recent message is still loading
       isConversationActive: true, // Whether the chat is active (true if (learner) or (trainer and is joined/in own session))
       isPastConversation: false,  // If true, don't allow chatting. Used for chat history
-      timeoutId: null // The id of the timeout for adding message with loading icons (needed to cancel when conversation is cleared)
+      timeoutId: null, // The id of the timeout for adding message with loading icons (needed to cancel when conversation is cleared)
+      // deletedList: []
+      reachedPhase5: false,
+      isTextareaDisabled: false
+    }
+  },
+
+  computed: {
+    computedTextareaClass() {
+      return {
+        'input-box': true,
+        'light-scrollbar': true,
+        'rounded-bottom': true,
+        'disabled-textarea': this.isTextareaDisabled
+      };
     }
   },
   methods: {
@@ -284,6 +317,14 @@ export default {
         }
       });
     },
+    disableTextarea() {
+      // Function to disable the textarea
+      this.isTextareaDisabled = true;
+    },
+    enableTextarea() {
+      // Function to enable the textarea
+      this.isTextareaDisabled = false;
+    },
     /**
      * Deletes the message with the provided index from the chat
      *
@@ -299,30 +340,93 @@ export default {
       // Delete the message
       this.chatRecord.splice(msgIndex, 1);
     },
-    deleteMessageUndo: function () {
+    deleteMessageUndo: function (phase) {
       // if the last msg is a user msg: delete them until you reach the first Lilo msg and delete it, with the previous user msg (if exists)
       // if the last msg is Lilo: delete it only once and delete the user msg before it (if there is one)
+      let deletedList = [];
+      if(this.chatRecord[this.chatRecord.length-1].fromUser){ // if last msg is from user
 
-      if(this.chatRecord[this.chatRecord.length-1].fromUser){
-        while(this.chatRecord[this.chatRecord.length-1].fromUser && this.chatRecord.length > 0){
-          this.chatRecord.splice(this.chatRecord.length-1, 1); // delete delete user msg
+        while(this.chatRecord[this.chatRecord.length-1].fromUser && this.chatRecord.length > 0){ // delete delete user msgs until you reach lilo
+          deletedList.push(this.chatRecord[this.chatRecord.length-1].text);
+          this.chatRecord.splice(this.chatRecord.length-1, 1);
         }
-        if(this.chatRecord.length > 0)
+
+        if(this.chatRecord.length > 0 && !this.chatRecord[this.chatRecord.length-1].fromUser)
         this.chatRecord.splice(this.chatRecord.length-1, 1); //delete Lilo msg
-        if(this.chatRecord.length > 0)
-        this.chatRecord.splice(this.chatRecord.length-1, 1); //delete user msg before it msg
-      }
-      else {
-        this.chatRecord.splice(this.chatRecord.length-1, 1); // the last is lilo
-        if(this.chatRecord[this.chatRecord.length-1].fromUser && this.chatRecord.length > 0){
-          this.chatRecord.splice(this.chatRecord.length-1, 1); // delete the user input before lilo
+
+        if(this.chatRecord.length > 0 && this.chatRecord[this.chatRecord.length-1].fromUser) {//delete user msg before Lilo's msg
+          deletedList.push(this.chatRecord[this.chatRecord.length - 1].text);
+          this.chatRecord.splice(this.chatRecord.length - 1, 1);
         }
       }
+      else if (phase=== 2) { // when phase two and the last is Lilo , only delete the trigger (as it changes the BDI)
+        if(this.chatRecord.length > 0)
+        this.chatRecord.splice(this.chatRecord.length-1, 1); // the last is lilo
 
+        if(this.chatRecord.length > 0) {
+          if (this.chatRecord[this.chatRecord.length - 1].fromUser) {
+            deletedList.push(this.chatRecord[this.chatRecord.length - 1].text);
+            this.chatRecord.splice(this.chatRecord.length - 1, 1); // delete the user input before lilo
+          }
+        }
+      }
+      else{ // when not phase two and the last is Lilo , delete the trigger and what's before it (as it doesn't change the BDI)
+        {
+          if(this.chatRecord.length > 0)
+            this.chatRecord.splice(this.chatRecord.length-1, 1); // the last is lilo
+
+          if(this.chatRecord.length > 0 && !this.chatRecord[this.chatRecord.length-1].fromUser)
+            this.chatRecord.splice(this.chatRecord.length-1, 1); //delete Lilo msg
+
+          if(this.chatRecord.length > 0) {
+            if (this.chatRecord[this.chatRecord.length - 1].fromUser) {
+              deletedList.push(this.chatRecord[this.chatRecord.length - 1].text);
+              this.chatRecord.splice(this.chatRecord.length - 1, 1); // delete the user input before lilo
+            }
+          }
+        }
+      }
+      return deletedList;
 
       //this.chatRecord.splice(msgIndex, 1);
 
     },
+    GetlastUsermsg: function () {
+      // Reverse iterate through the array to find the last occurrence of fromUser: true
+      for (let i = this.chatRecord.length - 1; i >= 0; i--) {
+        if (this.chatRecord[i].fromUser === true) {
+          return this.chatRecord[i].text;
+        }
+      }
+      // Return null if no such record is found
+      return null;
+    },
+    CleanRecordPhase: function(lastUserText){
+      if (this.chatRecord[this.chatRecord.length - 1].text !== lastUserText) {
+        // this.chatRecord.push({
+        //   text: lastUserText,
+        //   fromUser: true,
+        //   displayOptionButtons: false
+        // });
+
+        while (this.chatRecord.length > 0) {
+        const lastChat = this.chatRecord[this.chatRecord.length - 2].text;
+        if (lastChat === lastUserText) {
+          // this.chatRecord.push({
+          //   text: "test",
+          //   fromUser: true,
+          //   displayOptionButtons: false
+          // });
+          break;
+        } else {
+          this.chatRecord.pop();
+        }
+      }
+      }
+
+
+    },
+
     changeChatMode: function () {
       this.$emit('set-trainer-messaging', !this.autoSending);
       // Confirm and remove all unhandled messages when switching modes
@@ -552,6 +656,7 @@ input:checked + .slider:before {
   right: 0;
   width: calc(100% / 3); 
   z-index: 9998;
+
 }
 .conversationId-input {
   text-align: center;
@@ -635,6 +740,12 @@ input:checked + .slider:before {
   margin-left: auto;
   margin-right: auto;
   display: block;
+}
+
+.disabled-textarea {
+  background-color: #afafaf; /* Gray background */
+  color: #3d3d3d; /* Gray text */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
 }
 
 .confirm {

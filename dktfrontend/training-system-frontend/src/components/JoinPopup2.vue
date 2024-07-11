@@ -28,7 +28,7 @@
               <u>•	Method:</u> Ask questions about the child’s story. <br>
               <br>
               <strong>Phase 3: Setting a goal for the session</strong>  <br>
-              <u>•	Objective:</u> Both parties are aware of what the child may use the conversation for.<br>
+              <u>•	Objective:</u> Collaboratively working with the child to come up with the session's goal.<br>
               <u>•	Method:</u> Clarification on the child’s wishes, story, and desired goal.<br>
               <br>
 
@@ -45,14 +45,31 @@
               You are now back to phase {{currentphase}}. <br>
             </div>
 
+            <div v-if="TabMSG"  class="phases" id="TabMSG">
+
+              <table>
+                <thead>
+                <tr>
+                  <th>The message</th>
+                  <th>Phase you wrote it in</th>
+                  <th>Phase it belongs to</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(utterance, index) in Utterances" :key="index">
+                  <td>{{ utterance.usertext }}</td>
+                  <td>{{ utterance.usedInPhase }}</td>
+                  <td>{{ utterance.correctPhase }}</td>
+                </tr>
+                </tbody>
+              </table>
+
+            </div>
+
             <div v-if="seenIncPhase" class="phases" id="undoInc">
               It's not possible to go back, you are in phase 1.<br>
             </div>
 
-
-            <div v-if="seenIncPhase" class="phases" id="undoInc">
-              It's not possible to go back, you are in phase 1.<br>
-            </div>
 
             <div v-if="showMSG" class="phases" id="MsgGeneral">
               {{ this.MSG }}<br>
@@ -96,6 +113,7 @@
        currentphase: 0,
        seenUndoPhase: false,
        seenIncPhase: false,
+       TabMSG: false,
        headerText:"",
        MSG:""
      };
@@ -112,6 +130,7 @@
        this.seenPhase=false;
        this.seenUndoPhase=false;
         this.seenIncPhase=false;
+        this.TabMSG=false;
         this.showMSG=false;
        this.username = "";
      },
@@ -122,6 +141,16 @@
         this.MSG = msg;
        this.showMSG = true;
        this.showJoinPopup = true;
+     },
+     IncMSG(msg) {
+       this.Utterances = msg;
+       if (this.Utterances.length === 0)
+         this.openPopupwMsg("No messages belong to other phases. Keep it up!."); //update this message
+         else
+       {
+         this.TabMSG = true;
+         this.showJoinPopup = true;
+       }
      },
      editDiv() {
        this.dataPop = "";
@@ -337,5 +366,9 @@
  #close:active {
    background-color: var(--popup-close-button-active);
    outline-offset: 3px;
+ }
+
+ table, th, td {
+   border:1px solid black;
  }
  </style>

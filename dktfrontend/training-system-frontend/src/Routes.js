@@ -33,7 +33,7 @@ const routes = [
         name: 'TrainingPortal',
         component: TrainingPortal,
         meta: {
-            title: "LILOBOT TRAINER VIEW"
+            title: "TRAINING PORTAL"
         }
     },
     {

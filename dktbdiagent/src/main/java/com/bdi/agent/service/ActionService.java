@@ -37,7 +37,24 @@ public class ActionService {
                 return action;
             }
         }
-        return null;
+
+        // All actions are now completed.
+        actions.forEach(c -> {
+            c.setCompleted(false);
+            actionRepository.save(c);
+        });
+
+        return actions.get(0);
+
+//
+//        List<Action> actions = getActionsByDesireId(desireId);
+//        for (Action action : actions) {
+//            if (!action.getCompleted()) {
+//                return action;
+//            }
+//        }
+//        return null;
+
     }
 
     /**
@@ -71,7 +88,7 @@ public class ActionService {
             addAction(new Action(desire, "inform", "A4","chitchat", "goodbye", false));
         }
 
-        if (desire.getName().equals("D3")) {
+        if (desire.getName().equals("D3")) { //maybe ask it to do it twice only
             addAction(new Action(desire, "request", "A5","goal", "howkt", false));
         }
 
