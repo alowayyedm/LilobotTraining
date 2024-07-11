@@ -170,7 +170,7 @@ The `registerStompEndpoints` method needs to be changed to:
 @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/session")
-                .setAllowedOrigins("http://lilobottest.ewi.tudelft.nl);
+                .setAllowedOrigins("[your URL]");
     }
 ```
 
