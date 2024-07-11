@@ -244,7 +244,7 @@ Grundmann, S. (2022). A BDI-based virtual agent for training child helpline coun
 
 
 # Resources
-The first version of Lilobot was developed as part of a master thesis by Sharon Grundman
+The first version of Lilobot was developed as part of a master thesis by Sharon Grundmann
 - Thesis report: http://resolver.tudelft.nl/uuid:f04f8f0b-9ab9-4f1c-a19c-43b164d45cce
 
 - Experiment data (4TU.ResearchData): https://doi.org/10.4121/17371919
