@@ -1,0 +1,9 @@
+/.idea/
+/dktbdiagent/.idea/
+/dktbdiagent/target/
+/dktrasa/actions/__pycache__/
+/dktrasa/.idea/
+
+*.iws
+*.iml
+*.ipr

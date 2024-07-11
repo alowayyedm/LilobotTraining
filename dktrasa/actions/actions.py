@@ -6,7 +6,11 @@
 
 BDIAGENT_ENDPOINT = "http://localhost:8080/agent/"
 REPORT_ENDPOINT = "http://localhost:8080/report/"
+<<<<<<< HEAD
 LOCALMODE = False   # change to false if using Azure Blob Storage
+=======
+LOCALMODE = True   # change to false if using Azure Blob Storage
+>>>>>>> origin/updatedLilo
 
 # Azure configuration
 # BDIAGENT_ENDPOINT = "http://dktspringapp.azurewebsites.net/agent/"
@@ -108,9 +112,14 @@ class ActionReactToReminder(Action):
 
         response = requests.post(url = BDIAGENT_ENDPOINT+conversation_id, data = json.dumps(payload), headers = headers)
 
+<<<<<<< HEAD
     
         dispatcher.utter_message(text=response.text)
 
+=======
+        dispatcher.utter_message(text=response.text)
+        
+>>>>>>> origin/updatedLilo
         return []
 
 

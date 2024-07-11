@@ -8,6 +8,11 @@ import com.bdi.agent.model.Knowledge;
 import com.bdi.agent.repository.KnowledgeRepository;
 import com.opencsv.exceptions.CsvException;
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD
+=======
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+>>>>>>> origin/updatedLilo
 import org.springframework.stereotype.Service;
 import com.opencsv.CSVReader;
 
@@ -17,10 +22,20 @@ import java.io.IOException;
 import java.util.*;
 
 @Service
+<<<<<<< HEAD
 public class KnowledgeService {
 
     private final KnowledgeRepository knowledgeRepository;
     private final String knowledgeFile = "files/knowledge.csv";
+=======
+@PropertySource("classpath:config.properties")
+public class KnowledgeService {
+
+    private final KnowledgeRepository knowledgeRepository;
+
+    @Value("${knowledge.file}")
+    private String knowledgeFile;
+>>>>>>> origin/updatedLilo
 
 
     @Autowired

@@ -1,9 +1,29 @@
 package com.bdi.agent.model;
 
+<<<<<<< HEAD
 import javax.persistence.*;
 
 @Entity
 @Table
+=======
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Entity
+@Table
+@Getter
+@Setter
+>>>>>>> origin/updatedLilo
 public class Action {
 
     @Id
@@ -32,6 +52,7 @@ public class Action {
         this.attribute = attribute;
         this.completed = isCompleted;
     }
+<<<<<<< HEAD
 
     public Long getId() {
         return id;
@@ -64,4 +85,6 @@ public class Action {
     public void setIsCompleted(Boolean isCompleted) {
         this.completed = isCompleted;
     }
+=======
+>>>>>>> origin/updatedLilo
 }

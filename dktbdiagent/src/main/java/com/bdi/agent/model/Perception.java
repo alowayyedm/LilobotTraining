@@ -1,7 +1,15 @@
 package com.bdi.agent.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+<<<<<<< HEAD
 
+=======
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+>>>>>>> origin/updatedLilo
 public class Perception {
 
     private String type;
@@ -9,10 +17,13 @@ public class Perception {
     private String attribute;
     private String text;
 
+<<<<<<< HEAD
     public Perception() {
 
     }
 
+=======
+>>>>>>> origin/updatedLilo
     public Perception(@JsonProperty("type") String type, @JsonProperty("subject") String subject, @JsonProperty("attribute") String attribute,  @JsonProperty("text") String text) {
         this.type = type;
         this.subject = subject;
@@ -20,6 +31,7 @@ public class Perception {
         this.text = text;
     }
 
+<<<<<<< HEAD
     public String getType() {
         return type;
     }
@@ -48,4 +60,6 @@ public class Perception {
         return text;
     }
 
+=======
+>>>>>>> origin/updatedLilo
 }

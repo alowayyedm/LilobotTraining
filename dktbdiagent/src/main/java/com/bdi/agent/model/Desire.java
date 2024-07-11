@@ -1,10 +1,19 @@
 package com.bdi.agent.model;
 
+<<<<<<< HEAD
+=======
+import lombok.AllArgsConstructor;
+
+>>>>>>> origin/updatedLilo
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Table
+<<<<<<< HEAD
+=======
+@AllArgsConstructor
+>>>>>>> origin/updatedLilo
 public class Desire {
 
     @Id
@@ -18,7 +27,11 @@ public class Desire {
     private String fullName;
     private Boolean isActive;
 
+<<<<<<< HEAD
     @OneToMany(mappedBy="desire")
+=======
+    @OneToMany(mappedBy = "desire", cascade = CascadeType.ALL)
+>>>>>>> origin/updatedLilo
     private Set<Action> actions;
 
     public Desire() {

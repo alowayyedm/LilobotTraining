@@ -1,0 +1,828 @@
+:root[data-contrast='high'] {
+    --white: #FFFFFF;
+    --light-green: #30aa81; 
+    --lighter-green: #0b8c6c; 
+    --green: #007c5d; 
+    --darker-green: #00674d; 
+    --light-grey: #F4F7F9; 
+    --dark-grey: #586775;
+    --black: #000000;
+    --lightest-purple: #b079e3; 
+    --light-purple: #a26cd5; 
+    --medium-light-purple: #925fc3; 
+    --purple: #8253ad;
+    --dark-purple: #673e8d; 
+    --orange: #FFC570; 
+    --blue: #006fb9; 
+    --red: #ba2b2b; 
+    --lighter-red: #cd3131;
+    --light-red: #d73939;
+    --darker-red: #a01c1c;
+
+    /* Scrollbar colors */
+    --light-scrollbar-background: #000000;
+    --light-scrollbar-bar: #ffffff;
+    --light-scrollbar-hover: #ffffff;
+    --light-scrollbar-click: #b8c6d4;
+
+    --dark-scrollbar-background: #ffffff;
+    --dark-scrollbar-bar: #000000;
+    --dark-scrollbar-hover: #000000;
+    --dark-scrollbar-click: #3b4045;
+
+    --light-scrollbar-corner: #000000;
+    --dark-scrollbar-corner: #ffffff;
+
+    /* For username, password and email validation */
+    --field-bg-color: #F4F7F9;
+    --field-border-color: #000000;
+    --field-border-style: solid;
+    --field-border-width: 2px;
+
+    --field-bg-color-error: #ffffff;
+    --field-border-color-error: #B01411;
+    --field-border-style-error: solid;
+    --field-border-width-error: 4px;
+
+
+    --error-msg-color: #ffffff;
+    --error-div-color: #B01411;
+
+    /* For role change in signup page */
+    --role-checkbox-checked: #000000;
+    --role-checkbox-unchecked: #ffffff;
+
+    /* Main menu */
+    --menu-tab-text: #FFFFFF;   
+    --menu-tab-icon-background: #FFFFFF;   
+    --menu-tab-icon: #000000;   
+
+    /* Titles and headers */
+    --main-header: #FFFFFF;
+    --main-subtitle: #FFFFFF;
+
+    --main-text: #FFFFFF;
+    --main-text-secondary: #FFFFFF;
+    --main-background: #1d1f25;
+
+    /* Dropdown submenu for user profile */
+    --background-dropdown: #f9f9f9;
+    --submenu-hover: #000000;
+    --submenu-text: #000000;
+    --submenu-hover-text: #f9f9f9;
+
+    /* Belief Transitions*/
+    --success-icon: #12e4b0;
+    --warning-icon: #FFBC57;
+
+    /* Graphs (optimal path and phase transitions) */
+    --graph-loading: #FFFFFF;
+
+    --active-node: #FFBC57;
+    --inactive-node: #FFFFFF;
+    --node-text: #000000;
+    --edge-line: #50576D;
+
+    --edge-label: #00DBA3;
+    --edge-label-text: #000000;
+
+    /* Toast messages */
+    --toast-icon: #000000;
+    --toast-text: #000000;
+    --info-toast-background: #00C4E1;
+    --success-toast-background: #00DBA3;
+    --warning-toast-background: #FFBC57;
+    --error-toast-background: #FF6B6B;
+
+    /* Basic lists (belief inputs and transitions) */
+    --list-background: #000000;
+    /*#3e4352;*/
+    --list-text: #FFFFFF;
+    
+    --list-input-border: #000000;
+    --list-input-disabled: #1d1f25;
+    /*#a5261f;*/
+    --list-input-disabled-border: #000000;
+    --list-input-disabled-text: #FFFFFF;
+
+    /* Hoverable lists (chat history) */
+    --hoverable-list-background: #000000;
+    --hoverable-list-entry-focus: #1d1f25;
+    --hoverable-list-entry-active: #FFFFFF;
+    --hoverable-list-entry-icon: #ddd;
+    --hoverable-list-entry-icon-focus: #FFFFFF;
+    --hoverable-list-text: #FFFFFF;
+    --hoverable-list-entry-active-text: #000000;
+
+    /* Input fields */
+    --input-field-background: #F4F7F9;
+    --input-field-text: #1d1f25;
+
+    /* Basic button on main background */
+    --basic-button: #00DBA3;
+    --basic-button-focus: #12e4b0;
+    --basic-button-active: #33eec0;
+    --basic-button-text: #000000;
+
+    /* Advanced report */
+    --advanced-report-button: #00b8d4;
+    --advanced-report-button-focus: #00C4E1;
+    --advanced-report-button-active: #06ceed;
+    --advanced-report-button-text: #000000;
+    
+    /* Login/Signup*/
+    --popup-header-icon-background: #FFFFFF;
+    --popup-header-icon-text: #000000;
+    --popup-header-text: #000000;
+
+    /* Popups */
+    --advanced-report-popup-header: #00C4E1;
+    --basic-popup-header: #00DBA3;
+    
+    --popup-body: #FFFFFF;
+    --popup-footer: #F4F7F9;
+    --popup-text: #000000;
+    --popup-footer-text: #1d1f25;
+    --popup-footer-link: #006fb9;
+
+    --popup-button-text: #000000;
+    --popup-button-green: #00DBA3;
+    --popup-button-green-focus: #12e4b0;
+    --popup-button-green-active: #33eec0;
+    --popup-button-red: #FF6B6B;
+    --popup-button-red-focus: #ff8686;
+
+    --popup-close-button-focus: #FF6B6B;
+    --popup-close-button-active: #ff8686;
+
+    /* Notifications */
+    --notification-box: #FFFFFF;
+    --notification-text: #000000;
+    --notification-separator: #000000;
+
+    --new-notification-mark: #FF5D64;
+    --new-notification-text: #000000; 
+
+    /* Chat widget */
+    --chat-widget-header: #00DBA3;
+    --chat-widget-header-text: #000000;
+    --chat-widget-header-button: #00DBA3;
+    --chat-widget-header-button-focus: #12e4b0;
+    --chat-widget-header-button-active: #33eec0;
+    --chat-widget-body: #FFFFFF;
+
+    --chat-widget-button: #00DBA3;
+    --chat-widget-button-focus: #12e4b0;
+    --chat-widget-button-active: #33eec0;
+    --chat-widget-button-text: #000000;
+
+    --chat-widget-slider-active: #000000;
+    --chat-widget-slider-inactive: #ffffff;
+    --chat-widget-slider-circle-active: #FFFFFF;
+    --chat-widget-slider-circle-inactive: #000000;
+    --chat-widget-slider-shadow: #2196F3;
+
+    --chat-widget-message-from: #1d1f25;
+    --chat-widget-message-from-text: #FFFFFF;
+    --chat-widget-message-to: #FFFFFF;
+    --chat-widget-message-to-text: #1d1f25;
+
+    --chat-widget-message-edit-button: #FFBC57;
+    --chat-widget-message-edit-background: #FFBC57;
+    --chat-widget-message-confirm-button: #00DBA3;
+    --chat-widget-message-delete-button: #FF6B6B;
+
+    /* User settings */
+    --user-settings-container: #000000;
+    --user-settings-tab: #000000;
+    --user-settings-tab-focus: #000000;
+    --user-settings-header-text: #FFFFFF;
+    --user-settings-delete-button: #FF6B6B;
+    --user-settings-role-button: #FFBC57;
+    --user-settings-text: #ffffff;
+
+    --user-settings-list-entry-hover: #000000;
+    --user-settings-add-hover: #ffffff;
+    --user-settings-remove-hover: #FF6B6B;
+    --user-settings-remove-hover-text: #000000;
+    --user-settings-button-focus-brightness: inherit;
+
+    --chat-widget-message-to-border-width: 2px;
+
+    --hoverable-list-entry-border-color: #000000;
+    --hoverable-list-entry-focus-border-color: #FFFFFF;
+    --hoverable-list-entry-border-width: 2px;
+    --hoverable-list-entry-icon-focus-size: 1.3;
+    --chat-widget-header-border-width: 3px;
+
+    --button-outline-color: #FFFFFF;
+    --button-outline-dark: #000000;
+    --button-outline-width: 3px;
+
+    --field-outline-width: 2px;
+    --field-outline-dark: #000000;
+
+    --basic-border-color: #FFFFFF;
+    --basic-border-dark: #000000;
+    --basic-border-width: 2px;
+
+    --padding-removal-exit-button: 0.63em;
+    --menu-tab-hover-decoration: underline;
+
+    --chat-widget-slider-circle-offset: 0.15rem;
+
+    --contrast-mode-slider-active: #ffffff;
+    --contrast-mode-slider-inactive: #000000;
+    --contrast-mode-slider-circle-active: #000000;
+    --contrast-mode-slider-circle-inactive: #ffffff;
+    --contrast-mode-slider-shadow: #2196F3;
+
+}
+
+:root {
+    --white: #FFFFFF;
+    --light-green: #10f8be;
+    --lighter-green: #09eab2;
+    --green: #00DBA3;
+    --darker-green: #50BC98;
+    --light-grey: #F4F7F9;
+    --grey: #B2BCC6;
+    --dark-grey: #708090;
+    --black: #000000;
+    --lightest-purple: #D0ADF1;
+    --light-purple: #CCA0F6;
+    --medium-light-purple: #c093ea;
+    --purple: #b88be2;
+    --dark-purple: #AB81D2;
+    --orange: #FFC570;
+    --blue: #00b8d4;
+    --lighter-blue: #00C4E1;
+    --light-blue: #06ceed;
+    --red: #cd5c5c;
+    --vibrant-red: #e74c3c;
+    --lighter-red: #e06969;
+    --light-red: #ee7171;
+    --darker-red: #c43232;
+
+    /* Scrollbar colors */
+    --light-scrollbar-background: #F4F7F9;
+    --light-scrollbar-bar: #D9DCDE;
+    --light-scrollbar-hover: #c4bfbf;
+    --light-scrollbar-click: #9a9696;
+
+    --dark-scrollbar-background: #AB81D2;
+    --dark-scrollbar-bar: #CCA0F6;
+    --dark-scrollbar-hover: #D0ADF1;
+    --dark-scrollbar-click: #e2c4f6;
+
+    --light-scrollbar-corner: #D0ADF1;
+    --dark-scrollbar-corner: #b88be2;
+
+    /* For username, password and email validation */
+    --field-bg-color: #F4F7F9;
+    --field-border-color: none;
+    --field-border-style: none;
+    --field-border-width: none;
+
+    --field-bg-color-error: #FFCCCB;
+    --field-border-color-error: #cd5c5c;
+    --field-border-style-error: solid;
+    --field-border-width-error: medium;
+
+
+    --error-msg-color: #cd5c5c;
+    --error-div-color: #FFCCCB;
+
+    /* For role change in signup page */
+    --role-checkbox-checked: #10f8be;
+    --role-checkbox-unchecked: #ffffff;
+
+    /* Main menu */
+    --menu-tab-text: #000000;   
+    --menu-tab-icon-background: #000000;   
+    --menu-tab-icon: #FFFFFF;   
+
+    /* Titles and headers */
+    --main-header: #FFFFFF;
+    --main-subtitle: #FFFFFF;
+
+    --main-text: #FFFFFF;
+    --main-text-secondary: #000000;
+    --main-background: #b88be2;
+
+    /* Dropdown submenu for user profile */
+    --background-dropdown: #f9f9f9;
+    --submenu-hover: #ddd;
+    --submenu-text: #000000;
+    --submenu-hover-text: #000000;
+
+    /* Belief Transitions*/
+    --success-icon: #50BC98;
+    --warning-icon: #FFC570;
+
+    /* Graphs (optimal path and phase transitions) */
+    --graph-loading: #FFFFFF;
+
+    --active-node: #FFC570;
+    --inactive-node: #FFFFFF;
+    --node-text: #000000;
+    --edge-line: #000000;
+
+    --edge-label: #00DBA3;
+    --edge-label-text: #FFFFFF;
+
+    /* Toast messages */
+    --toast-icon: #FFFFFF;
+    --toast-text: #FFFFFF;
+    --info-toast-background: #00C4E1;
+    --success-toast-background: #00DBA3;
+    --warning-toast-background: #FFC570;
+    --error-toast-background: #cd5c5c;
+
+    /* Basic lists (belief inputs and transitions) */
+    --list-background: #CCA0F6;
+    --list-text: #000000;
+    
+    --list-input-border: #8652b7;
+    --list-input-disabled: #ecd8ff;
+    --list-input-disabled-border: #ecd8ff;
+    --list-input-disabled-text: #53465e;
+
+    /* Hoverable lists (chat history) */
+    --hoverable-list-background: #c093ea;
+    --hoverable-list-entry-focus: #C79AF1;
+    --hoverable-list-entry-active: #CCA0F6;
+    --hoverable-list-entry-icon: #f3e5ff;
+    --hoverable-list-entry-icon-focus: #FFFFFF;
+    --hoverable-list-text: #FFFFFF;
+    --hoverable-list-entry-active-text: #FFFFFF;
+
+    /* Input fields */
+    --input-field-background: #F4F7F9;
+    --input-field-text: #586775;
+
+    /* Basic button on main background */
+    --basic-button: #00DBA3;
+    --basic-button-focus: #00ca98;
+    --basic-button-active: #00ba8c;
+    --basic-button-text: #FFFFFF;
+
+    /* Advanced report */
+    --advanced-report-button: #00b8d4;
+    --advanced-report-button-focus: #00abc5;
+    --advanced-report-button-active: #009db5;
+    --advanced-report-button-text: #FFFFFF;
+    
+    /* Login/Signup*/
+    --popup-header-icon-background: #FFFFFF;
+    --popup-header-icon-text: #000000;
+    --popup-header-text: #000000;
+
+    /* Popups */
+    --advanced-report-popup-header: #00C4E1;
+    --basic-popup-header: #00DBA3;
+    
+    --popup-body: #FFFFFF;
+    --popup-footer: #F4F7F9;
+    --popup-text: #000000;
+    --popup-footer-text: #708090;
+    --popup-footer-link: #00b8d4;
+
+    --popup-button-text: #FFFFFF;
+    --popup-button-green: #00DBA3;
+    --popup-button-green-focus: #00ca98;
+    --popup-button-green-active: #00ba8c;
+    --popup-button-red: #cd5c5c;
+    --popup-button-red-focus: #b84848;
+
+    --popup-close-button-focus: #c83f3f;
+    --popup-close-button-active: #dc4848;
+
+    /* Notifications */
+    --notification-box: #FFFFFF;
+    --notification-text: #000000;
+    --notification-separator: #000000;
+
+    --new-notification-mark: #FF0000;
+    --new-notification-text: #FFFFFF; 
+
+    /* Chat widget */
+    --chat-widget-header: #00DBA3;
+    --chat-widget-header-text: #FFFFFF;
+    --chat-widget-header-button-focus: #00ca98;
+    --chat-widget-header-button-active: #00ba8c;
+    --chat-widget-body: #FFFFFF;
+
+    --chat-widget-button: #00DBA3;
+    --chat-widget-button-focus: #00ca98;
+    --chat-widget-button-active: #00ba8c;
+    --chat-widget-button-text: #FFFFFF;
+
+    --chat-widget-slider-active: #00DBA3;
+    --chat-widget-slider-inactive: #CCCCCC;
+    --chat-widget-slider-circle-active: #FFFFFF;
+    --chat-widget-slider-circle-inactive: #FFFFFF;
+    --chat-widget-slider-shadow: #2196F3;
+
+    --chat-widget-message-from: #708090;
+    --chat-widget-message-from-text: #FFFFFF;
+    --chat-widget-message-to: #F4F7F9;
+    --chat-widget-message-to-text: #708090;
+
+    --chat-widget-message-edit-button: #FFC570;
+    --chat-widget-message-edit-background: #FFC570;
+    --chat-widget-message-confirm-button: #50BC98;
+    --chat-widget-message-delete-button: #cd5c5c;
+
+    /* User settings */
+    --user-settings-container: #FFFFFF;
+    --user-settings-tab: #F4F7F9;
+    --user-settings-tab-focus: #708090;
+    --user-settings-header-text: #000000;
+    --user-settings-delete-button: #da4941;
+    --user-settings-role-button: #FFC570;
+    --user-settings-text: #000000;
+
+    --user-settings-list-entry-hover: #B2BCC6;
+    --user-settings-add-hover: #708090;
+    --user-settings-remove-hover: #e74c3c;
+    --user-settings-remove-hover-text: #000000;
+    --user-settings-button-focus-brightness: 0.75;
+
+    --chat-widget-message-to-border-width: 0;
+    --hoverable-list-entry-focus-border-color: none;
+    --hoverable-list-entry-border-width: 0;
+    --hoverable-list-entry-border-color: none;
+    --hoverable-list-entry-icon-focus-size: 1;
+    --chat-widget-header-border-width: 0;
+
+    --button-outline-color: none;
+    --button-outline-dark: none;
+    --button-outline-width: 0;
+
+    --field-outline-width: 0;
+    --field-outline-dark: none;
+
+    --basic-border-color: none;
+    --basic-border-dark: none;
+    --basic-border-width: 0;
+
+    --padding-removal-exit-button: 0.58em;
+    --menu-tab-hover-decoration: none;
+
+    --chat-widget-slider-circle-offset: 0.25rem;
+
+    --contrast-mode-slider-active: #00DBA3;
+    --contrast-mode-slider-inactive: #CCCCCC;
+    --contrast-mode-slider-circle-active: #FFFFFF;
+    --contrast-mode-slider-circle-inactive: #FFFFFF;
+    --contrast-mode-slider-shadow: #2196F3;
+
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.light-scrollbar {
+    scrollbar-color: var(--light-scrollbar-bar) var(--light-scrollbar-background);
+    scrollbar-width: thin;
+}
+
+.dark-scrollbar {
+    scrollbar-color: var(--dark-scrollbar-bar) var(--dark-scrollbar-background);
+    scrollbar-width: thin;
+}
+
+.light-scrollbar::-webkit-scrollbar-corner {
+    background-color: var(--light-scrollbar-corner);
+}
+
+.dark-scrollbar::-webkit-scrollbar-corner {
+    background-color: var(--dark-scrollbar-corner);
+}
+
+.dark-scrollbar::-webkit-scrollbar {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 0.5rem;
+    background: var(--dark-scrollbar-background);
+
+    /* border only for accessibility mode */
+    border: solid;
+    border-width: var(--button-outline-width);
+    border-color: var(--basic-border-color);
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb {
+    width: 5.5rem;
+
+    border-radius: 0.5rem;
+    background: var(--dark-scrollbar-bar);
+        
+    /* border only for accessibility mode */
+    border: solid;
+    border-width: var(--basic-border-width);
+    border-color: var(--basic-border-color);
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb:hover,
+.dark-scrollbar::-webkit-scrollbar-thumb:focus {
+    background: var(--dark-scrollbar-hover);
+
+    outline: var(--button-outline-width) solid var(--button-outline-color);
+}
+
+.dark-scrollbar::-webkit-scrollbar-thumb:active {
+    background: var(--dark-scrollbar-click);
+
+    /* border only for accessibility mode */
+    border-color: var(--basic-border-color);
+    outline: var(--button-outline-width) solid var(--button-outline-color);
+}
+
+.light-scrollbar::-webkit-scrollbar {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 0.5rem;
+    background: var(--light-scrollbar-background);
+
+    /* border only for accessibility mode */
+    border: solid;
+    border-width: var(--button-outline-width);
+    border-color: var(--basic-border-color);
+}
+
+.light-scrollbar::-webkit-scrollbar-thumb {
+    width: 1.5rem;
+
+    border-radius: 0.5rem;
+    background: var(--light-scrollbar-bar);
+
+    /* border only for accessibility mode */
+    border: solid;
+    border-width: var(--basic-border-width);
+    border-color: var(--basic-border-dark);
+}
+
+.light-scrollbar::-webkit-scrollbar-thumb:hover,
+.light-scrollbar::-webkit-scrollbar-thumb:focus {
+    background: var(--light-scrollbar-hover);
+
+    outline: var(--button-outline-width) solid var(--button-outline-dark);
+}
+
+.light-scrollbar::-webkit-scrollbar-thumb:active {
+    background: var(--light-scrollbar-click);
+    
+    /* border only for accessibility mode */
+    border-color: var(--basic-border-dark);
+    outline: var(--button-outline-width) solid var(--button-outline-dark);
+}
+
+h2 {
+    font-size: 1.3rem;
+    font-weight: normal;
+    line-height: 1.3rem;
+    margin: 0;
+    font-family: 'Anton', sans-serif;
+    color: var(--main-header);
+}
+
+.dynamic-h2 {
+    font-size: 1.3rem;
+    font-weight: normal;
+    line-height: 1.3rem;
+    height: 1.3rem;
+    margin: 0;
+    font-family: 'Anton', sans-serif;
+    color: var(--main-header);
+}
+
+h3 {
+    color: var(--main-header);
+    font-family: 'Anton', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.05rem;
+}
+
+h4 {
+    color: var(--main-header);
+    font-family: 'Anton', sans-serif;
+    font-weight: normal;
+    font-size: 1.1rem;
+    letter-spacing: 0.05rem;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--main-background);
+}
+
+.instruction h3 {
+    margin: 0;
+    color: var(--main-subtitle);
+    font-family: 'Anton', sans-serif;
+    font-size: 25px;
+}
+
+.instruction p, li {
+    color: var(--main-text);
+}
+
+.instruction-grid-container {
+    display: grid;
+    grid-template-areas:
+          'header header'
+          'left right';
+    grid-template-columns: 1fr 1fr;
+}
+
+.header {
+    grid-area: header;
+    padding: 2px;
+    text-align: center;
+}
+
+.header a {
+    float: left;
+    color: var(--main-header);
+    text-shadow: var(--black);
+    text-align: center;
+    padding: 15px;
+    font-size: 20px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+
+.header h1 {
+    color: var(--main-header);
+    text-shadow: var(--black);
+    text-align: center;
+    margin: 0 1rem;
+    font-size: 40px;
+    border-radius: 4px;
+    font-family: 'Anton', sans-serif;
+}
+
+.header h3 {
+    margin: 0;
+    color: var(--main-header);
+    font-family: 'Anton', sans-serif;
+    text-align: center;
+    font-size: 25px;
+}
+
+.header-right {
+    float: right;
+}
+
+/* --- TITLE & SUBTITLE, NON-BOLD, 
+    EXTRA SMALL LINE SPACING --- */
+.title {
+    font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    line-height: 45px;
+    font-family: 'Anton', sans-serif;
+}
+
+.auth-title {
+    font-size: 40px;
+    font-weight: normal;
+    margin-bottom: 0px;
+    line-height: 45px;
+    font-family: 'Anton', sans-serif;
+    padding: 60px;
+}
+
+.subtitle {
+    font-size: 24px;
+    font-weight: normal;
+    margin-top: 0px;
+    line-height: 28px;
+    font-family: 'Anton', sans-serif;
+}
+
+@media screen and (max-width: 500px) {
+    .header a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+
+    .header-right {
+        float: none;
+    }
+}
+
+.left,
+.right {
+    padding: 10px;
+}
+
+.left {
+    grid-area: left;
+}
+
+.right {
+    grid-area: right;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.instruction {
+    margin: 35px;
+
+}
+
+button:hover,
+button:focus {
+  outline: var(--button-outline-width) solid var(--button-outline-color);
+  outline-offset: 4px;
+}
+
+button:active {
+  outline-offset: 3px;
+}
+
+.button-with-icon-and-text {
+    border-radius: 15px;
+    height: 40px;
+    padding: 0px 40px;
+    background-color: var(--basic-button);
+    border: none;
+    color: var(--basic-button-text);
+    font-size: large;
+    font-family: 'Anton', sans-serif;
+    box-shadow: 0 4px 8px 0 rgba(0, 0.5, 0, 0.3), 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.button-with-icon-and-text:hover,
+.button-with-icon-and-text:focus {
+    background-color: var(--basic-button-focus);
+    cursor: pointer;
+  }
+  
+.button-with-icon-and-text:active {
+    background-color: var(--basic-button-active);
+  }
+
+@media (max-width: 600px) {
+    .grid-container  {
+        grid-template-areas:
+            'header header header header header header'
+            'left left left left left left'
+            'middle middle middle middle middle middle'
+            'right right right right right right'
+            'footer footer footer footer footer footer';
+    }
+}
+
+.rw-conversation-container .rw-header {
+    background-color: var(--chat-widget-header);
+}
+.rw-conversation-container .rw-messages-container .rw-message .rw-client {
+    background-color: var(--chat-widget-message-from);
+}
+.rw-conversation-container .rw-sender .rw-send {
+    color: var(--dark-grey);
+}
+.rw-launcher {
+    background-color: var(--green);
+}
+.rw-conversation-container .rw-replies {
+    display:block;
+}
+
+.general-icon {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--basic-button);
+    border: none;
+    color: var(--basic-button-text);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.general-icon:hover,
+.general-icon:focus {
+    background-color: var(--basic-button-focus);
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0.5, 0, 0.3), 0 4px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+.general-icon:active {
+    background-color: var(--basic-button-active);
+    transform: scale(1.0);
+}
+
+.info-box {
+    color: var(--main-text);
+}
+

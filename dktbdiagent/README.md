@@ -3,10 +3,40 @@
 ## Files
 This folder contains the initial configurations for the agent's beliefs and desires as well as the agent's knowledge. The files are .csv files. You can modify them
 as you wish. 
+<<<<<<< HEAD
 - Belief schema: belief-id,belief-name,phase,belief-value
 - Desire schema: desire-id,desire-name,desire-status
 - Knowledge schema: subject,attribute,value-1, value-2,value-3,value-4
 
+=======
+- Belief schema: belief-id,belief-name,phase,belief-value,is-modifiable,reason
+- Desire schema: desire-id,desire-name,desire-status
+- Knowledge schema: subject,attribute,value-1, value-2,value-3,value-4
+
+The belief schema's last two fields are optional. When a belief is set to be not modifiable, it means the trainer should
+not be able to modify them in the Training Portal on the frontend. All code is backward compatible with the old belief 
+format that didn't include the last two fields. The following table shows examples of belief records in the belief schema
+and their corresponding boolean value for isModifiable:
+
+| Belief as seen in .csv file                                                    | evaluates to | note                                                            |
+|--------------------------------------------------------------------------------|--------------|-----------------------------------------------------------------|
+| B1,Ik denk dat KT mij begrijpt,alle fasen,0                                    | true         | Old format, still works                                         |
+| B2,Ik denk dat KT mij begrijpt,alle fasen,0,                                   | true         | Empty becomes true                                              |
+| B3,Ik denk dat KT mij begrijpt,alle fasen,0,true                               | true         | New format, used correctly                                      |
+| B4,Ik denk dat KT mij begrijpt,alle fasen,0,,                                  | true         | Empty becomes true                                              |
+| B5,Ik denk dat KT mij begrijpt,alle fasen,0,true,                              | true         | Empty reason is never used                                      |
+| B6,Ik denk dat KT mij begrijpt,alle fasen,0,true,Depends on nothing            | true         | Nonempty reason is never used                                   |
+| B7,Ik denk dat KT mij begrijpt,alle fasen,0,false                              | false        | No reason will display 'reason unknown'                         |
+| B8,Ik denk dat KT mij begrijpt,alle fasen,0,false,                             | false        | Empty reason will display empty reason                          |
+| B9,Ik denk dat KT mij begrijpt,alle fasen,0,false,,                            | false        | Empty reason will display empty reason                          |
+| B10,Ik denk dat KT mij begrijpt,alle fasen,0,falsee                            | true         | All except 'f' or 'false', case insensitive, becomes true       |
+| B11,Ik denk dat KT mij begrijpt,alle fasen,0,false,Depends on B4, B5, B6, B7   | false        | Reason becomes "Depends on B4" due to commas without quotations |
+| B12,Ik denk dat KT mij begrijpt,alle fasen,0,false,Depends on B4 and B5        | false        | Reason works fine without quotations when no commas are used    |
+| B13,Ik denk dat KT mij begrijpt,alle fasen,0,false,"Depends on B4, B5, B6, B7" | false        | New format, used correctly                                      |
+| B14,Ik denk dat KT mij begrijpt,alle fasen,0,f,"Depends on B4, B5, B6, B7"     | false        | 'f' or 'F' becomes false                                        |
+| B15,Ik denk dat KT mij begrijpt,alle fasen,0,fAlsE,"Depends on B4, B5, B6, B7" | false        | Case insensitive                                                |
+
+>>>>>>> origin/updatedLilo
 With knowledge, the agent chooses one of the 4 values at random as it's response.
 
 
