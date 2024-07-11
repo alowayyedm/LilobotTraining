@@ -3,12 +3,6 @@
 ## Files
 This folder contains the initial configurations for the agent's beliefs and desires as well as the agent's knowledge. The files are .csv files. You can modify them
 as you wish. 
-<<<<<<< HEAD
-- Belief schema: belief-id,belief-name,phase,belief-value
-- Desire schema: desire-id,desire-name,desire-status
-- Knowledge schema: subject,attribute,value-1, value-2,value-3,value-4
-
-=======
 - Belief schema: belief-id,belief-name,phase,belief-value,is-modifiable,reason
 - Desire schema: desire-id,desire-name,desire-status
 - Knowledge schema: subject,attribute,value-1, value-2,value-3,value-4
@@ -36,7 +30,6 @@ and their corresponding boolean value for isModifiable:
 | B14,Ik denk dat KT mij begrijpt,alle fasen,0,f,"Depends on B4, B5, B6, B7"     | false        | 'f' or 'F' becomes false                                        |
 | B15,Ik denk dat KT mij begrijpt,alle fasen,0,fAlsE,"Depends on B4, B5, B6, B7" | false        | Case insensitive                                                |
 
->>>>>>> origin/updatedLilo
 With knowledge, the agent chooses one of the 4 values at random as it's response.
 
 

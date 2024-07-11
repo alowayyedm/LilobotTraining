@@ -14,11 +14,7 @@
 	<name>agent</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-<<<<<<< HEAD
-		<java.version>1.8</java.version>
-=======
 		<java.version>16</java.version>
->>>>>>> origin/updatedLilo
 	</properties>
 	<dependencies>
 		<dependency>
@@ -74,8 +70,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-<<<<<<< HEAD
-=======
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
@@ -159,7 +153,6 @@
 			<version>0.11.5</version>
 		</dependency>
 
->>>>>>> origin/updatedLilo
 	</dependencies>
 
 	<build>
@@ -168,11 +161,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-<<<<<<< HEAD
-		</plugins>
-	</build>
-
-=======
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -204,5 +192,4 @@
 
 
 
->>>>>>> origin/updatedLilo
 </project>
