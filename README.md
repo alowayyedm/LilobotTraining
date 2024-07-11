@@ -236,7 +236,7 @@ to:\
 2. Open command prompt and navigate to the project repo top directory. 
 3. Run the command `docker-compose up`. This may take 5-30 minutes to build.
 
-#Publications
+# Publications
 
 Al Owayyed, M., Grundmann, S., Bruijnes, M., & Brinkman, W. P. (2023). Training child helpline counsellors with a BDI-based conversational agent. In BNAIC/BeNeLearn 2023: Joint International Scientific Conferences on AI and Machine Learning.
 
