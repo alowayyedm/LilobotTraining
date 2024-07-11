@@ -106,6 +106,7 @@ public class GraphUtilsService {
             case D3 -> "Lilobot wil dat de Kindertelefoon de pestkoppen van school haalt";
             case D4 -> "Lilobot wil met zijn leraar praten over situatie";
             case D5 -> "Lilobot wil samen met de Kindertelefoon een oplossing zoeken,";
+            case D6 -> "Lilobot is happy to end the conv (TBD),";
         };
     }
 
@@ -295,7 +296,7 @@ public class GraphUtilsService {
             case D1 -> Phase.PHASE2;
             case D2 -> Phase.PHASE5;
             case D5, D3 -> Phase.PHASE3;
-            case D4 -> Phase.PHASE4;
+            case D4, D6 -> Phase.PHASE4;
         };
     }
 
@@ -317,7 +318,7 @@ public class GraphUtilsService {
             case PHASE1 -> List.of();
             case PHASE2 -> List.of(DesireName.D1);
             case PHASE3 -> List.of(DesireName.D3, DesireName.D5);
-            case PHASE4 -> List.of(DesireName.D4);
+            case PHASE4 -> List.of(DesireName.D4, DesireName.D6);
             case PHASE5 -> List.of(DesireName.D2);
         };
     }
