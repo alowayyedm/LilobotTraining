@@ -36,7 +36,7 @@ public class ConstraintProvider {
      */
     public Set<Set<BeliefConstraint>> getDesireConstraints(DesireName desire) {
         // TODO this could be changed to either load from a file, or be loaded to a database
-
+// D1->D3->D5->D4->D6->D2
         return switch (desire) {
             case D1 -> Set.of(Set.of(
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, minValue),
@@ -47,9 +47,14 @@ public class ConstraintProvider {
             ));
             case D2 -> Set.of(
                     Set.of(new BeliefConstraint(BoundaryCheck.LT, BeliefName.B1, minThreshold)), // add this as a single constraint to another desire. now if activated there will be two true desires
-                    Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B17, maxValue)),
+                    Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B17, maxValue)), // nothing is linked. b17 they think kt will solve for them
                     Set.of(new BeliefConstraint(BoundaryCheck.LT, BeliefName.B3, midThreshold),
                             new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B12, maxValue)), // asking about confidant without showing enough empathy
+                    Set.of(new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B9, maxThreshold),
+                            new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, minValue)), //in phase 2  the child says a lot about their situation with trigger
+                    Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue),
+                            new BeliefConstraint(BoundaryCheck.LT, BeliefName.B8, maxValue),
+                            new BeliefConstraint(BoundaryCheck.LT, BeliefName.B16, maxThreshold)), // saying no we can't do that when asked if they can call school
                     Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B2, maxValue)), //or delete this?
                     Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B15, maxValue)) // add this alone? if they say goodbye.
                              //or midthreeshhold? check!
@@ -174,8 +179,8 @@ public class ConstraintProvider {
 
                 float b3Value = (minThreshold * 2 + maxThreshold * 2) / 4;
                 float[] exampleBeliefValues = new float[]{
-                        midThreshold, minThreshold, b3Value, maxThreshold, minThreshold,
-                        minThreshold, maxThreshold, maxValue, minValue, minValue,
+                        midThreshold, minThreshold, b3Value, maxThreshold, 0,
+                        0, maxThreshold, maxValue, minValue, minValue,
                         minValue, minValue, midThreshold, maxValue, minValue,
                         minValue, minValue};
 
@@ -239,7 +244,7 @@ public class ConstraintProvider {
                         midThreshold, minThreshold, b3Value, maxThreshold, minThreshold,
                         minThreshold, maxValue, minValue, minValue, maxValue,
                         minValue, maxValue, midThreshold, maxValue, minValue,
-                        minValue, minValue};
+                        maxValue, minValue};
                 
                 // The last phase is reached optimally by means of B2
                 Set<Set<BeliefConstraint>> optimalGoal = Set.of(Set.of(constraintB2));

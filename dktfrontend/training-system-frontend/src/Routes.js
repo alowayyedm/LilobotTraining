@@ -12,6 +12,18 @@ import SignUp from './pages/SignUp';
 import LogIn from "./pages/LogInPage";
 import ChatHistory from "./pages/ChatHistory"
 import UserSettings  from "./pages/UserSettings";
+import ExplorationMode from "@/pages/ExplorationMode.vue";
+import ReflectionPage from "@/pages/ReflectionPage.vue";
+import AssessmentMode from "@/pages/AssesmentMode.vue";
+import AssessmentPortal from "@/pages/AssessmentPortal.vue";
+import ExplorationModeS from "@/pages/ExplorationS.vue";
+import TrainingPortalS from "@/pages/TrainingPortalS.vue";
+import AssessmentModeS from "@/pages/AssessmentModeS.vue";
+import AssessmentPortalS from "@/pages/AssessmentPortalS.vue";
+import ExplorationModeF from "@/pages/ExplorationModeF.vue";
+import TrainingPortalF from "@/pages/TrainingPortalF.vue";
+import AssessmentModeF from "@/pages/AssessmentModeF.vue";
+import AssessmentPortalF from "@/pages/AssessmentPortalF.vue";
 
 /**             ------- ADDING NEW ROUTES ------- 
  *  To add a new route to the navbar, add the {path, name, component}
@@ -25,7 +37,7 @@ const routes = [
         name: 'ChatWithLilobot',
         component: ChatWithLilobot,
         meta: {
-            title: "LILOBOT TRAINING PORTAL"
+            title: "Training Portal"
         }
     },
     {
@@ -33,15 +45,89 @@ const routes = [
         name: 'TrainingPortal',
         component: TrainingPortal,
         meta: {
-            title: "TRAINING PORTAL"
+            title: "Exploration Mode"
         }
     },
+    {
+        path: '/trains',
+        name: 'TrainingPortalS',
+        component: TrainingPortalS,
+        meta: {
+            title: "Exploration Mode"
+        }
+    },
+    {
+        path: '/trainf',
+        name: 'TrainingPortalF',
+        component: TrainingPortalF,
+        meta: {
+            title: "Exploration Mode"
+        }
+    },
+    {
+        path: '/Exploration',
+        name: 'ExplorationMode',
+        component: ExplorationMode,
+        meta: {
+            title: "Exploration Mode"
+        }
+    },
+    {
+        path: '/ExplorationS',
+        name: 'ExplorationModeS',
+        component: ExplorationModeS,
+        meta: {
+            title: "Exploration Mode"
+        }
+    },
+    {
+        path: '/ExplorationF',
+        name: 'ExplorationModeF',
+        component: ExplorationModeF,
+        meta: {
+            title: "Exploration Mode"
+        }
+    },
+    {
+        path: '/assessment',
+        name: 'AssessmentMode',
+        component: AssessmentMode,
+        meta: {
+            title: "Assessment Mode"
+        }
+    },
+    {
+        path: '/assessments',
+        name: 'AssessmentModeS',
+        component: AssessmentModeS,
+        meta: {
+            title: "Assessment Mode"
+        }
+    },
+    {
+        path: '/assessmentf',
+        name: 'AssessmentModeF',
+        component: AssessmentModeF,
+        meta: {
+            title: "Assessment Mode"
+        }
+    },
+
+    {
+        path: '/reflection',
+        name: 'ReflectionPage',
+        component: ReflectionPage,
+        meta: {
+            title: "Reflect on your learning experience"
+        }
+    },
+
     {
         path: '/signup',
         name: 'SignUp',
         component: SignUp,
         meta: {
-            title: "SIGN UP AS LEARNER"
+            title: "SIGN UP FOR THE FIRST SESSION"
         }
     },
     {
@@ -49,7 +135,7 @@ const routes = [
         name: 'LogIn',
         component: LogIn,
         meta: {
-            title: "LOG INTO YOUR ACCOUNT"
+            title: "LOG IN TO START YOUR 2ND, 3RD, 4TH, OR 5TH SESSION"
         }
     },
     {
@@ -58,6 +144,30 @@ const routes = [
         component: ChatHistory,
         meta: {
             title: "CHAT HISTORY"
+        }
+    },
+    {
+        path: '/assessmentportal',
+        name: 'AssessmentPortal',
+        component: AssessmentPortal,
+        meta: {
+            title: "Assessment Mode"
+        }
+    },
+    {
+        path: '/assessmentportalS',
+        name: 'AssessmentPortalS',
+        component: AssessmentPortalS,
+        meta: {
+            title: "Assessment Mode"
+        }
+    },
+    {
+        path: '/assessmentportalf',
+        name: 'AssessmentPortalF',
+        component: AssessmentPortalF,
+        meta: {
+            title: "Assessment Mode"
         }
     },
     {

@@ -5,82 +5,90 @@
 
 -->
 <template>
-  <div class="wrapper">
-<!--    <div class="wrapper2">-->
+<!--  <div class="wrapper2">-->
+    <div class="wrapper2">
 
-    <div  v-if="visibleDiv === 1 && this.phase !== 5"  name="col11" class="buttons1" >
+<!--<div v-if="this.phase=== null"><br><br><br><br><br><br><br><br><br></div>-->
+    <div  v-if="visibleDiv === 0"  name="col11" class="buttons1" >
+      <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Record your reflection</button>     </pre>
 
       <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
-      <pre>            <button class="join-button3" id="UndoStep" @click="UndoStep" >Undo My Last Message</button>      <button class="join-button3" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button> </pre> <br>
+      <pre>            <button class="join-button3" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button>      <button class="join-button3" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button> </pre> <br>
 
 
                  <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
-      <pre>            <button class="join-button2" id="WhatNext" @click="WhenNext" >Current Phase Progress</button>      <button class="join-button2" id="advice" @click="GiveAdvice" >Advice on Next Message</button></pre> <br> <br>
-      <pre>            <button class="join-button2" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button>      <button class="join-button2" id="ChildGoals"  @click="childGoal">Current Child's Goal</button></pre> <br> <br>
-      <pre>            <button class="join-button2" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button>      <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Show an overview of the 5-phase model" >5-Phase Model Summary</button></pre>
+      <pre>            <button class="join-button2" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button>      <button class="join-button2" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button></pre> <br> <br>
+      <pre>            <button class="join-button2" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button>      <button class="join-button2" id="ChildGoals"  @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button></pre> <br> <br>
+      <pre>            <button class="join-button2" id="IncUtterances"  @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button>      <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button></pre>
       <br><pre><p class="section-title"></p></pre>
 
     </div>
 
 
-  <div v-if="visibleDiv === 1 && this.phase !== 5"  name="col12" class="buttons1">
+  <div v-if="visibleDiv === 1"  name="col12" class="buttons1">
+    <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Record your reflection</button>     </pre>
 
     <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
-    <pre>            <button class="join-button2" id="ChildGoals"  @click="childGoal">Current Child's Goal</button>      <button class="join-button2" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button></pre> <br> <br>
-    <pre>            <button class="join-button2" id="advice" @click="GiveAdvice" >Advice on Next Message</button>      <button class="join-button2" id="WhatNext" @click="WhenNext" >Current Phase Progress</button></pre> <br> <br>
-    <pre>            <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Show an overview of the 5-phase model" >5-Phase Model Summary</button>      <button class="join-button2" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button></pre> <br>
+    <pre>            <button class="join-button2" id="ChildGoals"  @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button>      <button class="join-button2" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button></pre> <br> <br>
+    <pre>            <button class="join-button2" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button>      <button class="join-button2" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button></pre> <br> <br>
+    <pre>            <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button>      <button class="join-button2" id="IncUtterances"  @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button></pre> <br>
     <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
-    <pre>            <button class="join-button3" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button>      <button class="join-button3" id="UndoStep" @click="UndoStep" >Undo My Last Message</button> </pre>
+    <pre>            <button class="join-button3" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>      <button class="join-button3" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button> </pre>
     <br>
   </div>
 
 
-  <div  v-if="visibleDiv === 2 && this.phase !== 5"  name="col13" class="buttons1">
+  <div  v-if="visibleDiv === 2"  name="col13" class="buttons1">
+    <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Record your reflection</button>     </pre>
+
     <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
-    <pre>            <button class="join-button2" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button>      <button class="join-button2" id="UndoStep" @click="UndoStep" >Undo My Last Message</button></pre> <br>
+    <pre>            <button class="join-button2" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>      <button class="join-button2" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button></pre> <br>
     <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
-    <pre>            <button class="join-button3" id="5Phases" @click="FivePhasesButton" title="Show an overview of the 5-phase model" >5-Phase Model Summary</button>      <button class="join-button3" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button></pre> <br> <br>
-    <pre>            <button class="join-button3" id="ChildGoals"  @click="childGoal">Current Child's Goal</button>      <button class="join-button3" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button></pre> <br> <br>
-    <pre>            <button class="join-button3" id="advice" @click="GiveAdvice" >Advice on Next Message</button>      <button class="join-button3" id="WhatNext" @click="WhenNext" >Current Phase Progress</button></pre>
+    <pre>            <button class="join-button3" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null" >5-Phase Model Summary</button>      <button class="join-button3" id="IncUtterances"  @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button></pre> <br> <br>
+    <pre>            <button class="join-button3" id="ChildGoals"  @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button>      <button class="join-button3" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button></pre> <br> <br>
+    <pre>            <button class="join-button3" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button>      <button class="join-button3" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button></pre>
 
   </div>
 
-  <div  v-if="visibleDiv === 3 && this.phase !== 5"  name="col13" class="buttons1">
+  <div  v-if="visibleDiv === 3"  name="col13" class="buttons1">
+    <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Record your reflection</button>     </pre>
+
     <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
-    <pre>            <button class="join-button3" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button>      <button class="join-button3" id="ChildGoals"  @click="childGoal">Current Child's Goal</button></pre> <br> <br>
-    <pre>            <button class="join-button3" id="WhatNext" @click="WhenNext" >Current Phase Progress</button>      <button class="join-button3" id="advice" @click="GiveAdvice" >Advice on Next Message</button></pre> <br> <br>
-    <pre>            <button class="join-button3" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button>      <button class="join-button3" id="5Phases" @click="FivePhasesButton" title="Show an overview of the 5-phase model" >5-Phase Model Summary</button></pre><br>
+    <pre>            <button class="join-button3" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button>      <button class="join-button3" id="ChildGoals"  @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button></pre> <br> <br>
+    <pre>            <button class="join-button3" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button>      <button class="join-button3" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button></pre> <br> <br>
+    <pre>            <button class="join-button3" id="IncUtterances"  @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button>      <button class="join-button3" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button></pre><br>
     <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
-    <pre>            <button class="join-button2" id="UndoStep" @click="UndoStep" >Undo My Last Message</button>      <button class="join-button2" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button>      </pre>
+    <pre>            <button class="join-button2" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button>      <button class="join-button2" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>      </pre>
     <br>
   </div>
-
-
-
 
 
     <div hidden class="first" >
        <graph-component ref="graphComponent"></graph-component></div>
-    <div   class="first">
 
-<!--{{this.userIntents}}-->
+      <div  hidden class="first">
+{{this.userIntents}}
 <!--      {{this.wrongUtterances}}-->
+        <div  v-if="showFeedback"  name="col13" class="buttons2">
+          <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "viewFeedback" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Record your reflection</button>     </pre>
+
+        </div>
       <pre><button @mouseover="showInfo" @mouseleave="hideInfo" class="join-button" id="UndoStep" @click="UndoStep" >Undo Last Message</button> </pre> <br>
       <pre><button class="join-button" id="advice" @click="GiveAdvice" >Advice on Next Message</button> </pre><br>
       <pre><button class="join-button" id="ExplainSit" @click="ExplainSit" >Current Child's Situation</button> </pre><br>
       <pre><button class="join-button" id="UndoPhase" @click="UndoPhase" >Restart the Phase</button> </pre><br>
       <pre><button class="join-button" id="WhatNext" @click="WhenNext" >Current Phase Progress</button> </pre><br>
-      <pre><button class="join-button" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button> </pre> <br>
-      <pre><button class="join-button" id="ChildGoals"  @click="childGoal">Current Child's Goal</button> </pre> <br>
+        <pre><button class="join-button" id="ChildGoals"  @click="childGoal">Current Child's Goal</button> </pre> <br>
+        <pre><button class="join-button" id="IncUtterances"  @click="IncUtterances">View Messages Evaluation</button> </pre> <br>
 
-      <pre><button class="join-button" id="5Phases" @click="FivePhasesButton" title="Show a summary of the 5-phase model" >5-Phase Model Summary</button> </pre>
+      <pre><button class="join-button" id="5Phases" @click="FivePhasesButton" title="Shows a summary of the 5-phase model" >5-Phase Model Summary</button> </pre>
 
 <!--      <div v-if="isHovered" class="info-box">-->
 <!--        More Information-->
 <!--      </div>-->
 
     </div>
-    <div   class="second"><belief-input
+    <div hidden  class="second"><belief-input
       ref="beliefInput"
       :beliefs="beliefs"
       :previousValues="previousValues"
@@ -91,11 +99,13 @@
       :privateSession="privateSession"
       @switch-to-phase="switchToPhase">
     </belief-input></div>
-    <div     class="third">
+
+    <div  hidden   class="third">
       <belief-transitions-component
         ref="beliefTransitions">
       </belief-transitions-component>
     </div>
+
     <div class="fourth"><web-chat-component
       ref="webChat"
       :header-text="`${sessionActive ? `${ sessionActive }'s Chat` : 'Chat with a virtual child'}`"
@@ -169,6 +179,7 @@
         adviceMsg: null,
         progressMsg: null,
         childGoalMsg: null,
+        childSitMsg: null,
         phase2Intents: [
           "request_chitchat_greeting",
           "request_chitchat_faring",
@@ -221,7 +232,11 @@
           "request_chitchat_goodbye"
         ],
         wrongUtterances: [],
-        visibleDiv: 0
+        visibleDiv: 0,
+        showFeedback: false,
+        showRedo: false,
+        FirstSession: true,
+        Feedbackmsg: null
       }
     },
     created() {
@@ -578,11 +593,53 @@
 
       },
 
-      handlePhase5(){
+      handleButtonClick(button,phase,Currbeliefs) { // record each button click
+        const currentBeliefsString = Currbeliefs.join(','); // Convert array to comma-separated string
+
+        const data = {
+          username: this.$store.state.auth.username,
+          buttonClicked: button,
+          phase: phase,
+          currentBeliefs: currentBeliefsString,
+          agentId: this.getSessionID(),
+          firstSession: this.FirstSession,
+          condition: 4
+        };
+
+
+        axios.post(
+            this.$config.agentServer + '/api/button-click', // or '/api/button-click/' if there's a trailing slash in the endpoint
+            data,
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.$store.state.auth.token
+              }
+            }
+        ).then(response => {
+              console.log('Data successfully sent to the backend:', response.data);
+            })
+            .catch(error => {
+              console.error('There was an error sending the data to the backend:', error);
+            });
+      },
+
+
+      recordReflection(){
+
+        this.$router.push('/reflection');
+
+      },
+
+      handlePhase5() {
         this.$refs.webChat.disableTextarea();
         setTimeout(() => {
           this.$refs.webChat.reachedPhase5 = true;
+          this.showFeedback=true;
+
         }, 2000);
+
+
         //   change the popup information to the feedback information.
         //     so, the logic for the feedback should be here in this function
         // let the popup close. it only opens when they click the button with the information
@@ -590,6 +647,64 @@
         //maybe use this counter also to show it's the first or the second time?
         // if the first time, open the popup that has the reset button, if second time, open the popup that goes to the reflection page
         // Also, send the information of the chat to the backend to save it in the database
+      },
+
+      openFeedback(){
+
+        this.$refs.joinPopup2.headerText= "View feedback";
+
+        this.Feedbackmsg="";
+        const prevPhase = this.$refs.beliefInput.updateLastphase();
+        this.traverseAdvSitu(prevPhase);
+        // maybe check the value of feedback here, then if its the same, add another function that checks on beliefs values?
+
+        if (this.$refs.beliefInput.beliefs[8].value > 0.6 && this.$refs.beliefInput.beliefs[9].value < 0.1) { // too many triggers
+          this.Feedbackmsg= this.Feedbackmsg + " The child left the conversation because they felt they were doing most of the explaining and the conversation wasn't progressing." ;
+        }
+
+        if(prevPhase ===2) {
+          if (this.$refs.beliefInput.beliefs[11].value > 0.9) {
+            this.Feedbackmsg= this.Feedbackmsg + " The child left the conversation because they didn't feel connected enough to open up and discuss solutions. They felt you were not taking them seriously." ;
+          }
+        }
+
+        if(prevPhase ===3) {
+          if (this.userIntents.some(item => item.UserIntent === "inform_unknown_positive")) {
+            this.Feedbackmsg = this.Feedbackmsg + " Also, the helpline doesn't talk to someone on behalf of the child. Instead, a counselor should work with the child to find a solution together.";
+
+          }
+        }
+           if(this.userIntents.some(item => item.UserIntent === "inform_goal_negative" || item.UserIntent === "inform_unknown_negative")){
+            this.Feedbackmsg= this.Feedbackmsg + " And you should avoid using negative expressions such as 'we can't do that', as it can make the child feel discouraged. Instead, suggesting to work together on a solution would set-up the correct expectations of this conversation." ;
+          }
+
+        this.showRedo=true;
+
+        this.$refs.joinPopup2.openPopupwMsg(this.Feedbackmsg);
+
+      },
+
+      redoScenario(){
+        //if first is true, then empty all lists (beliefs list, intent lists and the conversation lists, and go back to the first (second?) phase) and unable the textarea and remove the msg that the child left
+        // change first session to false (inside the if)
+        // if false, then redirect to the reflection page (maybe have another button that shows if this is false or true)
+
+
+
+//navigate to phase 2
+        this.$refs.beliefInput.switchToPhase(1);
+          this.$refs.webChat.clearConversation();
+          this.$refs.webChat.reachedPhase5 = false;
+          this.$refs.webChat.enableTextarea();
+          this.$refs.beliefInput.AllBeliefList=[[0.5,0.3,0.4,0.6,0,0,0.7,1,0,0,0,0,0.5,1,0,0,0]];
+          this.$refs.beliefInput.lastPhase=2;
+        this.$refs.beliefInput.currBeliefs=[];
+          this.userIntents=[];
+          this.showFeedback=false;
+        this.$refs.webChat.clearConversation();
+
+        this.showRedo=false;
+        this.FirstSession=false;
       },
 
 
@@ -786,10 +901,13 @@
 
       FivePhasesButton() {
         this.$refs.joinPopup2.headerText= "5-Phase Model Summary";
+        this.handleButtonClick(8,this.$refs.beliefInput.phase,this.$refs.beliefInput.currBeliefs);
+
         this.$refs.joinPopup2.phasesDiv();
         this.$refs.joinPopup2.openPopup();
       },
       UndoStep() { // test it that everything works well!!
+        this.handleButtonClick(1,this.$refs.beliefInput.phase,this.$refs.beliefInput.currBeliefs);
         this.$refs.joinPopup2.headerText= "Undo Last Message";
         if(this.$refs.beliefInput.AllBeliefList.length<2){
           this.$refs.joinPopup2.openPopupwMsg("You can't go back to the previous step.");}
@@ -840,7 +958,9 @@
       GiveAdvice() {
         this.$refs.joinPopup2.headerText = "Advice on Next Message";
 
-        this.traverseAdvSitu();
+        this.traverseAdvSitu(this.$refs.beliefInput.phase);
+        this.handleButtonClick(2,this.$refs.beliefInput.phase,this.$refs.beliefInput.currBeliefs);
+
 
         this.$refs.joinPopup2.openPopupwMsg(this.adviceMsg);
         //this.$refs.joinPopup2.openPopupwMsg(this.intentMessage);
@@ -858,27 +978,31 @@
       },
       ExplainSit() {
         this.$refs.joinPopup2.headerText= "Current Child's Situation";
-        this.traverseAdvSitu();
+        this.traverseAdvSitu(this.$refs.beliefInput.phase);
         //do the if statement for D2 to see id they are close to hang up
         if(this.$refs.beliefInput.beliefs[0].value === 0.3){
-          this.childGoalMsg= this.childGoalMsg + " Also, the child is starting to feel that they are not under control of the conversation.";
+          this.childSitMsg= this.childSitMsg + " Also, the child is starting to feel that they are not under control of the conversation.";
         }
+
         // already in the child goals
         // else if(this.$refs.beliefInput.beliefs[2].value < 0.6 && this.$refs.beliefInput.beliefs[11].value < 0.6){
-        //   this.childGoalMsg= this.childGoalMsg + " On the other hand, the child is starting to feel that they are not under control of the conversation. They are also starting to feel that they are not under control of the conversation.";
+        //   this.childSitMsg= this.childSitMsg + " On the other hand, the child is starting to feel that they are not under control of the conversation. They are also starting to feel that they are not under control of the conversation.";
         // }
 
-        this.$refs.joinPopup2.openPopupwMsg(this.childGoalMsg);
+        this.handleButtonClick(3,this.$refs.beliefInput.phase,this.$refs.beliefInput.currBeliefs);
+
+        this.$refs.joinPopup2.openPopupwMsg(this.childSitMsg);
       },
 
-      traverseAdvSitu(){
+      traverseAdvSitu(PhaseNum){
         //check phase first
-        if (this.$refs.beliefInput.phase ===2){
-          if (this.$refs.beliefInput.beliefs[3].value < 0.8){
+        if (PhaseNum ===2){
+          if (this.$refs.beliefInput.beliefs[3].value < 0.7){
             this.adviceMsg = "Greet and welcome the child to create a warm atmosphere and build a connection.";
-            this.childGoalMsg="The child does not trust you yet and does not know if you are interested in their problem.";
+            this.childSitMsg="The child does not trust you yet and does not know if you are interested in their problem.";
             this.progressMsg="You completed 0% of phase 2 (clarifying the child’s story). \n" +
-                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their problem. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+            this.Feedbackmsg="You need to show more empathy and welcoming at the beginning in phases 1 and 2 to build trust and acknowledge the child's concerns.";
           }
           else if (this.$refs.beliefInput.beliefs[5].value < 0.3 && this.$refs.beliefInput.beliefs[4].value < 0.2){
             if (Math.random() < 0.5) {
@@ -886,59 +1010,71 @@
             } else {
               this.adviceMsg = "Show empathy towards the child. This can build trust and acknowledge their concerns.";
             }
-            this.childGoalMsg="The child has started to trust you more. However, they are still not sure if you are interested in and understand their problem.";
+            this.childSitMsg="The child has started to trust you more. However, they are still not sure if you are interested in and understand their problem.";
             this.progressMsg="You completed 20% of phase 2 (clarifying the child’s story). \n" +
-                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their problem. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+            this.Feedbackmsg="You need to show more empathy and warmth in phases 1 and 2 to build trust and acknowledge the child's concerns. The child was not sure if you are interested their problem.";
           }
           else if (this.$refs.beliefInput.beliefs[5].value < 0.3){
-            this.adviceMsg = "Ask questions to clarify details of the child's story. This can show your interest and willingness to help.";
-            this.childGoalMsg="The child trusts you now. However, they are still not sure if you are interested in their problem.";
+            this.adviceMsg = "Ask specific questions about the child's story to clarify details of the story. This can show your interest and willingness to help.";
+            this.childSitMsg="The child trusts you now. However, they are still not sure if you are interested in their problem.";
             this.progressMsg="You completed 40% of phase 2 (clarifying the child’s story). \n" +
-                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their problem. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+            this.Feedbackmsg="In phase 2, ask more specific questions about the child's story to show your interest and willingness to help. The virtual child felt uncertain about your understanding and interest in their problem.";
+
           }
           else if(this.$refs.beliefInput.beliefs[4].value < 0.2){
             this.adviceMsg = "Show empathy towards the child. This can build trust and acknowledge their concerns.";
-            this.childGoalMsg="The child trusts you now. However, they are still not sure if you understand their problem.";
+            this.childSitMsg="The child trusts you now. However, they are still not sure if you understand their problem.";
             this.progressMsg="You completed 60% of phase 2 (clarifying the child’s story). \n" +
-                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their problem. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+            this.Feedbackmsg="Show more empathy in phase 2 to build trust and acknowledge the child's concerns. The virtual child was unsure if you understood their problem";
 
           }
           else if(this.$refs.beliefInput.beliefs[9].value < 1){
             this.adviceMsg = "Ask the child about their goals and what they wish to achieve in this conversation to show your interest in their goal.";
-            this.childGoalMsg="The child trusts you now and thinks that you understand them. But they don't know what to do next.";
+            this.childSitMsg="The child trusts you now and thinks that you understand them. But they don't know what to do next.";
             this.progressMsg="You completed 80% of phase 2 (clarifying the child’s story). \n" +
-                "This phase requires building rapport and trust with the child by showing empathy and understanding of their story. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
-          }
+                "This phase requires building rapport and trust with the child by showing empathy and understanding of their problem. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
+           this.Feedbackmsg="In phase 2, ask the child about their goals and what they wish to achieve to show your interest and guide the conversation to the next phase.";
+            }
           else{ // add random to give a random msg? or nothing delete?
             this.adviceMsg = "Try to clarify the child's story and ask about their desires!";
           }
         }
 
-        else if (this.$refs.beliefInput.phase ===3){
-          if (this.$refs.beliefInput.beliefs[3].value < 0.8 || this.$refs.beliefInput.beliefs[4].value < 0.2){
-            this.adviceMsg = "Don’t forget to show empathy and warmth to help the child feel more comfortable and open up.";
-            this.childGoalMsg="The child has started to trust you more. However, they are still not sure if you are interested in and understand their problem.";
+        else if (PhaseNum ===3){
+          if (this.$refs.beliefInput.beliefs[3].value < 0.7 || this.$refs.beliefInput.beliefs[4].value < 0.2){
+            this.adviceMsg = "Don’t forget to show empathy and warmth to help the child feel more comfortable and open up. Also, ask the child about their story.";
+            this.childSitMsg="The child has started to trust you more. However, they are still not sure if you are interested in and understand their problem.";
             this.progressMsg="You completed 0% of phase 3 (Setting the session’s goal). \n " +
                 "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
+            this.Feedbackmsg="Show more empathy and ask more specific questions in phase 2 to build trust and acknowledge the child's concerns. The virtual child was unsure if you understood their problem.";
+
           }
           else if (!this.userIntents.some(item => item.UserIntent === "confirm_goal_summary")) {
             this.adviceMsg = "Summarize the child's goal and confirm it, to show you understand and are interested in their goals.";
-            this.childGoalMsg = "The child trusts you now and thinks that you understand them. But they don't know what to do next.";
+            this.childSitMsg = "The child trusts you now and thinks that you understand them. But they don't know what to do next.";
             this.progressMsg="You completed 25% of phase 3 (Setting the session’s goal). \n " +
                 "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
+            this.Feedbackmsg="In phase 3, summarize and confirm the child's goal to show you understand and are interested. The virtual child was unsure what to do next.";
+
           }
 
         else if(this.$refs.beliefInput.beliefs[15].value < 1){
             this.adviceMsg = "Suggest working together with the child to find a goal for the conversation. This can strengthen your connection and show how you can help.";
-            this.childGoalMsg = "The child has a misconception about how to solve their problem and wants you to solve it."; // change this with the hit back scenarios
+            this.childSitMsg = "The child has a misconception about how to solve their problem and wants you to solve it."; // change this with the hit back scenarios
             this.progressMsg="You completed 50% of phase 3 (Setting the session’s goal). \n " +
                 "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
+            this.Feedbackmsg="In phase 3, suggest working together with the child to find a goal. This strengthens your connection and shows how you can help. The virtual child misunderstood how to solve their problem and wanted you to solve it.";
         }
           else if(this.$refs.beliefInput.beliefs[11].value < 1){
             this.adviceMsg = "Ask the child to share their problem with someone they trust. This can stimulate their problem-solving skills";
-            this.childGoalMsg = "The child now understands that you can find a solution together. However, they cannot think of any solutions.";
+            this.childSitMsg = "The child now understands that you can find a solution together. However, they cannot think of any solutions.";
             this.progressMsg="You completed 75% of phase 3 (Setting the session’s goal). \n " +
                 "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
+           this.Feedbackmsg="In phase 3, ask the child to share their problem with someone they trust to stimulate their problem-solving skills. The virtual child needed help thinking of a solution.";
+
           }
           else{ // add random to give a random msg? or nothing delete?
             this.adviceMsg = "Try to clarify the child's wishes and goals for the conversation.";
@@ -946,7 +1082,7 @@
         }
 
 
-        else if (this.$refs.beliefInput.phase ===4){
+        else if (PhaseNum ===4){
 
           if (this.$refs.beliefInput.beliefs[1].value < 0.7){ ////// add another one for answering their concerns?
             if (Math.random() < 0.44) {
@@ -954,7 +1090,9 @@
             } else {
               this.adviceMsg = "Ask the child for details about how they plan to achieve their goal of telling someone. This can increase their confidence in taking action.";
             }
-            this.childGoalMsg = "The child has low confidence in their ability to talk to someone about their problem; they don't know how to do it.";
+            this.childSitMsg = "The child has low confidence in their ability to talk to someone about their problem; they don't know how to do it.";
+
+           this.Feedbackmsg="In phase 4, ask the child for details about how they plan to achieve their goal of telling someone. This increases their confidence in taking action. The virtual child lacked confidence in talking to someone about their problem and didn't know how to do it.";
 
             if (this.$refs.beliefInput.beliefs[1].value < 0.3)
             this.progressMsg="You completed 0% of phase 4 (Working towards the session goal). \n "+
@@ -970,20 +1108,22 @@
 
           else if (this.$refs.beliefInput.beliefs[1].value < 0.8){
             this.adviceMsg = "Wrap up the conversation and ask if it was helpful for them. This would show your continued interest in helping and understanding them, and to increase the child's commitment to the goal.";
-            this.childGoalMsg = "The child is now confident they can talk to someone. They are ready to wrap up the conversation.";
+            this.childSitMsg = "The child is now confident they can talk to someone. They are ready to wrap up the conversation.";
             this.progressMsg="You completed 100% of phase 4 (Working towards the session goal). \n "+
                 "This phase requires ensuring the child has the next steps to apply the agreed goal of talking to someone. If the child is confident enough and willing to apply this goal, then you can wrap up the conversation in phase 5";
 
+           this.Feedbackmsg="In phase 5, you should wrap up the conversation and ask if it was helpful for them. This would show your continued interest in helping and understanding them, and to increase the child's commitment to the goal.";
           }
           else if (this.$refs.beliefInput.beliefs[14].value < 1 && this.$refs.beliefInput.beliefs[1].value > 0.7){
             this.adviceMsg = "Remember to say goodbye before ending the conversation.";
-            this.childGoalMsg = "The child is happy about the conversation's outcome and is ready to talk to someone.";
+            this.childSitMsg = "The child is happy about the conversation's outcome and is ready to talk to someone.";
             this.progressMsg="You completed 100% of phase 4 (Working towards the session goal). \n "+
                 "This phase requires ensuring the child has the next steps to apply the agreed goal of talking to someone. If the child is confident enough and willing to apply this goal, then you can wrap up the conversation in phase 5";
-
+            this.Feedbackmsg="In phase 5, wrap up the conversation and ask if it was helpful for them. This shows your continued interest in helping and understanding, and increases the child's commitment to the goal.";
           }
           else{ // add random to give a random msg? or nothing delete?
             this.adviceMsg = "Try to stimulate the child's problem-solving skills.";
+            this.Feedbackmsg="Great job! You successfully completed the 5-phase model. The virtual child is happy with the outcome and ready to talk to someone.";
           }
 
 
@@ -1002,7 +1142,7 @@
       },
 
 
-      UndoPhase() { ///////////////////////////update the issue with switching to phase 3!!
+      UndoPhase() {
         this.$refs.joinPopup2.headerText= "Restart the Phase";
         // if((this.$refs.beliefInput.phase) > 1){
         //   this.$refs.beliefInput.switchToPhase(this.$refs.beliefInput.phase-2);
@@ -1040,6 +1180,8 @@
         //////////////// first know how to add the phase name to the beliefs list
         // }
 
+        this.handleButtonClick(4,this.$refs.beliefInput.phase,this.$refs.beliefInput.currBeliefs);
+
         this.$refs.joinPopup2.openPopup();
 
       },
@@ -1072,11 +1214,13 @@
           }
 
         // Get the text in the last element of userIntents
+        if(this.userIntents.length > 0){
         const lastUserText = this.userIntents[this.userIntents.length - 1].UserText;
 
         // Clean chatRecord
 
         this.$refs.webChat.CleanRecordPhase(lastUserText);
+        }
 
         this.updateAllBeliefsBforPhase();
         this.$refs.joinPopup2.openPopupwMsg("You are back to the start of the third phase: Setting a goal for the session.")
@@ -1102,12 +1246,14 @@
           }
         }
 
-        // Get the text in the last element of userIntents
-        const lastUserText = this.userIntents[this.userIntents.length - 1].UserText;
+        if(this.userIntents.length > 0) {
+          // Get the text in the last element of userIntents
+          const lastUserText = this.userIntents[this.userIntents.length - 1].UserText;
 
-        // Clean chatRecord
+          // Clean chatRecord
 
-        this.$refs.webChat.CleanRecordPhase(lastUserText);
+          this.$refs.webChat.CleanRecordPhase(lastUserText);
+        }
 
         this.updateAllBeliefsBforPhase();
         this.$refs.joinPopup2.openPopupwMsg("You are back to the start of the fourth phase: Working towards the session goal.")
@@ -1116,7 +1262,9 @@
 
       WhenNext() {
         this.$refs.joinPopup2.headerText= "Current Phase Progress";
-        this.traverseAdvSitu();
+        this.traverseAdvSitu(this.$refs.beliefInput.phase);
+
+        this.handleButtonClick(5,this.$refs.beliefInput.phase,this.$refs.beliefInput.currBeliefs);
 
         this.$refs.joinPopup2.openPopupwMsg(this.progressMsg);
       },
@@ -1162,6 +1310,7 @@
         });
 
 
+        this.handleButtonClick(7,this.$refs.beliefInput.phase,this.$refs.beliefInput.currBeliefs);
 
         this.$refs.joinPopup2.IncMSG(this.wrongUtterances);
       },
@@ -1180,12 +1329,18 @@
             this.childGoalMsg = "The child is willing to come up with a solution together with you.";
         }
         else if(this.$refs.beliefInput.phase ===4){
-          this.childGoalMsg = "The child is willing to talk to someone about the problem.";
+          if(this.$refs.beliefInput.beliefs[1].value < 0.7) {
+            this.childGoalMsg = "The child is willing to talk to someone about the problem, but they don't know how to do it.";
+          }
+          if(this.$refs.beliefInput.beliefs[1].value > 0.7) {
+            this.childGoalMsg = "The child is planning to tell someone about the bullying.";
+          }
         }
         else if(this.$refs.beliefInput.phase ===5){
           this.childGoalMsg = "The child wants to end the conversation.";
         }
 
+        this.handleButtonClick(6,this.$refs.beliefInput.phase,this.$refs.beliefInput.currBeliefs);
 
 
         this.$refs.joinPopup2.openPopupwMsg(this.childGoalMsg);
@@ -1312,6 +1467,38 @@
 
 }
 
+.feedbackSub{
+  border-radius: 16px;
+  background-color: #08cad0;
+  border: none;
+  color: var(--chat-widget-button-text);
+  font-size: x-large;
+  padding: 0.8rem;
+  font-family: 'Anton', sans-serif;
+  width: 40%;
+  cursor: pointer;
+
+  /* borders only used in accessibility mode */
+  border: solid;
+  border-width: var(--basic-border-width);
+  border-color: var(--basic-border-dark);
+
+}
+
+
+.join-button3:disabled {
+  background-color: #d3d3d3; /* Light grey background */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+  opacity: 0.6; /* Reduce opacity */
+}
+
+
+.join-button2:disabled {
+  background-color: #d3d3d3; /* Light grey background */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+  opacity: 0.6; /* Reduce opacity */
+}
+
 .hello-message {
   background-color: #f0f0f0;
   border: 1px solid #ccc;
@@ -1322,18 +1509,19 @@
 
 .buttons1 {
   width: 90%;
-  padding-top: 50px;
+  padding-top: 3%;
 }
 .buttons2 {
-  grid-area: second;
-  width: 90%;
-  padding-top: 50px;
+  width: 150%;
+  padding-top: 30%;
+  padding-left: 15%;
 }
 
 .join-button:hover {
   background-color: var(--chat-widget-header-button-focus);
   cursor: pointer;
 }
+
 
 .section-title {
   font-weight: bold;

@@ -73,10 +73,12 @@
       </div>
 
 <!--to show feedback after the child leaves the conversation. The feedback is hidden by default and is shown when the child leaves the conversation. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. -->
-      <div v-if="reachedPhase5">
-        The child left the conversation. Please click here to view the feedback.<br>
-        <button  id="join-button" title="Join session as Trainer" @click="enableTextarea" name="request-session">Join</button>
+      <div v-if="reachedPhase5 && exploreMode">
+        The child left the conversation. Please click the button on the left to continue.<br>
+      </div>
 
+      <div v-if="reachedPhase5 && !exploreMode">
+        The child left the conversation. Please click the button on the left to continue.<br>
       </div>
 
 
@@ -96,8 +98,8 @@
     <div v-else class="join-session">
       <button hidden id="join-button" title="Join session as Trainer" @click="requestSession" name="request-session">Join</button>
 <br><br>
-      <div>Click to start the conversation</div>
-      <button id="join-button" title="Start chatting with a virtual child" @click="startPrivateSession">Start conversation</button>
+      <div>Don't forget to start by greeting the child.</div>
+      <button id="join-button" title="Start chatting with a virtual child" @click="startPrivateSession">Click Here to Start Conversation</button>
       <div hidden style="text-align: center">Warning: you can not join the session of a trainer</div>
     </div>
   </div>
@@ -129,6 +131,7 @@ export default {
       timeoutId: null, // The id of the timeout for adding message with loading icons (needed to cancel when conversation is cleared)
       // deletedList: []
       reachedPhase5: false,
+      exploreMode: true,
       isTextareaDisabled: false
     }
   },
@@ -322,6 +325,10 @@ export default {
       this.isTextareaDisabled = true;
     },
     enableTextarea() {
+      // Function to enable the textarea
+      this.isTextareaDisabled = false;
+    },
+    openFeedback() {
       // Function to enable the textarea
       this.isTextareaDisabled = false;
     },

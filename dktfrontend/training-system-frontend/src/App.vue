@@ -12,7 +12,7 @@
 <template>
 	<div>
 		<nav>
-      <img alt="Kindertelefoon logo" src="../images/kt_logo.png" width="70" height="60">
+
       <div class="navbar-title">
         <dynamic-text
             :header-text="`${$route.meta.title}`"
@@ -24,86 +24,87 @@
         >
         </dynamic-text>
       </div>
-			<ul>
-				<!-- 
-					The for loop below automatically adds the tabs to 
-					the navbar. Nothing has to be changed here to add
-					a new route. 
-				-->
-				<li v-for="tab in tabs" :key="tab.name" >
-					<router-link v-if="hideTab(tab.name)" :to="tab.route" active-class="active">
-						<div class="tab" >
-							<div :class="'tab-circle ' + tab.circleClass">
-								<div :class="tab.iconClass"></div>
-							</div>
-							<div class="tab-title">
-                <dynamic-text
-                    :header-text="tab.title"
-                    :target-font-size=1
-                    :min-font-size=0.4
-                    :unit="'rem'"
-                    :step-size=0.1
-                    :overflow-wrap="'auto'"
-                >
-                </dynamic-text>
-              </div>
-						</div>
-					</router-link>
-        </li>
+<!--      change the links to refrence as we changed links-->
+<!--			<ul>-->
+<!--				&lt;!&ndash; -->
+<!--					The for loop below automatically adds the tabs to -->
+<!--					the navbar. Nothing has to be changed here to add-->
+<!--					a new route. -->
+<!--				&ndash;&gt;-->
+<!--				<li v-for="tab in tabs" :key="tab.name" >-->
+<!--					<router-link v-if="hideTab(tab.name)" :to="tab.route" active-class="active">-->
+<!--						<div class="tab" >-->
+<!--							<div :class="'tab-circle ' + tab.circleClass">-->
+<!--								<div :class="tab.iconClass"></div>-->
+<!--							</div>-->
+<!--							<div class="tab-title">-->
+<!--                <dynamic-text-->
+<!--                    :header-text="tab.title"-->
+<!--                    :target-font-size=1-->
+<!--                    :min-font-size=0.4-->
+<!--                    :unit="'rem'"-->
+<!--                    :step-size=0.1-->
+<!--                    :overflow-wrap="'auto'"-->
+<!--                >-->
+<!--                </dynamic-text>-->
+<!--              </div>-->
+<!--						</div>-->
+<!--					</router-link>-->
+<!--        </li>-->
 
-        <li class="profile" v-if="hideTab(profile.name)">
-          <div role="button" :tabindex="0" aria-label="profile" id="account-tab" class="tab" @click="toggleSubmenu" @keyup.enter="toggleSubmenu">
-            <div :class="'tab-circle ' + profile.circleClass" >
-              <div :class="profile.iconClass"></div>
-            </div>
+<!--        <li class="profile" v-if="hideTab(profile.name)">-->
+<!--          <div role="button" :tabindex="0" aria-label="profile" id="account-tab" class="tab" @click="toggleSubmenu" @keyup.enter="toggleSubmenu">-->
+<!--            <div :class="'tab-circle ' + profile.circleClass" >-->
+<!--              <div :class="profile.iconClass"></div>-->
+<!--            </div>-->
 
-            <nav class="submenu" v-if="showSubmenu">
-              <ul class="submenu-list">
-                <li v-for="tab in subMenuTabs" :key="tab.name">
-                  <router-link :to="tab.route" active-class="active">
-                    <div v-on:click="logout(tab.title)" class="submenu-tab">
-                      <div class="submenu-icon" :class="tab.iconClass"></div>
-                      <div class="submenu-title">{{ tab.title }}</div>
-                    </div>
-                  </router-link>
-                </li>
-              </ul>
-            </nav>
+<!--            <nav class="submenu" v-if="showSubmenu">-->
+<!--              <ul class="submenu-list">-->
+<!--                <li v-for="tab in subMenuTabs" :key="tab.name">-->
+<!--                  <router-link :to="tab.route" active-class="active">-->
+<!--                    <div v-on:click="logout(tab.title)" class="submenu-tab">-->
+<!--                      <div class="submenu-icon" :class="tab.iconClass"></div>-->
+<!--                      <div class="submenu-title">{{ tab.title }}</div>-->
+<!--                    </div>-->
+<!--                  </router-link>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </nav>-->
 
-            <div class="user-menu">
-              <div class="tab-title">
-                <dynamic-text
-                    :header-text="username.toString()"
-                    :target-font-size=1
-                    :min-font-size=0.4
-                    :unit="'rem'"
-                    :step-size=0.1
-                    :overflow-wrap="'auto'"
-                >
-                </dynamic-text>
-              </div>
-              <i v-if="showSubmenu" class="fa-solid fa-angle-up" title="Hide user menu"></i>
-              <i v-else class="fa-solid fa-angle-down"  title="Show user menu"></i>
-            </div>
+<!--            <div class="user-menu">-->
+<!--              <div class="tab-title">-->
+<!--                <dynamic-text-->
+<!--                    :header-text="username.toString()"-->
+<!--                    :target-font-size=1-->
+<!--                    :min-font-size=0.4-->
+<!--                    :unit="'rem'"-->
+<!--                    :step-size=0.1-->
+<!--                    :overflow-wrap="'auto'"-->
+<!--                >-->
+<!--                </dynamic-text>-->
+<!--              </div>-->
+<!--              <i v-if="showSubmenu" class="fa-solid fa-angle-up" title="Hide user menu"></i>-->
+<!--              <i v-else class="fa-solid fa-angle-down"  title="Show user menu"></i>-->
+<!--            </div>-->
 
-          </div>
+<!--          </div>-->
 
-          <!-- HERE -->
+<!--          &lt;!&ndash; HERE &ndash;&gt;-->
 
-        </li>
+<!--        </li>-->
 
-        <li class="notifications" v-if="hideTab(notifications.name)" >
-          <div class="tab" role="button" :tabindex="0" title="notifications" aria-label="notifications" id="notification-tab" 
-            @click="showNotificationsBox" @keyup.enter="showNotificationsBox">
-            <span class="notification-count" title="new notifications" v-if="showNotificationCount" >{{ this.notificationCount }}</span>
-            <div :class="'tab-circle ' + notifications.circleClass" >
-              <div :class="notifications.iconClass" ></div>
-            </div>
+<!--        <li class="notifications" v-if="hideTab(notifications.name)" >-->
+<!--          <div class="tab" role="button" :tabindex="0" title="notifications" aria-label="notifications" id="notification-tab" -->
+<!--            @click="showNotificationsBox" @keyup.enter="showNotificationsBox">-->
+<!--            <span class="notification-count" title="new notifications" v-if="showNotificationCount" >{{ this.notificationCount }}</span>-->
+<!--            <div :class="'tab-circle ' + notifications.circleClass" >-->
+<!--              <div :class="notifications.iconClass" ></div>-->
+<!--            </div>-->
 
-          </div>
-        </li>
+<!--          </div>-->
+<!--        </li>-->
 
-			</ul>
+<!--			</ul>-->
 		</nav>
 
     <notification-component
@@ -140,7 +141,7 @@ export default {
           */
           { name: 'ChatWithLilobot', title: 'Chat with Lilobot', iconClass: 'fa-solid fa-message',
             circleClass: '', route: '/' },
-          { name: 'TrainingPortal', title: 'Training Portal', iconClass: 'fa-solid fa-chalkboard-user',
+          { name: 'TrainingPortal', title: 'Exploration Mode', iconClass: 'fa-solid fa-chalkboard-user',
             circleClass: '', route: '/train' },
           { name: 'SignUp', title: 'Sign Up', iconClass: 'fa-solid fa-circle-user user-icon',
             circleClass: 'user-icon-circle', route: '/signup' },

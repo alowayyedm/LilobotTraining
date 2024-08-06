@@ -6,42 +6,43 @@
           <i class="fa-solid fa-circle-user"></i>
         </div>
         <div class="page-info-small">
-          SIGN UP
+          SIGN UP for the first session
         </div>
       </div>
+
 
       <form class="sign-up-form" @submit.prevent="register">
         <fieldset>
           <div class="form-item">
-            <label for="username">GEBRUIKERSNAAM</label>
-            <input type="text" id="username" class="field" v-model="username" placeholder="Gebruikersnaam" :class="{ 'invalid': nameInvalid }">
+            <label for="username">You Prolific ID</label>
+            <input type="text" id="username" class="field" v-model="username" placeholder="Prolific ID" :class="{ 'invalid': nameInvalid }">
           </div>
 
           <div class="form-item">
-            <label for="email">E-MAILADRES</label>
-            <input type="email" id="email" class="field" v-model="email" placeholder="E-mailadres" :class="{ 'invalid': emailInvalid }">
+            <label hidden for="email">E-MAILADRES</label>
+            <input hidden type="email" id="email" class="field" v-model="email" placeholder="E-mailadres" :class="{ 'invalid': emailInvalid } ">
           </div>
 
           <div class="form-item">
-            <label for="password">WACHTWOORD</label>
-            <input type="password" id="password" class="field" v-model="password" placeholder="Wachtwoord" :class="{ 'invalid': passwordInvalid }">
+            <label hidden for="password">WACHTWOORD</label>
+            <input hidden type="password" id="password" class="field" v-model="password" placeholder="Wachtwoord" :class="{ 'invalid': passwordInvalid }">
           </div>
 
           <div class="form-item">
-            <label for="code">CODE</label>
-            <input type="password" id="code" class="field" v-model="code" placeholder="Code" :class="{ 'invalid': codeInvalid }">
+            <label hidden for="code">CODE</label>
+            <input hidden type="password" id="code" class="field" v-model="code" placeholder="Code" :class="{ 'invalid': codeInvalid }">
           </div>
 
         </fieldset>
 
         <div class="trainer-role">
-          <button type="button" id="trainer" @click="changeRole" :class="{ 'checked': trainerSelected }"></button>
-          <span id="trainer-text">Sign up as a trainer</span>
+          <button hidden type="button" id="trainer" @click="changeRole" :class="{ 'checked': trainerSelected }"></button>
+          <span hidden id="trainer-text">Sign up as a trainer</span>
         </div>
 
         <div id="aanmelden">
-          <button type="submit" id="login">AANMELDEN</button>
-          <p>HEEFT U AL EEN ACCOUNT? <router-link to="/login" class="blue-link">INLOGGEN</router-link></p>
+          <button type="submit" id="login">Start the first session</button>
+<!--          <p>This is not your first session? <router-link to="/login" class="blue-link">Click here</router-link></p>-->
         </div>
 
       </form>
@@ -59,6 +60,7 @@
 <script>
 import UserCredentials from '../models/user-credentials';
 import router from '../Routes.js';
+import axios from "axios";
 
 export default {
   name: "SignUp",
@@ -68,13 +70,22 @@ export default {
       username: "",
       email: "",
       password: "",
-      code: "",
-      role: "LEARNER",
+      code: 'HyP$jdIHV$zK5#2X',
+      role: "TRAINER",
+      cond: null,
+      Knid: null,
+      Sessnum: null,
       errors: [],
       errorCodes: []
     };
   },
-
+  mounted() {
+    this.username = this.getQueryParam('userid');
+    this.cond = this.getQueryParam('Cid');
+    this.Knid = this.getQueryParam('Knid');
+    this.Sessnum= this.getQueryParam('SessNum');
+    //handle condition they are assigned to, and also the knowledge sequence and chack if its true that they are in session 5, then this is sent to qualtrics
+  },
   computed: {
     nameInvalid() {
       return this.errorCodes.some(item => item.includes("USERNAME"))
@@ -97,8 +108,17 @@ export default {
     },
   },
 
+  watch: {
+    username(newUsername) {
+      this.email = `${newUsername}@mail.com`;
+      this.password = newUsername +"1@A";
+    },
+  },
   methods: {
-
+    getQueryParam(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    },
     changeRole() {
       if (this.role === "LEARNER") {
         this.role = "TRAINER";
@@ -141,12 +161,55 @@ export default {
         return;
       }
 
+      // add adding meta experiment data here
+
+      const data = {
+        username: this.username,
+        condition: this.cond, //int
+        knowledge: this.Knid,
+        sessNum: this.Sessnum
+      };
+
+
+
+
+
       let user = new UserCredentials(this.username, this.password, this.email, this.role, this.code)
       this.$store.dispatch('auth/register', user).then(
           () => {
-            router.push('/');
-            this.emitter.emit('notification-message', "Welcome " + this.username + "!");
-            this.emitter.emit('notification-message', "Chat history is saved, to view it go to chat history page");
+            axios.post(
+                this.$config.agentServer + '/api/metaExperiment', // or '/api/button-click/' if there's a trailing slash in the endpoint
+                data,
+                {
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + this.$store.state.auth.token
+                  }
+                }
+            ).then(response => {
+              console.log('assessment successfully sent to the backend:', response.data);
+            })
+                .catch(error => {
+                  console.error('There was an error sending the assessment to the backend:', error);
+                });
+
+            if(this.cond === "2") { // redirect to Simulation only if the condition is 2
+              router.push('/ExplorationS');
+              this.emitter.emit('notification-message', "Welcome " + this.username + "!");
+              this.emitter.emit('notification-message', "Chat history is saved, to view it go to chat history page");
+            }
+            else if(this.cond ==="3"){ // redirect to simulation and feedback if the condition is 3
+              router.push('/ExplorationF');
+              this.emitter.emit('notification-message', "Welcome " + this.username + "!");
+              this.emitter.emit('notification-message', "Chat history is saved, to view it go to chat history page");
+
+            }
+            else if(this.cond ==="4"){ // redirect to simulation, feedback and reflection if the condition is 4
+              router.push('/Exploration');
+
+              this.emitter.emit('notification-message', "Welcome " + this.username + "!");
+              this.emitter.emit('notification-message', "Chat history is saved, to view it go to chat history page");
+            }
           }
         ).catch(
           () => {

@@ -38,7 +38,7 @@
         <i class="fa-solid fa-info"></i>
       </button>
     </div>
-    <phase-info
+    <phase-info ref="phaseInfo"
         :phase="phase"
         :lastTransition="lastTransition"
         @switch-to-phase="switchToPhase">
@@ -71,8 +71,9 @@
             {{ belief.id }}: {{ belief.fullName }}
       </div>
     </div>
-<!--    {{this.currBeliefs}}-->
+    {{this.currBeliefs}}
     {{this.AllBeliefList}}
+    {{this.lastPhase}}
 
 <!--    {{this.currBeliefs}}-->
   </div>
@@ -105,7 +106,8 @@ export default {
       displayInfo: false,
       bell:0,
       currBeliefs:[],
-      AllBeliefList: [[0.5,0.3,0.4,0.6,0,0,0.7,1,0,0,0,0,0.5,1,0,0,0]]
+      AllBeliefList: [[0.5,0.3,0.4,0.6,0,0,0.7,1,0,0,0,0,0.5,1,0,0,0]],
+      lastPhase:2
     }
   },
   methods: {
@@ -166,6 +168,10 @@ export default {
     },
     showInfo() {
       this.displayInfo = !this.displayInfo;
+    },
+    updateLastphase(){
+      this.lastPhase=this.$refs.phaseInfo.lastTransition.from;
+      return(this.lastPhase)
     }
   }
 };

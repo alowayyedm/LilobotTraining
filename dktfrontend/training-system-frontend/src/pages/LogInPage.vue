@@ -6,7 +6,7 @@
           <i class="fa-solid fa-circle-user"></i>
         </div>
         <div class="page-info-small">
-          LOG IN
+          start a new training session
         </div>
       </div>
 
@@ -14,19 +14,19 @@
 
         <fieldset class="field-elements">
           <div class="form-item">
-            <label for="username">GEBRUIKERSNAAM</label>
-            <input type="text" id="username" class="field" v-model="username" placeholder="Gebruikersnaam" :class="{ 'invalid': (!this.username && this.error) || this.invalid }">
+            <label for="username">Prolific ID</label>
+            <input type="text" id="username" class="field" v-model="username" placeholder="Prolific ID" :class="{ 'invalid': (!this.username && this.error) || this.invalid }">
           </div>
 
-          <div class="form-item">
-            <label for="password">WACHTWOORD</label>
-            <input type="password" id="password" class="field" v-model="password" placeholder="Wachtwoord" :class="{ 'invalid': (!this.password && this.error) || this.invalid }">
+          <div  class="form-item">
+            <label hidden for="password">WACHTWOORD</label>
+            <input hidden type="password" id="password" class="field" v-model="password" placeholder="Wachtwoord" :class="{ 'invalid': (!this.password && this.error) || this.invalid }">
           </div>
         </fieldset>
 
         <div id="aanmelden">
-          <button id="login">INLOGGEN</button>
-          <p>HEEFT U NOG GEEN ACCOUNT? <router-link to="/signup" class="blue-link">AANMELDEN</router-link></p>
+          <button id="login">Start the session</button>
+<!--          <p>You haven't done any session before? <router-link to="/signup" class="blue-link">Click here to sign up</router-link></p>-->
         </div>
 
       </form>
@@ -44,6 +44,7 @@
 <script>
 import User from "@/models/user-credentials";
 import router from '../Routes.js';
+import axios from "axios";
 
 export default {
   name: "LogInTrainer",
@@ -58,20 +59,54 @@ export default {
       password: "",
       error: "",
       invalid: false,
+      SessNum: null,
+      condition:null
     };
   },
+  watch: {
+    username(newUsername) {
+      this.password = newUsername +"1@A";
+    },
+  },
+  mounted() {
+    this.username = this.getQueryParam('userid');
+    this.SessNum = this.getQueryParam('SessNum');
+
+  },
   methods: {
+    getQueryParam(param) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(param);
+    },
     authenticate() {
+      this.getCondition(this.username);
       if (!this.username || !this.password) {
         this.error = "Please fill in the missing fields";
         return;
       }
 
+      if(this.SessNum === "5"){
+        this.updateSessNum(this.username);
+      }
+
+
+
       let user = new User(this.username, this.password, '', 'LEARNER')
+
+
 
       this.$store.dispatch('auth/login', user).then(
           () => {
-            router.push('/');
+            if(this.condition === 2){
+              router.push('/ExplorationS');
+            }
+            else if(this.condition === 3){
+              router.push('/ExplorationF');
+            }
+            else if(this.condition === 4){
+              router.push('/Exploration');
+            }
+            // router.push('/Exploration');
             this.emitter.emit('notification-message', "Welcome " + this.username + "!");
           }
       ).catch(
@@ -80,6 +115,62 @@ export default {
             this.invalid = true;
           }
       )
+    },
+
+    getCondition(username){
+      axios.get(this.$config.agentServer +`/api/meta-experiment-user`, {
+        params: {
+          username: username
+        },
+        headers: {
+          'Authorization': 'Bearer ' + this.$store.state.auth.token
+        }
+      })
+          .then(response => {
+            this.condition = response.data.condition;
+          })
+          .catch(error => {
+            console.error('There was an error fetching the meta experiment data:', error);
+          });
+    },
+
+    updateSessNum(user){
+      // axios.post(this.$config.agentServer + `/api/update-sessnum`, null, {
+      //       params: {
+      //         username: this.username
+      //       },
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         'Authorization': 'Bearer ' + this.$store.state.auth.token
+      //       }
+      //     }
+      // ).then(response => {
+      //   console.log('assessment successfully sent to the backend:', response.data);
+      // })
+      //     .catch(error => {
+      //       console.error('There was an error sending the assessment to the backend:', error);
+      //     });
+
+      const data = {
+        username: user,
+        sessNum: 5
+      };
+
+      axios.put(
+          this.$config.agentServer + '/api/updateSessNum',
+          data,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + this.$store.state.auth.token
+            }
+          }
+      ).then(response => {
+        console.log('Session number successfully updated:', response.data);
+      })
+          .catch(error => {
+            console.error('There was an error updating the session number:', error);
+          });
     }
   }
 }

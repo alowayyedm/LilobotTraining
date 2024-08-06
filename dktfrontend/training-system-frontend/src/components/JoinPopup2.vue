@@ -29,7 +29,7 @@
               <br>
               <strong>Phase 3: Setting a goal for the session</strong>  <br>
               <u>•	Objective:</u> Collaboratively working with the child to come up with the session's goal.<br>
-              <u>•	Method:</u> Clarification on the child’s wishes, story, and desired goal.<br>
+              <u>•	Method:</u> Clarification on the child’s wishes, desires, and goals.<br>
               <br>
 
               <strong>Phase 4: Work toward the session goal</strong> <br>

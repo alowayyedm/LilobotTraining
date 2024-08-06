@@ -10,9 +10,12 @@ nlu:
     - Good evening
     - Good afternoon
     - Good day
+    - Hiya
     - Hey, welcome aboard
     - Welcome to the Child Helpline
     - Welcome to the chat of the Child Helpline
+    - Welcome to the Children Helpline
+    - Welcome to the chat of the Children Helpline
     - Welcome
     - Hi, welcome
     - Welcome to the chat
@@ -28,6 +31,7 @@ nlu:
     - Hi, welcome here
     - Hello, welcome here
     - Hi there, thank you for reaching out
+    - how can we help you ?
 
 - intent: request_chitchat_faring
   examples: |
@@ -50,6 +54,7 @@ nlu:
     - How's everything?
     - How are things going?
     - How have you been lately?
+    - why are you contacting the children helpline?
 
 # phase 2 
 - intent: trigger_unknown_what
@@ -62,7 +67,9 @@ nlu:
     - What would you like to ask?
     - What do you want to talk about?
     - what do you want to talk about?
+    - why is it not going well?
     - How can I help you?
+    - What brought you here
     - What is bothering you?
     - what would you like to say?
     - what's bothering you?
@@ -73,6 +80,8 @@ nlu:
     - tell me, I'm listening to you
     - tell me
     - tell me more
+    - can you talk some more
+    - can you share more
     - would you like to say more about it?
     - Would you like to say or ask more about it?
     - what is not going so well?
@@ -119,11 +128,15 @@ nlu:
     - who scolded you?
     - who called you names?
     - who called you that?
+    - are those people classmates?
+    - did your classmates bully you?
+    - 
     
 
 - intent: request_unknown_who
   examples: |
     - by who?
+    - who is doing this to you?
     - who is doing that?
     - who is doing that then?
     - who does it?
@@ -134,6 +147,9 @@ nlu:
   examples: |
     - Would you like to tell me more about your situation?
     - can you tell me more about your situation?
+    - please tell me more about your situation
+    - please tell me more about the bullying
+    - can you tell me more about the problem?
     - Would you like to tell me more about the bullying?
     - can you tell me more about the bullying?
     - how do they bully you?
@@ -157,6 +173,8 @@ nlu:
     - what exactly happened?
     - what is happening?
     - what happened?
+    - what happened
+    - can you tell me what happened
     - what exactly they this to you?
     - what did they say?
     - what do they do?
@@ -355,10 +373,13 @@ nlu:
     - when was the last time this happened?
     - when did that happen?
     - when was the last time this happened?
+    - when did it happen?
 
 - intent: request_bullying_why
   examples: |
     - why do they bully you?
+    - why are these children bullying you?
+    - why are these kids bullying you?
     - why did they bully you?
     - why did they hit you?
     - why do they bully you?
@@ -391,6 +412,7 @@ nlu:
     - why does this happen?
     - do you have an idea why they do this?
     - Why?
+    - why is this hapenning
     - how did this happen?
     - do you know how it happens?
     - do you know why?
@@ -415,6 +437,7 @@ nlu:
 - intent: request_bullying_response
   examples: |
     - what do you do when you are bullied?
+    - how do you deal with the bullies
     - what do you do when they bully you?
     - what do you tell them when they bully you?
     - what do you say when they bully you?
@@ -498,6 +521,7 @@ nlu:
     - who let you know that you are being bullied?
     - have you talked about the bullying with someone else?
     - Have you ever talked to Miss Ellie about the bullying?
+    - can you talk to Miss Elie about it?
     - Have you ever talked to your teacher about the bullying?
      
      
@@ -526,10 +550,15 @@ nlu:
     - did you tell anyone at school about this?
     - Does your teacher know?
 
+#only parents? I added teacher here. the agent now replies with something like: I don't want to tell my parents about it
 - intent: request_bullying_parent
   examples: |
     - did you tell your parents about this?
-    - did you tell your parents about tje bullying?
+    - have you asked you teachers for help?
+    - have you talked to anyone?
+    - have you asked to anyone?
+    - Did you talk to your teacher about it?
+    - did you tell your parents about the bullying?
     - Do your parents already know about this?
     - Do your parents know that you are being bullied?
     - Does your father know that you are being bullied?
@@ -549,7 +578,11 @@ nlu:
     - if I understand you correctly, you are being bullied at school and you would like to go to another school, is that correct?
     - so, you were bullied at school yesterday?
     - to make it clear, you are being bullied at school, is that correct?
+    - you were bullied and you want bullying to stop, is that right?
+    - If I understand correctly, you were bullied and you want bullying to stop
     - Do I understand correctly that you indicate that you are being bullied?
+    - If I understood correctly, you bullied and you want the bullying to stop
+    - If I understand correctly, you were bullied at school and you want it to stop
     - if I understand correctly, you are being bullied at school and you are considering going to another school, is that correct?
 
 # talking about teacher (future work)
@@ -580,14 +613,17 @@ nlu:
     - sure
     - no problem
     - I'll do it
-    - ok
     - I can call tomorrow
+    - I could call the school
+    - I can call your school
     - Absolutely.
     - Certainly.
     - It's not a problem.
     - I'll take care of it.
-    - Alright.
+    - Alright I will call the school.
+    - I will talk to your school
     - I can make a phone call.
+    - yes I will call your school
 
 # negative response from kt
 - intent: inform_unknown_negative
@@ -638,6 +674,7 @@ nlu:
     - I can talk to you
     - I'd like to talk to you
     - let's find a solution together
+    - we can help with that!
    
 
 # acknowledgements
@@ -647,6 +684,9 @@ nlu:
     - oh what a shame
     - what a shame
     - how annoying
+    - I'm here to hear you
+    - I'm here to listen to you
+    - I'm here if you want to talk more
     - how bad for you
     - that seems very frustrating to me
     - that doesn't sound nice
@@ -663,13 +703,19 @@ nlu:
     - that is not nice
     - that sucks
     - I'm sorry to hear that
+    - oh sorry to hear that
     - what a pity
+    - I understand
+    - oh that's awful
     - I can understand that it is difficult for you
     - wow, that sounds bad
+    - That's bad
+    - I can imagine that is tough
     - bullied, what a shame
     - Wow, not nice
     - I'm sorry to hear that
     - that is shocking
+    - it's not easy
     - I'm so sorry you're being bullied
     - that seems terrible to me
     - that seems terrible to me to be shouted at like that
@@ -687,6 +733,7 @@ nlu:
     - it's a difficult situation
     - I understand that you are disappointed
     - how awful
+    - I completely understand it's difficult
     - if I understand correctly, you feel powerless?
 
 - intent: ack_unknown_neutral
@@ -711,10 +758,13 @@ nlu:
     - That's a great idea, I think
     - Good idea
     - Thanks
+    - perfect
     - Thank you
     - Thank you
     - That's a good idea
+    - Very good idea
     - good luck!
+    - good luck then!
     - I think that's clever of you
     - I think that's brave of you
     - How brave of you
@@ -757,10 +807,12 @@ nlu:
     - Nice to know what you want
     - Good to know what you want in this conversation
     - Impressive how you talk about it
+    - That is a great idea to tell Miss Ellie.
 
 - intent: ack_contactingkt_compliment
   examples: |
     - Good that you're contacting the child helpline
+    - you are brave for contacting the children helpline
     - Good that you're contacting the children's helpline
     - That's great that you're contacting the child helpline
     - nice that you come and chat with us
@@ -792,6 +844,7 @@ nlu:
     - what are you hoping for?
     - what would you like to be different?
     - what do you hope will change as a result of this conversation?
+    - How about we first discuss what you want to get out of this conversation?
     - what are you hoping for in this conversation?
     - what do you want from this conversation?
     - what do you want to accomplish with this?
@@ -874,10 +927,16 @@ nlu:
     - if I understand you correctly, you are being bullied at school and you want it to stop?
     - if I understand you correctly, you are being bullied at school and want it to stop, is that correct?
     - if I understand you correctly, you are being bullied at school and you want it to stop, is that correct?
+    - if I understood you correctly, you want to feel safe at school, is that correct?
+    - if I understood you correctly, you are being bullied at school and you want it to stop?
+    - if I understood you correctly, you are being bullied at school and want it to stop, is that correct?
+    - if I understood you correctly, you are being bullied at school and you want it to stop, is that correct?
     - to make it clear, you want the bullying to stop, right?
     - if I understand you correctly, you want to feel safe at school and have a good time with your friends, is that right?
     - if I understand you correctly, you want to feel safe at school, is that correct?
     - if I understand you correctly, you are being bullied at school and you want it to stop?
+    - so you were bullied at school and you want it to stop
+    - so you were bullied at school and you want the bullying to stop, correct?
     - if I understand you correctly, you are being bullied at school and you want it to stop, is that correct?
     - so you hope it stops, do I understand that correctly?
     - you wish the bullying to stop, is that correct?
@@ -889,6 +948,7 @@ nlu:
     - we can look for a different solution together. what do you think of that?
     - I suggest that we look for another solution together. what do you think?
     - Should we find a solution together?
+    - So you want to talk about how to fix your situation?
     - shall we find a solution together?
     - what do you think about finding a solution together?
     - what do you think about finding a solution together?
@@ -898,6 +958,7 @@ nlu:
     - are you happy to find a solution together?
     - do you want to find a solution together?
     - shall we look for a solution together?
+    - let's find a solution together
     - Shall we look together at how we can solve this?
     - Shall we look together at how we can solve this problem?
     - I propose that we look for a solution together, is that okay with you?
@@ -932,6 +993,7 @@ nlu:
     - what can I do?
     - how can I help you?
     - what can I do?
+    - what could I do to fix this?
     - what I can do for you?
     - what do you want from me?
     - what do you need from me?
@@ -981,6 +1043,8 @@ nlu:
     - what can you do yourself?
     - what could you do yourself?
     - what could you try yourself?
+    - what would you like to do to solve this?
+    - what would you do to solve this?
     - what could you do to make sure you feel safe at school?
     - is there anything you can change to solve this problem?
     - what could you do about this yourself?
@@ -1061,8 +1125,12 @@ nlu:
 - intent: request_confidant_who
   examples: |
     - is there anyone else you can talk to?
+    - can you talk to someone about it?
     - is there anyone else you can tell?
     - is there anyone else you trust?
+    - you can start by talking to your teachers and parents
+    - Is there somebody at school you could talk about so you feel safe again?
+    - Is there somebody at your school you can talk to yourself?
     - can you discuss this problem with someone?
     - do you have anyone to talk to about this?
     - is there anyone else who understands you?
@@ -1111,6 +1179,7 @@ nlu:
     - can you talk to your teacher?
     - would you dare to talk to your teacher?
     - do you want to talk to her?
+    - Can you ask Miss ellie about it
     - can you talk to her?
     - could you talk to her?
     - would you try to talk to your teacher?
@@ -1182,6 +1251,7 @@ nlu:
     - how are you going to tell her?
     - how can you tell Mrs. Ellie?
     - how would you talk to Miss Ellie?
+    - Let's think about how you could tell her.
     - how are you going to tell her?
     - how can you tell it?
     - how could you find the courage to talk to Miss Ellie?
@@ -1234,6 +1304,7 @@ nlu:
 - intent: inform_confidant_say
   examples: |   
     - you can tell her the same thing you told me
+    - the same thing that you mentioned to me
     - you can tell her the same as you mentioned to me
     - maybe you should tell the teacher that
     - just like you told me
@@ -1251,6 +1322,7 @@ nlu:
     - what would you like to tell her?
     - what are you going to say?
     - what would you say to her?
+    - what will you tell your teacher?
     - what would you like to tell your teacher?
     - what message would you like to ask her for?
     - what are you planning to say to her?
@@ -1290,6 +1362,8 @@ nlu:
 - intent: confirm_chitchat_satisfaction
   examples: |
     - how did you like the conversation?
+    - how did you think of the conversation
+    - what do you think of this conversation?
     - did you like this conversation?
     - did you find the conversation helpful?
     - did this conversation help you?
@@ -1306,6 +1380,7 @@ nlu:
     - Are you feeling better now that you told me?
     - Are you feeling better after this conversation?
     - is there anything else I can help with?
+    - was this conversation helpful?
 
 - intent: request_chitchat_goodbye
   examples: |
@@ -1318,6 +1393,9 @@ nlu:
     - Enjoy your evening
     - doei
     - have a good day
+    - Have a nice day!
+    - ok then bye
+
 
 # negative intents 
 - intent: ack_unknown_guilt
@@ -1351,6 +1429,7 @@ nlu:
     - what is your parents name?
     - which school do you go to?
     - this is a wrong sentence
+    - you deserve to get bullied
 
 # TODO: meta-communication (future work)
 
