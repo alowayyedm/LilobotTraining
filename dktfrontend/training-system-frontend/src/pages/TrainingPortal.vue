@@ -6,10 +6,10 @@
 -->
 <template>
 <!--  <div class="wrapper2">-->
-    <div class="wrapper2">
+    <div class="wrapper">
 
 <!--<div v-if="this.phase=== null"><br><br><br><br><br><br><br><br><br></div>-->
-    <div  v-if="visibleDiv === 0"  name="col11" class="buttons1" >
+    <div  v-if="visibleDiv === 5"  name="col11" class="buttons1" >
       <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Record your reflection</button>     </pre>
 
       <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
@@ -25,7 +25,7 @@
     </div>
 
 
-  <div v-if="visibleDiv === 1"  name="col12" class="buttons1">
+  <div v-if="visibleDiv === 5"  name="col12" class="buttons1">
     <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Record your reflection</button>     </pre>
 
     <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
@@ -38,7 +38,7 @@
   </div>
 
 
-  <div  v-if="visibleDiv === 2"  name="col13" class="buttons1">
+  <div  v-if="visibleDiv === 5"  name="col13" class="buttons1">
     <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Record your reflection</button>     </pre>
 
     <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
@@ -50,7 +50,7 @@
 
   </div>
 
-  <div  v-if="visibleDiv === 3"  name="col13" class="buttons1">
+  <div  v-if="visibleDiv === 5"  name="col13" class="buttons1">
     <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Record your reflection</button>     </pre>
 
     <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
@@ -66,7 +66,7 @@
     <div hidden class="first" >
        <graph-component ref="graphComponent"></graph-component></div>
 
-      <div  hidden class="first">
+      <div   class="first">
 {{this.userIntents}}
 <!--      {{this.wrongUtterances}}-->
         <div  v-if="showFeedback"  name="col13" class="buttons2">
@@ -88,7 +88,7 @@
 <!--      </div>-->
 
     </div>
-    <div hidden  class="second"><belief-input
+    <div   class="second"><belief-input
       ref="beliefInput"
       :beliefs="beliefs"
       :previousValues="previousValues"
@@ -100,7 +100,7 @@
       @switch-to-phase="switchToPhase">
     </belief-input></div>
 
-    <div  hidden   class="third">
+    <div     class="third">
       <belief-transitions-component
         ref="beliefTransitions">
       </belief-transitions-component>
