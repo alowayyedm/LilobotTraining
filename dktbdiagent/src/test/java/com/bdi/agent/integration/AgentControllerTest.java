@@ -1,8 +1,12 @@
 package com.bdi.agent.integration;
 
-import com.bdi.agent.api.AgentController;
-import com.bdi.agent.model.Agent;
-import com.bdi.agent.repository.AgentRepository;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +20,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.handler;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder.on;
+import com.bdi.agent.api.AgentController;
+import com.bdi.agent.model.Agent;
+import com.bdi.agent.repository.AgentRepository;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -53,7 +53,7 @@ public class AgentControllerTest {
     @Test
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void startSessionUserExists() throws Exception {
-        agentRepository.save(new Agent(1L, "testId", null, null, null, 1L, "", true, 1L, 1f, null, true, null));
+        agentRepository.save(new Agent(1L, "testId", "test", null, null, null, 1L, "", true, 1L, 1f, null, true, null));
         ResultActions resultActions = mockMvc.perform(post("/create/testId"));
 
         MvcResult result =  resultActions.andExpect(status().isOk())
@@ -80,7 +80,7 @@ public class AgentControllerTest {
     @Test
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void changeModeUserExists() throws Exception {
-        agentRepository.save(new Agent(1L, "testId", null, null, null, 1L, "", true,
+        agentRepository.save(new Agent(1L, "testId", "test", null, null, null, 1L, "", true,
                 1L, 1f, null, false, null));
         ResultActions resultActions = mockMvc.perform(post("/agent/changeMode/testId")
                 .contentType("application/json").content("true"));
@@ -96,7 +96,7 @@ public class AgentControllerTest {
     @Test
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void changeModeUserExistsTrue() throws Exception {
-        agentRepository.save(new Agent(1L, "testId", null, null,
+        agentRepository.save(new Agent(1L, "testId", "test", null, null,
                 null, 1L, "", true, 1L, 1f, null, true, null));
         ResultActions resultActions = mockMvc.perform(post("/agent/changeMode/testId")
                 .contentType("application/json").content("false"));

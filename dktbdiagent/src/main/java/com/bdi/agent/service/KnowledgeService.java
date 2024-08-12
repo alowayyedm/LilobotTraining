@@ -24,9 +24,8 @@ public class KnowledgeService {
 
     private final KnowledgeRepository knowledgeRepository;
 
-    @Value("${knowledge.file}")
-    private String knowledgeFile;
-
+    @Value("${knowledge.folder}")
+    private String knowledgeFolder;
 
     @Autowired
     public KnowledgeService(KnowledgeRepository knowledgeRepository) {
@@ -35,18 +34,33 @@ public class KnowledgeService {
 
     public void initializeKnowledge() {
         try {
-            readFromCsv();
+            List<String> initialized = new ArrayList<>();
+
+            File folder = new File(knowledgeFolder);
+            File[] files = folder.listFiles();
+            if (files == null) throw new IOException("No files found in the knowledge folder");
+            for (File file : files) {
+                if (!file.isFile()) continue;
+                readFromCsv(file.getName(), file.getAbsolutePath());
+                initialized.add(file.getName());
+            }
+
+            System.out.println("Initialized " + initialized.size() + " knowledge from files: " + initialized);
 
         } catch (IOException | CsvException e) {
-            System.err.println("could not initialize knowledge");
+            e.printStackTrace();
         }
-
     }
 
-    public Knowledge getBySubjectAndAttribute(String subject, String attribute) {
-        return knowledgeRepository.findBySubjectAndAttribute(subject, attribute);
+    public Knowledge getBySubjectAndAttribute(String knowledge, String subject, String attribute) {
+        return knowledgeRepository.findByKnowledgeAndSubjectAndAttribute(knowledge, subject, attribute);
     }
 
+    public String getKnowledge(String userId) {
+        List<String> knowledgeFiles = knowledgeRepository.findAllUniqueKnowledgeFiles();
+        Random rand = new Random();
+        return knowledgeFiles.get(rand.nextInt(knowledgeFiles.size()));
+    }
 
     public String getResponse(Knowledge knowledge) {
         List<String> res = knowledge.getValues();
@@ -55,21 +69,18 @@ public class KnowledgeService {
         return res.get(rand.nextInt(res.size()));
     }
 
-    private void readFromCsv() throws IOException, CsvException {
-//        String knowledgeFile = getKnowledgeFromBlobStorage();
-        CSVReader reader = new CSVReader(new FileReader(knowledgeFile));
+    private void readFromCsv(String knowledge, String path) throws IOException, CsvException {
+        // String knowledgeFile = getKnowledgeFromBlobStorage();
+        CSVReader reader = new CSVReader(new FileReader(path));
         List<String[]> records = reader.readAll();
 
         for (String[] record : records) {
             Knowledge k = new Knowledge();
             k.setSubject(record[0]);
             k.setAttribute(record[1]);
+            k.setKnowledge(knowledge);
 
-            List<String> values = new ArrayList<>();
-            values.add(record[2]);
-            values.add(record[3]);
-            values.add(record[4]);
-            values.add(record[5]);
+            List<String> values = new ArrayList<>(Arrays.asList(record).subList(2, record.length));
             k.setValues(values);
             knowledgeRepository.save(k);
         }

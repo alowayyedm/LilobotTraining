@@ -118,7 +118,11 @@ public class AgentService {
         this.constraintProvider = constraintProvider;
         this.messagingTemplate = messagingTemplate;
 
-        knowledgeService.initializeKnowledge();
+        try {
+            knowledgeService.initializeKnowledge();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -231,11 +235,11 @@ public class AgentService {
      * @param perception the perception of the agent
      * @return the response from the knowledge base
      */
-    private String respondToAck(Perception perception) {
+    private String respondToAck(Agent agent, Perception perception) {
         String type = "ack";
         String attribute = perception.getAttribute();
 
-        return getResponseFromKnowledge(type, attribute);
+        return getResponseFromKnowledge(agent.getKnowledgeFile(), type, attribute);
     }
 
     /**
@@ -245,11 +249,12 @@ public class AgentService {
      * @param attribute attribute of the perception
      * @return the response from the knowledge base
      */
-    private String getResponseFromKnowledge(String subject, String attribute) {
+
+    private String getResponseFromKnowledge(String knowledgeName, String subject, String attribute) {
         String err = "I do not understand what you mean";
 
         try {
-            Knowledge knowledge = knowledgeService.getBySubjectAndAttribute(subject, attribute);
+            Knowledge knowledge = knowledgeService.getBySubjectAndAttribute(knowledgeName, subject, attribute);
             return knowledgeService.getResponse(knowledge);
         } catch (NullPointerException e) {
             System.err.println("getResponseFromKnowledge: could not find knowledge");
@@ -277,7 +282,7 @@ public class AgentService {
             }
             actionService.addAction(action);
 
-            return getResponseFromKnowledge(action.getSubject(), action.getAttribute());
+            return getResponseFromKnowledge(agent.getKnowledgeFile(), action.getSubject(), action.getAttribute());
 
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -554,21 +559,21 @@ public class AgentService {
         if (intention.getName().equals("D2")) { //if the agent's desire to end the conversation, just return goodbye
             agent.isActive(false);
             agentRepository.save(agent);
-            return getResponseFromKnowledge("chitchat", "goodbye");
+            return getResponseFromKnowledge(agent.getKnowledgeFile(), "chitchat", "goodbye");
         }
 
         switch (perception.getType()) {
             case "request" -> {
-                return getResponseFromKnowledge(perception.getSubject(), perception.getAttribute());
+                return getResponseFromKnowledge(agent.getKnowledgeFile(), perception.getSubject(), perception.getAttribute());
             }
             case "ack" -> {
-                return respondToAck(perception);
+                return respondToAck(agent, perception);
             }
             case "inform" -> {
                 if (perception.getAttribute().equals("negative")) {
-                    return getResponseFromKnowledge("ack", "unhelpful");
+                    return getResponseFromKnowledge(agent.getKnowledgeFile(), "ack", "unhelpful");
                 }
-                return getResponseFromKnowledge("ack", "neutral");
+                return getResponseFromKnowledge(agent.getKnowledgeFile(), "ack", "neutral");
             }
             default -> {
                 return null;
@@ -673,6 +678,7 @@ public class AgentService {
         Agent agent = new Agent();
         agent.setUserId(userId);
         agent.isActive(true);
+        agent.setKnowledgeFile(knowledgeService.getKnowledge(userId));
 
         Set<Belief> initialBeliefs = beliefService.readBeliefsFromCsv(agent);
         beliefService.addBeliefs(initialBeliefs);
