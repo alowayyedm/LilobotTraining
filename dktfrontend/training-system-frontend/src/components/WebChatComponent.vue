@@ -73,7 +73,11 @@
       </div>
 
 <!--to show feedback after the child leaves the conversation. The feedback is hidden by default and is shown when the child leaves the conversation. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. The button has an event listener that emits a request-session event with the joinId as the argument. The feedback is shown in a div with a button to join the session as a trainer. The button is hidden by default and is shown when the child leaves the conversation. -->
-      <div v-if="reachedPhase5 && exploreMode">
+      <div v-if="reachedPhase5 && exploreMode && Fdbkmsg">
+        The child left the conversation. Please click the "View feedback" button on the left to continue.<br>
+      </div>
+
+      <div v-if="reachedPhase5 && exploreMode && !Fdbkmsg">
         The child left the conversation. Please click the button on the left to continue.<br>
       </div>
 
@@ -98,7 +102,7 @@
     <div v-else class="join-session">
       <button hidden id="join-button" title="Join session as Trainer" @click="requestSession" name="request-session">Join</button>
 <br><br>
-      <div>Don't forget to start by greeting the child.</div>
+      <div>Start the conversation by greeting the child.</div>
       <button id="join-button" title="Start chatting with a virtual child" @click="startPrivateSession">Click Here to Start Conversation</button>
       <div hidden style="text-align: center">Warning: you can not join the session of a trainer</div>
     </div>
@@ -132,7 +136,8 @@ export default {
       // deletedList: []
       reachedPhase5: false,
       exploreMode: true,
-      isTextareaDisabled: false
+      isTextareaDisabled: false,
+      Fdbkmsg: false
     }
   },
 

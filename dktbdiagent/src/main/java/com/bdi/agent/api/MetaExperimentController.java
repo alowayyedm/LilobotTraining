@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 @CrossOrigin(origins = "*")
@@ -49,6 +52,20 @@ public class MetaExperimentController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating session number.");
         }
     }
+
+
+    @PutMapping("/updateKnowledgeOrder")
+    public ResponseEntity<?> updateKnowledgeOrder(@RequestBody UpdateKnowledgeOrderUpdtRequest request) {
+        try {
+            service.updateKnowledgeOrderUpdt(request.getUsername(), request.getknowledgeOrderUpdt());
+            return ResponseEntity.ok("Session number updated successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating session number.");
+        }
+    }
+
+
+
 }
 
 class UpdateSessNumRequest {
@@ -71,5 +88,29 @@ class UpdateSessNumRequest {
 
     public void setSessNum(int sessNum) {
         this.sessNum = sessNum;
+    }
+}
+
+
+class UpdateKnowledgeOrderUpdtRequest {
+    private String username;
+    private String knowledgeOrderUpdt;
+
+    // getters and setters
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getknowledgeOrderUpdt() {
+        return knowledgeOrderUpdt;
+    }
+
+    public void setknowledgeOrderUpdt(String knowledgeOrderUpdt) {
+        this.knowledgeOrderUpdt = knowledgeOrderUpdt;
     }
 }

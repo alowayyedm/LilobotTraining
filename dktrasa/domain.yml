@@ -26,8 +26,10 @@ intents:
 - confirm_bullying_summary
 - request_school_start
 - inform_unknown_positive
+- inform_goalhitstop_positive
 - inform_unknown_negative
 - inform_goal_negative
+- inform_goalhitstop_negative
 - inform_goal_help
 - ack_unknown_empathize
 - ack_unknown_neutral
@@ -47,6 +49,7 @@ intents:
 - request_confidant_when
 - request_confidant_feeling
 - request_confidant_why
+- request_confidant_where
 - request_confidant_how
 - inform_confidant_help
 - inform_confidant_say
@@ -74,7 +77,7 @@ responses:
   utter_rephrase:
   - text: I dont understand what you mean
   - text: What do you mean?
-  - text: What are you talking about?
+  - text: I dont understand what you mean
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

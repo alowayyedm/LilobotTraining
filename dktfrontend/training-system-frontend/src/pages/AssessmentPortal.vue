@@ -681,7 +681,7 @@ export default {
       })
           .then(response => {
             this.condition = response.data.condition;
-            this.knowledge = response.data.knowledge;
+            this.knowledge = response.data.knowledgetest;
             this.Sessnum= response.data.sessNum;
             const redirectUrl = `https://tudelft.fra1.qualtrics.com/jfe/form/SV_20uk6d6gWZtclIq?PROLIFIC_PID=${this.$store.state.auth.username}&Cid=${this.condition}&RandKnowledge=${this.knowledge}&SessNum=${this.Sessnum}`;
             window.location.href = redirectUrl;
@@ -950,7 +950,9 @@ export default {
   font-size: x-large;
   padding: 0.8rem;
   font-family: 'Anton', sans-serif;
-  width: 60%;
+  width: 70%;
+  white-space: normal; /* Allow text to wrap */
+
   height: 30%;
   cursor: pointer;
 

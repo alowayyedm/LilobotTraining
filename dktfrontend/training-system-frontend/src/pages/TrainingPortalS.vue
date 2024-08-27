@@ -11,7 +11,7 @@
     <!--<div v-if="this.phase=== null"><br><br><br><br><br><br><br><br><br></div>-->
     <div    name="col11" class="buttons1" >
       <br><br><br><br><br><br><br>
-      <pre>      <button v-if=" FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="!FirstSession && showFeedback" class="join-button2" title="Go to assessment mode" @click="this.recordReflection()" name = "request-session" >Go to the assessment mode</button>     </pre>
+      <pre>      <button v-if=" FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >To continue, click here to restart the conversation</button><button v-if="!FirstSession && showFeedback" class="join-button2" title="Go to assessment mode" @click="this.recordReflection()" name = "request-session" >Continue to the assessment mode</button>     </pre>
 
     </div>
 
@@ -797,9 +797,11 @@ export default {
   border: none;
   color: var(--chat-widget-button-text);
   font-size: x-large;
+  white-space: normal; /* Allow text to wrap */
+
   padding: 0.8rem;
   font-family: 'Anton', sans-serif;
-  width: 40%;
+  width: 46%;
   cursor: pointer;
 
   /* borders only used in accessibility mode */

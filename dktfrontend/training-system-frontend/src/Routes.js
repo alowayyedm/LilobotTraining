@@ -24,6 +24,7 @@ import ExplorationModeF from "@/pages/ExplorationModeF.vue";
 import TrainingPortalF from "@/pages/TrainingPortalF.vue";
 import AssessmentModeF from "@/pages/AssessmentModeF.vue";
 import AssessmentPortalF from "@/pages/AssessmentPortalF.vue";
+import TrainingPortalTrainer from "@/pages/TraininingTrainer.vue";
 
 /**             ------- ADDING NEW ROUTES ------- 
  *  To add a new route to the navbar, add the {path, name, component}
@@ -46,6 +47,14 @@ const routes = [
         component: TrainingPortal,
         meta: {
             title: "Exploration Mode"
+        }
+    },
+    {
+        path: '/trainingtrainerinterface',
+        name: 'TrainingPortalTrainer',
+        component: TrainingPortalTrainer,
+        meta: {
+            title: "Trainer Mode"
         }
     },
     {

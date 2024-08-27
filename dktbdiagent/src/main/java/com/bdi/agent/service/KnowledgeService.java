@@ -6,6 +6,7 @@ import com.azure.storage.blob.BlobServiceClient;
 import com.azure.storage.blob.BlobServiceClientBuilder;
 import com.bdi.agent.model.Knowledge;
 import com.bdi.agent.repository.KnowledgeRepository;
+import com.bdi.agent.repository.MetaExperimentRepository;
 import com.opencsv.exceptions.CsvException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,8 @@ public class KnowledgeService {
 
     private final KnowledgeRepository knowledgeRepository;
 
+
+
     @Value("${knowledge.folder}")
     private String knowledgeFolder;
 
@@ -31,6 +34,13 @@ public class KnowledgeService {
     public KnowledgeService(KnowledgeRepository knowledgeRepository) {
         this.knowledgeRepository = knowledgeRepository;
     }
+
+
+
+    @Autowired
+    private MetaExperimentService metaExperimentService;
+
+
 
     public void initializeKnowledge() {
         try {
@@ -56,10 +66,18 @@ public class KnowledgeService {
         return knowledgeRepository.findByKnowledgeAndSubjectAndAttribute(knowledge, subject, attribute);
     }
 
-    public String getKnowledge(String userId) {
-        List<String> knowledgeFiles = knowledgeRepository.findAllUniqueKnowledgeFiles();
-        Random rand = new Random();
-        return knowledgeFiles.get(rand.nextInt(knowledgeFiles.size()));
+    public String getKnowledge(String userId, String username) {
+        try {
+            // Try to get the last knowledge order and update the list
+            List<String> knowledgeFiles = knowledgeRepository.findAllUniqueKnowledgeFiles();
+            int number = Integer.parseInt(metaExperimentService.getLastKnowledgeOrderAndUpdate(username));
+            return knowledgeFiles.get(number);
+        } catch (RuntimeException e) {
+            // Fallback to random selection if an exception occurs (e.g., list is empty)
+            List<String> knowledgeFiles = knowledgeRepository.findAllUniqueKnowledgeFiles();
+            Random rand = new Random();
+            return knowledgeFiles.get(rand.nextInt(knowledgeFiles.size()));
+        }
     }
 
     public String getResponse(Knowledge knowledge) {

@@ -351,10 +351,18 @@ public class AgentService {
             addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B10", minValue));
         }
 
+//        if (desireService.getActiveGoal(agentId)== null){
+//            desireService.
+//        }
+
         switch (perceptionName) {
             case "request_chitchat_greeting":
             case "request_chitchat_faring":
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B4", oneStep));
+                if(agent.getKnowledgeFile().contains("good")) {//check if knowledge file contains good idea about solution.
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B16", maxValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B8", twoSteps));
+                }
                 break;
             case "request_chitchat_goodbye":
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B15", maxValue));
@@ -381,6 +389,7 @@ public class AgentService {
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
                 break;
             case "request_confidant_when": //added new
+            case "request_confidant_where": //added new
             case "request_confidant_feeling": //added new
             case "request_confidant_how": //added new
             case "request_confidant_say": //added new
@@ -411,6 +420,7 @@ public class AgentService {
 
                 break;
             case "inform_goal_negative":
+            case "inform_goalhitstop_negative":
                 float isCurrentlyTalkingAboutGoal = beliefService.getByAgentIdAndName(agentId, "B10").getValue();
                 if (floatComparer.equalTo(isCurrentlyTalkingAboutGoal, maxValue)) {
                     // This is reset by the setting below:
@@ -420,6 +430,7 @@ public class AgentService {
                 }
                 break;
             case "inform_goal_positive":
+            case "inform_goalhitstop_positive":
                 if (floatComparer.equalTo(beliefService.getByAgentIdAndName(agentId, "B10").getValue(),
                         maxValue)) {
                     addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B17", maxValue));
@@ -674,11 +685,22 @@ public class AgentService {
      *
      * @param userId the userId (aka session/conversation id)
      */
-    public Agent createAgent(String userId) {
+    public Agent createAgent(String userId, String username) {
         Agent agent = new Agent();
         agent.setUserId(userId);
         agent.isActive(true);
-        agent.setKnowledgeFile(knowledgeService.getKnowledge(userId));
+        if (username.equals("testaccount")) { //if the account is test account, then only activate the most stable scenario
+            agent.setKnowledgeFile("knowledge_Lilo_schoolbreak_call_school.csv");
+        }
+        else {
+            agent.setKnowledgeFile(knowledgeService.getKnowledge(userId, username));
+        }
+//        if(agent.getKnowledgeFile().contains("good")) {
+//            System.out.print("it workssss");
+//            beliefService.setBeliefValue(agent, "B16", maxValue);
+//        }
+        // maybe check if they have goal, then increase b16 to 1
+        // addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B16", maxValue));
 
         Set<Belief> initialBeliefs = beliefService.readBeliefsFromCsv(agent);
         beliefService.addBeliefs(initialBeliefs);

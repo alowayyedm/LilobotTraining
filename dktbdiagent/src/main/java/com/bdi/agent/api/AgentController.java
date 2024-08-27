@@ -62,9 +62,10 @@ public class AgentController {
      */
     @PostMapping(path = "/agent/{userId}")
     public ResponseEntity<String> addPerception(@PathVariable("userId") String userId,
-                                                @RequestBody Perception perception) {
+                                                @RequestBody Perception perception,
+                                                @RequestParam(required = false) String username) {
         if (!agentService.containsUserId(userId)) {
-            agentService.createAgent(userId);
+            agentService.createAgent(userId, username);
         }
 
         Agent agent = agentService.getByUserId(userId);
@@ -185,7 +186,7 @@ public class AgentController {
     public ResponseEntity<String> startSession(@PathVariable("sessionId") String sessionId,
                                                @RequestParam(required = false) String username) {
         Agent agent = (agentService.containsUserId(sessionId))
-                ? (agentService.getByUserId(sessionId)) : (agentService.createAgent(sessionId));
+                ? (agentService.getByUserId(sessionId)) : (agentService.createAgent(sessionId, username));
 
         if (username != null && userService.containsUsername(username)) {
             User user = userService.getByUsername(username);

@@ -10,56 +10,106 @@
 
     <!--<div v-if="this.phase=== null"><br><br><br><br><br><br><br><br><br></div>-->
     <div  v-if="visibleDiv === 0"  name="col11" class="buttons1" >
-      <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Go to the assessment mode</button>     </pre>
+      <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >To continue, click here to restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Continue to the assessment mode</button>     </pre>
 
-      <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
-      <pre>            <button class="join-button3" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button>      <button class="join-button3" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button> </pre> <br>
+      <p class="section-title">--------- Change the conversation ---------</p>
+      <div class="button-group">
+        <button class="join-button3" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button>
+        <button class="join-button3" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>
+      </div>
 
+      <p class="section-title">--------- Information about conversation ---------</p>
+      <div class="button-group">
+        <button class="join-button2" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button>
+        <button class="join-button2" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button>
+      </div>
 
-      <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
-      <pre>            <button class="join-button2" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button>      <button class="join-button2" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button></pre> <br> <br>
-      <pre>            <button class="join-button2" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button>      <button class="join-button2" id="ChildGoals"  @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button></pre> <br> <br>
-      <pre>            <button class="join-button2" id="IncUtterances"  @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button>      <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button></pre>
-      <br><pre><p class="section-title"></p></pre>
+      <div class="button-group">
+        <button class="join-button2" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button>
+        <button class="join-button2" id="ChildGoals" @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button>
+      </div>
+
+      <div class="button-group">
+        <button class="join-button2" id="IncUtterances" @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button>
+        <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button>
+      </div>
 
     </div>
 
 
     <div v-if="visibleDiv === 1"  name="col12" class="buttons1">
-      <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Go to the assessment mode</button>     </pre>
+      <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >To continue, click here to restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Continue to the assessment mode</button>     </pre>
 
-      <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
-      <pre>            <button class="join-button2" id="ChildGoals"  @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button>      <button class="join-button2" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button></pre> <br> <br>
-      <pre>            <button class="join-button2" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button>      <button class="join-button2" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button></pre> <br> <br>
-      <pre>            <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button>      <button class="join-button2" id="IncUtterances"  @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button></pre> <br>
-      <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
-      <pre>            <button class="join-button3" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>      <button class="join-button3" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button> </pre>
-      <br>
+      <p class="section-title">--------- Information about conversation ---------</p>
+      <div class="button-group">
+        <button class="join-button2" id="ChildGoals" @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button>
+        <button class="join-button2" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button>
+      </div>
+      <div class="button-group">
+        <button class="join-button2" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button>
+        <button class="join-button2" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button>
+      </div>
+      <div class="button-group">
+        <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button>
+        <button class="join-button2" id="IncUtterances" @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button>
+      </div>
+
+      <p class="section-title">--------- Change the conversation ---------</p>
+      <div class="button-group">
+        <button class="join-button3" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>
+        <button class="join-button3" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button>
+      </div>
+
     </div>
 
 
     <div  v-if="visibleDiv === 2"  name="col13" class="buttons1">
-      <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Go to the assessment mode</button>     </pre>
+      <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >To continue, click here to restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Continue to the assessment mode</button>     </pre>
 
-      <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
-      <pre>            <button class="join-button2" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>      <button class="join-button2" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button></pre> <br>
-      <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
-      <pre>            <button class="join-button3" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null" >5-Phase Model Summary</button>      <button class="join-button3" id="IncUtterances"  @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button></pre> <br> <br>
-      <pre>            <button class="join-button3" id="ChildGoals"  @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button>      <button class="join-button3" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button></pre> <br> <br>
-      <pre>            <button class="join-button3" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button>      <button class="join-button3" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button></pre>
+      <p class="section-title">--------- Change the conversation ---------</p>
+      <div class="button-group">
+        <button class="join-button3" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>
+        <button class="join-button3" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button>
+      </div>
 
+      <p class="section-title">--------- Information about conversation ---------</p>
+      <div class="button-group">
+        <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button>
+        <button class="join-button2" id="IncUtterances" @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button>
+      </div>
+      <div class="button-group">
+        <button class="join-button2" id="ChildGoals" @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button>
+        <button class="join-button2" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button>
+      </div>
+      <div class="button-group">
+        <button class="join-button2" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button>
+        <button class="join-button2" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button>
+      </div>
     </div>
 
     <div  v-if="visibleDiv === 3"  name="col13" class="buttons1">
-      <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Go to the assessment mode</button>     </pre>
+      <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >To continue, click here to restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Continue to the assessment mode</button>     </pre>
 
-      <pre><p class="section-title">--------- Information about conversation ---------</p></pre>
-      <pre>            <button class="join-button3" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button>      <button class="join-button3" id="ChildGoals"  @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button></pre> <br> <br>
-      <pre>            <button class="join-button3" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button>      <button class="join-button3" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button></pre> <br> <br>
-      <pre>            <button class="join-button3" id="IncUtterances"  @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button>      <button class="join-button3" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button></pre><br>
-      <pre><p class="section-title">--------- Change the conversation ---------</p></pre>
-      <pre>            <button class="join-button2" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button>      <button class="join-button2" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>      </pre>
-      <br>
+      <p class="section-title">--------- Information about conversation ---------</p>
+      <div class="button-group">
+        <button class="join-button2" id="ExplainSit" @click="ExplainSit" title="Explains what the child is thinking or feeling." :disabled="phase === 5 || phase === null">Current Child's Situation</button>
+        <button class="join-button2" id="ChildGoals" @click="childGoal" title="Shows what the child wants to achieve in the conversation." :disabled="phase === 5 || phase === null">Current Child's Goal</button>
+      </div>
+      <div class="button-group">
+        <button class="join-button2" id="WhatNext" @click="WhenNext" title="Shows your progress in the current phase and how to proceed to the next phase." :disabled="phase === 5 || phase === null">Current Phase Progress</button>
+        <button class="join-button2" id="advice" @click="GiveAdvice" title="Gives you a hint about what you should say next in the conversation." :disabled="phase === 5 || phase === null">Advice on Next Message</button>
+      </div>
+      <div class="button-group">
+        <button class="join-button2" id="IncUtterances" @click="IncUtterances" title="Displays messages that might be better suited for a different phase than the one you wrote them in." :disabled="phase === 5 || phase === null">View Messages Evaluation</button>
+        <button class="join-button2" id="5Phases" @click="FivePhasesButton" title="Shows an overview of the 5-phase model" :disabled="phase === 5 || phase === null">5-Phase Model Summary</button>
+      </div>
+
+
+      <p class="section-title">--------- Change the conversation ---------</p>
+      <div class="button-group">
+        <button class="join-button3" id="UndoStep" @click="UndoStep" title="Deletes your last message in the conversation" :disabled="phase === 5 || phase === null">Undo My Last Message</button>
+        <button class="join-button3" id="UndoPhase" @click="UndoPhase" title="Goes back to the start of the current phase in the 5-phase model" :disabled="phase === 5 || phase === null">Restart the Phase</button>
+      </div>
     </div>
 
 
@@ -68,7 +118,7 @@
 
     <div  hidden class="first">
       <div  v-if="showFeedback"  name="col13" class="buttons2">
-        <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >Restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Go to the assessment mode</button>     </pre>
+        <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "request-session" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the assessment mode" @click="this.redoScenario()" name = "request-session" >To continue, click here to restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Continue to the assessment mode</button>     </pre>
 
       </div>
       <pre><button @mouseover="showInfo" @mouseleave="hideInfo" class="join-button" id="UndoStep" @click="UndoStep" >Undo Last Message</button> </pre> <br>
@@ -634,6 +684,8 @@ export default {
       setTimeout(() => {
         this.$refs.webChat.reachedPhase5 = true;
         this.showFeedback=true;
+        this.$refs.webChat.Fdbkmsg= true;
+
 
       }, 2000);
 
@@ -650,6 +702,7 @@ export default {
     openFeedback(){
 
       this.$refs.joinPopup2.headerText= "View feedback";
+      this.$refs.webChat.Fdbkmsg= false;
 
       this.Feedbackmsg="";
       const prevPhase = this.$refs.beliefInput.updateLastphase();
@@ -667,13 +720,13 @@ export default {
       }
 
       if(prevPhase ===3) {
-        if (this.userIntents.some(item => item.UserIntent === "inform_unknown_positive")) {
-          this.Feedbackmsg = this.Feedbackmsg + " Also, the helpline doesn't talk to someone on behalf of the child. Instead, a counselor should work with the child to find a solution together.";
+        if (this.userIntents.some(item => item.UserIntent === "inform_goal_positive" || item.UserIntent === "inform_goalhitstop_positive")) {
+          this.Feedbackmsg = this.Feedbackmsg + " Also, the helpline doesn't talk to someone on behalf of the child or solve their problem. Instead, a counselor should work with the child to find a solution together.";
 
         }
       }
-      if(this.userIntents.some(item => item.UserIntent === "inform_goal_negative" || item.UserIntent === "inform_unknown_negative")){
-        this.Feedbackmsg= this.Feedbackmsg + " And you should avoid using negative expressions such as 'we can't do that', as it can make the child feel discouraged. Instead, suggesting to work together on a solution would set-up the correct expectations of this conversation." ;
+      if(this.userIntents.some(item => item.UserIntent === "inform_goal_negative" || item.UserIntent === "inform_unknown_negative" || item.UserIntent === "inform_goalhitstop_negative")){
+        this.Feedbackmsg= this.Feedbackmsg + " And you should avoid using negative expressions such as 'we can't do that' or 'you shouldn't do this', as it can make the child feel discouraged. Instead, suggesting to work together on a solution would set-up the correct expectations of this conversation." ;
       }
 
       this.showRedo=true;
@@ -1061,7 +1114,7 @@ export default {
 
         else if(this.$refs.beliefInput.beliefs[15].value < 1){
           this.adviceMsg = "Suggest working together with the child to find a goal for the conversation. This can strengthen your connection and show how you can help.";
-          this.childSitMsg = "The child has a misconception about how to solve their problem and wants you to solve it."; // change this with the hit back scenarios
+          this.childSitMsg = "The child has a misconception or an idea about how to solve their problem and wants you to solve it."; // change this with the hit back scenarios
           this.progressMsg="You completed 50% of phase 3 (Setting the session’s goal). \n " +
               "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
           this.Feedbackmsg="In phase 3, suggest working together with the child to find a goal. This strengthens your connection and shows how you can help. The virtual child misunderstood how to solve their problem and wanted you to solve it.";
@@ -1437,9 +1490,10 @@ export default {
   font-size: x-large;
   padding: 0.8rem;
   font-family: 'Anton', sans-serif;
-  width: 40%;
+  width: 46%;
+  white-space: normal; /* Allow text to wrap */
   cursor: pointer;
-
+  //max-height: 90vh;
   /* borders only used in accessibility mode */
   border: solid;
   border-width: var(--basic-border-width);
@@ -1454,9 +1508,11 @@ export default {
   color: var(--chat-widget-button-text);
   font-size: x-large;
   padding: 0.8rem;
+  white-space: normal; /* Allow text to wrap */
   font-family: 'Anton', sans-serif;
-  width: 40%;
+  width: 46%;
   cursor: pointer;
+  //max-height: 90vh;
 
   /* borders only used in accessibility mode */
   border: solid;
@@ -1467,7 +1523,7 @@ export default {
 
 .feedbackSub{
   border-radius: 16px;
-  background-color: #08cad0;
+  background-color: #089094;
   border: none;
   color: var(--chat-widget-button-text);
   font-size: x-large;
@@ -1507,7 +1563,6 @@ export default {
 
 .buttons1 {
   width: 90%;
-  padding-top: 3%;
 }
 .buttons2 {
   width: 150%;
@@ -1523,15 +1578,22 @@ export default {
 
 .section-title {
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 7px;
   padding-left: 50px;
-  font-size: xx-large;
+  font-size: 24px;
   color: floralwhite;
   text-align: center;
 }
 
 #UndoStep:hover {
 
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between; /* Adjusts the space between the buttons */
+  margin-bottom: 5%; /* Space below each group of buttons */
+  padding-left: 7%;
 }
 
 

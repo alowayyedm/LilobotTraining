@@ -13,8 +13,11 @@ public class MetaExperiment {
     private String username;
 
     private int condition;
-    private int knowledge;
+    private int knowledgetest;
     private int sessNum;
+    private String knowledgeOrder;
+    private String knowledgeOrderUpdt;
+
 
     public Long getId() {
         return id;
@@ -40,12 +43,12 @@ public class MetaExperiment {
         this.condition = condition;
     }
 
-    public int getKnowledge() {
-        return knowledge;
+    public int getKnowledgetest() {
+        return knowledgetest;
     }
 
-    public void setKnowledge(int knowledge) {
-        this.knowledge = knowledge;
+    public void setKnowledgetest(int knowledge) {
+        this.knowledgetest = knowledge;
     }
 
     public int getSessNum() {
@@ -54,5 +57,21 @@ public class MetaExperiment {
 
     public void setSessNum(int SessNum) {
         this.sessNum = SessNum;
+    }
+
+    public String getKnowledgeOrder() {
+        return knowledgeOrder;
+    }
+
+    public void setKnowledgeOrder(String knowledgeOrder) {
+        this.knowledgeOrder = knowledgeOrder;
+    }
+
+    public String getKnowledgeOrderUpdt() {
+        return knowledgeOrderUpdt;
+    }
+
+    public void setKnowledgeOrderUpdt(String knowledgeOrderUpdt) {
+        this.knowledgeOrderUpdt = knowledgeOrderUpdt;
     }
 }

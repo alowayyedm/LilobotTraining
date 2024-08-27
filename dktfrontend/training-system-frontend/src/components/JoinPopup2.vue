@@ -286,6 +286,8 @@
  .phases{
    font-family: 'arial', sans-serif;
    text-align: left;
+   max-height: 70vh;
+   overflow: auto;
  }
 
  #popup-box #join{

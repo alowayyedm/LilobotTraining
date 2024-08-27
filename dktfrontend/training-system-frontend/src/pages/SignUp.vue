@@ -76,7 +76,9 @@ export default {
       Knid: null,
       Sessnum: null,
       errors: [],
-      errorCodes: []
+      errorCodes: [],
+      randomNumbers: [],
+      randomNumbersupd: []
     };
   },
   mounted() {
@@ -128,6 +130,22 @@ export default {
 
       console.warn("Change role to " + this.role);
     },
+    generateRandomOrder() {
+      // Create an array of numbers from 0 to 11
+      let numbers = Array.from({ length: 12 }, (_, i) => i);
+
+      // Shuffle the array using the Fisher-Yates algorithm
+      for (let i = numbers.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+      }
+
+      // Set the shuffled array to randomNumbers
+      this.randomNumbers = numbers.join(',');
+
+      // Repeat the randomNumbers sequence to create randomNumbersupd
+      this.randomNumbersupd = this.randomNumbers + "," + this.randomNumbers;
+    },
 
     register() {
       this.errors = []
@@ -162,12 +180,14 @@ export default {
       }
 
       // add adding meta experiment data here
-
+      this.generateRandomOrder();
       const data = {
         username: this.username,
         condition: this.cond, //int
-        knowledge: this.Knid,
-        sessNum: this.Sessnum
+        knowledgetest: this.Knid,
+        sessNum: this.Sessnum,
+        knowledgeOrder: this.randomNumbers,
+        knowledgeOrderUpdt:this.randomNumbersupd
       };
 
 

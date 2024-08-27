@@ -4,7 +4,7 @@
       <div class="instruction">
         <br><br>
         <h3 class="subtitle">Reflection Form</h3>
-        <p class="subsubtitle">Please write your thoughts to reflect on your learning from the last exploration session.</p>
+        <p class="subsubtitle"><b>Write your thoughts to reflect on your learning from the last exploration session. Reflecting takes time, so don't rush. After this, you will continue to the assessment mode.</b></p>
         <br>
 
         <form @submit.prevent="handleSubmit">
@@ -21,7 +21,7 @@
           </div>
           <br>
           <div class="form-item">
-            <label for="learningReflection">Please reflect on your learning experience. Consider aspects such as what you learned, how you learned it, why learning it matters, how to apply it, whether it changed your way of thinking, what the outcomes were, and how you felt while learning.</label>
+            <label for="learningReflection">Please reflect on your learning experience. Consider aspects such as what you learned, how you learned it, why learning it matters, how to apply it, whether it changed your way of thinking, what strategies did you use to learn, what the outcomes were, and how you felt while learning.</label>
             <textarea
                 id="learningReflection"
                 v-model="learningReflection"

@@ -11,7 +11,7 @@
           In the exploration mode, you will interact with two different virtual children without being assessed. Please be aware that the virtual children cannot answer questions on unrelated topics. Ensure your responses align with the current topic of conversation.        </p>
         <br>
       </div>
-      <router-link  to="/train" id="chat-history-link">
+      <router-link  to="/trains" id="chat-history-link">
         <button class="button-with-icon-and-text">Please click here to start the exploration mode</button>
       </router-link>
     </div>
