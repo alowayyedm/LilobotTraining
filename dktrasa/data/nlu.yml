@@ -676,6 +676,7 @@ nlu:
     - how would you feel if you were no longer bullied?
     - how does that make you feel?
     - what do you feel about that?
+    - how does bullying makes you feel?
     - how would you feel?
     - what would you notice?
     - would you notice something about yourself?
@@ -695,6 +696,10 @@ nlu:
     - what do you feel differently?
     - What is it like for you to be bullied so much?
     - how does that feel?
+    - what do you feel when [they]["entity": "bully_pronoun"] bully you?
+    - how does it feel being bullied?
+    - what does it feel to be bullied?
+    
     
     
 - intent: request_bullying_confidant
