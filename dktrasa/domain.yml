@@ -13,6 +13,9 @@ intents:
 - request_bullying_duration
 - request_unknown_duration
 - request_bullying_frequency
+- request_bullying_age
+- request_meta_active
+- request_bullying_bullyage
 - request_unknown_frequency
 - request_unknown_when
 - request_bullying_why
