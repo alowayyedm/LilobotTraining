@@ -76,7 +76,7 @@ class ActionSetReminder(Action):
         reminder = ReminderScheduled(
             "EXTERNAL_reminder",
             trigger_date_time=date,
-            name="my_reminder",
+            name=f"my_reminder_{tracker.sender_id}",  # Unique name per user
             kill_on_user_message=True,
         )
 
