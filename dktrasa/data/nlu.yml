@@ -111,6 +111,7 @@ nlu:
     - hallo
     - Hi
     - Hi.
+    - hey there
     - Hiii.
     - Good morning
     - Good evening
@@ -135,7 +136,7 @@ nlu:
     - Hello [Jim]{"entity": "child_name"}!
     - Hello [Tim]{"entity": "child_name"}
     - Hello [Ava]{"entity": "child_name"}!
-    - Hello [Axel]{"entity": "child_name"}
+    - hello [Axel]{"entity": "child_name"}
     - Hello [Dania]{"entity": "child_name"}
     - I am [Lotte]{"entity": "name"} from the Child Helpline
     - Hi, this is [Lotte]{"entity": "name"} from the Child Helpline
@@ -144,6 +145,7 @@ nlu:
     - Hi, my name is [Lotte]{"entity": "name"}
     - Hi, thank you for reaching out
     - Hello, thank you for calling
+    - thank you for reaching out
     - Hi, welcome here
     - Hello, welcome here
     - Hi there, thank you for reaching out
@@ -157,6 +159,8 @@ nlu:
     - How are you?
     - Nice to meet you [Kai]{"entity": "child_name"}
     - Nice to meet you
+    - how can I help you?
+    - how may I help you?
     - what are you up to right now?
     - Great to meet you [Daisy]{"entity": "child_name"}
     - Fantastic to have you here today
@@ -185,6 +189,7 @@ nlu:
     - How's your day been so far?
     - How have things been going for you?
     - How are you feeling today?
+    - How are you feeling [Daisy]{"entity": "child_name"}?
     - How do you feel?
     - How's everything?
     - How are things going?
@@ -223,6 +228,7 @@ nlu:
     - tell me
     - why?
     - Why?
+    - what's the issue?
     - why
     - why not?
     - why are you calling?
@@ -239,6 +245,7 @@ nlu:
     - do you need help with something?
     - why are you sad?
     - why is that?
+    - and why is that?
     - oh no, why are you feeling sad?
     - what makes you feel sad?
     - why is it not going well for you
@@ -258,6 +265,7 @@ nlu:
     - do you want to talk about a problem?
     - would you like to tell us about a problem?
     - tell us why you are contacting us
+    - Why did you decide to contant me?
     - tell me why you are contacting us?
     - what is the reason you're calling?
     - what makes you feel that way?
@@ -274,6 +282,7 @@ nlu:
     - who takes your toy?
     - who are the bullies?
     - who hit you?
+    - Is this person your [teammate]{"entity": "bully"}?
     - hide from who?
     - Who taunts you?
     - Is this person someone you know?
@@ -348,13 +357,21 @@ nlu:
   examples: |
     - Would you like to tell me more about your situation?
     - can you tell me more about your situation?
+    - tell me what the problem is
+    - what are some of the things [they]{"entity": "bully_pronoun"} say
     - please tell me more about your situation
     - please tell me more about the bullying
     - can you tell me more about the problem?
+    - What is your brother]{"entity": "bully"} doing to you?
     - what do [they]{"entity": "bully_pronoun"} do to you?
     - What do [they]{"entity": "bully_pronoun"} tell you?
     - Would you like to tell me more about the bullying?
     - tell me about your bullying
+    - What kind of messages do you get?
+    - do [they]{"entity": "bully_pronoun"} do other mean things?
+    - Can you explain the bullying?
+    - does [they]{"entity": "bully_pronoun"} hit you?
+    - does [he]{"entity": "bully_pronoun"} steal the toy?
     - can you tell me more about the bullying?
     - are you bullied by someone?
     - how do [they]{"entity": "bully_pronoun"} bully you?
@@ -363,6 +380,7 @@ nlu:
     - how does [he]{"entity": "bully_pronoun"} bully you?
     - what happens during bullying?
     - would you like to talk about it?
+    - is there something happening in [school]{"entity": "place"}?
     - do you want to talk about it?
     - what do [they]{"entity": "bully_pronoun"} do when [they]{"entity": "bully_pronoun"} bully you?
     - what does [she]{"entity": "bully_pronoun"} do when [she]{"entity": "bully_pronoun"} bully you?
@@ -391,6 +409,7 @@ nlu:
     - would you like to say more about it?
     - Would you like to say or ask more about it?
     - tell me more
+    - want to tell me more?
     - Could you tell me more details?
     - can you give me more details?
     - what happened?
@@ -525,8 +544,11 @@ nlu:
     - since when have you had this problem?
     - how long have you been bullied?
     - Have you been bullied for a long time?
+    - Has this happen for a long time?
     - since when have you been bullied?
     - when did this problem start?
+    - For how long did it start?
+    - How long has [he]{"entity": "bully_pronoun"} been doing this for?
     - would you like to tell me when did bullying start?
     - when did the bullying first occur?
     - when did your [teammates]{"entity": "bully"} bully you?
@@ -569,13 +591,13 @@ nlu:
     - Since when have you been struggling with this?
     - Since when has this been bothering you?
     - How many weeks have you been suffering from this?
-    - how long has this been going on?
     - when did this start?
     - do you know how long this has been going on?
     - how long has this been going on?
     - since when has this been happening?
     - since when has this been going on?
     - When did this happen?
+    - when did it happen?
 
 
 - intent: request_bullying_frequency
@@ -655,6 +677,7 @@ nlu:
   examples: |
     - why do [they]{"entity": "bully_pronoun"} bully you?
     - why does [they]{"entity": "bully_pronoun"} bully you?
+    - Why do you think your [classmates]{"entity": "bully"} bully you?
     - why does [he]{"entity": "bully_pronoun"} hide your toy?
     - why are [children]{"entity": "bully"} bullying you?
     - why are [kids]{"entity": "bully"} bullying you?
@@ -670,9 +693,11 @@ nlu:
     - what is the cause of the problem?
     - do you know why you are being bullied?
     - why are you being bullied?
+    - Why do you think your [neighbours]{"entity": "bully"} do it?
     - do [they]{"entity": "bully_pronoun"} say why [they]{"entity": "bully_pronoun"} bully you?
     - do you have an idea why [they]{"entity": "bully_pronoun"} bully you?
     - do you know the cause of the problem?
+    - Do you know the reason for this?
     - do you know the cause of the bullying?
     - do [they]{"entity": "bully_pronoun"} say why [they]{"entity": "bully_pronoun"} bully you?
     - do [they]{"entity": "bully_pronoun"} tell you why they are bullying you?
@@ -735,7 +760,8 @@ nlu:
     - what have you already tried to make sure it stops?
     - have you tried anything to make it stop?
     - Did you do something to stop it?
-    - would you like to tell me if you response to them?
+    - Have you tried telling [them]{"entity": "bully_pronoun"} to stop?
+    - would you like to tell me if you response to [them]{"entity": "bully_pronoun"}?
     - did you response to [them]{"entity": "bully_pronoun"}?
 
 
@@ -805,8 +831,12 @@ nlu:
 - intent: request_bullying_confidant
   examples: |
     - have you told anyone that you are being bullied?
+    - Did you tell someone about your problem?
+    - have you reached out to others for help 
     - have you told anyone that your [brother]{"entity": "bully"} takes your toy?
     - Did you tell anyone about the bullying?
+    - did you tell anyone about it?
+    - who do you think you could tell?
     - did you tell anyone about this?
     - have you told anyone other than me about the bullying?
     - have you told anyone other than me about your situation?
@@ -822,6 +852,7 @@ nlu:
     - who knows that you are being bullied?
     - who knows that you are being bullied?
     - have you ever told anyone but me?
+    - do you feel safe talking to someone?
     - You should talk with an adult
     - Did you tell anyone about the bullying?
     - Have you told anyone other than me about the bullying?
@@ -853,6 +884,7 @@ nlu:
     - have you talked about it with anyone?
     - did anyone see it happen?
     - did you tell anyone?
+    - Have you told your [brother]{"entity": "bully"}
     - is anyone else aware of this?
     - did you let anyone else know?
     - who did you tell this to?
@@ -870,7 +902,6 @@ nlu:
     - Have you tried talking to anyone about how you're feeling?
     - You need to tell someone about it
     - I think you should tell someone about it
-
 
 
 
@@ -907,10 +938,17 @@ nlu:
     - you say that you are being bullied, is that correct?
     - So your [brother]{"entity": "bully"} took your toy yesterday, is that correct?
     - So, you were bullied by [brother]{"entity": "bully"}, right?
+    - So, I understand you are being bullied by [brother]{"entity": "bully"} at [home]{"entity": "place"}
     - so, you were bullied at [home]{"entity": "place"} yesterday, is that right?
     - if I understand you correctly, you are being bullied at [home]{"entity": "place"}, is that correct?
     - you indicate that you are being bullied, is that correct?
     - if I understand you correctly, you are being bullied at [school]{"entity": "place"} and you would like to go to another [school]{"entity": "place"}, is that correct?
+    - so, i understand you are being bullied in [school]{"entity": "place"}, and you feel sad
+    - Is someone bullying you [online]{"entity": "place"}?
+    - So [kids]{"entity": "bully"} from your [neighbourhood]{"entity": "place"} are bullying you?
+    - So, your [brother]{"entity": "bully"} bullies you?
+    - if I understand correctly, you feel powerless?
+    - And you would like to stop it?
     - i understand you're being bullied
     - so, you were bullied at [home]{"entity": "place"} yesterday?
     - So, you were bullied while playing [online]{"entity": "place"} yesterday?
@@ -948,6 +986,7 @@ nlu:
     - I can manage that
     - no problem
     - I'll do it
+    - yes
     - I can call tomorrow
     - I could call the [school]{"entity": "place"}
     - I can call your [school]{"entity": "place"}
@@ -956,11 +995,13 @@ nlu:
     - I can call their parents
     - yes, I will call your parents
     - yes I can call your parents
+    - I will call 
     - It's not a problem.
     - I'll take care of it.
     - Alright I will call the [school]{"entity": "place"}.
     - I will talk to your [school]{"entity": "place"}
     - I can make a phone call.
+    - I can contact your [teacher]{"entity": "trustee"}
     
 - intent: inform_goalhitstop_positive
   examples: |
@@ -1056,6 +1097,15 @@ nlu:
     - I can talk to you
     - I'd like to talk to you
     - we can help with that
+    - I can help you
+    - I'm here to hear you
+    - we are here to help you
+    - i am here to suppuort you
+    - i am here to help you overcome the fear
+    - i want to help you
+    - i will be here to assist anytime
+    - I'm here to listen to you
+    - I'm here if you want to talk more
 
   # acknowledgements
 - intent: ack_unknown_empathize
@@ -1065,26 +1115,29 @@ nlu:
     - sorry to hear that
     - those kids are mean
     - what a shame
+    - That's mean
+    - bullying can be tough
+    - It's sad to hear that.
     - how annoying
+    - It sounds really frustrating
+    - I understand how you feel
+    - I can really feel your fear
+    - poor [Ori]{"entity": "child_name"}
+    - you are not stupid
     - I know this can be harmful
     - Don't think too much about it
     - I can feel your emotions
     - that's horrible
     - I know how you feel
     - Don't feel powerless
+    - You can do a lot
+    - You deserve better
     - thats sad
     - you are not dump
     - you are not guilty of anything
     - you deserve to feel safe at school
     - im sorry to hear this
-    - I'm here to hear you
     - im sorry to hear you've been getting bullied
-    - we are here to help you
-    - i want to help you
-    - i will be here to assist anytime
-    - let's see together what you can do
-    - I'm here to listen to you
-    - I'm here if you want to talk more
     - how bad for you
     - that seems very frustrating to me
     - that doesn't sound nice
@@ -1100,6 +1153,7 @@ nlu:
     - I can imagine that it makes you sad
     - that is understandable
     - that is not nice
+    - oh, that's not nice
     - that sucks
     - that must hurt!
     - Im sorry to hear that
@@ -1111,10 +1165,11 @@ nlu:
     - wow, that sounds bad
     - That's bad
     - I can imagine that is tough
-    - bullied, what a shame
+    - what a shame
     - Wow, not nice
     - I'm sorry to hear that
     - I'm sorry for you
+    - am sorry to here this
     - that is shocking
     - it's not easy
     - I'm so sorry you're being bullied
@@ -1136,8 +1191,8 @@ nlu:
     - I understand that you are disappointed
     - how awful
     - I completely understand it's difficult
-    - if I understand correctly, you feel powerless?
     - don't worry
+    - I want the bullying to stop too
     
 
 - intent: ack_unknown_neutral
@@ -1153,21 +1208,34 @@ nlu:
     - I understand that.
     - I get it.
     - how nice.
+    - I'm happy to hear that!
 
 - intent: ack_unknown_compliment
   examples: |
     - That's really good of you
     - That's a great idea, I think
     - Good idea
+    - I like your thinking
     - Thanks
+    - that sounds good
+    - You are better than them
+    - You deserve better friends
     - good to hear
+    - You've got this!
+    - You are intelliegent
     - Yes
+    - all the best to you
     - sure
     - yes, that's a good idea
+    - That is an excellent idea!
     - thanks for telling me!
+    - thank you for telling me
     - you can do this
+    - I know you can do it!
     - awesome
-    - You are very smart
+    - You're awesome
+    - you are amazing
+    - You are smart
     - okay thank you [Jim]{"entity": "child_name"}
     - You are brave
     - Thank you [Jim]{"entity": "child_name"}
@@ -1227,7 +1295,6 @@ nlu:
     - Good to know what you want in this conversation
     - Impressive how you talk about it
     - That is a great idea to tell
-    - you are amazing
     - you are beautiful
 
     
@@ -1239,6 +1306,7 @@ nlu:
     - That's great that you're contacting the child helpline
     - nice that you come and chat with us
     - Nice that you're chatting with us
+    - Thank you for sharing with me
     - Thank you for reaching out [Ori]{"entity": "child_name"}
     - Good that you reached out to us
     - Good that you're contacting us
@@ -1263,6 +1331,9 @@ nlu:
   examples: |
     - what would you like most?
     - what would you like?
+    - What do you think can we do?
+    - What do you think could be our goal?
+    - What would you like to work on today?
     - What do you expect with counselling?
     - what would you like to do about [home]{"entity": "place"}?
     - What would you like to do with the situation?
@@ -1401,7 +1472,10 @@ nlu:
     - we can look for a different solution together. what do you think of that?
     - I suggest that we look for another solution together. what do you think?
     - Should we find a solution together?
+    - How about we figure out ways to solve your problem?
+    - Maybe we can think of ways to make you feel safer
     - would you like to set a goal for this session
+    - lets work on a solution
     - So you want to talk about how to fix your situation?
     - i think we should set a goal for when these situations arise, what do you think?
     - shall we find a solution together?
@@ -1410,7 +1484,13 @@ nlu:
     - What do you want to achieve with the talk
     - Would you like to talk about some other options?
     - we could discuss the strategy together.
+    - How about finding a solution to this situation?
     - we will work towards that
+    - We should think of another solution together
+    - how do you think we can do that?
+    - let's see together what you can do
+    - We can solve this problem together
+    - Let's try to find a solution to your problem
     - Should we find a solution together in this chat discussion?
     - we can search for a solution together. Would you want that?
     - what do you think about finding a solution together?
@@ -1422,7 +1502,9 @@ nlu:
     - do you want to find a solution together?
     - shall we look for a solution together?
     - let's find a solution together
+    - Let's find a solution to your problem
     - Let's make a plan!
+    - maybe we can think of a way for you to solve this 
     - Shall we look together at how we can solve this?
     - Shall we look together at how we can solve this problem?
     - I propose that we look for a solution together, is that okay with you?
@@ -1462,9 +1544,8 @@ nlu:
     - what can I do?
     - what should we try in this chat discussion?
     - how can we work on this?
-    - how can I help you?
-    - how may I help you?
     - what can I do?
+    - How do you think we can get the bullying to stop?
     - what could I do to fix this?
     - what I can do for you?
     - what do you want from me?
@@ -1472,6 +1553,7 @@ nlu:
     - is there anything I can do for you?
     - is there anything I can do for you?
     - can I help you further?
+    - What do you think we could do?
     - What could we do to fix your problem?
     - how can I solve your problem?
     - is there anything I can do to help you?
@@ -1488,7 +1570,7 @@ nlu:
     - is there anything you want from me?
     - what could I do for you?
     - how could I ensure that you are no longer bullied?
-    - how could I make you feel safe at school?
+    - how could I make you feel safe at [school]{"entity": "place"}?
     - how could I ensure that your problem is resolved?
     - how could I make sure [they]["entity": "bully_pronoun"] don't bully you anymore?
     - can I do something?
@@ -1505,6 +1587,7 @@ nlu:
     - where can you use my help?
     - how could you use my help?
     - how can you use my help?
+    - How do you think we can get the bullying to stop?
     - What could we do so that you feel less left out?
     - what could you use my help with?
     - how could I assist you?
@@ -1517,10 +1600,13 @@ nlu:
     - what can you do to stop it?
     - So what do you think would be the best solution to your situation?
     - what can you do yourself?
+    - What do you think you should do?
+    - what else do you think you can do?
     - what would you advice a friend of yours with the same problem?
     - What have you done before to stop the bullying?
     - what could you do yourself?
     - what could you try yourself?
+    - Do you have any idea on how to fix this problem?
     - what would you like to do to solve this?
     - what would you do to solve this?
     - what could you do to make sure you feel safe at [home]{"entity": "place"}?
@@ -1531,6 +1617,7 @@ nlu:
     - what else could you try?
     - what can you do about this?
     - what can you do to stop it?
+    - What ideas do you have to get the bullying to stop?
     - what can you do yourself?
     - what could you do yourself?
     - What could you say so that you feel less left out
@@ -1541,6 +1628,8 @@ nlu:
     - do you think you could do something about this yourself?
     - what is the best thing you can do?
     - what else could you try?
+    - What are you planning to do?
+    - What are you planning to do?
     - what can you do about this?
 
 
@@ -1597,14 +1686,23 @@ nlu:
     - can you talk to someone about it?
     - is there anyone else you can tell?
     - is there anyone else you trust?
+    - Do you have someone you can talk to about this situation?
+    - Do you have someone close that you can talk to about this situation?
+    - How about talking to someone close about it?
+    - do you think someone could help you?
+    - Who are the individuals that bully you
+    - Is there anyone you trust that you can tell about this situation?
+    - Is there someone you can tell?
     - Is there somebody at your [school]{"entity": "place"} you can talk to yourself? 
     - you can start by talking to your [teacher]{"entity": "trustee"}
+    - A [teacher]{"entity": "trustee"} maybe?
     - Is there somebody at [school]{"entity": "place"} you could talk about so you feel safe again?
     - Is there somebody you could talk about so you feel safe again?
     - Is there somebody at your [school]{"entity": "place"} you can talk to yourself?
     - can you discuss this problem with someone?
     - do you have anyone to talk to about this?
     - is there anyone else who understands you?
+    - do you think you could tell someone?
     - do you think there is someone you can talk to about this?
     - do you know someone who would listen to you about this problem?
     - do you know someone who wants to listen to you?
@@ -1615,6 +1713,9 @@ nlu:
     - who could you ask this about?
     - who can you tell to about this?
     - who do you trust with this problem?
+    - Is there an adult that you trust?
+    - Do you have any adult in mind that you can tell?
+    - Who do you have in mind that you can tell?
     - is there anyone you trust?
     - is there anyone at [school]{"entity": "place"} you trust?
     - can you talk to someone about this problem?
@@ -1645,7 +1746,9 @@ nlu:
 - intent: confirm_confidant_teacher
   examples: |
     - could you talk to your [mom]{"entity": "trustee"} about this?
+    - have you tried talking to [Anu]{"entity": "trustee_name"}?
     - could you talk to [Fred]{"entity": "trustee_name"} about this?
+    - will you tell your [Anu]{"entity": "trustee_name"}?
     - would you talk to your [teacher]{"entity": "trustee"} about this?
     - So, you're going to talk with your [teacher]{"entity": "trustee"} about it?
     - What do you think about talking to your [teacher]{"entity": "trustee"}?
@@ -1655,6 +1758,7 @@ nlu:
     - would you like to talk to [Miss Ellie]{"entity": "trustee_name"}?
     - could you talk to [Miss Clara]{"entity": "trustee_name"}?
     - You can tell your [teacher]{"entity": "trustee"}
+    - I suggest that you tell your [teacher]{"entity": "trustee"} about it
     - You can tell your [teacher]{"entity": "trustee"} about all the kids making fun of you
     - could you talk to [Ms. Rachel]{"entity": "trustee_name"}?
     - do you dare to talk to your [trainer]{"entity": "trustee"}?
@@ -1698,6 +1802,9 @@ nlu:
     - when will you tell [him]{"entity": "trustee_pronoun"} that your [brother]{"entity": "bully"} takes your toy?
     - when are you going to tell?
     - when would you do that?
+    - What about next week?
+    - How about we tell your [mom]{"entity": "trustee"} later?
+    - what about tomorrow?
     - you can approach [him]{"entity": "trustee_pronoun"} after a class
     - maybe you should meet up with [her]{"entity": "trustee_pronoun"} sometime
     - When can you tell your [trainer]{"entity": "trustee"}?
@@ -1729,6 +1836,7 @@ nlu:
     - what would it be like to tell [Mr. Mark]{"entity": "trustee_name"}?
     - Would you feel better if you talked to [her]{"entity": "trustee_pronoun"}?
     - What would it be like to tell it?
+    - How would you feel after telling [her]{"entity": "trustee_pronoun"}?
     - What would it be like to talk to [Mark]{"entity": "trustee_name"}?
     - What would it be like to tell [Aunt Emma]{"entity": "trustee_name"}?
     - how would you feel if you told [mister Mark]{"entity": "trustee_name"}?
@@ -1752,6 +1860,7 @@ nlu:
     - why are you afraid to talk to [him]{"entity": "trustee_pronoun"}?
     - why are you afraid to talk to [Miss Ellie]{"entity": "trustee_name"}?
     - why didn't you talk to [them]{"entity": "trustee_pronoun"}?
+    - What do you think could happen if you told someone?
     - why didn't you talk to [mom]{"entity": "trustee"}?
     - why are you scared to ask?
     - What makes you feel scared?
@@ -1767,9 +1876,11 @@ nlu:
     - how would you talk it over with your [mom]{"entity": "trustee"}?
     - how are you going to tell [her]{"entity": "trustee_pronoun"}?
     - how can you tell [Miss Rachel]{"entity": "trustee_name"}?
+    - How do you plan on talking to [Miss Clara]{"entity": "trustee_name"}?
     - Let's think about how you could tell [her]{"entity": "trustee_pronoun"}.
     - how would you talk to [Aunt Anu]{"entity": "trustee_name"}?
     - how are you going to tell [her]{"entity": "trustee_pronoun"}?
+    - How do you plan on telling your [mother]{"entity": "trustee"}?
     - how can you tell [her]{"entity": "trustee_pronoun"}?
     - how could you find the courage to talk to [Anu]{"entity": "trustee_name"}?
     - in what way are you going to discuss it with your [mom]{"entity": "trustee"}?
@@ -1789,16 +1900,22 @@ nlu:
     - for starters, [she]{"entity": "trustee_pronoun"} could listen to your story and support you
     - [he]{"entity": "trustee_pronoun"} can make sure it doesn't happen again
     - [she]{"entity": "trustee_pronoun"} can support you
+    - [he]{"entity": "trustee_pronoun"} can make the bullying stop
     - [he]{"entity": "trustee_pronoun"} can support you
     - [he]{"entity": "trustee_pronoun"} can listen to you and support you
     - your [mom]{"entity": "trustee"} can support you
     - together you can find a solution
+    - explain that you feel sad because [kids]{"entity": "bully"} are bullying you
     - [he]{"entity": "trustee_pronoun"} could stop that from happening
     - [he]{"entity": "trustee_pronoun"} could talk to the bullies' parents
     - [she]{"entity": "trustee_pronoun"} could talk to the bullies' parents
     - I'm sure your [teacher]{"entity": "trustee"} would love to talk to you
     - [Mr. Mark]{"entity": "trustee_name"} could probably talk to the other kids' parents
-    - you can find a solution together
+    - you can find a solution together with [her]{"entity": "trustee_pronoun"}
+    - [she]{"entity": "trustee_pronoun"} can help you
+    - [she] could contact the other parents
+    - [she] could make [them]{"entity": "bully_pronoun"} stop bulliying you
+    - [he]{"entity": "trustee_pronoun"} would tell on the bullies
     - i'm sure [he]{"entity": "trustee_pronoun"} can help you with this
     - [They]{"entity": "trustee_pronoun"} might help you
     - [They]{"entity": "trustee_pronoun"} might help you
@@ -1816,6 +1933,7 @@ nlu:
     - Tell [him]{"entity": "trustee_pronoun"} the same thing you told me
     - Tell [them]{"entity": "trustee_pronoun"} what you told me
     - Tell [her]{"entity": "trustee_pronoun"} that your [brother]{"entity": "bully"} takes your toys.
+    - tell [her]{"entity": "trustee_pronoun"}  what is going on and how you feel about it
     - [she]{"entity": "trustee_pronoun"} might be able to see with you what you can do
     - [she]{"entity": "trustee_pronoun"} can help you
     - [she]{"entity": "trustee_pronoun"} can help stop bullying
@@ -1827,6 +1945,7 @@ nlu:
     - your [mom]{"entity": "trustee"} won't tell anyone
     - maybe [she]{"entity": "trustee_pronoun"} can talk to the bullies so the bullying stops
     - but a [mom]{"entity": "trustee"} can do something
+    - I know that [Fred]{"entity": "trustee_name"} will help you
     - your [teacher]{"entity": "trustee"} will really listen to you
     - your [mom]{"entity": "trustee"} can listen to you
     - your [trainer]{"entity": "trustee"} can help you
@@ -1841,8 +1960,18 @@ nlu:
     - you can say to your [mom]{"entity": "trustee"} the same thing as you told me
     - maybe you should tell the [trainer]{"entity": "bully"} that you are bullied
     - just like you told me
+    - you could tell [him]{"entity": "trustee_pronoun"} the same thing you're telling me.
+    - same as you told me
+    - tell [him]{"entity": "trustee_pronoun"} that [kids]{"entity": "bully"} are bullying you
+    - Tell [her]{"entity": "trustee_pronoun"} exactly what you told me
+    - that you're feeling sad about it
+    - You should tell [her]{"entity": "trustee_pronoun"} how you feel
+    - Tell [her]{"entity": "trustee_pronoun"} that you need help
     - say that you are being bullied by [kids]{"entity": "bully"}
     - the same thing as you told me
+    - Tell [her]{"entity": "trustee_pronoun"} this [girl]{"entity": "bully"} bully you
+    - Tell [her]{"entity": "trustee_pronoun"} these [boys]{"entity": "bully"} bully you
+    - You could tell [her]{"entity": "trustee_pronoun"} that some kids are rude to you
     - you can tell [him]{"entity": "trustee_pronoun"} that you are bullied and you want it to stop
     - the same thing that you mentioned to me
     - that you are being bullied and want to be safe
@@ -1891,6 +2020,9 @@ nlu:
     - Shall we agree that you will talk to your [mom]{"entity": "trustee"} about your situation?
     - do we agree that you will talk to your [mom]{"entity": "trustee"} about your situation?
     - should we agree that you will talk to [teacher]{"entity": "trustee"} tomorrow?
+    - do you feel secure about what to do?
+    - Will you speak with [him]{"entity": "trustee_pronoun"} about it?
+    - Everything will be okay after talking to your [mom]{"entity": "trustee"}
     - Shall we agree that you will talk to your [aunt]{"entity": "trustee"}?
     - should we agree that you will talk to [Miss Ellie]{"entity": "trustee_name"} about your situation tomorrow?
     - Shall we agree that you will talk to [Anu]{"entity": "trustee_name"} tomorrow?
@@ -1919,6 +2051,7 @@ nlu:
     - let's agree that you will simply come back to us if things don't work out. Okay?
     - I hope everything will turn out well
     - if you want to talk again later, you can always come back
+    - talk to me again and tell if it helped
     - you can always come back if you want to talk again
     - you're welcome back if you want to talk
     - you are always welcome back at another time

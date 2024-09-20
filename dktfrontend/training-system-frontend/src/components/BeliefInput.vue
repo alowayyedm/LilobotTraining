@@ -71,9 +71,9 @@
             {{ belief.id }}: {{ belief.fullName }}
       </div>
     </div>
-    {{this.currBeliefs}}
-    {{this.AllBeliefList}}
-    {{this.lastPhase}}
+<!--    {{this.currBeliefs}}-->
+<!--    {{this.AllBeliefList}}-->
+<!--    {{this.lastPhase}}-->
 
 <!--    {{this.currBeliefs}}-->
   </div>
