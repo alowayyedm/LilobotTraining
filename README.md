@@ -180,8 +180,10 @@ The `registerStompEndpoints` method needs to be changed to:
 2. Install Java 16 with:
    - `sudo apt-get update`
    - `sudo apt install oracle-java16-installer`
+If this doesn't work, try with Java 17 instead
 3. Navigate to `/dktbdiagent`
 4. Build the project with: `sudo mvn clean package`
+If this doesn't work, try `sudo mvn clean package -DskipTests`
 5. Run the project with `nohup java -jar target/agent-0.0.1-SNAPSHOT.jar &`
 
 # Configure firewall on the server
