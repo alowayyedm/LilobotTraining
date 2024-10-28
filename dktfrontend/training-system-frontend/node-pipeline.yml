@@ -1,0 +1,26 @@
+stages:
+  - build
+  - test
+
+cache:
+  paths:
+    - dktfrontend/training-system-frontend/node_modules/
+
+
+npm build:
+  image: node:16.13.2
+  stage: build
+  script:
+    - cd dktfrontend/training-system-frontend
+    - npm install --progress=false
+    - npm run build
+  artifacts:
+    paths:
+      - dktfrontend/training-system-frontend/node_modules/
+
+test-dktfrontend:
+  image: node:16.13.2 
+  stage: test
+  script:
+    - cd dktfrontend/training-system-frontend
+    - npm run test:unit
