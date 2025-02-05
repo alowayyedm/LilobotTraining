@@ -537,7 +537,7 @@ export default {
       else if (this.$refs.beliefInput.beliefs[2].value < 0.5 && this.$refs.beliefInput.beliefs[11].value > 0.9 ){
         return 3;
       }
-      else if (this.$refs.beliefInput.beliefs[8].value > 0.6 && this.$refs.beliefInput.beliefs[9].value < 0.1 ){
+      else if (this.$refs.beliefInput.beliefs[8].value > 0.7 && this.$refs.beliefInput.beliefs[9].value < 0.1 ){
         return 4;
       }
       else if (this.$refs.beliefInput.beliefs[9].value > 0.9 && this.$refs.beliefInput.beliefs[7].value < 1 && this.$refs.beliefInput.beliefs[15].value < 0.7 ){
@@ -601,17 +601,21 @@ export default {
 
       else if (PhaseNum ===4){
 
-        if (this.$refs.beliefInput.beliefs[1].value < 0.7){ ////// add another one for answering their concerns?
+        if (this.$refs.beliefInput.beliefs[1].value < 0.7){
 
           this.Feedbackmsg=12;
 
         }
 
-        else if (this.$refs.beliefInput.beliefs[1].value < 0.8){
+        else if (this.$refs.beliefInput.beliefs[12].value < 0.7){
           this.Feedbackmsg=13;
         }
-        else if (this.$refs.beliefInput.beliefs[14].value < 1 && this.$refs.beliefInput.beliefs[1].value > 0.7){
+
+        else if (this.$refs.beliefInput.beliefs[1].value < 0.8){
           this.Feedbackmsg=14;
+        }
+        else if (this.$refs.beliefInput.beliefs[14].value < 1 && this.$refs.beliefInput.beliefs[1].value > 0.7){
+          this.Feedbackmsg=15;
         }
         else{ // add random to give a random msg? or nothing delete?
           this.Feedbackmsg=99;
@@ -632,7 +636,7 @@ export default {
       this.traverseAdvSitu(prevPhase);
       const whyLeft=this.getWhyleft();
       const conversationEndMSG = this.Feedbackmsg; //this is an int
-      const allBeliefsString = this.$refs.beliefInput.AllBeliefList.join(';'); // Convert array to comma-separated string
+      const allBeliefsString = this.$refs.beliefInput.AllBeliefList.join('&'); // Convert array to comma-separated string
 
 
       const data = {

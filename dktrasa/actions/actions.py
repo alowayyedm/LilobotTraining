@@ -58,7 +58,7 @@ class ActionUseBdi(Action):
 
 
 class ActionSetReminder(Action):
-    """Schedules a reminder between 10 and 20 seconds to trigger the BDI agent to say something if user is inactive."""
+    """Schedules a reminder between 13 and 20 seconds to trigger the BDI agent to say something if user is inactive."""
 
     def name(self) -> Text:
         return "action_set_reminder"
@@ -70,7 +70,7 @@ class ActionSetReminder(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
 
-        time = random.randint(10, 20)
+        time = random.randint(13, 20)
         date = datetime.datetime.now() + datetime.timedelta(seconds=time)
 
         reminder = ReminderScheduled(

@@ -1,6 +1,7 @@
 chitchat,init,"Hey, I'm Lilo.","Hiiii I am Lilo","Hello, I'm Lilo!","Hi! I'm Lilo"
 chitchat,greeting,"Hey, I'm Lilo.","Hiiii I am Lilo","Hello!","Hi! I'm Lilo"
 chitchat,faring,"well it's not going well","I'm feeling a little sad","I'm feeling sad","It's not going well :(("
+chitchat,likes,"yess I like school","I like my school","I like school","yes"
 chitchat,end,"okaaaay that's good!","okaaaay great!","yeah, okeeey :)))", okeeey :))
 chitchat,goodbye,"Bye bye!","Bye!","Goodbye.","Have a nice day!"
 bullying,what,"I get bullied at school.","I'm bullied at school","I'm being bullied","I'm being bullied at school :("
@@ -46,6 +47,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,"I don't want to talk about that","I don't want to talk about it","I don't want to talk about this","I don't want to talk about that"
 ack,helpful,Yes I will try. thanks,Yes I will talk to Miss Ellie tomorrow. Thank you!,yes thank you, Yessss
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to Miss Ellie tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"

@@ -1,6 +1,7 @@
 ﻿chitchat,init,"Hey, I'm Ava","Hiiii I am Ava","Hello, I'm Ava","Hi! I'm Ava"
 chitchat,greeting,"Hey, I'm Ava","Hiiii I am Ava","Hello, I'm Ava","Hi! I'm Ava"
 chitchat,faring,"well it's not going well","I'm feeling a little sad","I'm feeling sad","It's not going well :(("
+chitchat,likes,"yess I like facebook","I like social media","I like facebook","yes"
 chitchat,end,"Okay, that sounds good!","Great!","Yeah, okay :)))","Okaaaaay"
 chitchat,goodbye,"Bye bye!","Byeeeee","Goodbye!","Bye, have a nice day!"
 bullying,what,"I'm being bullied on social media","Someone is bullying me online","I am bullied on social media :(","A person bullies me online"
@@ -15,7 +16,7 @@ bullying,duration,"Since last month","I think it started last month","I think fo
 bullying,when,"yesterday she messaged me again","Yesterday she called me stupid","Yesterday I got a bad message from her","She texted yesterday"
 bullying,why,"I don't know, I've never talked to her in person","I'm not sure, but she always tells me she never want to see me online again :(","I have no idea...","I don't know"
 bullying,response,"At first I told her to stop talking to me but now I don't say anything","To be honest I don't say anything...","I usually leave the messages on read and don't say anything","Nothing actually"
-bullying,feeling,"I'm scared to go on social media again","I once cried because her messages are hurtful","I often go to school and start getting nervous because she might see me","It makes me feel sad and afraid of her"
+bullying,feeling,"I'm scared to go on social media again","I once cried because her messages are hurtful","I get nervous when she sends a message","It makes me feel sad and afraid of her"
 bullying,confidant,"nobody. I'm afraid the bullying will get worse","I haven't told anyone about it.","I haven't talked to anyone about it yet. Otherwise the bullying will get worse. :(","I didn't tell anyone."
 bullying,parent,"I don't want to tell my parents because they might take my phone away","No, I don’t think they would understand","Noo I don't want to","I tried talking to them about it once but they don’t think it’s a problem at all :("
 bullying,attempt,"No","No, I'm scared to do anything","Noo I'm afraid of what could happen","I don't think I can do anything"
@@ -46,6 +47,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,I don't want to talk about that,I don't want to talk about it,I don't want to talk about this,I don't want to talk about that
 ack,helpful,"Yes I will try, thanks","Yes, I will talk to Miss Brown tomorrow. Thank you!","Yes, thank you :)","Yessss I will try"
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to Miss Brown tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"

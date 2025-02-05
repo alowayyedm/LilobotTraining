@@ -1,6 +1,7 @@
 chitchat,init,"Hey, I'm Maya","Hello, I'm Maya", "Hi hi! I am Maya", "Hi my name is Maya"
 chitchat,greeting,"Hey, I'm Maya","Hello, I'm Maya", "Hi hi! I am Maya", "Hi my name is Maya"
 chitchat,faring,"Well, it's not going well","I'm feeling a little sad","I'm not very happy right now","It's not going well :("
+chitchat,likes,"yess I like music","I like my class","I like school","yes"
 chitchat,end,"Okay, that sounds good!","Great!","Yeah, okay :)))","Okaaaaay"
 chitchat,goodbye,"Bye bye!","Bye!","Goodbye","Have a nice day!"
 bullying,what,"I'm bullied by some kids in my piano class","I'm being bullied in my afternoon piano lessons :(","I go to piano lessons and I started getting bullied","Some kids in my piano class are bullying me"
@@ -29,6 +30,7 @@ goal,howkt,"Do you think talking to someone is a good idea?","Maybe telling some
 goal,howchild,"Maybe talking to someone","Maybe I should tell an adult about it","I think talking to someone about it is a good solution","Maybe telling someone about it might help"
 goal,when,"Maybe talking to someone could help","Maybe I should tell an adult about it",,
 confidant,who,"Miss Clara, my piano teacher","My piano teacher, she is very sweet","Maybe Miss Clara my piano teacher","My piano teacher knows me well maybe I can ask her"
+confidant,whochild,"I don't who I should talk to","I don’t know who to tell","I’m not sure who I should tell.","I don’t know who I can talk to"
 confidant,why,maybe the situation will get worse,"I don't want the bullying to get worse", otherwise it will only get worse,"it might get worse I think"
 confidant,how,"I can go to her after class","After class is done so that no one sees me","Maybe after class is finished","When everyone else leaves after class "
 confidant,where,"I can go to her after class","After class","Maybe after class is finished","When everyone else leaves after class "
@@ -46,6 +48,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,"I don't want to talk about that","I don't want to talk about it","I don't want to talk about this","I don't want to talk about that"
 ack,helpful,"Yes I will try, thanks","Yes, I will talk to my teacher tomorrow. Thank you!","Yes, thank you :)","Yessss I will try"
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to Miss Clara tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"

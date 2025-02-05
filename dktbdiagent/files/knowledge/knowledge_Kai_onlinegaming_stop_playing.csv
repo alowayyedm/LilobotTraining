@@ -1,6 +1,7 @@
 chitchat,init,"Hey, I'm Kai.","Hello, I'm Kai.", "Hiii I am Kai.", "Hello I'm Kai."
 chitchat,greeting,"Hey, I'm Kai.","Hello, I'm Kai.", "Hiii I am Kai.", "Hello I'm Kai."
 chitchat,faring,"well it's not going well","I'm feeling a little sad","I'm feeling sad","It's not going well :(("
+chitchat,likes,"yess I like playing online","I like playing","I like playing online","yes"
 chitchat,end,"okaaaay that's good!","okaaaay great!","yeah, okeeey :)))", okeeey :))
 chitchat,goodbye,"Bye bye!","Bye!","Goodbye.","Have a nice day!"
 bullying,what,"My online friends bully me when I play with them online.","I get bullied while playing an online game with my friends","My friends bully me while playing an online game","I'm bullied playing an online game"
@@ -24,7 +25,7 @@ goal,what,"I wish the bullying would stop","That the bullying stops","I wish the
 goal,dream,"I have a lot of friends and we can play together happily","To play with my friends online and have fun","To be with my friends and play online together","Enjoy with my friends while playing online"
 goal,feeling, I would feel safe playing online, I would be happy, just be cheerful, I would feel happy
 goal,effect,I would be happy, then I would feel safe, others would notice that I am happy, I will feel happy
-goal,how,"I think I should stop playing the game","I will skip playing","Maybe I will skip playing the game for some days","Maybe I will stop playing online"
+goal,how,"I think I should stop playing games","I will skip playing","Maybe I will skip playing games","Maybe I will stop playing online"
 goal,howkt,I want to stop playing., I want to stop playing the game forever., I want stop the game.,I will stop playing online.
 goal,howchild,"I don't know",no idea,"I cant do anything",nothing really
 goal,when,I will not play with them tomorrow,I'm not going to play with them online tomorrow,,
@@ -46,6 +47,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,"I don't want to talk about that","I don't want to talk about it","I don't want to talk about this","I don't want to talk about that"
 ack,helpful,Yes I will try. thanks,Yes I will talk to Miss Rachel tomorrow. Thank you!,yes thank you, Yessss
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to Miss Rachel tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"

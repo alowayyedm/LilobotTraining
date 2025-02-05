@@ -36,6 +36,7 @@ intents:
 - inform_goal_help
 - ack_unknown_empathize
 - ack_unknown_neutral
+- request_chitchat_likes
 - ack_unknown_compliment
 - ack_contactingkt_compliment
 - request_goal_what
@@ -62,6 +63,7 @@ intents:
 - confirm_chitchat_satisfaction
 - request_chitchat_goodbye
 - ack_unknown_guilt
+- confirm_chitchat_questions
 - ack_unknown_taunt
 - EXTERNAL_reminder
 slots:

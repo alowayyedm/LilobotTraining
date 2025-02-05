@@ -359,10 +359,6 @@ public class AgentService {
             case "request_chitchat_greeting":
             case "request_chitchat_faring":
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B4", oneStep));
-                if(agent.getKnowledgeFile().contains("good")) {//check if knowledge file contains good idea about solution.
-                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B16", maxValue));
-                    addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B8", twoSteps));
-                }
                 break;
             case "request_chitchat_goodbye":
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B15", maxValue));
@@ -382,8 +378,20 @@ public class AgentService {
                 break;
             case "ack_goal_compliment":
             case "ack_confidant_compliment":
-                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B1", oneStep));
-                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep)); // added this
+                Desire currentDesiress = desireService.getActiveGoal(agentId);
+                if(agent.getKnowledgeFile().contains("good") && currentDesiress.getName().equals("D3")){
+                    float hasGoodRelationWithKt = beliefService.getByAgentIdAndName(agent.getId(), "B4").getValue();
+                    if (floatComparer.greaterThan(hasGoodRelationWithKt, midThreshold)) {
+                        addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B7", oneStep));
+                        addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B8", twoSteps));
+                        addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B16", maxValue));
+                    }
+                    parseConfirmToAck(perception, hasGoodRelationWithKt, midThreshold);
+                }
+                else {
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B1", oneStep));
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep)); // added this
+                }
                 break;
             case "ack_unknown_compliment":
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
@@ -431,11 +439,22 @@ public class AgentService {
                 break;
             case "inform_goal_positive":
             case "inform_goalhitstop_positive":
-                if (floatComparer.equalTo(beliefService.getByAgentIdAndName(agentId, "B10").getValue(),
-                        maxValue)) {
-                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B17", maxValue));
-                    actionService.getActionById(agent.getCurrentAction()).setCompleted(true);
+                Desire currentDesirePos = desireService.getActiveGoal(agentId);
+                if(agent.getKnowledgeFile().contains("good") && currentDesirePos.getName().equals("D3")){
+                    float hasGoodRelationWithKts = beliefService.getByAgentIdAndName(agent.getId(), "B4").getValue();
+                    if (floatComparer.greaterThan(hasGoodRelationWithKts, midThreshold)) {
+                        addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B7", oneStep));
+                        addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B8", twoSteps));
+                        addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B16", maxValue));
+                    }
+                    parseConfirmToAck(perception, hasGoodRelationWithKts, midThreshold);
+                    break;
                 }
+                    if (floatComparer.equalTo(beliefService.getByAgentIdAndName(agentId, "B10").getValue(),
+                            maxValue)) {
+                        addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B17", maxValue));
+                        actionService.getActionById(agent.getCurrentAction()).setCompleted(true);
+                    }
                 break;
             case "request_confidant_who":
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B12", maxValue));
@@ -446,6 +465,7 @@ public class AgentService {
                 Action currentAction = actionService.getActionById(agent.getCurrentAction());
                 if (currentAction.getName().equals("A6") || currentAction.getName().equals("A7")) {
                     actionService.getActionById(agent.getCurrentAction()).setCompleted(true);
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
                 }
                 break;
             case "confirm_confidant_teacher":
@@ -473,6 +493,20 @@ public class AgentService {
                     perception.setAttribute("helpful");
                 } else {
                     perception.setAttribute("negative");
+                }
+                break;
+            case "confirm_chitchat_questions":
+                perception.setType("ack");
+                Desire currentDesires = desireService.getActiveGoal(agentId);
+
+                if (currentDesires != null) {
+                    System.out.println(currentDesires.getName());
+                }
+
+                if (currentDesires != null && currentDesires.getName().equals("D6")) { // changed this to D6
+                    perception.setAttribute("noquestions");
+                } else {
+                    perception.setAttribute("unhelpful");
                 }
                 break;
             default:
@@ -612,23 +646,27 @@ public class AgentService {
 
 
 
-        if (perception.getType().equals("trigger")) {
+        if (perception.getType().equals("trigger") || (perception.getAttribute().equals("details") && desireService.getById(agent.getIntentionId()).getName().equals("D1") ) ) { //if they asked about what they want to talk about (condition 1) or what happened (condition 2).
             Desire intention = desireService.getById(agent.getIntentionId());
 
             if (intention.getName().equals("D1")) {
                 agent.setCurrentSubject("bullying");
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B9", oneStep));
             }
-
             response = saySomething(agent, intention);
 
-            setLogCauses(beliefUpdateLogs, perception.getText());
+            if(agent.getKnowledgeFile().contains("good") || !intention.getName().equals("D5")) {//check if knowledge file contains good idea about solution.
+                setLogCauses(beliefUpdateLogs, perception.getText());
 
-            addLogs(beliefUpdateLogs, agent);
+                addLogs(beliefUpdateLogs, agent);
 
-            beliefService.sendBeliefsToClientAndLog(agent, beliefUpdateLogs);
+                beliefService.sendBeliefsToClientAndLog(agent, beliefUpdateLogs);
 
-            return response;
+                return response;
+            }
+            else{
+                return null;
+            }
         }
 
         System.out.println("received perception: " + perception.getType() + " " + perception.getSubject() + " "

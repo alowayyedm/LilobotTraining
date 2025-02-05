@@ -1,6 +1,7 @@
 chitchat,init,"Hey, I'm Axel",Hiiii I am Axel,"Hello, I'm Axel!",Hi! I'm Axel
 chitchat,greeting,"Hey, I'm Axel",Hiiii I am Axel,"Hello, I'm Axel!",Hi! I'm Axel
 chitchat,faring,well it's not going well,I'm feeling horrible,I'm feeling sad,It's not going well :((
+chitchat,likes,"yess I like playing in my neighbourhood","I like playing","I like playing","yes"
 chitchat,end,okaaaay that's good!,okaaaay great!,"yeah, okeeey :)))", okeeey :))
 chitchat,goodbye,Bye bye!,Bye!,Goodbye.,Have a nice day!
 bullying,what,My neighbours are bullying me :( ,I'm bullied by my neighbours,I'm being bullied,I'm being bullied in my neighbourhood :(
@@ -46,6 +47,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,"I don't want to talk about that","I don't want to talk about it","I don't want to talk about this","I don't want to talk about that"
 ack,helpful,Yes I will try. thanks,Yes I will talk to my Aunt Anu. Thank you!,yes thank you, Yessss
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to Aunt Anu tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"

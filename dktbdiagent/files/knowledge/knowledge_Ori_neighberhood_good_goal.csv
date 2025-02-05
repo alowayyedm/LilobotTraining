@@ -2,6 +2,7 @@ chitchat,init,"Hey, I'm Ori",Hiiii I am Ori,"Hello, I'm Ori!",Hi! I'm Ori
 chitchat,greeting,"Hey, I'm Ori",Hiiii I am Ori,"Hello, I'm Ori!",Hi! I'm Ori
 chitchat,faring,well it's not going well,I'm feeling horrible,I'm feeling sad,It's not going well :((
 chitchat,end,okaaaay that's good!,okaaaay great!,"yeah, okeeey :)))", okeeey :))
+chitchat,likes,"yess I like playing in my neighbourhood","I like playing","I like playing","yes"
 chitchat,goodbye,Bye bye!,Bye!,Goodbye.,Have a nice day!
 bullying,what,My neighbours are bullying me :( ,I'm bullied by my neighbours,I'm being bullied,I'm being bullied in my neighbourhood :(
 bullying,who,Some kids that I have been playing outside with,I am being bullied by a few kids ,a group of kids,I am being bullied by a group of kids
@@ -29,6 +30,7 @@ goal,howkt,"Do you think talking to someone is a good idea?","Maybe telling some
 goal,howchild,"Maybe talking to someone","Maybe I should tell an adult about it","I think talking to someone about it is a good solution","Maybe telling someone about it might help"
 goal,when,"Maybe talking to someone","Maybe I should tell an adult about it",,
 confidant,who,"My mom.. maybe she can help","I think I can trust my mom","My mom, but I'm a bit afraid to tell her.","Maybe my mom"
+confidant,whochild,"I don't who I should talk to","I don’t know who to tell","I’m not sure who I should tell.","I don’t know who I can talk to"
 confidant,why,I don’t want to make it into a bigger situation than it is ,"I don't want the bullying to get worse",otherwise it will only get worse ,Maybe bullying will get worse if they know I told someone
 confidant,how,maybe I can do it after my mom comes home from work, I can ask her after she comes back from work, maybe after she comes back from work, I can ask her after work
 confidant,where,maybe I can do it after my mom comes home, I can ask her after she comes back from work, maybe after she comes back from work, I can ask her at home
@@ -46,6 +48,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,"I don't want to talk about that","I don't want to talk about it","I don't want to talk about this","I don't want to talk about that"
 ack,helpful,Yes I will try. thanks,Yes I will talk to my mom. Thank you!,yes thank you, Yessss
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to my mom tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"

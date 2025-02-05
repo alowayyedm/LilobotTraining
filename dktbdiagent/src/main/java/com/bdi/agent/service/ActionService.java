@@ -92,10 +92,17 @@ public class ActionService {
             addAction(new Action(desire, "request", "A5","goal", "howkt", false));
         }
 
+        if (desire.getName().equals("D5")) {
+            addAction(new Action(desire, "request", "A8","confidant", "whochild", false));
+        }
+
         if (desire.getName().equals("D4")) {
             addAction(new Action(desire, "request", "A6","help", "how", false));
 //            addAction(new Action(desire, "request", "A7","help", "severity", false));
             addAction(new Action(desire, "request", "A7","help", "say", false));
+        }
+
+        if (desire.getName().equals("D6")) {
         }
 
     }

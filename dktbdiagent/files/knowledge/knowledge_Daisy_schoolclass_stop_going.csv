@@ -1,6 +1,7 @@
 chitchat,init,"Hey, I'm Daisy.","Hello, I'm Daisy.",  "Hiii I am Daisy.", "Hello I'm Daisy."
 chitchat,greeting,"Hey, I'm Daisy.","Hello, I'm Daisy.",  "Hiii I am Daisy.", "Hello I'm Daisy."
 chitchat,faring,"well it's not going well","I'm feeling a little sad","I'm feeling sad","It's not going well :(("
+chitchat,likes,"yess I like school","I like my class","I like school","yes"
 chitchat,end,"okaaaay that's good!","okaaaay great!","yeah, okeeey :)))", okeeey :))
 chitchat,goodbye,"Bye bye!","Bye!","Goodbye.","Have a nice day!"
 bullying,what,"I get bullied at school.","I'm bullied at school","I'm being bullied","I'm being bullied at school :("
@@ -33,7 +34,7 @@ confidant,why,"If I tell someone the bullies will call me a coward","Maybe the s
 confidant,how,maybe I can do it after school. then no one is there, I can ask him after school. then there is no one around, maybe after school or something, maybe after school... then there is no one around
 confidant,where,maybe I can do it after school, I can ask him after school, maybe after school or something, maybe after school...
 confidant,feeling,Better I think,"I'm not sure but I'll try. I just want to feel safe", Hopefully better :),"I'm not sure but I think it would be fine"
-confidant,say,"That I am being bullied at class","I'm being bullied and I want it to stop","I get bullied while in class","I'm being bullied in my online game"
+confidant,say,"That I am being bullied at class","I'm being bullied and I want it to stop","I get bullied while in class","I'm being bullied in the class"
 confidant,when,I can ask Mr. Paul after school when there is no one around,I will tell Mr. Paul after the class tomorrow,Tomorrow I will tell Mr. Paul,I will tell Mr. Paul tomorrow during the break
 help,how,"how can Mr. Paul help?",how can my teacher help me?,what could Mr. Paul do about it?,what could my teacher do about it?
 help,severity,"won't the situation get worse?","won't the situation get worse if I tell him?","won't the bullying get worse?","won't it get worse?"
@@ -46,6 +47,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,"I don't want to talk about that","I don't want to talk about it","I don't want to talk about this","I don't want to talk about that"
 ack,helpful,Yes I will try. thanks,Yes I will talk to Mr. Paul tomorrow. Thank you!,yes thank you, Yessss
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to Mr. Paul tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"

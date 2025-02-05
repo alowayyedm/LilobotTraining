@@ -1,6 +1,7 @@
 chitchat,init,"Hey, I'm Dania","Hiiii I am Dania","Hello, I'm Dania!","Hi! I'm Dania"
 chitchat,greeting,"Hey, I'm Dania","Hiiii I am Dania","Hello, I'm Dania!","Hi! I'm Dania"
 chitchat,faring,"Well, it's not going well","I'm feeling a little sad","I'm not very happy right now","It's not going well :("
+chitchat,likes,"yess I like playdates","I like playing","I like it","yes"
 chitchat,end,"Okay, that sounds good!","Great!","Yeah, okay :)))","Okaaaaay"
 chitchat,goodbye,"Bye bye!","Byeeeee","Goodbye!","Bye, have a nice day!"
 bullying,what,"Some kids from my Wednesday playdate are bullying me","I'm being bullied by some kids at a playdate","I'm getting bullied at my Wednesday playdate","I have a weekly playdate where I'm getting bullied"
@@ -45,6 +46,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,I don't want to talk about that,I don't want to talk about it,I don't want to talk about this,I don't want to talk about that
 ack,helpful,Yes I will try. thanks,Yes I will talk to Aunt Emma next Wednesday. Thank you!,Yes thank you,Yessss
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to Aunt Emma tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"

@@ -1,6 +1,7 @@
 chitchat,init,"Hey, I'm Lyla!",Hiiii I am Lyla!,"Hello, I'm Lyla!",Hi! I'm Lyla!
 chitchat,greeting,"Hey, I'm Lyla!",Hiiii I am Lyla!,"Hello, I'm Lyla!",Hi! I'm Lyla!
 chitchat,faring,Well it's not going well,I'm feeling a little sad,I'm feeling sad,It's not going well :((
+chitchat,likes,"yess I like playing at home","I like playing with my brother","I like playing","yes"
 chitchat,end,Okaaaay that's good!,Okaaaay great!,"Yeah, okeeey :)))",Okeeey :))
 chitchat,goodbye,Bye bye!,Bye!,Goodbye.,Have a nice day!
 bullying,what,I'm being made fun of at home,I am being bullied at home,I'm being bullied at home...,My brother is making fun of me at home...
@@ -44,6 +45,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,I don't want to talk about that,I don't want to talk about it,I don't want to talk about this,I don't want to talk about that
 ack,helpful,Yes I will try. thanks,Yes I will talk to her tomorrow. Thank you!,Yes thank you,Yessss
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to mom tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"

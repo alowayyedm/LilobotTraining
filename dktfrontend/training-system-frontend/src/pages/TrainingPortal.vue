@@ -713,8 +713,8 @@
         this.traverseAdvSitu(prevPhase);
         // maybe check the value of feedback here, then if its the same, add another function that checks on beliefs values?
 
-        if (this.$refs.beliefInput.beliefs[8].value > 0.6 && this.$refs.beliefInput.beliefs[9].value < 0.1) { // too many triggers
-          this.Feedbackmsg= this.Feedbackmsg + " The child left the conversation because they felt they were doing most of the explaining and the conversation wasn't progressing." ;
+        if (this.$refs.beliefInput.beliefs[8].value > 0.7 && this.$refs.beliefInput.beliefs[9].value < 0.1 && this.$refs.beliefInput.beliefs[5].value >= 0.3) { // too many triggers
+          this.Feedbackmsg= this.Feedbackmsg + "The child left because they felt they were doing most of the explaining. Clarify their situation by asking more specific questions (e.g., when, where, how often) instead of open-ended questions that can overwhelm them." ;
         }
 
         if(prevPhase ===2) {
@@ -724,9 +724,12 @@
         }
 
         if(prevPhase ===3) {
-          if (this.userIntents.some(item => item.UserIntent === "inform_unknown_positive" || item.UserIntent === "inform_goal_positive" || item.UserIntent === "inform_goalhitstop_positive")) {
+          if (this.userIntents.some(item => item.UserIntent === "inform_unknown_positive" || item.UserIntent === "inform_goal_positive")) {
             this.Feedbackmsg = this.Feedbackmsg + " Also, the helpline doesn't talk to someone on behalf of the child or solve their problem. Instead, a counselor should work with the child to find a solution together.";
 
+          }
+          if (this.userIntents.some(item => item.UserIntent === "inform_goalhitstop_positive")) {
+            this.Feedbackmsg = this.Feedbackmsg + " Also, the helpline doesn't give direct advice on what to do (e.g., whether to hit back). Instead, a counsellor should work with the child to find a solution together by encouraging problem-solving.";
           }
         }
         if(this.userIntents.some(item => item.UserIntent === "inform_goal_negative" || item.UserIntent === "inform_unknown_negative" || item.UserIntent === "inform_goalhitstop_negative")){
@@ -1061,9 +1064,9 @@
           }
           else if (this.$refs.beliefInput.beliefs[5].value < 0.3 && this.$refs.beliefInput.beliefs[4].value < 0.2){
             if (Math.random() < 0.5) {
-              this.adviceMsg = "Ask questions to clarify details of the child's story. This can show your interest and willingness to help.";
+              this.adviceMsg = "Ask specific questions to clarify details of the child's story. This can show your interest and willingness to help.";
             } else {
-              this.adviceMsg = "Show empathy towards the child. This can build trust and acknowledge their concerns.";
+              this.adviceMsg = "Show empathy towards the child's story. This can build trust and acknowledge their concerns.";
             }
             this.childSitMsg="The child has started to trust you more. However, they are still not sure if you are interested in and understand their problem.";
             this.progressMsg="You completed 20% of phase 2 (clarifying the child’s story). \n" +
@@ -1075,11 +1078,11 @@
             this.childSitMsg="The child trusts you now. However, they are still not sure if you are interested in their problem.";
             this.progressMsg="You completed 40% of phase 2 (clarifying the child’s story). \n" +
                 "This phase requires building rapport and trust with the child by showing empathy and understanding of their problem. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
-            this.Feedbackmsg="In phase 2, ask more specific questions about the child's story to show your interest and willingness to help. The virtual child felt uncertain about your understanding and interest in their problem.";
+            this.Feedbackmsg="In phase 2, ask more specific questions about the child's story (e.g., when, where, how often) instead of open-ended questions that could overwhelm them. The virtual child felt uncertain about your understanding and interest in their problem.";
 
           }
           else if(this.$refs.beliefInput.beliefs[4].value < 0.2){
-            this.adviceMsg = "Show empathy towards the child. This can build trust and acknowledge their concerns.";
+            this.adviceMsg = "Show empathy towards the child's story. This can build trust and acknowledge their concerns.";
             this.childSitMsg="The child trusts you now. However, they are still not sure if you understand their problem.";
             this.progressMsg="You completed 60% of phase 2 (clarifying the child’s story). \n" +
                 "This phase requires building rapport and trust with the child by showing empathy and understanding of their problem. This will make the child more open to discussing goals for their problem in phase 3 (Setting the session’s goal).";
@@ -1107,14 +1110,14 @@
             this.Feedbackmsg="Show more empathy and ask more specific questions in phase 2 to build trust and acknowledge the child's concerns. The virtual child was unsure if you understood their problem.";
 
           }
-          else if (!this.userIntents.some(item => item.UserIntent === "confirm_goal_summary")) {
-            this.adviceMsg = "Summarize the child's goal and confirm it, to show you understand and are interested in their goals.";
-            this.childSitMsg = "The child trusts you now and thinks that you understand them. But they don't know what to do next.";
-            this.progressMsg="You completed 25% of phase 3 (Setting the session’s goal). \n " +
-                "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
-            this.Feedbackmsg="In phase 3, summarize and confirm the child's goal to show you understand and are interested. The virtual child was unsure what to do next.";
-
-          }
+          // else if (!this.userIntents.some(item => item.UserIntent === "confirm_goal_summary")) {
+          //   this.adviceMsg = "Summarize the child's goal and confirm it, to show you understand and are interested in their goals.";
+          //   this.childSitMsg = "The child trusts you now and thinks that you understand them. But they don't know what to do next.";
+          //   this.progressMsg="You completed 25% of phase 3 (Setting the session’s goal). \n " +
+          //       "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
+          //   this.Feedbackmsg="In phase 3, summarize and confirm the child's goal to show you understand and are interested. The virtual child was unsure what to do next.";
+          //
+          // }
 
         else if(this.$refs.beliefInput.beliefs[15].value < 1){
             this.adviceMsg = "Suggest working together with the child to find a goal for the conversation. This can strengthen your connection and show how you can help.";
@@ -1124,7 +1127,7 @@
             this.Feedbackmsg="In phase 3, suggest working together with the child to find a goal. This strengthens your connection and shows how you can help. The virtual child misunderstood how to solve their problem and wanted you to solve it.";
         }
           else if(this.$refs.beliefInput.beliefs[11].value < 1){
-            this.adviceMsg = "Ask the child to share their problem with someone they trust. This can stimulate their problem-solving skills";
+            this.adviceMsg = "Ask the child if there is someone they trust and can share the problem with. This can stimulate their problem-solving skills";
             this.childSitMsg = "The child now understands that you can find a solution together. However, they cannot think of any solutions.";
             this.progressMsg="You completed 75% of phase 3 (Setting the session’s goal). \n " +
                 "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";

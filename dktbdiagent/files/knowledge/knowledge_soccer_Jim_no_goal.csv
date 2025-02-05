@@ -1,6 +1,7 @@
 chitchat,init,"Hey, I'm Jim.",Hiiii I am Jim,"Hello, I'm Jim!",Hi! I'm Jim
 chitchat,greeting,"Hey, I'm Jim.",Hiiii I am Jim,"Hello, I'm Jim!",Hi! I'm Jim
 chitchat,faring,Well it's not going well,I'm feeling a little sad,I'm feeling sad,It's not going well :((
+chitchat,likes,"yess I like football","I like playing football","I like football","yes"
 chitchat,end,Okaaaay that's good!,Okaaaay great!,"Yeah, okeeey :)))",Okeeey :))
 chitchat,goodbye,Bye bye!,Bye!,Goodbye.,Have a nice day!
 bullying,what,I am being bullied at football practice.,Someone is making fun of me at football practice.,I'm being bullied at football.,They are making fun of me at football :(
@@ -44,6 +45,7 @@ ack,compliment,:))),thank yooou,:),thank yooou
 ack,uninterested,"I don't want to talk about that","I don't want to talk about it","I don't want to talk about this","I don't want to talk about that"
 ack,helpful,Yes I will try. thanks,Yes I will talk to Kevin tomorrow. Thank you!,yes thank you, Yessss
 ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to Kevin tomorrow","Thank you!","No, thank you"
 ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
 ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
 ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"
