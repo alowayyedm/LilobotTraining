@@ -36,8 +36,8 @@ public class ConversationServiceTest {
 
     @Test
     public void renameConversationTest() {
-        Agent agent = new Agent(1L, "testId", "test", null, null,
-                null, 0L, "", true,
+        Agent agent = new Agent(1L, "testId", "test", null, null, null,
+                null, null, 0L, "", true,
                 0L, 0.0f, null, false, null);
         User user = new User("j_doe", "1VeryUnsafePassword!", "j.doe@mail.com", Role.LEARNER);
         Conversation conversation = new Conversation("Old", LocalDateTime.now(), agent, user);
@@ -49,8 +49,8 @@ public class ConversationServiceTest {
 
     @Test
     public void deleteConversationTest() {
-        Agent agent = new Agent(1L, "testId", "test", null,
-                null, null, 0L, "",
+        Agent agent = new Agent(1L, "testId", "test", null, null,
+                null, null, null, 0L, "",
                 true, 0L, 0.0f, null, false, null);
         User user = new User("j_doe", "1VeryUnsafePassword!", "j.doe@mail.com", Role.LEARNER);
         Conversation conversation = new Conversation("Name", LocalDateTime.now(), agent, user);

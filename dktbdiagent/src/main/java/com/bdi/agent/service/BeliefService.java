@@ -60,6 +60,9 @@ public class BeliefService {
     @Value("${beliefs.file}")
     private String beliefsFile;
 
+    @Value("files/beliefsBen.csv")
+    private String beliefsFileBenev;
+
     // configuration for Azure Blob Storage
     String connectionString = "DefaultEndpointsProtocol=https;AccountName=dktblobstorage;"
             + "AccountKey=JRaAWGN9SbJ+gvn5ec0brrpuvOPT3HS+VSTyLfJoE4/EQKf9eEVIPGqCeniJCiHUKA4JNYymNDtsl1/TDIjEKA==;"
@@ -103,12 +106,22 @@ public class BeliefService {
     }
 
     /**
-     * Sets the belief file.
+     * Sets the belief file for power.
      *
      * @param beliefsFile The name of the belief file.
      */
     public void setBeliefsFile(String beliefsFile) {
         this.beliefsFile = beliefsFile;
+    }
+
+
+    /**
+     * Sets the belief file for benevolence.
+     *
+     * @param beliefsFilebenev The name of the belief file.
+     */
+    public void setBeliefsFileBenev(String beliefsFilebenev) {
+        this.beliefsFileBenev = beliefsFilebenev;
     }
 
     /**
@@ -237,35 +250,66 @@ public class BeliefService {
      * Also sets the agent for each belief.
      *
      * @param agent the agent for which the beliefs are read
+     * @param scenarioid the id of the scenario (1 is power and 2 is benevolence). to know which to load
      * @return HashSet of Beliefs
      */
-    public HashSet<Belief> readBeliefsFromCsv(Agent agent) {
+    public HashSet<Belief> readBeliefsFromCsv(Agent agent, int scenarioid) {
 
         HashSet<Belief> result = new HashSet<>();
+        CSVReader reader;
 
-        try {
+        if (scenarioid== 1) {
+            try {
 
-            if (!localMode) {
-                beliefsFile = getBeliefsFromBlobStorage();
+                if (!localMode) {
+                    beliefsFile = getBeliefsFromBlobStorage();
+                }
+
+                reader = new CSVReader(new FileReader(beliefsFile));
+                List<String[]> records = reader.readAll();
+
+                for (String[] record : records) {
+                    Belief b = new Belief();
+                    b.setAgent(agent);
+                    b.setName(record[0]);
+                    b.setFullName(record[1]);
+                    b.setPhase(record[2]);
+                    b.setValue(Float.valueOf(record[3]));
+                    result.add(b);
+                }
+
+                reader.close();
+
+            } catch (IOException | CsvException e) {
+                System.err.println("readBeliefsFromCsv: could not initialize beliefs");
             }
+        }
 
-            CSVReader reader = new CSVReader(new FileReader(beliefsFile));
-            List<String[]> records = reader.readAll();
+        else if (scenarioid== 2) {
+            try {
 
-            for (String[] record : records) {
-                Belief b = new Belief();
-                b.setAgent(agent);
-                b.setName(record[0]);
-                b.setFullName(record[1]);
-                b.setPhase(record[2]);
-                b.setValue(Float.valueOf(record[3]));
-                result.add(b);
+                if (!localMode) {
+                    beliefsFileBenev = getBeliefsFromBlobStorage();
+                }
+
+                reader = new CSVReader(new FileReader(beliefsFileBenev));
+                List<String[]> records = reader.readAll();
+                for (String[] record : records) {
+                    Belief b = new Belief();
+                    b.setAgent(agent);
+                    b.setName(record[0]);
+                    b.setFullName(record[1]);
+                    b.setPhase(record[2]);
+                    b.setValue(Float.valueOf(record[3]));
+
+                    result.add(b);
+                }
+
+                reader.close();
+
+            } catch (IOException | CsvException e) {
+                System.err.println("readBeliefsFromCsv: could not initialize beliefs2");
             }
-
-            reader.close();
-
-        } catch (IOException | CsvException e) {
-            System.err.println("readBeliefsFromCsv: could not initialize beliefs");
         }
 
         return result;

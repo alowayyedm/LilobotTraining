@@ -50,7 +50,7 @@ public class ReportServiceTest {
     public void testFormatLogEntryForBasicReport() throws IOException {
         // Create a sample XWPFDocument, Agent, Belief and Desire
         XWPFDocument doc = new XWPFDocument();
-        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         Belief belief = new Belief(0L, agent, "B1", "Belief number one", "", 0.3f);
         Desire desire = new Desire(0L, agent, "D1", "Desire number one", false, null);
 
@@ -125,7 +125,7 @@ public class ReportServiceTest {
     public void testFormatLogEntryForAdvancedReport() throws IOException {
         // Create a sample XWPFDocument, Agent, Belief and Desire
         XWPFDocument doc = new XWPFDocument();
-        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         Belief belief = new Belief(0L, agent, "B1", "Belief number one", "", 0.3f);
         Desire desire = new Desire(0L, agent, "D1", "Desire number one", false, null);
 
@@ -217,7 +217,7 @@ public class ReportServiceTest {
     public void testNonMessageCausesForAdvancedReport() throws IOException {
         // Create a sample XWPFDocument, Agent, Belief and Desire
         XWPFDocument doc = new XWPFDocument();
-        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         Belief belief = new Belief(0L, agent, "B1", "Belief number one", "", 0.3f);
 
         when(beliefService.getByAgentIdAndName(1L, "B1")).thenReturn(belief);

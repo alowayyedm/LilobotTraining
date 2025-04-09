@@ -81,7 +81,7 @@ public class OptimalPathControllerTest {
         @WithMockUser(username = "test", password = "test", roles = "USER")
         public void testGetOptimalPath() throws Exception {
 
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L,
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L,
                                 "", true, 0L, 0.0f, null,
                                 false, null);
                 User learner = new User("learner", "password", "email2", Role.LEARNER);

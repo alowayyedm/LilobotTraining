@@ -105,6 +105,26 @@ public class ActionService {
         if (desire.getName().equals("D6")) {
         }
 
+        if (desire.getName().equals("D7")) {
+            addAction(new Action(desire, "request", "A5","goal", "howkt", false));
+        }
+
+        if (desire.getName().equals("D8")) {
+
+        }
+
+        if (desire.getName().equals("D9")) {
+            addAction(new Action(desire, "request", "A5","goal", "howkt", false));
+
+        }
+
+        if (desire.getName().equals("D10")) {
+
+        }
+
+
+        //add two actions here, when
+
     }
 
 }

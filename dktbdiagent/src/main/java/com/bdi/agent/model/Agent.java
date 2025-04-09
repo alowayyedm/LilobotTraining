@@ -48,6 +48,11 @@ public class Agent {
 
     @OneToMany(mappedBy="agent", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Desire> desires;
+    @OneToMany(mappedBy="agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<HumanValues> humanValues;
+
+    @OneToMany(mappedBy="agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Conviction> convictions;
 
     @Enumerated(EnumType.STRING)
     private Phase phase;
@@ -78,12 +83,16 @@ public class Agent {
     public Agent() {
         this.desires = new HashSet<>();
         this.beliefs = new HashSet<>();
+        this.humanValues= new HashSet<>();
+        this.convictions = new HashSet<>();
         this.isTrainerResponding = false;
     }
 
     public Agent(String userId) {
         this.desires = new HashSet<>();
         this.beliefs = new HashSet<>();
+        this.humanValues= new HashSet<>();
+        this.convictions = new HashSet<>();
         this.isTrainerResponding = false;
         this.userId = userId;
     }

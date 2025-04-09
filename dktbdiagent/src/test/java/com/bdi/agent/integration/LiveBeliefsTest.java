@@ -84,7 +84,7 @@ public class LiveBeliefsTest {
                 Thread.sleep(1000);
 
                 Agent agent = new Agent();
-                agent = new Agent(1L, "testId", "test", null, null, null, 0L, "",
+                agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L, "",
                                 true, 0L, 0.0f, List.of(new MessageLogEntry("test message",
                                                 true, agent)),
                                 false, null);

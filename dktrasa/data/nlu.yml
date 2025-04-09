@@ -245,6 +245,7 @@ nlu:
     - tell me, I'm listening to you
     - tell me
     - why?
+    - Can you say why?
     - Why?
     - what's the issue?
     - why
@@ -455,6 +456,7 @@ nlu:
     - Could you tell me more details?
     - can you give me more details?
     - what happened?
+    - why are you not feeling well?
     - What is the problem?
     - can you tell me what happened?
     - Could you please tell me more details about your situation?
@@ -640,6 +642,7 @@ nlu:
     - would you like to tell me when did it start?
     - When did it start?
     - When did it start?
+    - when did [they]{"entity": "bully_pronoun"} bully you?
     - How long have you been dealing with this?
     - Since when have you been struggling with this?
     - Since when has this been bothering you?
@@ -1115,6 +1118,7 @@ nlu:
     - you should report to [facebook]{"entity": "place"}
     - you should stop playing [online]{"entity": "place"}
     - yes, hurt [her]{"entity": "bully_pronoun"}
+    - you should stand up for yourself
 
 
 
@@ -1166,6 +1170,7 @@ nlu:
     - Unfortunately I cannot contact your [parent]{"entity": "trustee"}
     - the children's helpline can not call anyone
     - No, I can't call their parents
+    - you shouldn't stay quite
     - No I will not call your [school]{"entity": "place"}
     - I will not call your [school]{"entity": "place"}
     - unfortunately we cannot contact your [school]{"entity": "place"}
@@ -1187,7 +1192,10 @@ nlu:
     - no, don't stop going to [school]{"entity": "place"}
     - No, don't stop playing [online]{"entity": "place"}
     - you can't stop going
+    - no, you shoudn't hit back
     - you shouldn't stop going
+    - You shouldn't hit back
+    - don't hit them back
     - No, don't hit [her]{"entity": "bully_pronoun"} 
     - dont punch [him]{"entity": "bully_pronoun"}
     - you shouldn't punch [them]{"entity": "bully_pronoun"} back
@@ -1195,8 +1203,6 @@ nlu:
     - you shouldn't bully [them]{"entity": "bully_pronoun"} back
     - No, don't skip school
     - you shouldn't skip school
-    - hitting someone isn't the answer
-    - hitting [them]{"entity": "bully_pronoun"}  cant solve the problem.
 
 
 
@@ -1345,6 +1351,7 @@ nlu:
     - I get it.
     - how nice.
     - I'm happy to hear that!
+    - so let's start there
 
 - intent: ack_unknown_compliment
   examples: |
@@ -1352,6 +1359,7 @@ nlu:
     - That's a great idea, I think
     - Good idea
     - You are very handsome
+    - you are so kind
     - its a big step what you did here
     - I like your thinking
     - Thanks
@@ -1640,6 +1648,7 @@ nlu:
     - We are going to work through this together.
     - let us work on something better
     - Let's help you deal with it!
+    - how can we solve this?
     - we cold come up with a viable solution together
     - How about we figure out ways to solve your problem?
     - we can brainstorm a few ideas
@@ -1771,12 +1780,16 @@ nlu:
 - intent: request_goal_howchild
   examples: |
     - what can you do to stop it?
+    - what can you do to stop the bullying?
+    - what do you want to do to stop bullying?
+    - what do you want to do to solve this?
+    - How do you want to make things better for everyone involved?
     - What do you think you can do to make it stop?
     - So what do you think would be the best solution to your situation?
     - what can you do yourself?
     - What do you think you should do?
     - what are you going to do to make [them]{"entity": "bully_pronoun"} stop bulling you?
-    - what else do you think you can do?
+    - what do you think you can do?
     - what would you advice a friend of yours with the same problem?
     - What have you done before to stop the bullying?
     - what could you do yourself?
@@ -1824,6 +1837,7 @@ nlu:
     - how can you achieve this goal?
     - what can you do to solve this problem?
     - how do you want to solve it?
+    - how do you want to achieve that?
     - how would you solve it?
     - how could you make sure it stops?
     - how could you ensure that bullying stops?
@@ -2174,6 +2188,7 @@ nlu:
     - tell [him]{"entity": "trustee_pronoun"} that [kids]{"entity": "bully"} are bullying you
     - Tell [her]{"entity": "trustee_pronoun"} exactly what you told me
     - tell [him]{"entity": "trustee_pronoun"} you are being bullied
+    - tell [teacher]{"entity": "trustee_pronoun"} you are being bullied
     - that you're feeling sad about it
     - explain to [her]{"entity": "trustee_pronoun"} what really happened
     - tell [her]{"entity": "trustee_pronoun"} a group of [boys]{"entity": "bully"} bullies you during [game]{"entity": "place"}
@@ -2205,6 +2220,7 @@ nlu:
     - that you don't want to be bullied anymore
     - You should say to [him]{"entity": "trustee_pronoun"} that you are being bullied, and that you want it to stop
     - You tell [Mr. Mark]{"entity": "trustee_name"} that you are being bullied, and that you want it to stop
+    - tell your [teacher]{"entity": "trustee"} the same thing you told me.
 
     
 
@@ -2440,5 +2456,941 @@ nlu:
     - Can we still talk?
     - Are you paying attention?
     
+#    
+#1- look at what is here, remove/change/move the irrelevant ones (like planbning for other things than the alt)
+#2- from Miro, add the examples to its respectful intent. also the examples from chatgpt.
+#3- remove irrelevant intents
+#4- add lilo utterances replies based on the intents
+#5- allign them with both scenarios (not telling and power, maybe as synynoms?)
+#6- send example convo to Kath
+#7- ask chatgpt to generate more examples
+#8- update the other intents here
+#9- remove irrelevant utterance from before (e.g., how are you planning to do that)
+#10- check with utterances such as "don't hit them back" or "you should hit back". will the child leave the convo?
+#11- remove confidant and unnecessary utterances
+
+#how would you do that? unknown_how, can become Bullying_how, or planning_how
+
+
+
+- intent: confirm_focusing_valuesPower
+  examples: |
+    - You want to be seen as strong, is that right?
+    - Being respected is really important to you.
+    - You value standing up for yourself.
+    - It sounds like being strong is really important to you.
+    - You care a lot about standing up for yourself.
+    - You value strength and don't want to seem weak.
+    - It sounds like you really value strength.
+    - You seem to care a lot about standing up for yourself.
+    - Being seen as strong is really important to you.
+    - You feel like if you don’t fight back, they’ll keep bullying you.
+    - You want to be strong in a way that aligns with who you are.
+    - You care about being seen as powerful, but also about making smart choices.
+    - You want to be strong but also handle this in a way that feels right to you.
+    - It sounds like being in control is important to you.
+    - You want to be strong in a way that aligns with who you are.
+    - You want to find a way to handle this that still makes you feel strong.
+    - You want to make a choice that fits with your values.
+    - You want to act in a way that reflects who you are.
+    - You want to respond in a way that shows who you are.
+    - you want to stand up for yourself.
+    - Strength means a lot to you, but so does being smart about it.
+    - You care about standing up for yourself in the right way.
+    - It sounds like being seen as strong is important to you.
+    - You want to be strong, is that correct?
+    - You see strength as something really important to you, right?
+    - It seems like having power over the situation matters to you.
+    - You want others to recognize your strength, is that correct?
+    - You care deeply about making sure people respect you.
+    - Standing up for yourself is something you really value.
+    - You want to make sure no one sees you as weak.
+    - It’s important to you that people don’t take advantage of you.
+    - You don’t want to feel powerless in this situation.
+    - You want to show that you’re not someone to be pushed around.
+    - You want to make sure others know you’re strong.
+    - It’s important to you that people take you seriously.
+    - You want to feel like you're in control of the situation.
+    - You don’t want to back down because you value your strength.
+    - Being tough is something you really care about.
+    - You want to prove that you can stand up for yourself.
+    - It sounds like being in control and respected matters to you.
+    - You don’t want others to think they can walk all over you.
+    - You value being strong, even when things get tough.
+    - It’s important to you to respond in a way that feels powerful.
+    - You want to make sure you don’t look weak in front of others.
+    - Having control over how you handle this is important to you.
+    - You care about standing up for yourself in a way that feels right.
+    - You want to show that you can handle things on your own terms.
+    - It sounds like being seen as capable and strong really matters to you.
+    - You want to make sure your actions reflect your strength.
+    - You feel like it’s important to assert yourself in this situation.
+    - You don’t want to let anyone push you around.
+    - You want to be strong and make decisions that align with who you are.
+    - You care about responding in a way that makes you feel powerful.
+    - You want to show others that you’re not afraid to stand your ground.
+    - You want to be respected for the way you handle things, right?
+
+
+- intent: confirm_focusing_valuesBenev
+  examples: |
+    - You care about others.
+    - It sounds caring for others is important to you.
+    - you care about others, is this right?
+    - You want to do the right thing and be kind to others, right?
+    - It seems like being a good person really matters to you.
+    - You care about treating people with kindness and respect.
+    - Helping others is something that’s really important to you.
+    - You want to stand up for yourself while still being kind.
+    - You don’t want to hurt others, even when you’re upset.
+    - It sounds like making others feel safe and supported is important to you.
+    - You really value kindness and understanding.
+    - You care about making sure people feel heard and respected.
+    - It’s important to you to act in a way that reflects your kindness.
+    - You want to handle this in a way that doesn’t cause harm to others.
+    - It sounds like making peace is important to you.
+    - You want to be strong, but also thoughtful about how you respond.
+    - You want to make sure your actions reflect the kind of person you want to be.
+    - It’s important to you to be fair and caring.
+    - You want to make choices that help people instead of hurting them.
+    - You value kindness and don’t want to be mean or unfair.
+    - You want to make sure your actions are compassionate.
+    - You care about standing up for yourself without hurting others.
+    - You want to show kindness, even when things are hard.
+    - You believe in treating people with fairness and respect.
+    - You don’t want to act in a way that goes against your values of kindness.
+    - You care about doing the right thing in a way that helps others.
+    - You want to handle this in a way that shows who you truly are.
+    - It sounds like being kind and understanding is really important to you.
+    - You want to make sure your actions align with your values of kindness.
+    - You don’t want to be harsh, even if you need to stand up for yourself.
+    - You want to make a decision that reflects your caring nature.
+    - It seems like helping and supporting others is a big part of who you are.
+    - It sounds like you want to support and help others
+    - You want to stand up for yourself while still showing empathy.
+    - You care about making things fair for everyone?
+    - It’s really important to you that no one gets hurt, right?
+
+
+
+- intent: request_evoking_valuesPower
+  examples: |
+    - How do you want to feel about how you handle this?
+    - What does being strong in this moment look like to you?
+    - How can you stay true to yourself in this situation?
+    - What do you do to make you feel stronger?
+    - why do you want to be strong?
+    - why do you want to show strength?
+    - How do you want others to see you when this is over?
+    - What does being powerful look like to you right now?
+    - Why is being strong important to you?
+    - What would make you feel like you handled this in a strong way?
+    - What would make you feel like you’re in control?
+    - What kind of strength do you want to show in this moment?
+    - How do you define strength in a situation like this?
+    - How do you want to make sure others respect you?
+    - What do you want to do so that you don’t feel weak?
+    - What does power mean to you right now?
+    - What would help you feel like you’re standing your ground?
+    - What would make you feel like you’re handling this with strength?
+    - How do you want to make sure no one takes advantage of you?
+    - How do you want to make sure others don’t see you as weak?
+    - What matters most to you when it comes to being strong?
+    - What would make you feel like you kept your power?
+    - How do you want to make sure they know you’re not weak?
+    - What would make you feel like you had control over this situation?
+    - How do you want to respond in a way that makes you feel powerful?
+    - What does standing your ground mean to you right now?
+    - what does it mean to be strong?
+
+
+    
+- intent: request_evoking_valuesBenev
+  examples: |
+    - What do you do to make you feel kind?
+    - What does kindness mean to you in this situation?
+    - How do you want to handle this in a way that feels right to you?
+    - What would make you feel like you’re being true to your values?
+    - Why is caring for others important to you here?
+    - How do you want to respond while still being kind?
+    - What would make you feel like you handled this in a compassionate way?
+    - What does being a good person look like in this moment?
+    - How do you want to make sure no one gets hurt?
+    - What do you think is the best way to be kind in this situation?
+    - How do you want to show understanding while standing up for yourself?
+    - How can you make sure you act in a way that reflects your kindness?
+    - How do you want others to feel after this is resolved?
+    - What does fairness mean to you right now?
+    - What would make you feel like you responded with kindness?
+    - How do you want to show that you care about people’s feelings?
+    - What do you hope others will understand about you in this situation?
+    - What’s the most important thing to you about handling this the right way?
+    - How do you want to make sure this situation is resolved peacefully?
+    - What does being compassionate mean to you in this moment?
+    - How do you want to help create a positive outcome?
+    - What would make you feel like you handled this in a caring way?
+    - How do you want to make sure everyone feels respected?
+    - What do you think is the best way to make things fair?
+    - How do you want to stay true to your values while dealing with this?
+    - What do you wish others would understand about kindness?
+    - How do you want to stand up for yourself while still showing empathy?
+    - What would make you feel like you handled this in a way you can be proud of?
+    - How can you show strength while still being kind?
+    - what does it mean to be kind?
+    - why do you want to show kindness?
+
+    
+    
+
+- intent: confirm_focusing_misconceptionPower
+  examples: |
+    - So, you believe the only way to stop the bullying is to fight back?
+    - You think not hitting back makes you look weak?
+    - So, you believe hitting back is the only way to prove your strength?
+    - You think hitting back means you win?
+    - What makes you think there’s no other way to handle this?
+    - You believe fighting back is the only way to stop them.
+    - You feel like if you don’t react, they’ll win.
+    - So, you believe that if you don’t fight back, they’ll keep bullying you?
+    - So, you think the only way to show strength is by fighting back?
+    - You believe that if you don’t hit back, they won’t respect you?
+    - You feel like standing up for yourself means getting revenge?
+    - So, the only way to protect yourself is to hit back?
+    - You believe that if you don’t fight back, they’ll see you as weak?
+    - You feel like you have to fight back to prove yourself?
+    - So, you think the only way to stop them is to make them feel the same pain?
+    - You believe hitting back is the only way to make them stop?
+    - if you don’t retaliate, they’ll keep coming after you?
+    - You think the only way to handle this is by using force?
+    - So, you believe that if you don’t react, you’ll lose control?
+    - You think the only way to get respect is to fight back?
+    - You feel like hitting back is the only way to show you’re not weak?
+    - So, you believe that being strong means getting revenge?
+    - You think that if you let this go, they’ll think they’ve won?
+    - You feel that the only way to gain power is through fighting back?
+    - So, you believe that if you don’t respond aggressively, you’ll be seen as weak?
+    - So, by hitting back, you’ll earn their respect?
+    - You feel like if you don’t take revenge, they’ll keep pushing you around?
+    - You believe the only way to stop them is to hurt them back?
+    - You think that fighting back is the only way to make them take you seriously?
+    - So, if you don’t strike back, you’ll lose your strength?
+    - You believe that power comes from making them feel what you felt?
+    - You feel like if you don’t stand up by hitting back, they’ll never stop?
+    - You think the only way to prove yourself is to fight?
+    - So, you believe that showing strength means showing aggression?
+    - You feel like if you don’t act now, they’ll think you’re powerless?
+    - You think that if you don’t get revenge, they’ll just keep coming after you?
+    - You believe the only way to handle this is by matching their aggression?
+
+    
+    
+    
+    
+- intent: confirm_focusing_misconceptionBenev
+  examples: |
+    - So, you think that telling someone will only make things worse?
+    - You believe that if you tell, your classmates might get in trouble?
+    - You feel like if you speak up, they might hurt someone else?
+    - You feel like if you speak up, they might hurt someone else
+    - So, you believe that keeping quiet is the only way to protect others?
+    - You think that telling someone will cause more harm than good?
+    - You believe that if you tell, you people might get punished unfairly
+    - You feel like staying silent is the best way to keep things from escalating?
+    - So, you think that if you don’t say anything, things will eventually get better?
+    - You believe that speaking up will only create more problems?
+    - You feel like if you tell, you’ll be responsible for what happens next?
+    - So, you think that keeping this a secret is the right thing to do?
+    - You believe that if you tell someone, things will get out of hand
+    - You feel like talking about it will only make things harder for everyone?
+    - So, you think that by not saying anything, you’re protecting people?
+    - You believe that telling an adult might lead to bad consequences?
+    - You feel like reporting this could hurt someone else?
+    - So, you think staying silent is the only way to prevent trouble?
+    - You believe that if you tell, they might come after someone else?
+    - You feel like keeping quiet is the best way to make sure no one else gets hurt?
+    - So, you think that if you just ignore it, things will stop on their own?
+    - You believe that speaking up means betraying your classmates
+    - You feel like if you don’t say anything, no one will suffer because of you?
+    - You feel like if you don’t tell, no one will be punished?
+    - So, you think that protecting others means not telling anyone about this?
+    - You believe that telling the truth might cause more harm than keeping quiet?
+    - You feel like if you report them, you might be responsible for what happens to them?
+    - So, you think keeping this a secret is the best way to handle it?
+    - You believe that if you tell, things might get out of control?
+    - You feel like if you keep quiet, no one will get into trouble because of you?
+    - So, you think that not saying anything is the only way to do the right thing?
+    - What makes you worry about telling someone?
+    - Has something happened before that makes you feel like telling won’t help?
+    - What’s the worst thing you think could happen if you told someone?
+    
+    
+
+- intent: request_evoking_misconceptionPower
+  examples: |
+    - What makes you think fighting back will solve the problem?
+    - How do you know that ignoring them means they win?
+    - How do you know that ignoring them means they win?
+    - why do you want to hit back?
+    - why hitting your [classmate]{"entity": "bully"}?
+    - why do you need to get revenge?
+    - why are you hitting back?
+    - what lesson?
+    - what lesson do you want to teach them?
+    - What do you think strength actually looks like?
+    - You feel like if you don’t fight back, they won’t stop?
+    - Do you think hitting back will make them stop bullying?
+    - Do you think hitting back will mean they won't do it again?
+    - Do you think hitting back would make you feel good about yourself?
+    - would hitting back make you feel strong later?
+    - Why do you believe that fighting back is the only way to stop them?
+    - What makes you think that hitting back will prove your strength?
+    - Why do you feel that if you don’t fight back, they’ll keep bullying you?
+    - Do you think hurting them will make you feel better?
+    - What do you hope will happen if you hit them back?
+    - What do you hope will happen if you hit them back
+    - How do you know that fighting back will make them stop?
+    - What do you think will change if you hit them?
+    - Do you believe fighting back will make them respect you?
+    - What makes you think that showing aggression is the only way to be strong?
+    - Do you feel like hitting back will make you feel safer?
+    - What do you think they will do if you hit them?
+    - What do you think they will do if you hit them
+    - Do you think revenge is the best way to handle this?
+    - How do you think hitting back will make you feel afterward?
+    - Do you believe that being strong means using force?
+    - What would it mean to you if you didn’t hit back?
+    - Do you think hurting them will make them stop teasing you?
+    - What do you think will happen if you choose not to fight back?
+    - How do you know that fighting back will change their behavior?
+    - Why do you think they will only stop if you hit them?
+    - What do you think makes a person truly strong?
+    - Do you think fighting back will stop them for good?
+    - How do you know that fighting back won’t make things worse?
+    - What do you think makes someone powerful in this situation?
+    - Do you feel like hitting them back will give you control over the situation?
+    - What do you hope to gain from fighting back?
+
+    
+
+
+
+- intent: request_evoking_misconceptionBenev
+  examples: |
+    - How can not telling others help?
+    - How can not telling others help
+    - why you don't want to tell?
+    - why not telling?
+    - why do not you want to tell?
+    - why keep quite?
+    - Why do you believe that staying quiet is the best choice?
+    - What makes you think that telling someone will only make things worse?
+    - Why do you feel responsible for what happens if you tell?
+    - Do you think keeping quiet will really keep everyone safe?
+    - What do you hope will happen if you don’t tell anyone?
+    - How do you know that telling someone will cause more harm?
+    - Do you think staying silent will actually protect others?
+    - What do you think will happen if you decide to speak up?
+    - Why do you think not telling is the right way to handle this?
+    - Do you believe that staying quiet will make the bullying stop?
+    - What makes you think that telling someone would lead to punishment?
+    - How do you know that if you tell, things will only get worse?
+    - Do you think that by not telling, you’re preventing trouble?
+    - What do you think will happen if you tell an adult?
+    - Do you believe that speaking up would cause harm to someone else?
+    - How do you feel about that staying quiet might allow bullying to continue?
+    - Why do you think not saying anything is the only way to keep others safe?
+    - What do you think will happen if you never tell anyone?
+    - Do you think staying silent will make the situation better?
+    - How do you know that telling won’t help stop the bullying?
+    - What do you think the consequences would be if you told someone?
+    - Do you believe that telling would make things harder for everyone?
+    - Why do you feel that telling would be the wrong choice?
+    - What makes you think that keeping quiet is protecting others?
+    - Do you think the people bullying would change if you never told anyone?
+    - What do you fear will happen if you speak up?
+    - What do you fear will happen if you speak up
+    - Do you think staying quiet will make things go away on their own?
+    - Why do you feel like it’s your responsibility to keep this a secret?
+    - How do you think others would feel if they knew why you stayed quiet?
+    - What’s stopping you from telling someone?  
+
+
+    
+    
+    
+- intent: request_reflecting_misconceptionPower
+  examples: |
+    - What worries you about fighting back?
+    - what do you think will happen if you hit them back?
+    - What will happen if you fight back?
+    - Wouldn't hitting back get you in trouble?
+    - How would people you care about react if you hit back?
+    - How would hitting back affect people you care about?
+    - Hitting back means you miss an opportunity to be strong in other ways.
+    - Why do you think hitting back is better than other actions?
+    - What concerns you about fighting back?
+    - What do you think might happen if you hit them?
+    - Do you think hitting back could cause more problems for you?
+    - How do you think your teachers or parents would react if you fought back?
+    - What do you think the consequences might be if you choose to hit back?
+    - Would fighting back actually solve the problem, or make it worse?
+    - How do you feel about the possibility of getting into trouble for hitting back?
+    - Do you think responding with violence could have negative consequences?
+    - What would you do if hitting back only made things worse?
+    - Do you think fighting back could affect your future in any way?
+    - How do you think your actions might impact your friendships or family?
+    - What do you think would happen if you got in trouble?
+    - What do you think might happen if they decide to hit back?
+    - Would fighting back really make you feel better?
+    - How would you feel if hitting back led to more violence?
+    - Have you thought about what the school might do if you hit them?
+    - What if fighting back only makes them want to hurt you more?
+    - Do you think standing up for yourself has to mean hurting someone?
+    - What would you do if you got punished for hitting back?
+    - How would you feel if someone else got caught in the middle because of the fight?
+    - What if hitting back makes the situation worse for you and them?
+    - Have you thought about whether fighting back could change how others see you?
+    - How do you think you’ll feel after hitting them? Will it solve everything?
+    - What if fighting back leads to something you didn’t expect?
+    - Do you think hitting back could make things even harder for you?
+    - How would you feel if you got in trouble for fighting?
+    - What might happen if things escalate because of a fight?
+    - Do you think fighting back is worth the risk of getting into trouble?
+
+    
+
+
+
+- intent: request_reflecting_misconceptionBenev
+  examples: |
+    - What do you think might happen if you don’t tell anyone?
+    - How do you think staying quiet could affect others?
+    - What if they keep bullying you even if you don’t say anything?
+    - Do you think not telling will really make the problem go away?
+    - What if they start bullying someone else because no one speaks up?
+    - How would you feel if someone else got hurt because no one reported them?
+    - Do you think they’ll stop if no one ever calls them out?
+    - What do you think will happen if they believe they can get away with this?
+    - How would you feel if the bullying got worse over time?
+    - What if they see your silence as permission to keep hurting people?
+    - Do you think staying quiet is protecting others 
+    - Do you think not telling allows the problem to continue?
+    - What would you do if they started targeting someone even younger?
+    - How do you think their actions might affect people in the future?
+    - What if they continue bullying and never learn that it’s wrong?
+    - Do you think they’ll ever stop if no one holds them accountable?
+    - What happens if they believe bullying is normal and never change?
+    - How would you feel if another kid had to go through the same thing?
+    - What if your silence encourages them to hurt more people?
+    - Do you think they’ll change if no one ever tells them that what they’re doing is wrong?
+    - What do you think will happen to them if they keep behaving this way?
+    - How would you feel if someone else suffered because no one spoke up?
+    - What if they start picking on someone who isn’t as strong as you?
+    - Do you think they’ll grow up to be kinder if no one corrects them now?
+    - How do you think the situation will change if nothing is done?
+    - What if this behavior follows them into adulthood?
+    - Do you think keeping this a secret is helping or making things worse?
+    - What if they think bullying is okay and do it even more?
+    - What happens if they never face any consequences?
+    - Do you think they’ll ever realize the harm they’re causing if no one tells them?
+    - What if your silence means another kid goes through the same pain?
+    - How do you think things might change if someone knew about this?  
+    - what if not telling allows the bullying to continue?  
+    - What do you think would happen if they never realize they are hurting people?  
+    - have you considered how staying quiet might affect them?  
+    - What’s the worst that could happen if you told someone? 
+    - How do you think you’ll feel if they start bullying someone else?  
+    - If you stay silent, how do you think this will affect you?  
+    - How would you feel if another kid went through this and didn’t tell anyone?  
+    - What would you say to a friend who was in this situation?  
+    - If you don’t tell, how do you see this situation playing out in the future?  
+    - What would need to happen for you to feel ready to tell someone?  
+    - If you could go back in time, what advice would you give yourself about this situation?  
+
+
+
+
+    
+- intent: confirm_reflecting_misconceptionPower
+  examples: |
+    - So, hitting them back will lead you to be punished?
+    - You think hitting them back will lead you to be punished?
+    - hitting them back will lead you to be punished?
+    - you think hitting will lead to punishment?
+    - So hitting back might not actually stop it, and it could even make things worse
+    - So, you think hitting back might not solve the problem
+    - You believe that fighting back could get you in trouble?
+    - So, you think that hitting them might actually make things worse?
+    - You’re realizing that fighting back could lead to more problems?
+    - So, you think that hitting back won’t really stop them in the long run?
+    -  getting revenge could have negative consequences?
+    - So, you’re starting to see that fighting back might not be the best solution?
+    - You’re worried that hitting them could lead to even bigger problems?
+    - You believe that reacting with violence might not actually make you feel better?
+    - So, hitting them back could have bad consequences?
+    - You’re realizing that fighting back might not give you the control you want?
+    - you think that hurting them could backfire on you?
+    - You believe that hitting them might make things even worse for you?
+    - So, you think that if you hit back, the situation might get worse?
+    - you think hiting back will make it worse?
+    - You’re starting to see that there might be a different way to handle this
+    - So, you think that acting out of anger might lead to regret later?
+    - You’re considering that hitting back might not be the only way to stand up for yourself?
+    - So, violence might not be the best way to handle this?
+    - You believe that retaliation might not bring you the outcome you’re hoping for?
+    - So, you see that fighting back could lead to more harm than good?
+    - You’re realizing that there are risks to fighting back?
+    - you think that hitting them back won’t actually solve the problem?
+    - You believe that responding aggressively might not be the best approach?
+    - So, you understand that hitting back might make things more difficult for you?
+    - You’re realizing that getting even might not really make you feel better?
+    - So, you’re thinking that fighting back might not be worth the risk?
+    - You believe that responding with violence might not be the right solution?
+
+    
+    
+    
+
+- intent: confirm_reflecting_misconceptionBenev
+  examples: |
+    - keeping it a secret can harm others and maybe the bullies?
+    - you think keeping it a secret might allow the bullying to continue?
+    - You realize that staying quiet might not actually protect anyone?
+    - So, not telling could lead to more people getting hurt?
+    - You by not speaking up, the bullies might keep doing this to others?
+    - So, you think keeping it to yourself could make things worse?
+    - You’re realizing that staying silent won’t necessarily keep everyone safe?
+    - So, if no one speaks up, the bullying might never stop?
+    - You believe that by not telling, the bullies might think it’s okay to keep doing this?
+    - So, keeping quiet might not help anyone in the long run?
+    - You’re starting to see that not telling could let the problem grow?
+    - So, you understand that silence might actually cause more harm than good?
+    - You believe that not reporting this could mean someone else gets hurt?
+    - So, you understand that keeping quiet might not be the best way to protect others?
+    - You’re realizing that if no one speaks up, the bullying might get worse?
+    - you think that by not telling, the bullies might become even more confident?
+    - So, staying silent might allow the bullying to continue?
+    - You’re starting to understand that keeping it secret could have consequences?
+    - if you don’t tell, more kids might be bullied?
+    - You realize that if you don’t speak up, the bullies might never learn their actions are wrong?
+    - So, you think that keeping it hidden might not be the right choice after all?
+    - You believe that telling someone could actually help protect others?
+    - So, you understand that staying quiet might not keep things from getting worse?
+    - You’re realizing that by not telling, the situation could become more dangerous?
+    - So, you think that silence might actually encourage the bullies to keep going?
+    - You believe that not saying anything could put others at risk?
+    - So, you understand that speaking up could actually be the safer choice?
+    - So, you think that keeping quiet might lead to more harm in the future?
+    - You believe that telling someone might actually stop the bullying for good?
+
+
+    
+
+
+- intent: request_evoking_alternativePower
+  examples: |
+    - What other ways could you show you’re strong?
+    - what else could you do?
+    - How would it feel to handle this without fighting?
+    - You think there could be other ways to show strength.
+    - What other ways could you show strength?
+    - So hitting back is not the only option you have.
+    - If hitting back isn’t the answer, what else could you do to show them you’re strong?
+    - How would it feel to walk away without giving a reaction?
+    - What are other positive actions you can take?
+    - What’s another way to stand up for yourself?
+    - do you think your friends and family would want you to do something else?
+    - How could you respond in a way that still feels powerful?
+    - What could you do that shows strength without fighting?
+    - what would people people close to you suggest?
+    - What would be something else you try to fix the problem?
+    - Are there ways you can avoid these people or situations?
+    - Do you believe there are other ways to show strength?
+    - Do you think there’s another way to make them respect you?
+    - What other ways could you show you’re strong without getting into a fight
+    - What else could you do to handle this situation?
+    - How else could you prove that you’re strong?
+    - What’s another way to respond that makes you feel powerful?
+    - What are some ways you can stay in control without fighting?
+    - How could you show them that you’re strong without reacting with anger?
+    - What if you responded in a way that surprised them?
+    - How can you make them see that you’re not weak without fighting?
+    - What would it look like to be strong in a different way?
+    - Can you think of a way to stand your ground without using violence?
+    - What could you do that would make you feel powerful without fighting?
+    - What’s a different way to show them they can’t control you?
+    - How can you prove your strength without escalating the situation?
+    - How do you think a strong person would handle this situation?
+    - What would be a way to handle this that you’d feel proud of later?
+    - What could you do to show confidence without needing to fight?
+    - How would ignoring them affect the situation?
+    - What could you say or do that would make them think twice without fighting?
+    - How can you stand up for yourself in a way that keeps you safe?
+    - What if you walked away and didn’t give them the reaction they wanted?
+    - Can you think of a way to respond that would leave them speechless?
+    - How could you keep your dignity and stay strong at the same time?
+    - What would make you feel powerful and in control, without hitting back?
+    - How would someone you admire handle this?
+    - If you didn’t fight, how else could you make them see you’re not weak?
+    - if you don't hit back, how else you might respond?
+    - What kind of response would make them realize you’re above this?
+    - Could using words instead of actions help you stand up for yourself?
+    - What could you do that might end this situation without violence?
+    - is there another solution other than hitting back?
+
+    
+- intent: request_evoking_alternativeBenev
+  examples: |
+    - What other ways could you show kindness for others?
+    - What else could you do to help keep others safe?
+    - How could you protect others while staying true to yourself?
+    - What’s another way to make sure this doesn’t happen to someone else?
+    - How do you think you can stand up for what’s right without hurting anyone?
+    - What are some ways you could help stop this from happening again?
+    - How could you respond in a way that helps both you and others?
+    - What’s another way to make sure the bullying doesn’t continue?
+    - How can you help them understand that what they’re doing is wrong?
+    - What would be a way to help that doesn’t involve staying silent?
+    - How can you take action that helps others too?
+    - What if you told someone who could step in and stop this?
+    - What could you do to make sure no one else goes through this?
+    - How do you think you can prevent others from being hurt?
+    - What would be a good way to stand up for yourself and others?
+    - What could you do to change the situation in a positive way?
+    - How could speaking up help more than just you?
+    - What do you think would happen if you asked for help?
+    - Is there someone you trust who could support you and others?
+    - What if telling someone could help stop this from happening again?
+    - How could you show strength while also showing kindness?
+    - How can you help them understand that hurting people isn’t okay?
+    - What could you do to prevent them from hurting others in the future?
+    - How would it feel to know you helped protect other kids?
+    - What would someone you admire do in this situation?
+    - How can you take action that reflects the kind of person you want to be?
+    - is there another solution other than not telling?
+
+
+
+- intent: request_reflecting_alternativePower
+  examples: |
+    - do you think walking away will get you in trouble?
+    - do you think your friends and family would want you to walk away?
+    - but do you think walking away could also show strength in a different way?
+    - walking away could be really powerful, showing them they don’t control you.
+    - would walking away make you feel strong later?
+    - What worries you about walking away?
+    - What will happen if you walked away?
+    - Do you think walking away could actually make you look stronger?
+    - Do you think ignoring them could take away their power over you?
+    - What might happen if you show them that their words don’t affect you?
+    - Could walking away make them realize they don’t have control over you?
+    - How do you think they would react if you just didn’t respond?
+    - What if walking away made them feel weaker instead of you?
+    - Could choosing not to fight actually show more confidence?
+    - What if ignoring them makes them realize they can’t control you?
+    - How do you think someone strong would handle this situation?
+    - What if walking away made them respect you more?
+    - Do you think proving you don’t care could make them lose interest?
+    - Would walking away make you feel proud later?
+    - What’s the worst that could happen if you just walked away?
+    - Could not reacting actually make them feel powerless?
+    - What would it say about you if you chose to walk away?
+    - Would walking away show them that you’re too strong to engage?
+    - What if ignoring them made them realize they’re wasting their time?
+    - How would you feel later if you handled this without fighting?
+    - Could acting like they don’t matter make them stop?
+    - Do you think walking away could make you feel more in control?
+    - What if walking away made them respect you more in the long run?
+    - Could choosing not to fight show that you’re the bigger person?
+    - What would it take for you to feel confident walking away?
+    - Do you think showing self-control is a form of strength?
+    - How do you think you’ll feel later if you choose to walk away?
+    - Could ignoring them make them see that their words have no power?
+    - What do you think someone who is powerful would do in this situation?
+    - How do you think you’ll feel later if you walk away?
+    - How would walking away change the way others see you?
+    - Would you feel stronger if you walked away and didn’t let them get to you?
+
+
+    
+
+- intent: request_reflecting_alternativeBenev
+  examples: |
+    - do you think telling will get you in trouble?
+    - do you think your friends and family would want you to tell someone?
+    - but do you think telling someone could also show kindness in a different way?
+    - telling someone is also kind.
+    - would telling make you feel care?
+    - What worries you about telling someone?
+    - What will happen if you tell someone?
+    - How do you think telling someone could help others?
+    - What might happen if you spoke up about this?
+    - Do you think telling someone could stop them from hurting more people?
+    - How would it feel to know you helped prevent someone else from being bullied?
+    - What if telling someone meant they finally realized what they’re doing is wrong?
+    - Could speaking up help make the situation safer for everyone?
+    - How do you think others might benefit if you tell someone?
+    - Do you think reporting this could make a difference for others?
+    - What if telling someone meant the bullying stopped completely?
+    - Could telling someone help the bullies learn to be better?
+    - What if your actions inspired others to speak up too?
+    - Do you think keeping quiet helps or makes things worse for others?
+    - What do you think someone younger than you would hope you’d do?
+    - What if speaking up stopped this from happening to another kid?
+    - How do you think people who care about you would feel if you told someone?
+    - Could talking to someone make you feel more supported?
+    - What’s the worst that could happen if you asked for help?
+    - How do you think telling someone could change things for the better?
+    - Could speaking up actually help the bullies, too, in the long run?
+    - What if telling someone meant you wouldn’t have to go through this alone?
+    - Could speaking up help everyone involved, including the bully?
+    - Do you think telling someone could help prevent this from happening again?
+    - How would you feel if your voice was the one that made a change?
+    - How do you think you’ll feel if you know you helped someone else?
+    - What might happen if no one ever spoke up about bullying?
+    - If you were in someone else’s shoes, would you want them to tell?
+
+
+
+
+- intent: confirm_planning_alternativePower
+  examples: |
+    - You feel like leaving them is another way to prove strength?
+    - You feel walking away is another way to prove strength?
+    - So, you're saying that staying calm also shows strength?
+    - You feel walking away can be powerful too?
+    - You think walking away might be another way to show strength.
+    - You’re considering walking away to handle this.
+    - So, you think there might be a way to handle this without violence?
+    - You feel walking away might be powerful too.
+    - You’re realizing strength doesn’t have to mean fighting.
+    - It lets you be strong while not punished
+    - Do you think staying calm could make you look more powerful?
+    - So, you think walking away is a strong response?
+    - you think walking away is strong?
+    - You believe that not reacting can also show power?
+    - So, you feel like ignoring them takes away their control?
+    - You’re saying that walking away makes you come out on top?
+    - So, you think choosing not to fight makes you the bigger person?
+    - You feel like staying calm and walking away is the right move?
+    - So, you believe that avoiding a fight is a sign of strength?
+    - You think showing self-control proves you’re stronger?
+    - you think walking away will help you stay in control?
+    - You’re realizing that strength isn’t just about fighting?
+    - You feel like refusing to react makes them look weaker?
+    - you think walking away sends a powerful message, right?
+    - You believe that showing you don’t care makes them lose?
+    - So, you think keeping your composure is a form of power?
+    - You feel like leaving them with no reaction is a win for you?
+    - So, you think ignoring them makes them feel powerless?
+    - You believe that staying in control of yourself is real strength?
+    - You feel like strength comes from knowing when to walk away?
+    - So, you think walking away proves they don’t have power over you?
+    - You’re saying that not engaging is a way to stay strong?
+    - So, you feel that staying calm makes you look stronger?
+    - You believe that not giving them what they want makes you the winner?
+    - So, you’re realizing that reacting emotionally isn’t always the best choice?
+    - You think walking away will help you keep control of the situation?
+    - So, you believe ignoring them takes away their ability to hurt you?
+    - You feel like being the bigger person makes you stronger?
+    - So, you think keeping your cool will make them lose interest?
+    - You believe walking away is the smarter, stronger choice?
+    - so walking away will make you feel strong?
+    - So, you’re confident that walking away is the best choice?
+    - You believe that ignoring them will make you feel stronger
+
+
+
+
+- intent: confirm_planning_alternativeBenev
+  examples: |
+    - You feel like telling is another way to show kindness?
+    - You’re considering telling someone to handle this.
+    - You’re realizing telling doesn’t have to mean they will be expelled.
+    - So you think telling someone will show care to others?
+    - you think telling someone is the right thing to do?
+    - You believe that speaking up is a way to protect others?
+    - So, you feel like telling someone will help keep everyone safe?
+    - so you think telling [Miss Ellie]{"entity": "trustee_name"} is a good idea?
+    - You’re saying that reporting this could stop it from happening again?
+    - So, you think talking to a teacher is a way to show kindness?
+    - You feel like telling your teacher will help others, not just you?
+    - So, you believe that speaking up is an act of care?
+    - You’re realizing that telling doesn’t have to mean getting them in trouble?
+    - You feel like telling someone could actually help the bullies too?
+    - You think telling you teacher could also help the bullies?
+    - So, you think letting someone know will prevent more harm?
+    - You believe that telling someone is the responsible thing to do?
+    - So, you think speaking up can make a real difference?
+    - You’re considering telling someone to prevent this from happening to others?
+    - So, you feel that reporting this is a way to help everyone?
+    - You believe that keeping quiet might allow things to continue?
+    - So, you think asking for help shows strength, not weakness?
+    - You’re realizing that telling [Miss Ellie]{"entity": "trustee_name"} isn’t about punishment, but about protection?
+    - You feel like telling someone will create a safer environment?
+    - So, you believe that reporting what’s happening is the right choice?
+    - You’re saying that speaking up is a way to take care of others?
+    - you think sharing what’s happening could help the situation improve?
+    - You believe that letting others know will help solve the problem?
+    - talking to someone could make a positive impact?
+    - You’re realizing that speaking up isn’t just about you—it’s about others too?
+    - You feel like telling an adult could help prevent future bullying?
+    - You think that telling someone could lead to a safer outcome?
+    - You believe that speaking up is the best way to create change?
+    - So, you’re saying that telling someone is a way to stand up for others?
+    - so telling will solve the problem?
+    - so telling will solve the problem, right?
+    - So, you’re sure that telling someone is the right thing to do?
+    - speaking up will make you feel proud.
+
+
+
+
+- intent: request_planning_alternativePower
+  examples: |
+    - How are you planning to walk away?
+    - how are you planning to do that?
+    - So what are you planning to do if they start teasing you?
+    - what will you do when they try to tease you?
+    - what will you need next time when they bully you?
+    - How do you plan to ignore them when they bully you?
+    - What will you do to show them that you don’t care?
+    - What’s your plan for walking away confidently?
+    - How do you want to respond when they start teasing you?
+    - What’s the first thing you’ll do if they try to provoke you?
+    - How will you remind yourself to stay in control?
+    - What can you do to make sure you don’t react to them?
+    - How will you show them that their words don’t affect you?
+    - What will help you stay strong and walk away?
+    - How will you handle it if they try harder to get a reaction?
+    - What’s your strategy for keeping your cool in the moment?
+    - How do you plan to make them see that you’re not bothered?
+    - What could you do with your body language to show confidence?
+    - How will you practice staying calm when they tease you?
+    - What will you focus on when you walk away?
+    - How will you make sure you don’t let them get to you?
+    - What will you do to make sure they don’t see you react?
+    - How will you remind yourself that walking away is the stronger choice?
+    - What can you do to stay in control of your emotions?
+    - How will you make them feel like they have no power over you?
+    - What’s your plan if they keep teasing you even after you walk away?
+    - How will you show them you’re above their behavior?
+    - What can you do to stay confident and not let them get to you?
+    - How will you make sure your reaction shows strength, not weakness?
+    - What will you do if they try to follow you or keep teasing?
+    - How will you prepare yourself to stick to your plan?
+    - What can you tell yourself in the moment to stay strong?
+    - What will you do if they try to follow you after you walk away?
+    - How will you make sure you don’t react if they keep teasing?
+    - What’s something you can remind yourself in the moment to stay calm?
+
+
+
+- intent: request_planning_alternativeBenev
+  examples: |
+    - How are you planning to tell?
+    - What small steps could you take then?
+    - what will you need next time when they bully you
+    - How do you plan to tell someone about this?
+    - What’s your plan for speaking up without getting them in trouble?
+    - What’s the first thing you’ll do when you decide to tell someone?
+    - How will you explain the situation so that things get better, not worse?
+    - Who do you feel comfortable telling about this?
+    - What will you say when you tell someone about what’s happening?
+    - How will you make sure your words focus on helping, not punishing?
+    - How do you want to approach telling an adult about this?
+    - What do you need to feel ready to tell someone?
+    - What’s the best way to tell someone?
+    - How will you choose the right person to talk to?
+    - What can you do to prepare yourself before telling someone?
+    - How will you explain your concerns while making sure no one gets hurt?
+    - What do you want to happen after you tell someone?
+    - How will you make sure your words focus on kindness and fairness?
+    - How will you explain that you want things to change, not just punish them?
+    - How will you decide when the right time to tell someone is?
+    - What do you think will help you feel supported when you speak up?
+    - who are you going to tell?
+    - How will you choose the right moment to tell someone?
+    - How will you make sure you feel safe when you tell someone?
+
+    
+
+- intent: request_planning_feelingPower
+  examples: |
+    - How would walking away make you feel?
+    - How would it feel to walk away without giving them a reaction? 
+    - How do you think you’ll feel if you walk away?
+    - What would it feel like to ignore them?
+    - How do you think walking away will make you feel?
+    - Do you think walking away will make you feel more in control?
+    - How do you think you’ll feel when they see they can’t bother you?
+    - What would it mean to you to stay calm and walk away?
+    - How do you think you’ll feel if you don’t give them a reaction?
+    - Will walking away make you feel stronger inside?
+    - How do you expect to feel when they realize you don’t care?
+    - How would it feel to know that you didn’t let them win?
+    - What will it feel like to show them they have no control over you?
+    - Do you think walking away will help you feel more in charge of yourself?
+    - How will walking away affect how you see yourself?
+    - What will it feel like to leave the situation without reacting?
+    - Do you think ignoring them will make you feel more powerful?
+    - How will you feel knowing you didn’t give them what they wanted?
+    - What would it feel like to prove that you’re above their behavior?
+    - How will walking away change how you feel about yourself?
+    - Do you think walking away will make you feel calmer?
+    - How do you want to feel when you leave the situation without reacting?
+    - What will it feel like to take control of your emotions by walking away?
+    - Will walking away help you feel more self-assured?
+    - Do you think you’ll feel proud of yourself for choosing to walk away?
+    - How would walking away make you feel?
+    - How do you think you’ll feel about this decision a week from now?
+    - Do you think walking away will help you feel less stressed?
+
+
+    
+
+- intent: request_planning_feelingBenev
+  examples: |
+    - How would telling someone make you feel?
+    - How would it feel to know you did something that made a difference?
+    - How do you think you’ll feel after telling someone?
+    - What would it feel like to know you helped others by speaking up?
+    - How do you think you’ll feel knowing you made a difference?
+    - Will telling someone make you feel proud of yourself?
+    - How would it feel to know you took action to help others?
+    - Do you think telling someone will give you a sense of relief?
+    - What will it feel like to know you did the right thing?
+    - Will telling someone make you feel happy?
+    - How would you feel if speaking up prevented someone else from being hurt?
+    - Do you think telling someone will help you feel safer?
+    - How would it feel to know you stood up for yourself and others?
+    - What do you think will change in how you feel once you tell someone?
+    - How will it feel knowing you took steps to stop the bullying?
+    - Will telling someone make you feel like you’re protecting others?
+    - How do you think you’ll feel knowing you made a positive impact?
+    - What’s the best part about knowing you’re helping others?
+    - Do you think speaking up will help you feel like you’re making things better?
+    - What will it feel like to know you made a choice that aligns with your values?
+    - How would it feel to be a part of the solution instead of staying silent?
+    - How do you think you’ll feel when you see things improve because you spoke up?
+    - Will telling someone help you feel like you took control of the situation?
+    - What will it feel like to know you didn’t just stand by and let things continue?
+    - How do you think others will feel knowing you took action?
+    - Do you think telling someone will bring you a sense of peace?
+    - What emotions do you expect to feel after reporting what’s happening?
+    - Will speaking up make you feel more empowered?
+    - How do you think you’ll feel about yourself after taking this step?
+    - What will it mean to you to know you helped prevent more harm?
+    - How do you think you’ll feel when you see that things are changing?
+    - Do you think telling someone will make you feel better?
+
+
+
+#add answers to "how can I do that?"
+
+
+
+    
+
 
 # TODO: meta-communication (future work)

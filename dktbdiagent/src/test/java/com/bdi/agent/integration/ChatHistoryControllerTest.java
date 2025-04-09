@@ -60,7 +60,7 @@ public class ChatHistoryControllerTest {
         @Test
         @WithMockUser(username = "j_doe", password = "1VeryUnsafePassword!", roles = "LEARNER")
         public void getChatHistoryMetadataListTest() throws Exception {
-                Agent agent = new Agent(1L, "testId", "test", null, null, Phase.PHASE1, 1L, "", true, 1L, 1f, null,
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null, Phase.PHASE1, 1L, "", true, 1L, 1f, null,
                                 false, null);
                 User user = new User(1L, "j_doe", "1VeryUnsafePassword!", "j.doe@mail.com", Role.LEARNER, null, null,
                                 0);

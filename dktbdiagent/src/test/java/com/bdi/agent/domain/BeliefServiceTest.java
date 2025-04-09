@@ -45,7 +45,7 @@ public class BeliefServiceTest {
 
     @Test
     public void updateBeliefValid() {
-        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         Belief belief = new Belief(0L, agent, "B1", "", "", 0.3f);
         when(mockBeliefRepository.findByAgentIdAndName(1L, "B1")).thenReturn(belief);
 
@@ -58,7 +58,7 @@ public class BeliefServiceTest {
 
     @Test
     public void updateBeliefInvalid() {
-        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         when(mockBeliefRepository.findByAgentIdAndName(1L, "B1")).thenReturn(null);
 
         assertThrows(EntityNotFoundException.class, () -> {

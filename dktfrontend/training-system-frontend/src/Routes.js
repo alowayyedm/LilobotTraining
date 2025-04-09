@@ -46,7 +46,7 @@ const routes = [
         name: 'TrainingPortal',
         component: TrainingPortal,
         meta: {
-            title: "Exploration Mode"
+            title: "Training"
         }
     },
     {
@@ -54,7 +54,7 @@ const routes = [
         name: 'TrainingPortalTrainer',
         component: TrainingPortalTrainer,
         meta: {
-            title: "Trainer Mode"
+            title: "Training"
         }
     },
     {
@@ -62,7 +62,7 @@ const routes = [
         name: 'TrainingPortalS',
         component: TrainingPortalS,
         meta: {
-            title: "Exploration Mode"
+            title: "Training"
         }
     },
     {
@@ -70,7 +70,7 @@ const routes = [
         name: 'TrainingPortalF',
         component: TrainingPortalF,
         meta: {
-            title: "Exploration Mode"
+            title: "Training"
         }
     },
     {
@@ -78,7 +78,7 @@ const routes = [
         name: 'ExplorationMode',
         component: ExplorationMode,
         meta: {
-            title: "Exploration Mode"
+            title: "Training"
         }
     },
     {
@@ -86,7 +86,7 @@ const routes = [
         name: 'ExplorationModeS',
         component: ExplorationModeS,
         meta: {
-            title: "Exploration Mode"
+            title: "Training"
         }
     },
     {
@@ -94,7 +94,7 @@ const routes = [
         name: 'ExplorationModeF',
         component: ExplorationModeF,
         meta: {
-            title: "Exploration Mode"
+            title: "Training"
         }
     },
     {
@@ -102,7 +102,7 @@ const routes = [
         name: 'AssessmentMode',
         component: AssessmentMode,
         meta: {
-            title: "Assessment Mode"
+            title: "Training"
         }
     },
     {
@@ -110,7 +110,7 @@ const routes = [
         name: 'AssessmentModeS',
         component: AssessmentModeS,
         meta: {
-            title: "Assessment Mode"
+            title: "Training"
         }
     },
     {
@@ -118,7 +118,7 @@ const routes = [
         name: 'AssessmentModeF',
         component: AssessmentModeF,
         meta: {
-            title: "Assessment Mode"
+            title: "Training"
         }
     },
 
@@ -160,7 +160,7 @@ const routes = [
         name: 'AssessmentPortal',
         component: AssessmentPortal,
         meta: {
-            title: "Assessment Mode"
+            title: "Training"
         }
     },
     {
@@ -168,7 +168,7 @@ const routes = [
         name: 'AssessmentPortalS',
         component: AssessmentPortalS,
         meta: {
-            title: "Assessment Mode"
+            title: "Training"
         }
     },
     {
@@ -176,7 +176,7 @@ const routes = [
         name: 'AssessmentPortalF',
         component: AssessmentPortalF,
         meta: {
-            title: "Assessment Mode"
+            title: "Training"
         }
     },
     {

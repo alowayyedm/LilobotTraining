@@ -70,7 +70,7 @@ class ActionSetReminder(Action):
         domain: Dict[Text, Any],
     ) -> List[Dict[Text, Any]]:
 
-        time = random.randint(13, 20)
+        time = random.randint(15, 25)
         date = datetime.datetime.now() + datetime.timedelta(seconds=time)
 
         reminder = ReminderScheduled(

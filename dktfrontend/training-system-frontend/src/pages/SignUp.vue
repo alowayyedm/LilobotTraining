@@ -6,7 +6,7 @@
           <i class="fa-solid fa-circle-user"></i>
         </div>
         <div class="page-info-small">
-          SIGN UP for the first session
+          SIGN UP for the session
         </div>
       </div>
 
@@ -14,7 +14,7 @@
       <form class="sign-up-form" @submit.prevent="register">
         <fieldset>
           <div class="form-item">
-            <label for="username">You Prolific ID</label>
+            <label for="username">Your Prolific ID</label>
             <input type="text" id="username" class="field" v-model="username" placeholder="Prolific ID" :class="{ 'invalid': nameInvalid }">
           </div>
 
@@ -41,7 +41,7 @@
         </div>
 
         <div id="aanmelden">
-          <button type="submit" id="login">Start the first session</button>
+          <button type="submit" id="login">Start the session</button>
 <!--          <p>This is not your first session? <router-link to="/login" class="blue-link">Click here</router-link></p>-->
         </div>
 
@@ -130,20 +130,10 @@ export default {
 
       console.warn("Change role to " + this.role);
     },
-    generateRandomOrder() {
-      // Create an array of numbers from 0 to 11
-      let numbers = Array.from({ length: 12 }, (_, i) => i);
+    generateRandomOrder() { // make this 0 or 1?
+      this.randomNumbers = Array(12).fill(this.Knid).join(',');
 
-      // Shuffle the array using the Fisher-Yates algorithm
-      for (let i = numbers.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
-      }
-
-      // Set the shuffled array to randomNumbers
-      this.randomNumbers = numbers.join(',');
-
-      // Repeat the randomNumbers sequence to create randomNumbersupd
+      // Duplicate the sequence for randomNumbersupd
       this.randomNumbersupd = this.randomNumbers + "," + this.randomNumbers;
     },
 
@@ -184,7 +174,7 @@ export default {
       const data = {
         username: this.username,
         condition: this.cond, //int
-        knowledgetest: this.Knid,
+        knowledgetest: this.Knid, //this is now the scenario id
         sessNum: this.Sessnum,
         knowledgeOrder: this.randomNumbers,
         knowledgeOrderUpdt:this.randomNumbersupd
@@ -218,13 +208,19 @@ export default {
               this.emitter.emit('notification-message', "Welcome " + this.username + "!");
               this.emitter.emit('notification-message', "Chat history is saved, to view it go to chat history page");
             }
-            else if(this.cond ==="3"){ // redirect to simulation and feedback if the condition is 3
+            else if(this.cond ==="3" && this.Knid==="1"){ // redirect to simulation and feedback if the condition is 3 and scenario 0
               router.push('/ExplorationF');
               this.emitter.emit('notification-message', "Welcome " + this.username + "!");
               this.emitter.emit('notification-message', "Chat history is saved, to view it go to chat history page");
 
             }
-            else if(this.cond ==="4"){ // redirect to simulation, feedback and reflection if the condition is 4
+            else if(this.cond ==="3" && this.Knid==="0"){ // redirect to simulation and feedback if the condition is 3 and scenario 1
+              router.push('/Exploration');
+
+              this.emitter.emit('notification-message', "Welcome " + this.username + "!");
+              this.emitter.emit('notification-message', "Chat history is saved, to view it go to chat history page");
+            }
+            else if(this.cond ==="4"){
               router.push('/Exploration');
 
               this.emitter.emit('notification-message', "Welcome " + this.username + "!");

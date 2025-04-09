@@ -48,7 +48,7 @@ public class SessionControllerTest {
         WebSocketStompClient webSocketStompClient = new WebSocketStompClient(new StandardWebSocketClient());
         webSocketStompClient.setMessageConverter(new MappingJackson2MessageConverter());
 
-        Agent agent = new Agent(1L, "testId", "test", null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(), false,
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(), false,
                 null);
 
         when(mockAgentService.getByUserId("sessionId")).thenReturn(agent);

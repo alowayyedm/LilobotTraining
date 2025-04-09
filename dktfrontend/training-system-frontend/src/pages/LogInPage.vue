@@ -60,7 +60,11 @@ export default {
       error: "",
       invalid: false,
       SessNum: null,
-      condition:null
+      condition:null,
+      cond:null,
+      Knid:null,
+      randomNumbers: [],
+      randomNumbersupd: []
     };
   },
   watch: {
@@ -71,7 +75,8 @@ export default {
   mounted() {
     this.username = this.getQueryParam('userid');
     this.SessNum = this.getQueryParam('SessNum');
-
+    this.cond = this.getQueryParam('Cid');
+    this.Knid = this.getQueryParam('Knid');
   },
   methods: {
     getQueryParam(param) {
@@ -88,6 +93,9 @@ export default {
       if(this.SessNum === "5"){
         this.updateSessNum(this.username);
       }
+
+
+      this.updateKnowledge(this.username, this.Knid);
 
 
 
@@ -171,7 +179,51 @@ export default {
           .catch(error => {
             console.error('There was an error updating the session number:', error);
           });
+    },
+
+    generateRandomOrder(knowledge) { // make this 0 or 1?
+      if (knowledge === "0") {
+
+        this.randomNumbers = Array(12).fill(1).join(',');
+      }
+      else if (knowledge === "1") {
+
+        this.randomNumbers = Array(12).fill(0).join(',');
+
+      }
+
+
+      // Duplicate the sequence for randomNumbersupd
+      this.randomNumbersupd = this.randomNumbers + "," + this.randomNumbers;
+
+      alert(this.randomNumbers);
+    },
+
+
+    updateKnowledge(user, knowledge) {
+      this.generateRandomOrder(knowledge);
+      const data = {
+        username: user,
+        knowledgeOrderUpdt:this.randomNumbersupd
+      };
+
+      axios.put(
+          this.$config.agentServer + '/api/updateKnowledgeOrder',
+          data,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + this.$store.state.auth.token
+            }
+          }
+      ).then(response => {
+        console.log('Session number successfully updated:', response.data);
+      })
+          .catch(error => {
+            console.error('There was an error updating the session number:', error);
+          });
     }
+
   }
 }
 </script>

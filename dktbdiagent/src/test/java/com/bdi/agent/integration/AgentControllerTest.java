@@ -53,7 +53,7 @@ public class AgentControllerTest {
     @Test
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void startSessionUserExists() throws Exception {
-        agentRepository.save(new Agent(1L, "testId", "test", null, null, null, 1L, "", true, 1L, 1f, null, true, null));
+        agentRepository.save(new Agent(1L, "testId", "test", null, null, null, null, null, 1L, "", true,  1L, 1f,  null, true, null));
         ResultActions resultActions = mockMvc.perform(post("/create/testId"));
 
         MvcResult result =  resultActions.andExpect(status().isOk())
@@ -80,7 +80,7 @@ public class AgentControllerTest {
     @Test
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void changeModeUserExists() throws Exception {
-        agentRepository.save(new Agent(1L, "testId", "test", null, null, null, 1L, "", true,
+        agentRepository.save(new Agent(1L, "testId", "test", null, null, null, null, null,  1L, "", true,
                 1L, 1f, null, false, null));
         ResultActions resultActions = mockMvc.perform(post("/agent/changeMode/testId")
                 .contentType("application/json").content("true"));
@@ -96,7 +96,7 @@ public class AgentControllerTest {
     @Test
     @WithMockUser(username = "test", password = "test", roles = "USER")
     public void changeModeUserExistsTrue() throws Exception {
-        agentRepository.save(new Agent(1L, "testId", "test", null, null,
+        agentRepository.save(new Agent(1L, "testId", "test", null, null, null, null,
                 null, 1L, "", true, 1L, 1f, null, true, null));
         ResultActions resultActions = mockMvc.perform(post("/agent/changeMode/testId")
                 .contentType("application/json").content("false"));

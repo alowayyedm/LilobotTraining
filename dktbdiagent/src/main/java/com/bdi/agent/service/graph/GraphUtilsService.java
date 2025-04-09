@@ -107,6 +107,8 @@ public class GraphUtilsService {
             case D4 -> "Lilobot wil met zijn leraar praten over situatie";
             case D5 -> "Lilobot wil samen met de Kindertelefoon een oplossing zoeken,";
             case D6 -> "Lilobot is happy to end the conv (TBD),";
+            default -> throw new IllegalStateException("Unexpected value: " + desireName);
+
         };
     }
 
@@ -297,6 +299,7 @@ public class GraphUtilsService {
             case D2 -> Phase.PHASE5;
             case D5, D3 -> Phase.PHASE3;
             case D4, D6 -> Phase.PHASE4;
+            default -> throw new IllegalStateException("Unexpected value: " + desire);
         };
     }
 

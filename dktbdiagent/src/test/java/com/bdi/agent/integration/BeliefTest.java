@@ -121,7 +121,7 @@ public class BeliefTest {
         public void updateBeliefInvalidBelief() throws Exception {
                 BeliefChangeModel model = new BeliefChangeModel("B1", 0.5f);
                 String modelSerialized = new ObjectMapper().writeValueAsString(model);
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L,
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L,
                                 "", true, 0L, 0.0f, null, false, null);
                 when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
                 when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
@@ -140,7 +140,7 @@ public class BeliefTest {
         public void updateBeliefValid() throws Exception {
                 BeliefChangeModel model = new BeliefChangeModel("B1", 0.5f);
                 String modelSerialized = new ObjectMapper().writeValueAsString(model);
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false,
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L, "", true, 0L, 0.0f, null, false,
                                 null);
                 Belief b1 = new Belief(0L, agent, "B1", "", "", 0.3f);
                 Belief b3 = new Belief(0L, agent, "B3", "", "", 0.3f);
@@ -177,7 +177,7 @@ public class BeliefTest {
         public void updateBeliefValidChangingRelatednessBeliefs() throws Exception {
                 BeliefChangeModel model = new BeliefChangeModel("B4", 0.9f);
                 String modelSerialized = new ObjectMapper().writeValueAsString(model);
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false,
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null,  0L, "", true, 0L, 0.0f, null, false,
                                 null);
                 Belief b1 = new Belief(0L, agent, "B1", "", "", 0.3f);
                 Belief b3 = new Belief(0L, agent, "B3", "", "", 0.3f);
@@ -215,7 +215,7 @@ public class BeliefTest {
 
         @Test
         void testGetAllBeliefsValid() throws Exception {
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L,
+                Agent agent = new Agent(1L, "testId", "test", null, null,  null, null, null, 0L,
                                 "", true, 0L, 0.0f, null, false, null);
 
                 Set<Belief> beliefs = Set.of(
@@ -260,7 +260,7 @@ public class BeliefTest {
                                 new Belief("B2", "Test Belief 2", 0.7f),
                                 new Belief("B3", "Test Belief 3", 0.3f));
 
-                Agent agent = new Agent(1L, "testId", "test", beliefs, null, null, 0L,
+                Agent agent = new Agent(1L, "testId", "test", beliefs, null, null, null, null, 0L,
                                 "", true, 0L, 0.0f, null, false, null);
                 when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
                 when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
@@ -304,7 +304,7 @@ public class BeliefTest {
 
         @Test
         public void testChangeAgentToPhaseAgentPhaseNull() throws Exception {
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L,
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null,  null, 0L,
                                 "", true, 0L, 0.0f, null, false, null);
                 when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
                 when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);
@@ -327,7 +327,7 @@ public class BeliefTest {
 
                 Set<Belief> beliefs = Set.of(new Belief("B1", "Test Belief 1", 0.5f));
 
-                Agent agent = new Agent(1L, "testId", "test", beliefs, null, null, 0L,
+                Agent agent = new Agent(1L, "testId", "test", beliefs, null, null, null, null, 0L,
                                 "", true, 0L, 0.0f, null, false, null);
                 when(mockAgentRepository.existsByUserId("testId")).thenReturn(true);
                 when(mockAgentRepository.getByUserId("testId")).thenReturn(agent);

@@ -40,7 +40,7 @@ public class LogEntryServiceTest {
 
     @Test
     public void testAddMessageLog() {
-        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, null,  null, 0L, "", true, 0L, 0.0f, null, false, null);
         MessageLogEntry log = new MessageLogEntry("testLog", true, agent);
         logEntryService.addMessageLogEntry("testLog", true, agent);
         ArgumentCaptor<MessageLogEntry> argumentCaptor = ArgumentCaptor.forClass(MessageLogEntry.class);
@@ -50,7 +50,7 @@ public class LogEntryServiceTest {
 
     @Test
     public void testGetMessageLogsByAgentChronological() {
-        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         MessageLogEntry log_1 = new MessageLogEntry("testLog", true, LocalDateTime.now().plusHours(1), agent);
         MessageLogEntry log_2 = new MessageLogEntry("testLog", true, agent);
         logEntryService.addLogEntry(log_1);
@@ -69,7 +69,7 @@ public class LogEntryServiceTest {
 
     @Test
     public void testGetBeliefUpdateLogsByAgent() {
-        Agent agent = new Agent(1L, "testId", "test", null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
+        Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 0L, "", true, 0L, 0.0f, null, false, null);
         BeliefUpdateLogEntry log_1 = new BeliefUpdateLogEntry(LocalDateTime.now().minusHours(1),
                 BeliefUpdateType.INCREASE,
                 0.8F, BeliefName.B1, "", agent);

@@ -65,6 +65,28 @@ intents:
 - ack_unknown_guilt
 - confirm_chitchat_questions
 - ack_unknown_taunt
+- confirm_focusing_valuesPower
+- request_evoking_valuesPower
+- confirm_focusing_misconceptionPower
+- request_evoking_misconceptionPower
+- request_reflecting_misconceptionPower
+- confirm_reflecting_misconceptionPower
+- request_evoking_alternativePower
+- request_reflecting_alternativePower
+- confirm_planning_alternativePower
+- request_planning_alternativePower
+- request_planning_feelingPower
+- confirm_focusing_valuesBenev
+- request_evoking_valuesBenev
+- confirm_focusing_misconceptionBenev
+- request_evoking_misconceptionBenev
+- request_reflecting_misconceptionBenev
+- confirm_reflecting_misconceptionBenev
+- request_evoking_alternativeBenev
+- request_reflecting_alternativeBenev
+- confirm_planning_alternativeBenev
+- request_planning_alternativeBenev
+- request_planning_feelingBenev
 - EXTERNAL_reminder
 slots:
   training:

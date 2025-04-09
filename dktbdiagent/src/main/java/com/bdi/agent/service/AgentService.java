@@ -1,12 +1,7 @@
 package com.bdi.agent.service;
 
 import com.bdi.agent.exceptions.SizeMismatchException;
-import com.bdi.agent.model.Action;
-import com.bdi.agent.model.Agent;
-import com.bdi.agent.model.Belief;
-import com.bdi.agent.model.Desire;
-import com.bdi.agent.model.Knowledge;
-import com.bdi.agent.model.Perception;
+import com.bdi.agent.model.*;
 import com.bdi.agent.model.api.BeliefChangeClientModel;
 import com.bdi.agent.model.api.BeliefChangeModel;
 import com.bdi.agent.model.api.MessageModel;
@@ -51,6 +46,8 @@ public class AgentService {
 
     private final BeliefService beliefService;
     private final DesireService desireService;
+    private final HumanValuesService hValuesService;
+    private final ConvictionService convictionService;
     private final ActionService actionService;
     private final ReportService reportService;
     private final LogEntryService logEntryService;
@@ -88,10 +85,11 @@ public class AgentService {
     /**
      * Constructor for the agent service. Injects the other services and the initialises the knowledge base
      * (agent responses).
-     *
      * @param agentRepository       repository for agent data
      * @param beliefService         the belief service
      * @param desireService         the desire service
+     * @param hValuesService        the human values service
+     * @param convictionService     the conviction service
      * @param actionService         the action service
      * @param reportService         the report service
      * @param knowledgeService      the knowledge service
@@ -102,13 +100,15 @@ public class AgentService {
      */
     @Autowired
     public AgentService(AgentRepository agentRepository, BeliefService beliefService, DesireService desireService,
-                        ActionService actionService, ReportService reportService, LogEntryService logEntryService,
+                        HumanValuesService hValuesService, ConvictionService convictionService, ActionService actionService, ReportService reportService, LogEntryService logEntryService,
                         KnowledgeService knowledgeService, FloatComparer floatComparer,
                         ConstraintService constraintService, ConstraintProvider constraintProvider,
                         SimpMessagingTemplate messagingTemplate) {
         this.agentRepository = agentRepository;
         this.beliefService = beliefService;
         this.desireService = desireService;
+        this.hValuesService = hValuesService;
+        this.convictionService = convictionService;
         this.actionService = actionService;
         this.reportService = reportService;
         this.logEntryService = logEntryService;
@@ -190,8 +190,8 @@ public class AgentService {
             setTo = switch (activeDesire.getName()) {
                 case "D1" -> Phase.PHASE2;
                 case "D2" -> Phase.PHASE5;
-                case "D5", "D3" -> Phase.PHASE3;
-                case "D4", "D6" -> Phase.PHASE4;
+                case "D5", "D3", "D7", "D9" -> Phase.PHASE3;
+                case "D4", "D6", "D8", "D10" -> Phase.PHASE4;
                 default -> throw new IllegalStateException("Unexpected desire name " + activeDesire.getName());
             };
         }
@@ -359,7 +359,26 @@ public class AgentService {
             case "request_chitchat_greeting":
             case "request_chitchat_faring":
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B4", oneStep));
-                break;
+                if (agent.getKnowledgeFile().contains("benevolence") && beliefService.getBeliefValue(agent.getBeliefs(),"B4")< 0.8) {  // workaround, needs updating. added this so that when the scenario is benevolence, the agent will set the correct values in the interface
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B18", (float) (minThreshold-0.1)));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B19", minThreshold));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B20", minThreshold));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B21", (float) (minThreshold-0.1)));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B22", (float) (maxThreshold+0.11)));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B23", (float) (midThreshold+0.01)));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B24", (float) (minThreshold+0.01)));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B25", (float) (midThreshold+0.01)));
+                }
+
+                // the next is for assign the active goal based on value
+//                String ActiveGoal = calculateValuesAction(agent);
+//                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal, maxValue));// to change the active goal
+//                if (ActiveGoal.equals("B27") || ActiveGoal.equals("B29")) {
+//                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+//                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+//                }
+
+                    break;
             case "request_chitchat_goodbye":
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B15", maxValue));
                 break;
@@ -447,6 +466,10 @@ public class AgentService {
                         addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B8", twoSteps));
                         addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B16", maxValue));
                     }
+                    else if( currentDesirePos.getName().equals("D8") || currentDesirePos.getName().equals("D10")){
+                        addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
+                        addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B4", oneStep));
+                    }
                     parseConfirmToAck(perception, hasGoodRelationWithKts, midThreshold);
                     break;
                 }
@@ -457,6 +480,10 @@ public class AgentService {
                     }
                 break;
             case "request_confidant_who":
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B20", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B21", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B24", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B25", oneStep));
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B12", maxValue));
                 break;
             case "inform_confidant_help":
@@ -509,6 +536,199 @@ public class AgentService {
                     perception.setAttribute("unhelpful");
                 }
                 break;
+
+            case "confirm_focusing_valuesPower":
+            case "confirm_focusing_valuesBenev":
+                perception.setType("ack");
+                perception.setAttribute("positive");
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B5", oneStep));
+                break;
+
+
+            case "request_evoking_valuesPower":
+            case "request_evoking_valuesBenev":
+            case "request_evoking_misconceptionPower":
+            case "request_evoking_misconceptionBenev":
+                perception.setAttribute("misconception");
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B18", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B21", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B22", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B25", oneStep));
+
+                // the next is for assign the active goal based on value
+                String ActiveGoal = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal, maxValue));// to change the active goal
+                if (ActiveGoal.equals("B27") || ActiveGoal.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+                break;
+            case "confirm_focusing_misconceptionPower":
+            case "confirm_focusing_misconceptionBenev":
+                perception.setType("ack");
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B5", oneStep));
+
+                Desire currentDesire3 = desireService.getActiveGoal(agentId);
+                if (currentDesire3 != null && (currentDesire3.getName().equals("D7") || currentDesire3.getName().equals("D9") )) { // to check if they have the goal of hitting back
+                    perception.setAttribute("positive");
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B18", oneStep));
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B22", oneStep));
+                } else {
+                    perception.setAttribute("negative");
+                }
+
+                // the next is for assign the active goal based on value
+                String ActiveGoal1 = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal1, maxValue));// to change the active goal
+                if (ActiveGoal1.equals("B27") || ActiveGoal1.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+
+                break;
+
+            case "request_reflecting_misconceptionPower":
+            case "request_reflecting_misconceptionBenev":
+                perception.setAttribute("misconception");
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B18", twoSteps));
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B19", twoSteps));
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B22", twoSteps));
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B23", twoSteps));
+                // the next is for assign the active goal based on value
+                String ActiveGoal2 = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal2, maxValue));// to change the active goal
+                if (ActiveGoal2.equals("B27") || ActiveGoal2.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+
+                break;
+            case "confirm_reflecting_misconceptionPower":
+            case "confirm_reflecting_misconceptionBenev":
+                perception.setType("ack");
+                perception.setAttribute("positive");
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B19", twoSteps));
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B23", twoSteps));
+
+                // the next is for assign the active goal based on value
+                String ActiveGoal3 = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal3, maxValue));// to change the active goal
+                if (ActiveGoal3.equals("B27") || ActiveGoal3.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+
+                break;
+            case "request_evoking_alternativePower":
+            case "request_evoking_alternativeBenev":
+                perception.setAttribute("alternative");
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B18", twoSteps));
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B22", twoSteps));
+
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B20", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B21", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B24", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B25", oneStep));
+
+                // the next is for assign the active goal based on value
+                String ActiveGoal4 = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal4, maxValue));// to change the active goal
+                if (ActiveGoal4.equals("B27") || ActiveGoal4.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+
+                break;
+            case "request_reflecting_alternativePower":
+            case "request_reflecting_alternativeBenev":
+                perception.setAttribute("alternative");
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B19", twoSteps));
+                addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B23", twoSteps));
+
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B20", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B24", oneStep));
+                // the next is for assign the active goal based on value
+                String ActiveGoal5 = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal5, maxValue));// to change the active goal
+                if (ActiveGoal5.equals("B27") || ActiveGoal5.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+
+                break;
+            case "confirm_planning_alternativePower":
+            case "confirm_planning_alternativeBenev":
+                perception.setType("ack");
+//                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B5", oneStep));
+
+                Desire currentDesire4 = desireService.getActiveGoal(agentId);
+                if (currentDesire4 != null && (currentDesire4.getName().equals("D8") || currentDesire4.getName().equals("D10") )) { // to check if they have the goal of hitting back
+                    perception.setAttribute("positive");
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B21", oneStep));
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B25", oneStep));
+                } else {
+                    perception.setAttribute("negative");
+                }
+
+                // the next is for assign the active goal based on value
+                String ActiveGoal6 = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal6, maxValue));// to change the active goal
+                if (ActiveGoal6.equals("B27") || ActiveGoal6.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+
+                break;
+            case "request_planning_alternativePower":
+            case "request_planning_alternativeBenev":
+                Desire currentDesire5 = desireService.getActiveGoal(agentId);
+                if (currentDesire5 != null && (currentDesire5.getName().equals("D7") || currentDesire5.getName().equals("D9") )) { // to check if they have the goal of hitting back
+                    perception.setAttribute("misconception");
+
+                }
+                else {
+                    perception.setAttribute("alternative");
+
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B5", oneStep));
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B21", oneStep));
+                    addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B25", oneStep));
+                }
+                    // the next is for assign the active goal based on value
+                    String ActiveGoal7 = calculateValuesAction(agent);
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal7, maxValue));// to change the active goal
+                    if (ActiveGoal7.equals("B27") || ActiveGoal7.equals("B29")) {
+                        addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                        addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                    }
+
+
+
+                break;
+
+
+            case "request_planning_feelingPower":
+            case "request_planning_feelingBenev":
+                perception.setAttribute("feeling");
+
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B5", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B21", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B25", oneStep));
+
+                // the next is for assign the active goal based on value
+                String ActiveGoal8 = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal8, maxValue));// to change the active goal
+                if (ActiveGoal8.equals("B27") || ActiveGoal8.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+
+                break;
+
             default:
                 break;
         }
@@ -728,7 +948,7 @@ public class AgentService {
         agent.setUserId(userId);
         agent.isActive(true);
         if (username.equals("testaccount")) { //if the account is test account, then only activate the most stable scenario
-            agent.setKnowledgeFile("knowledge_Lilo_schoolbreak_call_school.csv");
+            agent.setKnowledgeFile("knowledge_Lilo_benevolence.csv");
         }
         else {
             agent.setKnowledgeFile(knowledgeService.getKnowledge(userId, username));
@@ -739,18 +959,48 @@ public class AgentService {
 //        }
         // maybe check if they have goal, then increase b16 to 1
         // addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B16", maxValue));
+        Set<Belief> initialBeliefs;
+        if(agent.getKnowledgeFile().contains("power")) {
+            initialBeliefs = beliefService.readBeliefsFromCsv(agent, 1);
 
-        Set<Belief> initialBeliefs = beliefService.readBeliefsFromCsv(agent);
-        beliefService.addBeliefs(initialBeliefs);
+        }
+        else {
+            initialBeliefs = beliefService.readBeliefsFromCsv(agent, 2);
+//            System.out.println("agent2");
+        }
+        beliefService.addBeliefs(initialBeliefs); // update this as well, look at how we did it downstairs
         agent.setBeliefs(initialBeliefs);
 
         Set<Desire> initialDesires = desireService.readDesiresFromCsv(agent);
         desireService.addDesires(initialDesires);
         agent.getDesires().addAll(initialDesires);
 
+//        agent.getDesires().addAll(initialHValues); ///update this
+
         updateDesires(agent);
         sendPhaseOfAgent(agent.getPhase(), updatePhaseOfAgent(agent), true, agent.getUserId());
+
+        Set<HumanValues> initialHValues = hValuesService.readHumanValuesFromCsv(agent);
+        if(agent.getKnowledgeFile().contains("power")) { //Update later with the actual files, e.g., is it the one with power achievement or the one with  benevolence care for others
+        hValuesService.addHumanValue(initialHValues,1);}
+        else if (agent.getKnowledgeFile().contains("benevolence")){
+            hValuesService.addHumanValue(initialHValues, 2);
+        }
+//        agent.getHumanValues().addAll(initialHValues);
+//        agent.getHumanValues().addAll(initialHValues);
+
+
+        Set<Conviction> initialConviction = convictionService.readConvictionsFromCsv(agent);
+        if(agent.getKnowledgeFile().contains("power")) { //Update later with the actual files, e.g., is it the one with power achievement or the one with  benevolence care for others
+            convictionService.addConviction(initialConviction,1);}
+        else if (agent.getKnowledgeFile().contains("benevolence")){
+            convictionService.addConviction(initialConviction, 2);
+        }
+
+
         agentRepository.save(agent);
+
+
 
         return agent;
     }
@@ -811,6 +1061,10 @@ public class AgentService {
             case "D4" -> checkDesireConstraints(agentId, DesireName.D4);
             case "D5" -> checkDesireConstraints(agentId, DesireName.D5);
             case "D6" -> checkDesireConstraints(agentId, DesireName.D6);
+            case "D7" -> checkDesireConstraints(agentId, DesireName.D7);
+            case "D8" -> checkDesireConstraints(agentId, DesireName.D8);
+            case "D9" -> checkDesireConstraints(agentId, DesireName.D9);
+            case "D10" -> checkDesireConstraints(agentId, DesireName.D10);
             default -> false;
         };
     }
@@ -989,4 +1243,64 @@ public class AgentService {
         }
         agentRepository.save(agent);
     }
+
+
+
+
+    /**
+     * Calculates which desire to adapt (linked to a flag belief). 4 equations are computed where
+     * each corresponds to a different goal the agent will adapt (hitting back, walking away, telling
+     * someone, not telling anyone). This should only be used with the human values scenarios.
+     *
+     * @param agent the agent
+     */
+    private String calculateValuesAction(Agent agent) {
+        double hitBackScore = beliefService.getBeliefValue(agent.getBeliefs(),"B18") *
+        convictionService.getConvictionValue(agent.getConvictions(),"C1") *
+        hValuesService.gethumanValueValue(agent.getHumanValues(),"V1") +
+                beliefService.getBeliefValue(agent.getBeliefs(),"B19") *
+                        convictionService.getConvictionValue(agent.getConvictions(),"C2") *
+                        hValuesService.gethumanValueValue(agent.getHumanValues(),"V3");
+        //if highest, activate B26
+        double walkAwayScore = beliefService.getBeliefValue(agent.getBeliefs(),"B20") *
+                convictionService.getConvictionValue(agent.getConvictions(),"C3") *
+                hValuesService.gethumanValueValue(agent.getHumanValues(),"V3") +
+                beliefService.getBeliefValue(agent.getBeliefs(),"B21") *
+                        convictionService.getConvictionValue(agent.getConvictions(),"C4") *
+                        hValuesService.gethumanValueValue(agent.getHumanValues(),"V1");
+        //if highest, activate B27
+
+        double dontTellScore = beliefService.getBeliefValue(agent.getBeliefs(),"B22") *
+                convictionService.getConvictionValue(agent.getConvictions(),"C5") *
+                hValuesService.gethumanValueValue(agent.getHumanValues(),"V1") +
+                beliefService.getBeliefValue(agent.getBeliefs(),"B23") *
+                        convictionService.getConvictionValue(agent.getConvictions(),"C6") *
+                        hValuesService.gethumanValueValue(agent.getHumanValues(),"V3");
+        //if highest, activate B28
+        double tellSomeoneScore = beliefService.getBeliefValue(agent.getBeliefs(),"B24") *
+                convictionService.getConvictionValue(agent.getConvictions(),"C7") *
+                hValuesService.gethumanValueValue(agent.getHumanValues(),"V3") +
+                beliefService.getBeliefValue(agent.getBeliefs(),"B25") *
+                        convictionService.getConvictionValue(agent.getConvictions(),"C8") *
+                        hValuesService.gethumanValueValue(agent.getHumanValues(),"V1");
+        //if highest, activate B29
+
+        // Determine the highest score
+        double maxScore = Math.max(Math.max(hitBackScore, walkAwayScore), Math.max(dontTellScore, tellSomeoneScore));
+
+        if (maxScore == hitBackScore) {
+            return "B26";
+        } else if (maxScore == walkAwayScore) {
+            return "B27";
+        } else if (maxScore == dontTellScore) {
+            return "B28";
+        } else {
+            return "B29";
+        }
+
+    }
+
+
+
+
 }

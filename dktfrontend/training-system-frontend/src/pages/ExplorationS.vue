@@ -8,11 +8,13 @@
         <br> <br>
         <h3 class="subtitle">Welcome!</h3>
         <p>
-          In the exploration mode, you will interact with two different virtual children without being assessed. Please be aware that the virtual children cannot answer questions on unrelated topics. Ensure your responses align with the current topic of conversation.        </p>
+          Next, you will have 15 minutes to interact with a virtual children scenario. Please take your time in interactions, and keep restarting the conversation when it ends until the time runs out. You will be automatically redirected after 15 minutes.
+
+          <br> Please be aware that the virtual child cannot answer questions on unrelated topics. Ensure your responses align with the current topic of conversation.        </p>
         <br>
       </div>
       <router-link  to="/trains" id="chat-history-link">
-        <button class="button-with-icon-and-text">Please click here to start the exploration mode</button>
+        <button class="button-with-icon-and-text">Please click here to start the interaction</button>
       </router-link>
     </div>
 

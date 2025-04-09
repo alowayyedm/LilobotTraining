@@ -51,7 +51,7 @@ public class MessageLoggingTest {
         @Test
         @WithMockUser(username = "test", password = "test", roles = "USER")
         public void addPerceptionWhenNotTrainerRespondingTest_Trigger() throws Exception {
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(),
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(),
                                 false,
                                 null);
                 agentRepository.save(agent);
@@ -79,7 +79,7 @@ public class MessageLoggingTest {
         @Test
         @WithMockUser(username = "test", password = "test", roles = "USER")
         public void addPerceptionWhenTrainerRespondingTest_Trigger() throws Exception {
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(),
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null,  1L, "", true, 1L, 1f, new ArrayList<>(),
                                 true,
                                 null);
                 agentRepository.save(agent);
@@ -106,7 +106,7 @@ public class MessageLoggingTest {
         @Test
         @WithMockUser(username = "test", password = "test", roles = "USER")
         public void addPerceptionWhenNotTrainerRespondingTest_Request() throws Exception {
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(),
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(),
                                 false,
                                 null);
                 agentRepository.save(agent);
@@ -133,7 +133,7 @@ public class MessageLoggingTest {
         @Test
         @WithMockUser(username = "test", password = "test", roles = "USER")
         public void addPerceptionWhenTrainerRespondingTest_Request() throws Exception {
-                Agent agent = new Agent(1L, "testId", "test", null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(),
+                Agent agent = new Agent(1L, "testId", "test", null, null, null, null, null, 1L, "", true, 1L, 1f, new ArrayList<>(),
                                 true, null);
                 agentRepository.save(agent);
 

@@ -1,0 +1,61 @@
+chitchat,init,"Hey, I'm Kai.","Hiiii I am Kai","Hello, I'm Kai!","Hi! I'm Kai"
+chitchat,greeting,"Hey, I'm Kai.","Hiiii I am Kai","Hello!","Hi! I'm Kai"
+chitchat,faring,"well it's not going well","I'm feeling a little sad","I'm feeling sad","It's not going well :(("
+chitchat,likes,"yess I like school","I like my school","I like school","yes"
+chitchat,end,"okaaaay that's good!","okaaaay great!","yeah, okeeey :)))", okeeey :))
+chitchat,goodbye,"Bye bye!","Bye!","Goodbye.","Have a nice day!"
+bullying,what,"I get bullied at school.","I'm bullied at school","I'm being bullied","I'm being bullied at school :("
+bullying,who,"a group of kids in my class","I am being bullied by a group of kids at school","a group of kids","I am being bullied by a group of kids"
+bullying,age,"I'm 11 years old","I'm 11 years old","I'm 11 years old","I just turned 11"
+bullying,bullyage,"They are around my age","They are in the same class","They are the same age as me, around 11","Most of them are 11 years old"
+bullying,count,"4-5 kids","They are 4 or 5 kids","They are 4 or 5 kids","4-5 kids"
+bullying,details,"Yesterday they beat me up again. they often tease me and sometimes hit me...I don't like that","I get shouted at, teased and so on. It actually started with jokes, but now it is becoming more and more bullying","Well, yesterday I met them after school and then they hit me again","they tease me for being ugly and for talking and walking strangely. Yesterday they make fun of me again"
+bullying,location,"at school","on the schoolyard","at school :(","I am bullied in class and on the schoolyard (and also after school)"
+bullying,frequency,"once every 2 weeks or so","every week or so","often... every week","almost every week"
+bullying,duration,"since the start of this year","Since the start of this school year. I was bullied at my old school. I thought things would be different at this school, but that is not the case. :(","Since the beginning of the school year. I was also bullied at my old school and now... it's starting again...","since the beginning of the year... so I'm sometimes afraid to to go to school even though I like school"
+bullying,when,"yesterday...after school","Yesterday ","Yesterday","yesterday they beat me up again"
+bullying,why,"I'm not sure","I'm not sure. maybe they are just mean to everyone.","they often say mean comment that are meant to be funny, so I play the game, but it does affect me .","Don't know"
+bullying,response,"Im scared to do anything","Nothing actually","Actually, I'm scared to do anything","Nothing. they also do that to others, which is sad."
+bullying,feeling,"I sometimes go to school with a stomach ache.","When I come home I'm always sad about it.","I often come home and cry really hard because I'm being teased. I feel powerless.","It makes me sad.I really don't know what to do anymore,I often feel left out. :((("
+bullying,confidant,"nobody. I'm afraid they might be expelled","I haven't told anyone about it.  I don’t want to get my classmates in trouble.","I haven't talked to anyone about it yet. Otherwise they might bully others as well","I didn't tell anyone. I don't want them to bully others"
+bullying,parent,"No. I don’t want them to worry about it.","No I don't want to worry them","I don't want them to worry about it","No I don't want to bother them about it"
+school,start,I started this year,"Yes, I started this year", yes, I started this school year
+goal,what,"that they don't hit me anymore","That they stop bullying me", I want the bullying to stop,"I don't want to be bullied anymore"
+goal,dream,"I hope everyone can feel safe at school.","I wish no one else has to go through this.","I want us all to get along.","I hope no one has to feel scared at school."
+goal,feeling, I would feel safe at school, I would be happy, just be cheerful... I just want to feel safe at school and have lunch with my friend and so on, I would feel happy
+goal,effect,I would be happy, then I would feel safe, others would notice that I am happy, I will feel happy
+goal,how,"Maybe if I don't anyone, no one will get in trouble.","I don't want to tell. I don’t others to be hurt because of me.","If I don’t say anything, maybe they’ll change on their own.","I don’t want say anything and then maybe they will bully other people."
+goal,howkt,"I hope they be nice, so no one else feels like this.",I want them to stop bullying me and other, I wish they care about others and stop bullying, I hope they don't hurt anyone else
+goal,howchild,"I don't want to tell anyone, otherwise my classmates might be expelled","They might hurt others if I told about them","I don't want them to be harmed or expelled.","I’m afraid of what will happen to other children."
+evoking,values, "I wish they stop bullying and care about other", "I don’t want anyone to be hurt.","I wish they would understand how much it affects others.","I want things to be better for everyone."
+evoking,misconception, then they will not hurt anyone and they will not be expelled, "Maybe staying quiet is the best way to keep everyone safe.","If I tell, they might just bully someone else.","I don’t want anyone to get in trouble because of me."
+reflecting,misconception, maybe they will keep bullying me and others even if I don't tell ,"Maybe they will continue bullying and grow up to be criminals.","If I stay quiet, they might start bullying someone even younger","maybe they will think it's okay to keep doing this to other kids too"
+evoking,alternative, "Maybe telling someone will stop them from hurting others, not just me.","If I talk to someone, maybe they can help to protect everyone.","Maybe I can tell someone so that no other kids get hurt too.","If I tell, maybe they’ll learn that hurting people isn’t okay and they don't grow up to be criminals."
+reflecting,alternative, "If I speak up, others will be safe too.","Maybe telling someone will help them understand it’s wrong.","If they get help, they might change and not hurt others anymore.","If I tell, everyone will be safe."
+planning,misconception,"I don't want to tell anyone, otherwise my classmates might be expelled","They might hurt others if I told about them","I don't want them to be harmed or expelled.","I’m afraid of what will happen to other children."
+planning,alternative, "when they tease me, I will tell my teacher about it so she can help without punishing them.", I will tell my teacher tomorrow about them and that I don't want them to be expelled, "I’ll tell someone to keep everyone safe from bullying.","I will tell someone so things get better, not worse."
+planning,how, "when they tease me, I will tell my teacher about it so she can help without punishing them.", I will tell my teacher tomorrow about them and that I don't want them to be expelled, "I’ll tell someone to keep everyone safe from bullying.","I will tell someone so things get better, not worse."
+planning,feeling, "Better and happy for others, I think", "It will feel good to help everyone.","I will feel happy that I did something good for everyone.","I will feel like I’m making things better for everyone."
+confidant,who,"I think Miss Ellie is sweet but I don't dare tell her","I do have my teacher. I might be able to talk to her","I do have Miss Ellie. I think she's super nice :))))","I like Miss Ellie, but I'm a bit afraid to tell her."
+confidant,why,maybe the situation will get worse,"I don't want the bullying to get worse", otherwise it will only get worse,"it might get worse I think"
+confidant,how,maybe I can do it after school. then no one is there, I can ask her after school. then there is no one around, maybe after school or something, maybe after school... then there is no one around
+confidant,where,maybe I can do it after school., I can ask her after school. , maybe after school or something, maybe after school...
+confidant,feeling,Better I think,"I'm not sure but I'll try. I just want to feel safe", Hopefully better :),"I'm not sure but I think it would be fine"
+confidant,say,That I am being bullied and I want it to stop,I am going to tell her about the bullying and that I want it to stop,That I am being bullied and stuff,"That I don't want to be bullied"
+confidant,when,Maybe I can talk to her tomorrow.,"I'll talk to her tomorrow",tomorrow I think...,"I'll try tomorrow"
+help,how,what could Miss Ellie do about it?,how can my teacher help me?,what could my teacher do about it?,what could Miss Ellie do about it?
+help,severity,"won't the situation get worse?","won't the situation get worse if I tell her?","won't the bullying get worse?","won't it get worse?"
+help,say,what should I tell her?,what should I say?,what do I say?,what should I say to her?
+ack,positive,yes,yeah,yesss,yes!
+ack,neutral,:),okay,ok,:))))
+ack,negative,:(,no,no,nooo
+ack,empathize,:(,:(((((,thanks :(,:(
+ack,compliment,:))),thank yooou,:),thank yooou
+ack,uninterested,"I don't want to talk about that","I don't want to talk about it","I don't want to talk about this","I don't want to talk about that"
+ack,helpful,Yes I will try. thanks,Yes I will talk to Miss Ellie tomorrow. Thank you!,yes thank you, Yessss
+ack,unhelpful,.....,:(,:(,:(((
+ack,noquestions,"no, thank you","No, I will talk to Miss Ellie tomorrow","Thank you!","No, thank you"
+ack,cannot,"no. I don't dare","No, I don't dare","No, I just don't dare","No, I don't dare."
+ack,unknown,"I'm not sure","I don't know.",No idea,I have no idea
+ack,notfound,"I don't understand what you mean","I don't understand what you mean","I don't understand what you mean","I don't understand what you mean"
+meta,active,yesssss,"yes I'm still here",yeah,yeeesss
