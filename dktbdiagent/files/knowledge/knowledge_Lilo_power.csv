@@ -22,14 +22,15 @@ bullying,parent,"No. I don't want to tell them","No. I want to solve it myself, 
 school,start,I started this year,"Yes, I started this year", yes, I started this school year
 goal,what,"that they don't hit me anymore","That they stop bullying me", I want the bullying to stop,"I don't want them to bully me"
 goal,dream,then I have a lot of friends and we can eat together and play during break... just like everyone else,"I would like to go to school and I can play with my friends :)", so far it is not fun at school at all ... but I want to feel safe at school and play with my friends,"then I will be happy at school and I can eat with my friends during the lunch break... just have fun :)))"
-goal,feeling, I would feel safe at school, I would be happy, just be cheerful... I just want to feel safe at school and have lunch with my friend and so on, I would feel happy
+goal,feeling, I would feel respected at school, I would be respected, just be cheerful... I just want to feel respected at school and have lunch with my friend and so on, I would feel respected
 goal,effect,I would be happy, then I would feel safe, others would notice that I am happy, I will feel happy
-goal,how,I want to hit my classmate and show him who is weak,"I want to show my classmate that I am not weak and punch him!",I want to teach my classmate a lesson!, I want to hit back my classmate
-goal,howkt,I want to teach them a lesson., I want to show my classmates who is stronger., I want to hit them back.,I want to be strong.
-goal,howchild,I want to teach them a lesson., I want to show my classmate who is stronger., I want to hit my classmates.,I want to be strong and punch them.
+goal,how,I want to hit my classmate and show him who is weak,"I want to show my classmate that I am not weak and punch him!",I want to teach my classmate a lesson!, I want to hit my classmate back so they respect me
+goal,howkt,I want to teach them a lesson., I want to show my classmates who is stronger., I want to hit them back.,I want to be strong so they respect me
+goal,howchild,I want to teach them a lesson., I want to show my classmate who is stronger., I want to hit my classmates.,I want to be strong so they respect me
+goal,confidant,"nobody. I don’t want people thinking I can’t handle it.","I haven't told anyone about it. I don't want to look weak","I don’t want people thinking I'm weak to handle this.","If I tell someone, it’s like showing I'm weaker than them."
 evoking,values, "I want them to stop while I'm still strong","I want to show them who is stronger","I want to show that I'm not weak","I want them to know they can’t mess with me."
 evoking,misconception, "I don't want them to think I'm weak","Then I will hurt them back and maybe they will stop","If I hit them, they’ll see I’m not easy to tease.","If I don’t fight back, they’ll think I’m scared."
-reflecting,misconception, "I might get punished if I hit them","Maybe the school will punish me","Maybe I will get into trouble for fighting","Maybe hitting them just makes things worse"
+reflecting,misconception, "I might get punished","Maybe the school will punish me","Maybe I will get into trouble for fighting","Maybe hitting them just makes things worse"
 evoking,alternative, "Maybe if I walk away, they will think I don't care about them","I can walk away, maybe they will stop","Ignoring them and walk away might make me look stronger.","If I don’t react and walk away, they won’t get what they want."
 reflecting,alternative, "Then they might say Lilo doesn't care about us","I will walk away and look better than them","If I walk away like I don’t care, it makes them look weak.","If I ignore them and walk away, I come out on top."
 planning,misconception,I want to teach them a lesson., I want to show my classmate who is stronger., I want to hit my classmates.,I want to be strong and punch them.

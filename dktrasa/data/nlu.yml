@@ -127,6 +127,7 @@ nlu:
     - Welcome to the chat of the Children Helpline
     - Welcome
     - Hi, welcome
+    - Nice to meet you, I'm [Lotte]{"entity": "name"}
     - Welcome to the chat
     - Welcome [Maya]{"entity": "child_name"}
     - Hi [Lyla]{"entity": "child_name"}!
@@ -165,6 +166,7 @@ nlu:
     - how can I help you?
     - how may I help you?
     - how can i help you
+    - What can I help you with today
     - how can I help you today?
     - hey you how are you doing?
     - how are you doing today?
@@ -222,11 +224,13 @@ nlu:
     - do you have something to say?
     - What would you like to ask?
     - What do you want to tell?
+    - Did something specific happen?
     - What do you want to talk about?
     - what do you want to talk about?
     - do you like to talk about it?
     - what do you want to talk about?
     - why is it not going well?
+    - what do you hope to achieve from being here today.
     - how come?
     - care to explain your story?
     - what's wrong?
@@ -265,6 +269,7 @@ nlu:
     - why are you sad?
     - what is making you sad?
     - Why are you sad today?
+    - what make you sad
     - why is that?
     - and why is that?
     - why are you feeling sad?
@@ -295,6 +300,9 @@ nlu:
 - intent: request_bullying_who
   examples: | 
     - who is bullying you?
+    - Who is bulling you
+    - are these boys and girls ones you were friends with before?
+    - who do you want to teach a lesson?
     - Do [they]{"entity": "bully_pronoun"} go to school with you?
     - Are [they]{"entity": "bully_pronoun"} from your [school]{"entity": "place"}?
     - who bullies you?
@@ -357,6 +365,7 @@ nlu:
     - Are [they]{"entity": "bully_pronoun"} older than you?
     - How old are [they]{"entity": "bully_pronoun"}
     - How old are the bullies?
+    - are [they]{"entity": "bully_pronoun"} grown ups?
     - Are the bullies older or younger than you?
     - Is [he]{"entity": "bully_pronoun"} the same age as you?
     - how old is your [brother]{"entity": "bully"}?
@@ -396,6 +405,7 @@ nlu:
     - what are some of the things [they]{"entity": "bully_pronoun"} say
     - please tell me more about your situation
     - please tell me more about the bullying
+    - Can you tell me a little bit about what’s been happening at school?
     - can you tell me more about the problem?
     - What is your brother]{"entity": "bully"} doing to you?
     - what do [they]{"entity": "bully_pronoun"} do to you?
@@ -510,6 +520,7 @@ nlu:
     - where did [he]{"entity": "bully_pronoun"} bully you?
     - where is this bullying happened?
     - where were you get bullied?
+    - where exactly, school or where?
     - please tell me where is this bullying happened?
     - Are the kids that are bullying you in your class?
     - where did you get bullied?
@@ -575,6 +586,7 @@ nlu:
   examples: |
     - where did that happen?
     - where does this happen?
+    - is it at [school]{"entity": "place"}?
     - where did this happen?
     - would you like to tell me where did it happen?
     - where do [they]{"entity": "bully_pronoun"} do this?
@@ -591,6 +603,8 @@ nlu:
   examples: |
     - for how long have you been bullied?
     - when did the bullying start?
+    - How long has this been happening?
+    - So has this just started or has it been going on for awhile?
     - please tell me when did the bullying started?
     - since when have you had this problem?
     - how long have you been bullied?
@@ -741,6 +755,8 @@ nlu:
     - why do [they]{"entity": "bully_pronoun"} bully you?
     - why are [they]{"entity": "bully_pronoun"} making jokes about you?
     - Why are they doing this to you?
+    - Why do you think they are targeting you specifically?
+    - why do you think they are picking on you?
     - please tell me why do [they]{"entity": "bully_pronoun"} bully you?
     - why does [they]{"entity": "bully_pronoun"} bully you?
     - Why do you think your [classmates]{"entity": "bully"} bully you?
@@ -787,6 +803,7 @@ nlu:
     - What makes you think so?
     - can i ask why?
     - Why are you sad when you get home?
+    - Why do you feel this way?
     - do you have an idea why [they]{"entity": "bully_pronoun"} do this?
     - would you like to tell me why did it happen?
     - why is this happening
@@ -904,8 +921,13 @@ nlu:
   examples: |
     - have you told anyone that you are being bullied?
     - Did you tell someone about your problem?
+    - Did you try to report them?
     - have you told any adult about this situation?
+    - have you talked to friends?
+    - did you tell your friends?
+    - What if you speak to someone in private?
     - Have you tried reporting it?
+    - Do you want to speak to an adult?
     - have you reached out to others for help 
     - have you told anyone that your [brother]{"entity": "bully"} takes your toy?
     - Did you tell anyone about the bullying?
@@ -916,6 +938,7 @@ nlu:
     - is there anyone else that you've told about this incedent?
     - have you told anyone other than me about your situation?
     - Does anyone else know that you are being bullied?
+    - does anyone else know about this
     - Does anyone else know about this problem?
     - Does anyone know that you are being bullied?
     - have you mentioned this problem to anyone else?
@@ -973,6 +996,7 @@ nlu:
     - did you tell anyone at [home]{"entity": "place"} about this?
     - Does anyone know?
     - Does your [mom]{"entity": "trustee"} know?
+    - does your [mom]{"entity": "trustee"} know about this?
     - Does your [mom]{"entity": "trustee"} know about the bullying?
     - And the [teacher]{"entity": "trustee"} knows?
     - Have you tried talking to anyone about how you're feeling?
@@ -990,6 +1014,7 @@ nlu:
     - Have you spoken to the [coach]{"entity": "trustee"} about this issue
     - have you told your [teacher]{"entity": "trustee"}?
     - have spoken to your [teacher]{"entity": "trustee"}?
+    - your parents never notices?
     - can you try telling your [parents]{"entity": "trustee"}?
     - Did you talk to your [teacher]{"entity": "trustee"}  about it?
     - have you tried telling your [teacher]{"entity": "trustee"}  about it?
@@ -1030,6 +1055,7 @@ nlu:
     - if I understand correctly, you feel powerless?
     - And you would like to stop it?
     - i understand you're being bullied
+    - so they teased you meany times
     - so, you were bullied at [home]{"entity": "place"} yesterday?
     - So, you were bullied while playing [online]{"entity": "place"} yesterday?
     - to make it clear, you are being bullied at [home]{"entity": "place"}, is that correct?
@@ -1092,6 +1118,7 @@ nlu:
     - I'll take care of it.
     - Alright I will call the [school]{"entity": "place"}.
     - I will talk to your [school]{"entity": "place"}
+    - should i speak to the [school]{"entity": "place"}
     - I can make a phone call.
     - I can contact your [teacher]{"entity": "trustee"}
     
@@ -1228,6 +1255,7 @@ nlu:
   examples: |
     - oh how annoying
     - oh what a shame
+    - it must have been hard for you
     - so sorry to hear that 
     - the kids are too mean
     - sorry to hear that
@@ -1236,6 +1264,7 @@ nlu:
     - I am sorry about that
     - you are a good person
     - I'm so sorry to hear that
+    - it is a bad experience
     - you are not dumb, you are intelligent
     - This is awful 
     - i fully understand
@@ -1341,10 +1370,12 @@ nlu:
   examples: |
     - I can see it in you
     - that's good
+    - that is good to hear
     - That is good
     - I get it
     - I understand that
     - how nice
+    - Let's try and make this better
     - that's fine, you know.
     - Fine.
     - I understand that.
@@ -1358,6 +1389,14 @@ nlu:
     - That's really good of you
     - That's a great idea, I think
     - Good idea
+    - Great [Lilo]{"entity": "child_name"}
+    - That is brilliant. 
+    - You are a beautiful 
+    - I like how you thought of that
+    - I love how positive and selfless you are
+    - You are not weak
+    - You are very strong for speaking out
+    - That is a good start.
     - You are very handsome
     - you are so kind
     - its a big step what you did here
@@ -1457,6 +1496,7 @@ nlu:
     - nice that you come and chat with us
     - Nice that you're chatting with us
     - Thank you for sharing with me
+    - They are just jealous of you
     - Thank you for reaching out [Ori]{"entity": "child_name"}
     - Thank you for reaching out 
     - Good that you reached out to us
@@ -1644,6 +1684,8 @@ nlu:
     - I suggest that we look for another solution together. what do you think?
     - Should we find a solution together?
     - Let us set some goals together
+    - shall we make a plan
+    - How would you like to solve this?
     - I think we can make that happen together
     - We are going to work through this together.
     - let us work on something better
@@ -1725,6 +1767,7 @@ nlu:
   examples: |
     - what can I do for you?
     - what can I do?
+    - Do you have any solutions to solve this?
     - what should we try in this chat discussion?
     - how can we work on this?
     - what can I do?
@@ -1830,6 +1873,7 @@ nlu:
     - what could you think of for that?
     - what could you think of for this?
     - what could you do?
+    - How do you want to do that
     - what can you do to achieve this?
     - how can you ensure that this will work?
     - what would you like to do to make things better?
@@ -1878,6 +1922,7 @@ nlu:
     - can you talk to someone about it?
     - is there anyone else you can tell?
     - is there anyone else you trust?
+    - is it people you used to be friends with?
     - do you have someone that you trust?
     - Who do you think will understand?
     - do you have someone in mind that you can ask?
@@ -1890,6 +1935,7 @@ nlu:
     - do you think someone could help you?
     - Who are the individuals that bully you
     - Is there anyone you trust that you can tell about this situation?
+    - do you have any teachers you are close to ?
     - Is there someone you can tell?
     - Is there someone you can inform?
     - lets start by telling someone very close to you.
@@ -2075,6 +2121,7 @@ nlu:
     - What do you think could happen if you told someone?
     - why didn't you talk to [mom]{"entity": "trustee"}?
     - why are you scared to ask?
+    - Why do you think [she]{"entity": "trustee_pronoun"} cannot help you?
     - What makes you feel scared?
     - what makes you feel this way?
     - why are you afraid to talk?
@@ -2130,6 +2177,7 @@ nlu:
     - [she]{"entity": "trustee_pronoun"} can help you
     - [she] could contact the other parents
     - It will solve your problem
+    - they would want to make you feel better
     - tell [Kevin]{"entity": "trustee"} why you are sad
     - [she] will solve your problem
     - [she] could make [them]{"entity": "bully_pronoun"} stop bulliying you
@@ -2181,6 +2229,7 @@ nlu:
     - you can say to your [mom]{"entity": "trustee"} the same thing as you told me
     - maybe you should tell the [trainer]{"entity": "bully"} that you are bullied
     - just like you told me
+    - you can let her know what exactly happened to you recently
     - tell [her]{"entity": "trustee_pronoun"} that you are bullied at [school]{"entity": "place"}
     - Tell [her]{"entity": "trustee_pronoun"} exactly how you feel
     - you could tell [him]{"entity": "trustee_pronoun"} the same thing you're telling me.
@@ -2478,6 +2527,8 @@ nlu:
     - You want to be seen as strong, is that right?
     - Being respected is really important to you.
     - You value standing up for yourself.
+    - you want to be strong
+    - so, you value being powerful
     - It sounds like being strong is really important to you.
     - You care a lot about standing up for yourself.
     - You value strength and don't want to seem weak.
@@ -2495,6 +2546,7 @@ nlu:
     - You want to act in a way that reflects who you are.
     - You want to respond in a way that shows who you are.
     - you want to stand up for yourself.
+    - you could stand up for your self 
     - Strength means a lot to you, but so does being smart about it.
     - You care about standing up for yourself in the right way.
     - It sounds like being seen as strong is important to you.
@@ -2543,6 +2595,8 @@ nlu:
     - Helping others is something that’s really important to you.
     - You want to stand up for yourself while still being kind.
     - You don’t want to hurt others, even when you’re upset.
+    - you want to be kind
+    - so, you value being nice
     - It sounds like making others feel safe and supported is important to you.
     - You really value kindness and understanding.
     - You care about making sure people feel heard and respected.
@@ -2581,6 +2635,7 @@ nlu:
     - What do you do to make you feel stronger?
     - why do you want to be strong?
     - why do you want to show strength?
+    - Hitting them back might not be the best option
     - How do you want others to see you when this is over?
     - What does being powerful look like to you right now?
     - Why is being strong important to you?
@@ -2646,11 +2701,14 @@ nlu:
   examples: |
     - So, you believe the only way to stop the bullying is to fight back?
     - You think not hitting back makes you look weak?
+    - you think hitting back will stop bullying?
     - So, you believe hitting back is the only way to prove your strength?
     - You think hitting back means you win?
-    - What makes you think there’s no other way to handle this?
+    - So you think that if you are strong that this won't happen?
+    - Do good people hit back ?
     - You believe fighting back is the only way to stop them.
     - You feel like if you don’t react, they’ll win.
+    - So, you have to stand up for yourself and let them know that bullying is wrong
     - So, you believe that if you don’t fight back, they’ll keep bullying you?
     - So, you think the only way to show strength is by fighting back?
     - You believe that if you don’t hit back, they won’t respect you?
@@ -2677,6 +2735,7 @@ nlu:
     - You believe that power comes from making them feel what you felt?
     - You feel like if you don’t stand up by hitting back, they’ll never stop?
     - You think the only way to prove yourself is to fight?
+    - So you think that being physical will get them to stop
     - So, you believe that showing strength means showing aggression?
     - You feel like if you don’t act now, they’ll think you’re powerless?
     - You think that if you don’t get revenge, they’ll just keep coming after you?
@@ -2690,6 +2749,7 @@ nlu:
   examples: |
     - So, you think that telling someone will only make things worse?
     - You believe that if you tell, your classmates might get in trouble?
+    - So you think if you keep ignoring them they will stop the bullying?
     - You feel like if you speak up, they might hurt someone else?
     - You feel like if you speak up, they might hurt someone else
     - So, you believe that keeping quiet is the only way to protect others?
@@ -2735,6 +2795,8 @@ nlu:
     - why do you need to get revenge?
     - why are you hitting back?
     - what lesson?
+    - What makes you think there’s no other way to handle this?
+    - Can you tell me more about why hitting back feels like the right thing to do?
     - what lesson do you want to teach them?
     - What do you think strength actually looks like?
     - You feel like if you don’t fight back, they won’t stop?
@@ -2781,6 +2843,7 @@ nlu:
     - why you don't want to tell?
     - why not telling?
     - why do not you want to tell?
+    - Do you think reporting them to the school principal won't work?
     - why keep quite?
     - Why do you believe that staying quiet is the best choice?
     - What makes you think that telling someone will only make things worse?
@@ -2823,6 +2886,8 @@ nlu:
     - What worries you about fighting back?
     - what do you think will happen if you hit them back?
     - What will happen if you fight back?
+    - If you fight back that will make you a bad person too
+    - Two wrongs never make one right
     - Wouldn't hitting back get you in trouble?
     - How would people you care about react if you hit back?
     - How would hitting back affect people you care about?
@@ -2867,6 +2932,7 @@ nlu:
     - How do you think staying quiet could affect others?
     - What if they keep bullying you even if you don’t say anything?
     - Do you think not telling will really make the problem go away?
+    - There may be others feeling the same way
     - What if they start bullying someone else because no one speaks up?
     - How would you feel if someone else got hurt because no one reported them?
     - Do you think they’ll stop if no one ever calls them out?
@@ -2916,6 +2982,8 @@ nlu:
     - So, hitting them back will lead you to be punished?
     - You think hitting them back will lead you to be punished?
     - hitting them back will lead you to be punished?
+    - so you will get in trouble if you fight?
+    - so you think if you hit back you will get in trouble?
     - you think hitting will lead to punishment?
     - So hitting back might not actually stop it, and it could even make things worse
     - So, you think hitting back might not solve the problem
@@ -2990,7 +3058,10 @@ nlu:
 - intent: request_evoking_alternativePower
   examples: |
     - What other ways could you show you’re strong?
+    - Other ways to do it would also help?
     - what else could you do?
+    - are there different solutions ?
+    - How do you want to feel safe beside hitting them back?
     - How would it feel to handle this without fighting?
     - You think there could be other ways to show strength.
     - What other ways could you show strength?
@@ -3012,6 +3083,7 @@ nlu:
     - How else could you prove that you’re strong?
     - What’s another way to respond that makes you feel powerful?
     - What are some ways you can stay in control without fighting?
+    - What are some things you think could help?
     - How could you show them that you’re strong without reacting with anger?
     - What if you responded in a way that surprised them?
     - How can you make them see that you’re not weak without fighting?
@@ -3031,6 +3103,8 @@ nlu:
     - How could you keep your dignity and stay strong at the same time?
     - What would make you feel powerful and in control, without hitting back?
     - How would someone you admire handle this?
+    - what else can you do?
+    - other ways to stop bullying?
     - If you didn’t fight, how else could you make them see you’re not weak?
     - if you don't hit back, how else you might respond?
     - What kind of response would make them realize you’re above this?
@@ -3157,12 +3231,15 @@ nlu:
   examples: |
     - You feel like leaving them is another way to prove strength?
     - You feel walking away is another way to prove strength?
+    - Walk away and don't talk to them
     - So, you're saying that staying calm also shows strength?
     - You feel walking away can be powerful too?
+    - Walking away is a sign of being strong, that they can't touch you.
     - You think walking away might be another way to show strength.
     - You’re considering walking away to handle this.
     - So, you think there might be a way to handle this without violence?
     - You feel walking away might be powerful too.
+    - so you want to walk away
     - You’re realizing strength doesn’t have to mean fighting.
     - It lets you be strong while not punished
     - Do you think staying calm could make you look more powerful?
@@ -3208,6 +3285,7 @@ nlu:
     - You’re considering telling someone to handle this.
     - You’re realizing telling doesn’t have to mean they will be expelled.
     - So you think telling someone will show care to others?
+    - so you think it would be a good idea to speak to someone at school
     - you think telling someone is the right thing to do?
     - You believe that speaking up is a way to protect others?
     - So, you feel like telling someone will help keep everyone safe?
@@ -3279,6 +3357,7 @@ nlu:
     - How will you make sure your reaction shows strength, not weakness?
     - What will you do if they try to follow you or keep teasing?
     - How will you prepare yourself to stick to your plan?
+    - They will know you are stronger and better than them when you choose to ignore them
     - What can you tell yourself in the moment to stay strong?
     - What will you do if they try to follow you after you walk away?
     - How will you make sure you don’t react if they keep teasing?

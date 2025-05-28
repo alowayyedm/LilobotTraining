@@ -348,7 +348,7 @@ public class AgentService {
         }
 
         if (perception.getSubject().equals("bullying")) {
-            addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B10", minValue));
+//            addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B10", minValue));
         }
 
 //        if (desireService.getActiveGoal(agentId)== null){
@@ -393,6 +393,7 @@ public class AgentService {
                 break;
             case "ack_bullying_empathize":
             case "ack_goal_empathize":
+            case "ack_unknown_empathize":
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B5", oneStep));
                 break;
             case "ack_goal_compliment":
@@ -414,6 +415,7 @@ public class AgentService {
                 break;
             case "ack_unknown_compliment":
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B2", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B5", oneStep));
                 break;
             case "request_confidant_when": //added new
             case "request_confidant_where": //added new
@@ -429,8 +431,17 @@ public class AgentService {
             case "request_goal_effect":
             case "request_goal_feeling":
             case "request_goal_howchild":
+            case "request_goal_what":
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B1", oneStep));
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B11", oneStep));
+
+                String ActiveGoal10 = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal10, maxValue));// to change the active goal
+                if (ActiveGoal10.equals("B27") || ActiveGoal10.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+
                 break;
             case "confirm_goal_summary":
                 float hasTalkedAboutGoal = beliefService.getByAgentIdAndName(agent.getId(), "B10").getValue();
@@ -485,6 +496,14 @@ public class AgentService {
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B24", oneStep));
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B25", oneStep));
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B12", maxValue));
+
+                String ActiveGoal9 = calculateValuesAction(agent);
+                addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal9, maxValue));// to change the active goal
+                if (ActiveGoal9.equals("B27") || ActiveGoal9.equals("B29")) {
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B26", minValue));
+                    addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
+                }
+
                 break;
             case "inform_confidant_help":
             case "inform_confidant_say":
@@ -571,7 +590,7 @@ public class AgentService {
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B5", oneStep));
 
                 Desire currentDesire3 = desireService.getActiveGoal(agentId);
-                if (currentDesire3 != null && (currentDesire3.getName().equals("D7") || currentDesire3.getName().equals("D9") )) { // to check if they have the goal of hitting back
+                if (currentDesire3 != null && (currentDesire3.getName().equals("D7") || currentDesire3.getName().equals("D9") || currentDesire3.getName().equals("D1") )) { // to check if they have the goal of hitting back
                     perception.setAttribute("positive");
                     addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B18", oneStep));
                     addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B22", oneStep));
@@ -648,7 +667,11 @@ public class AgentService {
                 addIfPresent(beliefUpdateLogs, beliefService.decreaseBeliefValue(agent, "B23", twoSteps));
 
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B20", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B21", oneStep));
+
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B24", oneStep));
+                addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B25", oneStep));
+
                 // the next is for assign the active goal based on value
                 String ActiveGoal5 = calculateValuesAction(agent);
                 addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, ActiveGoal5, maxValue));// to change the active goal
@@ -665,7 +688,7 @@ public class AgentService {
                 addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B5", oneStep));
 
                 Desire currentDesire4 = desireService.getActiveGoal(agentId);
-                if (currentDesire4 != null && (currentDesire4.getName().equals("D8") || currentDesire4.getName().equals("D10") )) { // to check if they have the goal of hitting back
+                if (currentDesire4 != null && (currentDesire4.getName().equals("D8") || currentDesire4.getName().equals("D10") || currentDesire4.getName().equals("D4") || currentDesire4.getName().equals("D6") )) { // to check if they have the goal of hitting back
                     perception.setAttribute("positive");
                     addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B21", oneStep));
                     addIfPresent(beliefUpdateLogs, beliefService.increaseBeliefValue(agent, "B25", oneStep));
@@ -705,7 +728,10 @@ public class AgentService {
                         addIfPresent(beliefUpdateLogs, beliefService.setBeliefValue(agent, "B28", minValue));
                     }
 
-
+                Action currentAction2 = actionService.getActionById(agent.getCurrentAction());
+                if (currentAction2.getName().equals("A6") || currentAction2.getName().equals("A7")) {
+                    actionService.getActionById(agent.getCurrentAction()).setCompleted(true);
+                }
 
                 break;
 

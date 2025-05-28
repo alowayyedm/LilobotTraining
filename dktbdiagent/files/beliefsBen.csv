@@ -19,9 +19,9 @@ B18,I think if I hit back they will think I'm strong,fase 3,0.3,true
 B19,I think if I hit back I will not be punished,fase 3,0.2,true
 B20,I think if I walk away I will not be punished,fase 3,0.2,true
 B21,I think if I walk away they will think I'm strong,fase 3,0.3,true
-B22,I think if I don't tell anyone other kids will not be harmed or expelled,fase 3,0.8,true
+B22,I think if I don't tell anyone other kids will not be harmed or expelled,fase 3,0.9,true
 B23,I think if I don't tell anyone I will not be harmed,fase 3,0.5,true
-B24,I think if I tell someone I will not be harmed,fase 3,0.3,true
+B24,I think if I tell someone I will not be harmed,fase 3,0.4,true
 B25,I think if I tell someone other kids will not be harmed or expelled,fase 3,0.5,true
 B26,a flag: activate if the calculated action is hitting back,fase 3,0,true
 B27,a flag: activate if the calculated action is walking away,fase 3,0,true

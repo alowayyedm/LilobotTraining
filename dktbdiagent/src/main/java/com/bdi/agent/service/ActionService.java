@@ -119,7 +119,7 @@ public class ActionService {
         }
 
         if (desire.getName().equals("D10")) {
-
+            addAction(new Action(desire, "request", "A6","help", "how", false));
         }
 
 

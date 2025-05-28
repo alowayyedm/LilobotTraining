@@ -36,32 +36,43 @@
 
       <div class="info-container2">
         <div class="info-box2">
-          <i>Information about the 5-phase model and motivational interviewing:</i><br>
+          <i><b>Five-phase Model:</b></i><br>
 
           <strong>Phase 1: Building rapport</strong><br>
-          • <b>Objective:</b> Establish a welcoming atmosphere and build trust.<br>
+          • <b>Objective:</b> A welcoming atmosphere and build trust.<br>
           • <b>Method:</b> Empathy, respect, sincere interest, active listening.<br><br>
 
           <strong>Phase 2: Clarify the child’s story</strong><br>
-          • <b>Objective:</b> Get a clear view of the child’s story, perspective, personality, network and competencies.<br>
-          • <b>Method:</b> Ask specific questions about the child’s experiences (e.g., when/where something happened). This aligns with the <b>engaging</b> process in motivational interviewing. <em>"What do you want to achieve in this conversation?"</em><br><br>
+          • <b>Objective:</b> Get a clear view of the child’s story.<br>
+          • <b>Method:</b> Ask specific questions about the child’s story (e.g., when/where something happened). This aligns with the <b>engaging</b> process in motivational interviewing. <br><br>
 
           <strong>Phase 3: Setting a goal for the session</strong><br>
           • <b>Objective:</b> Collaborate with the child to set the session goal.<br>
-          • <b>Method:</b> Use the <b>motivational interviewing</b> process:<br>
-          &nbsp;&nbsp;1. Engaging – Build trust. (mainly in phase 2) <i>"What do you want to achieve...?"</i>
-          &nbsp;&nbsp;2. Focusing – Identify concerns and values. <i>"So, you think that...?"</i>
-          &nbsp;&nbsp;3. Evoking – Encourage the child to explore motivations. <i>"Why do you think...?"</i>
-          &nbsp;&nbsp;4. Planning – Support finding solutions. <i>"Other ways to ... ?"</i><br>
+          • <b>Method:</b> Use the <b>motivational interviewing</b> process in this phase (as shown in the right).<br>
+
+          <br>
 
           <strong>Phase 4: Work toward the session goal</strong><br>
           • <b>Objective:</b> Help the child benefit from the conversation.<br>
           • <b>Method:</b> Stimulate their own problem-solving skills. This aligns with the <b>planning</b> process in motivational interviewing.<br><br>
 
           <strong>Phase 5: Rounding off the conversation</strong><br>
-          • <b>Objective:</b> Leave the child with as few lingering questions as possible.<br>
+          • <b>Objective:</b> Leave the child with as few  questions as possible.<br>
           • <b>Method:</b> Summarize and wrap up.
         </div>
+
+
+
+
+        <div class="info-box2">
+          <i><b>Motivational Interviewing:</b></i><br>
+          &nbsp;&nbsp;1. <strong>Engaging</strong> – Build trust. <i>Example "What do you want to achieve in this conversation?"</i>
+          &nbsp;&nbsp;2. <strong>Focusing</strong> – Identify concerns and values. <i>Examples: "So, you think that...?", "It sounds like you want..."</i>
+          &nbsp;&nbsp;3. <strong>Evoking</strong> – Encourage the child to explore motivations. <i>Examples: "Why do you think...?", "What would happen if you...."</i>
+          &nbsp;&nbsp;4. <strong>Planning</strong> – Support finding solutions. <i>Examples: "Other ways to ... ?", "What small steps could you take?"</i><br>
+        </div>
+
+
       </div>
 
 
@@ -214,7 +225,7 @@
     </div>
 
     <div class="fourth">
-      <strong>Session Timer:</strong> {{ formattedTime }}
+      <div  class="timer"> <strong>Session Timer:</strong> {{ formattedTime }}</div>
       <web-chat-component
         ref="webChat"
         :header-text="`${sessionActive ? `${ sessionActive }'s Chat` : 'Chat with a virtual child'}`"
@@ -370,7 +381,7 @@ export default {
     // Set a timer for 5 minutes (300,000 milliseconds)
     setTimeout(() => {
       this.redirectToNextPage();
-    }, 900000); // 900000 = 15 minutes
+    }, 780000); // 900000 = 15 minutes
     this.startTimer(); // Start when component loads
   },
   beforeUnmount() {
@@ -1762,7 +1773,7 @@ export default {
 /* Center the entire information box */
 .info-container2 {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: flex-start; /* Align to the top initially */
   height: 10vh; /* Adjust as needed */
   width: 100%;
@@ -1771,7 +1782,7 @@ export default {
 
 /* Styled Information Box */
 .info-box2 {
-  width: 100%;
+  width: 50%;
   max-width: 90%;
   margin-left: 5%;
   margin-top: -5%;
@@ -1806,6 +1817,9 @@ export default {
   margin-bottom: 5px; /* Adds some spacing before the main text */
 }
 
+.timer{
+  color: #dcd8d8;
+}
 
 .info-box2 i {
   font-size: 16px; /* Make it smaller */

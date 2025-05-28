@@ -36,32 +36,43 @@
 
       <div class="info-container2">
         <div class="info-box2">
-          <i>Information about the 5-phase model and motivational interviewing:</i><br>
+          <i><b>Five-phase Model:</b></i><br>
 
           <strong>Phase 1: Building rapport</strong><br>
-          • <b>Objective:</b> Establish a welcoming atmosphere and build trust.<br>
+          • <b>Objective:</b> A welcoming atmosphere and build trust.<br>
           • <b>Method:</b> Empathy, respect, sincere interest, active listening.<br><br>
 
           <strong>Phase 2: Clarify the child’s story</strong><br>
-          • <b>Objective:</b> Get a clear view of the child’s story, perspective, personality, network and competencies.<br>
-          • <b>Method:</b> Ask specific questions about the child’s experiences (e.g., when/where something happened). This aligns with the <b>engaging</b> process in motivational interviewing. <em>"What do you want to achieve in this conversation?"</em><br><br>
+          • <b>Objective:</b> Get a clear view of the child’s story.<br>
+          • <b>Method:</b> Ask specific questions about the child’s story (e.g., when/where something happened). This aligns with the <b>engaging</b> process in motivational interviewing. <br><br>
 
           <strong>Phase 3: Setting a goal for the session</strong><br>
           • <b>Objective:</b> Collaborate with the child to set the session goal.<br>
-          • <b>Method:</b> Use the <b>motivational interviewing</b> process:<br>
-          &nbsp;&nbsp;1. Engaging – Build trust. (mainly in phase 2) <i>"What do you want to achieve...?"</i>
-          &nbsp;&nbsp;2. Focusing – Identify concerns and values. <i>"So, you think that...?"</i>
-          &nbsp;&nbsp;3. Evoking – Encourage the child to explore motivations. <i>"Why do you think...?"</i>
-          &nbsp;&nbsp;4. Planning – Support finding solutions. <i>"Other ways to ... ?"</i><br>
+          • <b>Method:</b> Use the <b>motivational interviewing</b> process in this phase (as shown in the right).<br>
+
+          <br>
 
           <strong>Phase 4: Work toward the session goal</strong><br>
           • <b>Objective:</b> Help the child benefit from the conversation.<br>
           • <b>Method:</b> Stimulate their own problem-solving skills. This aligns with the <b>planning</b> process in motivational interviewing.<br><br>
 
           <strong>Phase 5: Rounding off the conversation</strong><br>
-          • <b>Objective:</b> Leave the child with as few lingering questions as possible.<br>
+          • <b>Objective:</b> Leave the child with as few  questions as possible.<br>
           • <b>Method:</b> Summarize and wrap up.
         </div>
+
+
+
+
+        <div class="info-box2">
+          <i><b>Motivational Interviewing:</b></i><br>
+          &nbsp;&nbsp;1. <strong>Engaging</strong> – Build trust. <i>Example "What do you want to achieve in this conversation?"</i>
+          &nbsp;&nbsp;2. <strong>Focusing</strong> – Identify concerns and values. <i>Examples: "So, you think that...?", "It sounds like you want..."</i>
+          &nbsp;&nbsp;3. <strong>Evoking</strong> – Encourage the child to explore motivations. <i>Examples: "Why do you think...?", "What would happen if you...."</i>
+          &nbsp;&nbsp;4. <strong>Planning</strong> – Support finding solutions. <i>Examples: "Other ways to ... ?", "What small steps could you take?"</i><br>
+        </div>
+
+
       </div>
 
 
@@ -214,7 +225,7 @@
     </div>
 
     <div class="fourth">
-      <strong>Session Timer:</strong> {{ formattedTime }}
+     <div  class="timer"> <strong>Session Timer:</strong> {{ formattedTime }}</div>
       <web-chat-component
       ref="webChat"
       :header-text="`${sessionActive ? `${ sessionActive }'s Chat` : 'Chat with a virtual child'}`"
@@ -370,7 +381,7 @@
       // Set a timer for 5 minutes (300,000 milliseconds)
       setTimeout(() => {
         this.redirectToNextPage();
-      }, 900000); // 900000 = 15 minutes
+      }, 780000); // 600000 = 10 minutes
       this.startTimer(); // Start when component loads
 
     },
@@ -790,7 +801,7 @@
 
         if(prevPhase ===2) {
           if (this.$refs.beliefInput.beliefs[11].value > 0.9) {
-            this.Feedbackmsg= this.Feedbackmsg + " At the beginning, the child didn't feel connected enough to open up and discuss solutions. They felt dismissed or not taken seriously, making them hesitant to continue the discussion. For them, opening up is a sign of weakness." ;
+            this.Feedbackmsg= this.Feedbackmsg + " At the beginning, the child didn't feel connected enough to open up and discuss solutions. For them, opening up too quickly can feel like giving up control" ;
           }
         }
 
@@ -1202,7 +1213,7 @@
           // if (Math.random() < 0.5) {
           else if(this.$refs.beliefInput.beliefs[18].value >=  this.$refs.beliefInput.beliefs[19].value){
               this.adviceMsg = "Ask the child if there is someone they trust and can share the problem with. This can stimulate their problem-solving skills";
-              this.childSitMsg = "The child thinks that hitting back is the only solution that aligns with their desires and values. They have not considered the consequences of such an action.";
+              this.childSitMsg = "The child thinks that hitting back is the only solution that aligns with their values. They have not considered the consequences of such an action.";
               this.progressMsg = "You completed 75% of phase 3 (Setting the session’s goal). \n " +
                   "This phase requires collaboratively exploring possible solutions to the child's problem and identifying desired outcomes and goals. Then, the child can plan and think about how to achieve the goal in phase 4 (Working towards the session goal).";
             this.Feedbackmsg = "In phase 3, try to apply the motivational interviewing processing such as focusing and evoking. They have not considered the consequences of such an action and their motivations behind it. Try to explore the core values and concerns of the child.";
@@ -1210,7 +1221,7 @@
           }
 
           else if(this.$refs.beliefInput.beliefs[17].value <  this.$refs.beliefInput.beliefs[20].value){
-            this.childSitMsg = "The child thought about the consequences of hitting back that they will be punished, and they want to avoid that! Try to prime them to think about a different solution.";
+            this.childSitMsg = "The child considered that hitting back might lead to punishment, and they want to avoid that. They're open to considering alternative actions that align with their values.";
             this.Feedbackmsg = "In phase 3, try to apply the motivational interviewing processing such as focusing and evoking. The child has not considered the consequences of such an action and other ways to tackle it. Try to explore the core values and concerns of the child and encourage them to think about a different solution.";
 
           }
@@ -1763,16 +1774,20 @@
 /* Center the entire information box */
 .info-container2 {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: flex-start; /* Align to the top initially */
   height: 10vh; /* Adjust as needed */
   width: 100%;
   position: relative;
 }
 
+.timer{
+  color: #dcd8d8;
+}
+
 /* Styled Information Box */
 .info-box2 {
-  width: 100%;
+  width: 50%;
   max-width: 90%;
   margin-left: 5%;
   margin-top: -5%;

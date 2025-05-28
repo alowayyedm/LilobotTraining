@@ -96,7 +96,7 @@ public class GraphUpdatingService {
             case B15 -> updateB15(current, goalValue, boundary, constraints);
             case B16 -> updateB16(current, goalValue, boundary, constraints);
             case B17 -> updateB17(current, goalValue, boundary, constraints);
-            case B9, B14 -> new ArrayList<>(); // These beliefs are not/cannot be updated
+            case B9, B14, B18, B19,B20, B21, B22, B23, B24, B25, B26, B27, B28, B29  -> new ArrayList<>(); // These beliefs are not/cannot be updated
         };
     }
 

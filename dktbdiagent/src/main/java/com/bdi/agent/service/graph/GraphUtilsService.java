@@ -139,6 +139,7 @@ public class GraphUtilsService {
             case B15 -> "Ik denk dat KT wil het gesprek beëindigen";
             case B16 -> "Ik denk dat KT en ik samen tot een oplossing zullen komen";
             case B17 -> "Ik denk dat KT het probleem voor mij gaat oplossen";
+            case B18, B19, B20, B21, B22, B23, B24, B25, B26, B27, B28, B29 -> "Ik denk dat KT het probleem voor mij gaat oplossen";
         };
     }
 

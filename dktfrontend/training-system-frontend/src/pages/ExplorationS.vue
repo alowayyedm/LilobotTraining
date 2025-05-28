@@ -8,7 +8,7 @@
         <br> <br>
         <h3 class="subtitle">Welcome!</h3>
         <p>
-          Next, you will have 15 minutes to interact with a virtual children scenario. Please take your time in interactions, and keep restarting the conversation when it ends until the time runs out. You will be automatically redirected after 15 minutes.
+          Next, you will have 12 minutes to interact with a virtual children scenario. Please take your time in interactions, and keep restarting the conversation when it ends until the time runs out. You will be automatically redirected after 12 minutes.
 
           <br> Please be aware that the virtual child cannot answer questions on unrelated topics. Ensure your responses align with the current topic of conversation.        </p>
         <br>

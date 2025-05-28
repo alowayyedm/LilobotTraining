@@ -57,7 +57,7 @@ public class ConstraintProvider {
                     Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B9, maxValue),
                             new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, minValue)), //in phase 2  the child says a lot about their situation with trigger
                     Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue), // leave conversation if they said (no we can't do that), and if the good goal (walk away, tell someone) is not active.
-                            new BeliefConstraint(BoundaryCheck.LT, BeliefName.B8, maxThreshold),
+                            new BeliefConstraint(BoundaryCheck.LEQ, BeliefName.B8, midThreshold),
                             new BeliefConstraint(BoundaryCheck.LT, BeliefName.B27, maxThreshold),
                             new BeliefConstraint(BoundaryCheck.LT, BeliefName.B29, maxThreshold)), // saying no we can't do that when asked if they can call school
                     Set.of(new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B2, maxValue),
@@ -71,7 +71,7 @@ public class ConstraintProvider {
             case D3 -> Set.of(Set.of(
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue),
                     new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B8, maxValue),
-                    new BeliefConstraint(BoundaryCheck.LT, BeliefName.B2, maxThreshold),
+                    new BeliefConstraint(BoundaryCheck.LT, BeliefName.B2, maxValue),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B8, maxThreshold),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B26, maxThreshold),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B27, maxThreshold),
@@ -147,6 +147,7 @@ public class ConstraintProvider {
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue),
                     new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B8, maxThreshold),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B2, maxThreshold),
+                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B26, maxValue),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B27, maxValue),
                     new BeliefConstraint(BoundaryCheck.GT, BeliefName.B18, minThreshold)
             ));
@@ -160,6 +161,7 @@ public class ConstraintProvider {
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue),
                     new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B8, maxThreshold),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B2, maxThreshold),
+                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B28, maxValue),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B29, maxValue),
                     new BeliefConstraint(BoundaryCheck.GT, BeliefName.B22, minThreshold)
             ));
@@ -167,7 +169,7 @@ public class ConstraintProvider {
                     new BeliefConstraint(BoundaryCheck.EQ, BeliefName.B10, maxValue),
                     new BeliefConstraint(BoundaryCheck.LT, BeliefName.B2, maxThreshold),
                     new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B29, maxValue),
-                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B5, midThreshold)
+                    new BeliefConstraint(BoundaryCheck.GEQ, BeliefName.B5, minThreshold)
             ));
 
             default -> throw new IllegalStateException("Unexpected value: " + desire);
