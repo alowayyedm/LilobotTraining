@@ -120,7 +120,7 @@
       <graph-component ref="graphComponent"></graph-component></div>
 
     <div   class="first">
-      {{this.userIntents}}
+<!--      {{this.userIntents}}-->
       <!--      {{this.wrongUtterances}}-->
       <div  v-if="showFeedback"  name="col13" class="buttons2">
         <pre>            <button v-if="showFeedback" class="feedbackSub" title="View Feedback" @click="this.openFeedback()" name = "viewFeedback" >View feedback</button>      <button v-if="showRedo && FirstSession && showFeedback" class="join-button2" title="Continue to the second guidance session" @click="this.redoScenario()" name = "request-session" >To continue, click here to restart the conversation</button><button v-if="showRedo && !FirstSession && showFeedback" class="join-button2" title="Record your reflection" @click="this.recordReflection()" name = "request-session" >Continue to add reflection</button>     </pre>

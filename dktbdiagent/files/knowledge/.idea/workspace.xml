@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="48b6b7a7-4d3d-46a2-a5a5-032da4153286" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../beliefs.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../beliefs.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../desires.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../desires.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_Ava_socialMedia_hit_back.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_Axel_neighberhood_call_school.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_Daisy_schoolclass_stop_going.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_Kai_onlinegaming_stop_playing.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_Lilo_schoolbreak_call_school.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_Miles_schoolbreak_good_goal.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_Ori_neighberhood_good_goal.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_Tim_soccer_hit_back.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_home_Lyla_no_goal.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_mayabot_music_good_goal.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_playdate_dania_no_goal.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/knowledge_soccer_Jim_no_goal.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/1245ba00d17217a6e7238ad7f998e71b.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/194f49762de8d32bee76a1bb6f1d7323.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/1a57813e68ef4b754488387eaadea295.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/1babf0c41340cc29be9fce9e0ceae055.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/1d6f70f83e063e51a8a4b51f8a2e6abf.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/1fb3ed50cdd4fa72e26d716d967ae479.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/2952cf4ab24af4c5884ebf66c147d16a.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/3160018b39619a2c800603222cd7fb00.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/3a19c120d47b71a1b9e45839f04e598a.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/3eaf5016a4728f8cacf938ad8bf3d26c.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/435faf26098b0c7fe879b10b2ed1c515.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/4b1b3db1a54734931a2fe66167f041b3.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/4c4c38f976bf9c504f780a789f5b587c.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/57859d8c8954c3c0d7e0328196b461b0.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/6277ca7831c08d28abb151c9ac8bf05a.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/6cb1384e59fc5bfb923259410faf1b32.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/77ffeedaf3bf40363748f6fe4f6bda2f.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/903b9b0c2c36f5398d813f8bca4dd588.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/936af9f8f3ee9676da0f1484ddf5ab0f.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/a66e02004d0ff9cf02a8c04a87d8cf3e.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/a8eec31e13907a0ba566754d2a13fe04.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/a9138802098f0ee4fe0c8857ee679048.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/ace37c80f4c2035f7bc8d7ba83884f65.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/b37dfad1e700e9f205036e9c15134b2b.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/bccc0e73edc69afcbaab66c9e9458a81.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/c542c1c16c2a903866b5964a1963e655.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/c5b09f08ce3543babdfb2e3b3c87029f.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/c929add0341fc540514d1919a49d87a6.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/cb456aa957bbf167f1dc4d3653ebbc26.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/d248fcd41d3d539be6c2629d43a32e1e.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/dcce5e5acc6da6d15dc3c895144d56b2.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/e2ba13709d6b119908135856e684e116.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/ee85464711058911fee207b3098dbac6.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/ef5a4c4c1c82c8ac9928470a588611b9.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../reports/f4c66a62ea0fad343f12384862535d77.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/model/Agent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/model/Agent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/model/enums/BeliefName.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/model/enums/BeliefName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/model/enums/DesireName.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/model/enums/DesireName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/service/ActionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/service/ActionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/service/AgentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/service/AgentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/service/BeliefService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/service/BeliefService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/service/graph/GraphUtilsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/service/graph/GraphUtilsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/utils/ConstraintProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/main/java/com/bdi/agent/utils/ConstraintProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/AgentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/AgentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/BeliefServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/BeliefServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/ConversationServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/ConversationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/LogEntryServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/LogEntryServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/OptimalPathServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/OptimalPathServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/ReportServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/domain/ReportServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/AgentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/AgentControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/BeliefTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/BeliefTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/ChatHistoryControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/ChatHistoryControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/LiveBeliefsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/LiveBeliefsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/MessageLoggingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/MessageLoggingTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/OptimalPathControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/OptimalPathControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/SessionControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../src/test/java/com/bdi/agent/integration/SessionControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/Routes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/AssesmentMode.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/AssesmentMode.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/ExplorationMode.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/ExplorationMode.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/ExplorationModeF.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/ExplorationModeF.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/ExplorationS.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/ExplorationS.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/SignUp.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/SignUp.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/TrainingPortal.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/TrainingPortal.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/TrainingPortalF.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/TrainingPortalF.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/TrainingPortalS.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktfrontend/training-system-frontend/src/pages/TrainingPortalS.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktrasa/.rasa/cache/cache.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktrasa/.rasa/cache/cache.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktrasa/actions/actions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktrasa/actions/actions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktrasa/data/nlu.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktrasa/data/nlu.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../dktrasa/domain.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../dktrasa/domain.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="2vPElkKGFkQGAgjFxlwTKzDOjm6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="48b6b7a7-4d3d-46a2-a5a5-032da4153286" name="Changes" comment="" />
+      <created>1744038461959</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744038461959</updated>
+      <workItem from="1744038463153" duration="9000" />
+      <workItem from="1744038495177" duration="8000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
