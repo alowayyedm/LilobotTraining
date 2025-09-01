@@ -2505,20 +2505,6 @@ nlu:
     - Can we still talk?
     - Are you paying attention?
     
-#    
-#1- look at what is here, remove/change/move the irrelevant ones (like planbning for other things than the alt)
-#2- from Miro, add the examples to its respectful intent. also the examples from chatgpt.
-#3- remove irrelevant intents
-#4- add lilo utterances replies based on the intents
-#5- allign them with both scenarios (not telling and power, maybe as synynoms?)
-#6- send example convo to Kath
-#7- ask chatgpt to generate more examples
-#8- update the other intents here
-#9- remove irrelevant utterance from before (e.g., how are you planning to do that)
-#10- check with utterances such as "don't hit them back" or "you should hit back". will the child leave the convo?
-#11- remove confidant and unnecessary utterances
-
-#how would you do that? unknown_how, can become Bullying_how, or planning_how
 
 
 
